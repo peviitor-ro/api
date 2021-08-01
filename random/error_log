@@ -1,0 +1,1 @@
+[01-Aug-2021 12:18:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://solr.peviitor.ro/solr/shaqodoon/select?q=*%3A*&amp;rows=1&amp;start=1589&amp;omitHeader=true): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/random/index.php on line 10

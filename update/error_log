@@ -1,0 +1,3 @@
+[21-Jul-2021 23:34:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://zimbor.go.ro/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/update/index.php on line 32
+[01-Aug-2021 09:27:53 Europe/Bucharest] PHP Warning:  file_get_contents(http://zimbor.go.ro/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/update/index.php on line 32

@@ -1,0 +1,1 @@
+[01-Aug-2021 09:26:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://zimbor.go.ro/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/clean/index.php on line 35
