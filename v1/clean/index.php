@@ -1,9 +1,34 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+    /**
+     * 
+     * @OA\Post(
+     *     path="/v1/clean/", 
+     *     tags={"search engine"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="company",
+     *                     type="string"
+     *                 ),
+     *                 example="company=Endava"
+     *                      )
+     *                  )
+     *          ),
+    
+     *     @OA\Response(response="200", description="Success")
+     * )
+     */
+
+
 
 $method = 'POST';
-//$server = 'http://23.97.216.44/solr/';
-$server = 'http://zimbor.go.ro/solr/';
+
+
+$server = 'http://23.97.216.44/solr/';
+//$server = 'http://zimbor.go.ro/solr/';
 $core  = 'shaqodoon';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';

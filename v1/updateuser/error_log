@@ -1,0 +1,1107 @@
+[04-Oct-2021 11:54:35 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 11:54:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 11:54:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 11:54:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:16:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:16:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:16:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:16:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:35 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:55:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:55:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:58:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:58:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:58:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:58:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:04 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:04 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:04 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:04 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 12:59:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 12:59:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:01:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:01:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:01:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:01:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:01:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:01:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:01:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:01:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:02:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:03:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:03:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:03:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:03:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:03:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:03:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:10 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:10 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:10 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:54 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:54 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:54 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:54 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:09:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:09:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:10:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:10:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:16 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:11:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:11:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:11:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:11:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:14:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:17:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:17:02 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:02 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:02 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:17:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:52:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:52:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:52:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:52:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:52:35 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:52:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:52:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:52:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:59:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:59:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:59:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:59:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:59:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 13:59:02 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:59:02 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 13:59:02 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 14:51:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 14:51:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 14:51:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 14:51:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 14:51:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 14:51:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 14:51:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 14:51:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 15:07:59 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:59 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:07:59 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:35:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 15:35:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:35:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:35:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:35:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 15:35:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:35:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 15:35:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:33:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:33:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:33:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:33:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:33:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:33:27 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:33:27 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:33:27 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:35:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:35:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:35:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:35:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:36:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:36:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:36:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:36:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:44:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:44:10 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:44:10 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:44:10 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:49:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:49:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:49:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:49:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:49:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[04-Oct-2021 17:49:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:49:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[04-Oct-2021 17:49:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 09:31:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:24 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:24 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:24 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:24 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 11:31:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:05:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:05:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:05:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:05:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:06:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:06:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:06:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:06:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:07:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:07:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:07:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:07:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:07:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:07:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:07:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:07:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:27:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:27:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:27:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:27:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:30:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:30:31 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:30:31 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:30:31 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:30:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 12:30:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:30:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 12:30:41 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 13:37:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:38 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 13:37:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[05-Oct-2021 13:37:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 13:37:40 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[05-Oct-2021 16:43:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[06-Oct-2021 13:26:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[06-Oct-2021 15:20:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[06-Oct-2021 18:00:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[07-Oct-2021 19:15:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[07-Oct-2021 19:15:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[07-Oct-2021 19:15:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[07-Oct-2021 19:15:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:19 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:25 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:29 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:29 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:29 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:23:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:23:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:43:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 15:43:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:43:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 15:43:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:17 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[08-Oct-2021 18:45:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[08-Oct-2021 18:45:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 11:02:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 11:02:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 11:02:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 11:02:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 11:54:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 11:54:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 11:54:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 11:54:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:42:35 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 12:42:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:42:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:42:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:48:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 12:48:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:48:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:48:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:48:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 12:48:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:48:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 12:48:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 14:04:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 14:04:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 14:04:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 14:04:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 14:04:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 14:04:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 14:04:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 14:04:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:05:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:05:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:05:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:05:23 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:05:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:05:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:05:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:05:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:07:04 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:07:04 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:07:04 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:07:04 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:09:30 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:09:30 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:09:30 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:09:30 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:13:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:13:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:13:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:13:32 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:16:22 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:16:22 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:16:22 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:16:22 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:17:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:17:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:17:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:17:09 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:17:49 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:17:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:17:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:17:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:18:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:18:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:18:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:18:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:18:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:18:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:18:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:18:13 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:19:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:19:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:19:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:19:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:20:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:06 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:20:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:20:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:20:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:24:49 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:24:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:24:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:24:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:41:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:41:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:41:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:41:26 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:41:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:41:57 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:41:57 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:41:57 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:42:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 15:42:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:42:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 15:42:11 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:20:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 16:20:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:20:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:20:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:28:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 16:28:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:28:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:28:12 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:45:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[11-Oct-2021 16:45:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:45:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[11-Oct-2021 16:45:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[12-Oct-2021 12:04:14 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:34:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:34:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:34:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:34:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:35:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:36:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:18 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:20 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:29 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:29 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:29 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:33 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:33 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:33 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:36:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:37:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:39 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:46 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:48 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:48 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:48 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:48 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:49 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:37:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:37:49 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:38:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:38:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:34 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:36 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:38:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:37 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:38:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:46 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:46 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:48 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:38:49 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:39:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:39:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:39:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:39:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:39:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:39:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:39:51 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:51 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:51 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:39:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:55 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:39:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:40:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3Aszucsrebeca%40gmail.com): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[14-Oct-2021 10:40:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[14-Oct-2021 10:40:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:40:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:40:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:40:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:41:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[14-Oct-2021 10:41:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 80
+[15-Oct-2021 10:24:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 10:24:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 10:24:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 10:24:52 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 10:58:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 10:58:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 10:58:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 10:58:58 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:00:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:00:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:00:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:00:21 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:40:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:40:31 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:40:31 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:40:31 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:40:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:40:33 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:40:33 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:40:33 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:45:35 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:45:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:45:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:45:35 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:45:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:45:51 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:45:51 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:45:51 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:46:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:46:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:46:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:46:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:48:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:48:27 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:48:27 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:48:27 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:51:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 11:51:57 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:51:57 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 11:51:57 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 16:19:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 16:19:05 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 16:19:05 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 16:19:05 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 16:28:50 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 16:28:50 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 16:28:50 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 16:28:50 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 17:15:22 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[15-Oct-2021 17:15:22 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 17:15:22 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[15-Oct-2021 17:15:22 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 08:13:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 08:13:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 08:13:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 08:13:28 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:15:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 09:15:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:15:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:15:00 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:15:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 09:15:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:15:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:15:01 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:56:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 09:56:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:56:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 09:56:07 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 10:03:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:43 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 10:03:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:44 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 10:03:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 10:03:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:03:47 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:05:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 10:05:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:05:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 10:05:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 14:04:16 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 14:04:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 14:04:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 14:04:16 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 14:05:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[18-Oct-2021 14:05:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 14:05:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 14:05:42 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[18-Oct-2021 17:40:56 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:44:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[19-Oct-2021 13:44:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:44:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:44:15 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:44:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[19-Oct-2021 13:44:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:44:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:44:45 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:45:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[19-Oct-2021 13:45:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:45:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 13:45:08 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 15:35:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/auth/select?omitHeader=true&amp;q.op=OR&amp;q=id%3A): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 46
+[19-Oct-2021 15:35:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 15:35:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50
+[19-Oct-2021 15:35:03 Europe/Bucharest] PHP Warning:  Creating default object from empty value in /home/peviitor/api.peviitor.ro/v1/updateuser/index.php on line 50

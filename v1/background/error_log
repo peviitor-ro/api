@@ -1,0 +1,75 @@
+[26-Sep-2021 10:14:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 10:15:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 10:16:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 10:29:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 21:25:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:10:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:10:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:10:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:10:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:10:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:18:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:18:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:19:16 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:19:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:19:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:20:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:49:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[26-Sep-2021 22:49:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[03-Oct-2021 16:59:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[03-Oct-2021 17:03:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[10-Oct-2021 09:46:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[10-Oct-2021 17:08:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[14-Oct-2021 08:26:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:3&amp;rows=100): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[14-Oct-2021 10:16:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:3&amp;rows=100): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[14-Oct-2021 11:24:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:3&amp;rows=100): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[14-Oct-2021 15:52:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:3&amp;rows=100): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[14-Oct-2021 15:53:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:3&amp;rows=100): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[17-Oct-2021 13:19:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[17-Oct-2021 16:00:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[17-Oct-2021 16:00:50 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[17-Oct-2021 19:34:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[17-Oct-2021 21:49:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[17-Oct-2021 23:22:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 03:28:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 16:15:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 18:44:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 20:55:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 21:59:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 21:59:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21
+[24-Oct-2021 23:57:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/tech/select?q.op=OR&amp;q=cat:-1&amp;rows=100): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
+ in /home/peviitor/api.peviitor.ro/v1/background/index.php on line 21

@@ -1,0 +1,6 @@
+[14-Oct-2021 11:26:48 Europe/Bucharest] PHP Warning:  file_get_contents(https://api.peviitor.ro/v0/search/?facet.field=company&amp;facet=on&amp;q=*%3A*&amp;rows=0): failed to open stream: HTTP request failed! in /home/peviitor/api.peviitor.ro/v1/companies/index.php on line 19
+[14-Oct-2021 11:26:48 Europe/Bucharest] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/peviitor/api.peviitor.ro/v1/companies/index.php on line 25
+[14-Oct-2021 11:26:48 Europe/Bucharest] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/peviitor/api.peviitor.ro/v1/companies/index.php on line 28
+[14-Oct-2021 15:54:38 Europe/Bucharest] PHP Warning:  file_get_contents(https://api.peviitor.ro/v0/search/?facet.field=company&amp;facet=on&amp;q=*%3A*&amp;rows=0): failed to open stream: HTTP request failed! in /home/peviitor/api.peviitor.ro/v1/companies/index.php on line 19
+[14-Oct-2021 15:54:38 Europe/Bucharest] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/peviitor/api.peviitor.ro/v1/companies/index.php on line 25
+[14-Oct-2021 15:54:38 Europe/Bucharest] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/peviitor/api.peviitor.ro/v1/companies/index.php on line 28
