@@ -43,7 +43,14 @@ $data = file_get_contents('php://input');
 
 
 
+$json = json_decode($data);
+   
+foreach ($json as $item) {
+    $item->job_title=html_entity_decode($item->job_title);
+    
+}
 
+$data = json_encode($json);
 
 $url = $server.$core.$command.$qs;
 

@@ -1,407 +1,79 @@
-[09-Aug-2021 22:43:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Aug-2021 22:49:30 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Aug-2021 22:51:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Aug-2021 22:52:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Aug-2021 22:55:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[11-Aug-2021 09:29:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:24 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:30 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:30 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 11:40:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Aug-2021 15:06:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Aug-2021 09:30:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[25-Aug-2021 09:31:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Sep-2021 14:18:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Sep-2021 14:19:49 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Sep-2021 14:20:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Sep-2021 14:21:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Sep-2021 14:53:48 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Sep-2021 14:59:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[03-Sep-2021 14:54:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[03-Sep-2021 15:00:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[04-Sep-2021 14:53:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[04-Sep-2021 14:59:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[05-Sep-2021 14:53:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[05-Sep-2021 14:58:48 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Sep-2021 14:54:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Sep-2021 15:00:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[07-Sep-2021 14:53:54 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[07-Sep-2021 14:59:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[08-Sep-2021 14:54:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[08-Sep-2021 14:59:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Sep-2021 14:53:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Sep-2021 14:59:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[10-Sep-2021 14:54:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[10-Sep-2021 14:59:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[11-Sep-2021 14:53:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[11-Sep-2021 14:59:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[12-Sep-2021 14:53:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[12-Sep-2021 14:59:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[13-Sep-2021 14:54:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[13-Sep-2021 14:59:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Sep-2021 14:54:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Sep-2021 14:54:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 09:27:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 14:54:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 14:56:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 14:58:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 14:59:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:01:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:03:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:06:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:08:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:10:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:12:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:14:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:17:48 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:19:53 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:21:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:24:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:26:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:28:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:30:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:32:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:34:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:36:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:38:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:41:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:43:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:45:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:46:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:48:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:50:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Sep-2021 15:53:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[17-Sep-2021 14:53:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[18-Sep-2021 14:55:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[19-Sep-2021 14:56:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[19-Sep-2021 20:05:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[20-Sep-2021 14:54:04 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 14:54:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 20:33:36 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 20:34:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 20:47:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 20:48:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 21:16:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 21:17:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 21:26:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 21:40:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Sep-2021 21:42:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 13:19:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 13:24:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 13:25:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 14:53:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 14:54:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 15:44:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Sep-2021 15:46:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[23-Sep-2021 14:53:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[23-Sep-2021 14:55:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[23-Sep-2021 22:13:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[23-Sep-2021 22:14:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[24-Sep-2021 14:53:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[24-Sep-2021 14:54:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[25-Sep-2021 14:53:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[25-Sep-2021 14:55:22 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[26-Sep-2021 14:54:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[26-Sep-2021 14:55:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[27-Sep-2021 14:53:49 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[27-Sep-2021 14:54:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[28-Sep-2021 14:53:46 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[28-Sep-2021 14:55:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[29-Sep-2021 14:54:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[29-Sep-2021 14:55:21 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[30-Sep-2021 14:53:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[30-Sep-2021 14:54:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[01-Oct-2021 14:54:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[01-Oct-2021 14:55:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Oct-2021 14:54:00 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[02-Oct-2021 14:55:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[03-Oct-2021 14:53:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[03-Oct-2021 14:54:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[04-Oct-2021 14:53:48 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[04-Oct-2021 14:55:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[05-Oct-2021 14:54:18 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[05-Oct-2021 14:55:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Oct-2021 10:10:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Oct-2021 10:12:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Oct-2021 14:54:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Oct-2021 14:55:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[06-Oct-2021 17:28:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[07-Oct-2021 14:54:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[07-Oct-2021 14:55:28 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[08-Oct-2021 14:53:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[08-Oct-2021 14:54:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Oct-2021 14:53:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[09-Oct-2021 14:55:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[10-Oct-2021 14:53:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[10-Oct-2021 14:54:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[11-Oct-2021 14:53:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[11-Oct-2021 14:54:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[12-Oct-2021 14:53:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[12-Oct-2021 14:55:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[13-Oct-2021 14:54:15 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[13-Oct-2021 14:55:42 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 09:27:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 14:53:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 14:56:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 14:58:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:00:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:02:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:04:34 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:06:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:08:46 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:10:51 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:12:58 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:15:04 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:17:10 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:19:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:20:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:23:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:25:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:27:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:28:54 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:31:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:33:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:35:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:37:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:39:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:41:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:43:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:46:06 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:48:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:50:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[14-Oct-2021 15:52:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Oct-2021 14:53:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[15-Oct-2021 14:54:59 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Oct-2021 14:53:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[16-Oct-2021 14:54:50 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[17-Oct-2021 14:53:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[17-Oct-2021 14:55:22 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[18-Oct-2021 14:53:38 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[18-Oct-2021 14:54:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[19-Oct-2021 14:54:03 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[19-Oct-2021 14:55:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[20-Oct-2021 14:53:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[20-Oct-2021 14:54:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[20-Oct-2021 19:34:45 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[20-Oct-2021 19:38:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Oct-2021 14:54:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[21-Oct-2021 14:55:40 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Oct-2021 14:53:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[22-Oct-2021 14:55:14 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[23-Oct-2021 14:54:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[23-Oct-2021 14:55:22 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[24-Oct-2021 14:54:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[24-Oct-2021 14:55:52 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[25-Oct-2021 14:54:05 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[25-Oct-2021 14:55:27 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[26-Oct-2021 14:54:11 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[26-Oct-2021 14:55:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[27-Oct-2021 14:54:17 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[27-Oct-2021 14:55:44 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[28-Oct-2021 14:53:47 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[28-Oct-2021 14:54:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[29-Oct-2021 14:54:12 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
-[29-Oct-2021 14:55:41 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: HTTP request failed! HTTP/1.1 400 Bad Request
- in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 60
+[10-Nov-2021 14:52:26 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:52:51 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:53:14 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:53:20 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:53:27 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:53:34 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:53:47 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:54:28 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:54:34 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:55:53 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 14:58:59 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 15:01:03 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 15:44:29 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 15:45:05 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 15:45:44 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 15:51:26 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[10-Nov-2021 15:53:16 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 09:27:54 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 14:54:20 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 14:55:31 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 14:56:31 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 14:58:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:00:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:02:50 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:03:56 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:04:56 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:07:02 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:09:08 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:11:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:12:19 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:13:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:14:25 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:15:25 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:16:32 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:17:32 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:18:37 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:19:37 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:21:43 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:22:49 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:23:50 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:25:55 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:28:01 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:30:07 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:32:13 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:34:19 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:36:26 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:37:33 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:38:33 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:39:39 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[11-Nov-2021 15:40:39 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:42:57 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:45:09 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:47:16 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:49:23 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[11-Nov-2021 15:51:29 Europe/Bucharest] PHP Warning:  file_get_contents(http://23.97.216.44/solr/shaqodoon/update?_=1617366504771&amp;commitWithin=1000&amp;overwrite=true&amp;wt=json): failed to open stream: Connection timed out in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 67
+[12-Nov-2021 14:52:15 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:52:42 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:53:06 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:53:12 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:53:19 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:53:26 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:53:38 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:54:24 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:54:30 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:55:58 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 14:59:16 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[12-Nov-2021 15:01:25 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:52:04 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:52:30 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:52:54 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:52:59 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:53:06 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:53:12 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:53:24 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:54:07 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:54:13 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:55:35 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 14:58:45 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48
+[13-Nov-2021 15:00:38 Europe/Bucharest] PHP Warning:  Invalid argument supplied for foreach() in /home/peviitor/api.peviitor.ro/v1/update/index.php on line 48

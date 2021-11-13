@@ -1,16 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-   /**
-     * @OA\Get(
-     *     path="/v1/getuser/", tags={"dev"},
-     * *          @OA\Parameter(
-     *                in="query", 
-     *                name="user",  example="sebastian.boga@outlook.com",
-     *               @OA\Schema(type="string")
-     * ),
-     *     @OA\Response(response="200", description="Success")
-     * );
-     */
+
 
 $qs = $_SERVER['QUERY_STRING'];
 $qs = urldecode($qs);

@@ -4,30 +4,6 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
 
-/**
- * @OA\Post(
- * path="/v1/updateuser/", tags={"dev"},
- * @OA\RequestBody(
- *  @OA\MediaType(
- *             mediaType="application/json",
- *     @OA\Property(
-*              
-*               @OA\Schema(type="array"),
-
-*              @OA\Items(             
-*                   @OA\Property(property="id", type="string", example="rebecaszucs@gmail.com"),
-*                   @OA\Property(property="url", type="string", example="https://peviitor.ro/"),
-*                   @OA\Property(property="company", type="string", example="NTT Data"),
-*                   @OA\Property(property="apikey", type="string", example="2b100708-c6de-4951-b441-83e075fb20c9")
-
-*                       )                   
-*           )
- *               )
- *                 ),
- *     @OA\Response(response="200", description="Success")
- *               
- * )
- */
 
 
 
