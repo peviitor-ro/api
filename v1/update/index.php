@@ -36,6 +36,13 @@ header("Access-Control-Allow-Origin: *");
      $output = str_replace("Bucharest","București",$output);
      $output = str_replace("Brasov","Brașov",$output);
      $output = str_replace("Timisoara","Timișoara",$output);
+     $output = str_replace("Pitesti","Pitești",$output);
+     $output = str_replace("Iasi","Iași",$output);
+     $output = str_replace("Targu Mures","Târgu Mureș",$output);
+
+     
+     
+     
    
   return $output;
  }
