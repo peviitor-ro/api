@@ -39,6 +39,7 @@ header("Access-Control-Allow-Origin: *");
      $output = str_replace("Pitesti","Pitești",$output);
      $output = str_replace("Iasi","Iași",$output);
      $output = str_replace("Targu Mures","Târgu Mureș",$output);
+     $output = str_replace("Cluj Napoca","Cluj-Napoca",$output);
 
      
      
