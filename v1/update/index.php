@@ -47,6 +47,7 @@ $json = json_decode($data);
    
 foreach ($json as $item) {
     $item->job_title=html_entity_decode($item->job_title);
+    $item->city = str_replace("Bucharest","București",$item->city);
     
 }
 
