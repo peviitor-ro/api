@@ -7,7 +7,7 @@ function city_fix($in){
 
  }
 
-
-echo city_fix($_GET('city'));
+ $oras = $_GET["city"];
+echo city_fix($oras);
 
  ?>
