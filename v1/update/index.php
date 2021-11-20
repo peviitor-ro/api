@@ -32,9 +32,10 @@ header("Access-Control-Allow-Origin: *");
 
 
  function city_fix($in){
-     $output = str_replace("Bucharest","București",$in);
-     $output = str_replace("Brasov","Brașov",$in);
-     $output = str_replace("Timisoara","Timișoara",$in);
+     $output = $in;
+     $output = str_replace("Bucharest","București",$output);
+     $output = str_replace("Brasov","Brașov",$output);
+     $output = str_replace("Timisoara","Timișoara",$output);
    
   return $output;
  }
