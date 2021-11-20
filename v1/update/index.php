@@ -30,6 +30,14 @@ header("Access-Control-Allow-Origin: *");
  * )
  */
 
+
+ function city_fix($in){
+   return str_replace("Bucharest","București",$in);
+   return str_replace("Brasov","Brașov",$in);
+   
+
+ }
+
 $method = 'POST';
 $server = 'http://23.97.216.44/solr/';
 // $server = 'http://zimbor.go.ro/solr/';
@@ -47,7 +55,7 @@ $json = json_decode($data);
    
 foreach ($json as $item) {
     $item->job_title=html_entity_decode($item->job_title);
-    $item->city = str_replace("Bucharest","București",$item->city);
+    $item->city = city_fix($item->city);
     
 }
 
