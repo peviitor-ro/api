@@ -28,7 +28,4 @@ $url =  $server.'shaqodoon/select?'.$qs;
  
 $json = file_get_contents($url);
 echo $json;
-
-
-
 ?>
