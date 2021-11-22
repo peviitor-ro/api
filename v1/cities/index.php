@@ -38,6 +38,7 @@ for($i=0;$i<count($cities)/2;$i++) {
     $results->cities[$i] = new stdClass();
     $results->cities[$i] = $obj;
    
+    
 }
 
 
