@@ -6,3 +6,4 @@ code for api.peviitor.ro
 
 
 - working on v2
+- v2 is in testing
