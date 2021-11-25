@@ -38,6 +38,8 @@ for($i=0;$i<count($companies)/2;$i++) {
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
+
+    
 }
 
 
