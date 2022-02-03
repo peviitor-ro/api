@@ -19,7 +19,7 @@ $url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet=on&q=*%
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
-$companies = $json['facet_counts']['facet_fields']['company'];
+$companies = $json['facet_counts']['facet_fields']['company_str'];
 
 
 
