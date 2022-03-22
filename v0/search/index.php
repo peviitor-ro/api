@@ -4,9 +4,14 @@ header("Access-Control-Allow-Origin: *");
 
 $qs = $_SERVER['QUERY_STRING'];
 
-// $url =  'http://solr.peviitor.ro/solr/shaqodoon/select?'.$qs;
+function get_server(){
+    //get the IP of the server
+    //we need a config file to know where is the SOLR
+    require('../../_config/index.php');
+    return $server;
+}
 
-$url =  'http://23.97.216.44/solr/shaqodoon/select?'.$qs;
+$url =  get_server().'shaqodoon/select?'.$qs;
 
  
 

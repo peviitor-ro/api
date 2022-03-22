@@ -1,5 +1,14 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+
+function get_server(){
+    //get the IP of the server
+    //we need a config file to know where is the SOLR
+    require('../../_config/index.php');
+    return $server;
+}
+
+
     /**
      * @OA\Get(
      *     path="/v1/search/", tags={"search engine"},
@@ -34,6 +43,7 @@ header("Access-Control-Allow-Origin: *");
      */
 
 
+
 if (isset($_GET['q'])) {$q  = "q=".urlencode($_GET['q']);} else {$q='q=*:*';}
 if (isset($_GET['company'])) {$q .= "&fq=company:".urlencode($_GET['company']);}
 if (isset($_GET['city'])) {$q .= '&fq=city%3A"'.urlencode($_GET['city']).'"';}
@@ -44,8 +54,7 @@ if (isset($_GET['page'])) {
     $q .= "&start=".$start;
 }
 
-//$url =  'http://solr.peviitor.ro/solr/shaqodoon/select?'.$qs;
-$url =  'http://23.97.216.44/solr/shaqodoon/select?'.$q;
+$url =  get_server().'shaqodoon/select?'.$q;
  
  
 $json = file_get_contents($url);
