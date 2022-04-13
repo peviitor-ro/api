@@ -50,8 +50,7 @@ header("Access-Control-Allow-Origin: *");
  }
 
 $method = 'POST';
-$server = 'http://23.97.216.44/solr/';
-// $server = 'http://zimbor.go.ro/solr/';
+$server = 'http://zimbor.go.ro/solr/';
 $core  = 'shaqodoon';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
