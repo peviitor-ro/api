@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 /**
  * @OA\Post(
  * path="/v1/update/",
- * tags={"search engine"},
+ * tags={"scraper"},
  * @OA\RequestBody(
  *  @OA\MediaType(
  *             mediaType="application/json",
