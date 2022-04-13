@@ -20,7 +20,7 @@ header("Access-Control-Allow-Origin: *");
 *                   @OA\Property(property="job_link", type="string", example="https://www.epam.com/careers/job-listings/job.55552.software-test-automation-engineer-java_mykolaiv_ukraine"),
 *                   @OA\Property(property="company", type="string", example="test"),
 *                   @OA\Property(property="country", type="string", example="Romania"),
-                    @OA\Property(property="remote", type="string", example="remote"),
+*                   @OA\Property(property="remote", type="string", example="remote"),
 *                   @OA\Property(property="city", type="string", example="Cluj-Napoca")
 *                       )                   
 *           )
