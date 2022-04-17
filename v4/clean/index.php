@@ -47,7 +47,7 @@ header("Access-Control-Allow-Origin: *");
     $server = get_server();
     $core  = 'shaqodoon';
     $command ='/update';
-    $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
+    $qs = '?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
     $url =  $server.$core.$command.$qs;
     $data = "{'delete': {'query': 'company:";
         $data.=$xcompany;
