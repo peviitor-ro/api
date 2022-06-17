@@ -10,8 +10,8 @@ function get_server(){
     require('../../_config/index.php');
     return $server;
 }
-
-$url =  get_server().'shaqodoon/select?'.$qs;
+$core ="jobs";
+$url =  get_server().$core.'/select?'.$qs;
 
  
 
