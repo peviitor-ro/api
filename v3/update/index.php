@@ -71,7 +71,7 @@ header("Access-Control-Allow-Origin: *");
 
     $method = 'POST';
     $server = get_server();
-    $core  = 'shaqodoon';
+    $core  = 'jobs';
     $command ='/update';
     $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
     
