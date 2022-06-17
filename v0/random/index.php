@@ -28,8 +28,8 @@ $server = get_server();
 $max=$json['response']['numFound'];;
 $start = rand(0,$max);
 $qs = 'q=*%3A*&rows=1&start='.$start.'&omitHeader=true';
-
-$url =  $server.'shaqodoon/select?'.$qs;
+$core = "jobs";
+$url =  $server.$core.'/select?'.$qs;
  
  
 $json = file_get_contents($url);
