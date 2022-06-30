@@ -9,39 +9,7 @@ function get_server(){
 }
 
 
-    /**
-     * @OA\Get(
-     *     path="/v1/search/", tags={"search engine"},
-     *     
-     *          @OA\Parameter(
-     *                in="query", 
-     *                name="q",  example="front end",
-     *               @OA\Schema(type="string")
-     * ),
-     *               @OA\Parameter(
-     *                in="query", 
-     *                name="company",  example="Endava",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="city",  example="Cluj-Napoca",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="country",  example="România",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="page",  example="1",
-     *               @OA\Schema(type="string")
-     * ),
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
-
+    
 
 
 if (isset($_GET['q'])) {$q  = "q=".urlencode($_GET['q']);} else {$q='q=*:*';}
@@ -54,7 +22,7 @@ if (isset($_GET['page'])) {
     $q .= "&start=".$start;
 }
 
-$url =  get_server().'shaqodoon/select?'.$q;
+$url =  get_server().'jobs/select?'.$q;
  
  
 $json = file_get_contents($url);
