@@ -62,6 +62,7 @@ $data = file_get_contents('php://input');
 
 
 $json = json_decode($data);
+echo $json;
    
 foreach ($json as $item) {
     $item->job_title=html_entity_decode($item->job_title);
@@ -86,5 +87,5 @@ $context  = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */ }
 
-var_dump($result);
+//var_dump($result);
 ?>
