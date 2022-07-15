@@ -62,7 +62,7 @@ $data = file_get_contents('php://input');
 
 
 $json = json_decode($data);
-echo $json;
+print_r($data);
    
 foreach ($json as $item) {
     $item->job_title=html_entity_decode($item->job_title);
