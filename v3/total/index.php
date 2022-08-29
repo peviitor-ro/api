@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-$url = 'https://api.peviitor.ro/v0/search/?facet.field=company&facet=on&q=*%3A*&rows=0';
+$url = 'https://api.peviitor.ro/v0/search/?facet.field=company&facet.limit=10000&facet=true&fl=company&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
