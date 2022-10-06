@@ -12,9 +12,17 @@ header("Access-Control-Allow-Origin: *");
      *                 @OA\Property(
      *                     property="company",
      *                     type="string"
-     *                 ),
+     *                              ),
      *                 example="company=Endava"
-     *                      )
+     *                        )
+     * ,
+     *      *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="country",
+     *                     type="string"
+     *                              ),
+     *                 example="country=Poland"
+     *                        )
      *                  )
      *          ),
     
