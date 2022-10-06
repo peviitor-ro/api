@@ -12,17 +12,9 @@ header("Access-Control-Allow-Origin: *");
      *                 @OA\Property(
      *                     property="company",
      *                     type="string"
-     *                              ),
+     *                 ),
      *                 example="company=Endava"
-     *                        )
-     * ,
-     *      *             @OA\Schema(
-     *                 @OA\Property(
-     *                     property="country",
-     *                     type="string"
-     *                              ),
-     *                 example="country=Poland"
-     *                        )
+     *                      )
      *                  )
      *          ),
     
@@ -44,16 +36,8 @@ $company='xtest';
 $company = $_POST['company'];
 
 $url =  $server.$core.$command.$qs;
-if(isset( $_POST['country'])) {$country = $_POST['country'])}
-
- if (isset($country) {
-
-    $data = "{'delete': {'query': ' company:".$company." AND country:".$country." '}}";
-
- } else {
-$data = "{'delete': {'query': ' company:".$company."'}}";
-
- }
+ 
+$data = "{'delete': {'query': 'company:".$company."'}}";
 
 
 
