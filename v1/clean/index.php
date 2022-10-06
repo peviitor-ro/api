@@ -36,8 +36,16 @@ $company='xtest';
 $company = $_POST['company'];
 
 $url =  $server.$core.$command.$qs;
- 
-$data = "{'delete': {'query': 'company:".$company."'}}";
+if(isset( $_POST['country'])) {$country = $_POST['country'])}
+
+ if (isset($country) {
+
+    $data = "{'delete': {'query': ' company:".$company." AND country:".$country." '}}";
+
+ } else {
+$data = "{'delete': {'query': ' company:".$company."'}}";
+
+ }
 
 
 
