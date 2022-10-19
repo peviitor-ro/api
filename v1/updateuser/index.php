@@ -18,7 +18,7 @@ if (isset($data[0]->id))
 $user = $data[0]->id;
 $user = urlencode($user);
 
-$url =  'http://23.97.216.44/solr/auth/select?'.'omitHeader=true&q.op=OR&q=id%3A'.$user;
+$url =  'http://zimbor.go.ro/solr/auth/select?'.'omitHeader=true&q.op=OR&q=id%3A'.$user;
 $json = file_get_contents($url);
 $json = json_decode($json);
 unset($json->response->docs[0]->_version_);
@@ -33,7 +33,7 @@ unset($json->response->docs[0]->_version_);
 
 
 $method = 'POST';
-$server = 'http://23.97.216.44/solr/';
+$server = 'http://zimbor.go.ro/solr/';
 $core  = 'auth';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
