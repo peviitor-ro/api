@@ -32,7 +32,7 @@ function get_server(){
      *                in="query", 
      *                name="country",  example="România",
      *               @OA\Schema(type="string")
-     * ,
+     * ),
      *           @OA\Parameter(
      *                in="query", 
      *                name="remote",  example="remote",
