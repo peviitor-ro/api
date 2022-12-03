@@ -32,6 +32,11 @@ function get_server(){
      *                in="query", 
      *                name="country",  example="România",
      *               @OA\Schema(type="string")
+     * ,
+     *           @OA\Parameter(
+     *                in="query", 
+     *                name="remote",  example="remote",
+     *               @OA\Schema(type="string")
      * ),
      *           @OA\Parameter(
      *                in="query", 
@@ -48,6 +53,7 @@ if (isset($_GET['q'])) {$q  = "q=".urlencode($_GET['q']);} else {$q='q=*:*';}
 if (isset($_GET['company'])) {$q .= "&fq=company:".urlencode($_GET['company']);}
 if (isset($_GET['city'])) {$q .= '&fq=city%3A"'.urlencode($_GET['city']).'"';}
 if (isset($_GET['country'])) {$q .= "&fq=country:".urlencode($_GET['country']);}
+if (isset($_GET['remote'])) {$q .= "&fq=remote:".urlencode($_GET['remote']);}
 if (isset($_GET['page'])) {
     $start = $_GET['page'];
     $start = ($start-1)*10; 
