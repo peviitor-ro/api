@@ -57,7 +57,7 @@ header("Access-Control-Allow-Origin: *");
     $data = file_get_contents('php://input');
     
     $json = json_encode($data);
-   var_dump($json);
+   print_r($json);
     foreach ($json as $item) {
         $item->company    = $xcompany;
         $item->job_title  = html_entity_decode($item->job_title);
