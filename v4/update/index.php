@@ -92,8 +92,8 @@ header("Access-Control-Allow-Origin: *");
         if (($name=='apikey'))        {	
           if (validate_api_key($value)==true)
               {     
-                    
-                   update($_POST['company']);
+                    $company = $_POST['company'] ;
+                   update("$company");
               } else {echo "apikey error";}
                                       }
     } 
