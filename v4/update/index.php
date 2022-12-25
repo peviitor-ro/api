@@ -42,7 +42,7 @@ header("Access-Control-Allow-Origin: *");
 
 
 
- function update($xcompany) {
+ function update() {
    
 
 
@@ -59,7 +59,7 @@ header("Access-Control-Allow-Origin: *");
     $json = json_decode($data);
   
     foreach ($json as $item) {
-        $item->company    = $xcompany;
+        
         $item->job_title  = html_entity_decode($item->job_title);
         $item->country    = str_replace("Romania","România",$item->country);
     }
@@ -92,8 +92,8 @@ header("Access-Control-Allow-Origin: *");
         if (($name=='apikey'))        {	
           if (validate_api_key($value)==true)
               {     
-                    $company = $_POST['company'] ;
-                   update("$company");
+                    
+                   update();
               } else {echo "apikey error";}
                                       }
     } 
