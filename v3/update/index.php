@@ -79,7 +79,7 @@ header("Access-Control-Allow-Origin: *");
      
     $data = file_get_contents('php://input');
     
-    $json = json_encode($data);
+    $json = json_decode($data);
    
     foreach ($json as $item) {
         $item->company=$xcompany;
@@ -88,7 +88,7 @@ header("Access-Control-Allow-Origin: *");
     }
     
 
-    $data = json_decode($json);
+    $data = json_encode($json);
     $url = $server.$core.$command.$qs;
   
     
