@@ -84,6 +84,7 @@ header("Access-Control-Allow-Origin: *");
     foreach ($json as $item) {
         $item->company=$xcompany;
         $item->job_title=html_entity_decode($item->job_title);
+        $item->country    = str_replace("Romania","România",$item->country);
     }
     
 
