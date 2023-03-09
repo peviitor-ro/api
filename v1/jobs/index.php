@@ -18,8 +18,8 @@ header("Access-Control-Allow-Origin: *");
 
 $qs = "q=*%3A*&rows=100&omitHeader=true";
 //$qs = urldecode($qs);
-//$url =  'http://solr.peviitor.ro/solr/shaqodoon/select?'.$qs;
-$url =  "http://23.97.216.44/solr/shaqodoon/select?".$qs;
+$url =  'http://solr.peviitor.ro/solr/shaqodoon/select?'.$qs;
+
  
  
 $json = file_get_contents($url);
