@@ -16,8 +16,10 @@ header("Access-Control-Allow-Origin: *");
      */
 
 
+
 $qs = "q=*%3A*&rows=100&omitHeader=true";
 //$qs = urldecode($qs);
+if (isset($_GET["start"])) {$start=$_GET["start"];$qs.="&start=".$start;}
 $url =  'http://solr.peviitor.ro/solr/jobs/select?'.$qs;
 
  
