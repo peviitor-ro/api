@@ -26,6 +26,7 @@ unset($json->response->docs[0]->_version_);
  if (isset($data[0]->id)) {$json->response->docs[0]->id = $data[0]->id;}
  if (isset($data[0]->url)) {$json->response->docs[0]->url = $data[0]->url;}
  if (isset($data[0]->company)) {$json->response->docs[0]->company = $data[0]->company;}
+ if (isset($data[0]->logo)) {$json->response->docs[0]->logo = $data[0]->logo;}
  if (isset($data[0]->apikey)) { $json->response->docs[0]->apikey = $data[0]->apikey;}
 
 //print_r ($json->response->docs[0]);
