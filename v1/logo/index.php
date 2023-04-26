@@ -29,7 +29,7 @@ foreach($companies as $company)
     $item = $company["id"];
     $xurl  =  $company["logo"];
     $url  = $xurl[0];
-    $test[$item] = $company[$url];
+    $test[$item] = $url;
      var_dump($test);
 }
 
