@@ -11,6 +11,14 @@ function get_server(){
 $core ="auth";
 $url =  get_server().$core.'/select?'.$qs;
 
-$json = file_get_contents($url);
-echo $json;
+$string = file_get_contents($url);
+$json = json_decode($string, true);
+$companies = $json['response']['docs'];
+
+
+$results =  new stdClass();
+$results->companies = array();
+$results->companies = $companies;
+
+echo json_encode($results);
 ?>
