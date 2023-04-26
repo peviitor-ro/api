@@ -27,7 +27,8 @@ foreach($companies as $company)
    
     echo "<br/> ";
     $item = $company["id"];
-    $url  =  $company->logo[0];
+    $xurl  =  $company["logo"];
+    $url  = $xurl[0];
     $test[$item] = $company[$url];
      var_dump($test);
 }
