@@ -28,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: master 
+          ref:  ${{secrets.FTP_PAT}}
       - name: Fast FTP
         uses: anvil-solutions/Fast-FTP-Action@2.1.3
         with:
