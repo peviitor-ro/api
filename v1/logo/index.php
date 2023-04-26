@@ -24,10 +24,12 @@ $results->companies = $companies;
 $test = array();
 foreach($companies as $company) 
 {
-    var_dump($company);
+   
     echo "<br/> ";
-    echo $company["id"];
-    echo "<br/> ";
+    $item = $company["id"];
+    $url  =  $company->logo[0];
+    $test[$item] = $company[$url];
+     var_dump($test);
 }
 
 //echo json_encode($results);
