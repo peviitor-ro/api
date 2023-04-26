@@ -26,6 +26,8 @@ foreach($companies as $company)
 {
     var_dump($company);
     echo "<br/> ";
+    echo $company["id"];
+    echo "<br/> ";
 }
 
 //echo json_encode($results);
