@@ -20,5 +20,13 @@ $results =  new stdClass();
 $results->companies = array();
 $results->companies = $companies;
 
-echo json_encode($results);
+
+$test = array();
+foreach($companies as $company) 
+{
+    var_dump($company);
+    echo "<br/> ";
+}
+
+//echo json_encode($results);
 ?>
