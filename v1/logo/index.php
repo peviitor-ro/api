@@ -1,6 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-$qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&useParams=";
+$qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&omitHeader=true&useParams=";
 
 function get_server(){
     //get the IP of the server
