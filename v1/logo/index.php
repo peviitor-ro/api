@@ -26,7 +26,7 @@ foreach($companies as $company)
 {
    
     echo "<br/> ";
-    $item = $company["id"];
+    $item = strtolower($company["id"]);
     $xurl  =  $company["logo"];
     $url  = $xurl[0];
     $test[$item] = $url;
@@ -54,7 +54,7 @@ for($i=0;$i<count($companies)/2;$i++) {
        {
     $obj->jobs = $companies[$l];
        }
-    $obj->logo = $test[$obj->name];
+    $obj->logo = $test[strtolower($obj->name)];
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
