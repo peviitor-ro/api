@@ -12,13 +12,13 @@ $url =  $server.$core.$command.$qs;
 $data = file_get_contents('php://input');
 $json = json_decode($data);
 print_r($data);
-   foreach ($json as $item) {
+    $item = new stdClass();
     $item->id=html_entity_decode($item->company);
     $item->logo = $item->logo;
     
-}
 
-$data = json_encode($json);
+
+$data = json_encode($item);
 
 $options = array(
     'http' => array(
