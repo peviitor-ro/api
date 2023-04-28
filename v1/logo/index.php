@@ -24,15 +24,14 @@ $results->companies = $companies;
 $test = array();
 foreach($companies as $company) 
 {
-   
-    echo "<br/> ";
+
     $item = strtolower($company["id"]);
     $xurl  =  $company["logo"];
     $url  = $xurl[0];
     $test[$item] = $url;
     
 }
-// var_dump($test);
+
 
 $url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
 $string = file_get_contents($url);
