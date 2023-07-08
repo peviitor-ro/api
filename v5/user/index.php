@@ -11,7 +11,7 @@ function get_user_from_api_key($key) {
     $server = get_server();
     $core  = 'auth';
     $command ='/select';
-    $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=0';
+    $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=1';
     $url =  $server.$core.$command.$qs;
    
     $options = array(
@@ -26,7 +26,7 @@ function get_user_from_api_key($key) {
     if ($result === FALSE) { /* Handle error */ }
     $json = json_decode($result);
 
-    var_dump($json);
+    echo $json->response->docs[0]->id;
      $y = $json->response->numFound; 
     if ($y==1) {$x=true;}
     if ($y==0) {$x = false;}
