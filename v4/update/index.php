@@ -41,7 +41,7 @@ header("Access-Control-Allow-Origin: *");
     $server = get_server();
     $core  = 'auth';
     $command ='/select';
-    $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=0';
+    $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=1';
     $url =  $server.$core.$command.$qs;
    
     $options = array(
