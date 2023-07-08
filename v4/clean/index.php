@@ -35,6 +35,33 @@ header("Access-Control-Allow-Origin: *");
   return $x;
  }
 
+
+ function get_user_from_api_key($key) {
+    $method = 'GET';
+    $server = get_server();
+    $core  = 'auth';
+    $command ='/select';
+    $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=1';
+    $url =  $server.$core.$command.$qs;
+   
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'GET',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    $json = json_decode($result);
+
+     $y = $json->response->numFound; 
+    if ($y==1) {$x = $json->response->docs[0]->id;}
+    if ($y==0) {$x = false;}
+  return $x;
+ }
+
  function get_company($token) {
      $x=$company = $_POST['company'];
     return $x;
@@ -43,7 +70,7 @@ header("Access-Control-Allow-Origin: *");
  function discord_webhook($msg) {
     $msg .= ' CLEAN'.' ';
     $msg .= "in PRODUCTION";
-    $msg = date("l d-m-Y H:i:s").' -> '.$msg;
+    $msg .= date("l d-m-Y H:i:s").' ';
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
     $data = '{"content": "'.$msg.'"}';
@@ -61,7 +88,7 @@ header("Access-Control-Allow-Origin: *");
     
  }
 
- function clean($xcompany) {
+ function clean($xcompany,$key) {
    
     $method = 'POST';
     $server = get_server();
@@ -84,7 +111,8 @@ header("Access-Control-Allow-Origin: *");
             'content' => $data
         )
     );
-    discord_webhook($xcompany);
+    $msg = $xcompany.' key-> '.$key.' user-> '.get_user_from_api_key($key);
+    discord_webhook($msg);
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
@@ -103,7 +131,7 @@ header("Access-Control-Allow-Origin: *");
           if (validate_api_key($value)==true)
               {     
                     $company = get_company($value);
-                    clean($company);
+                    clean($company,$value);
               } else {echo "apikey error";}
                                       }
     } 
