@@ -96,7 +96,8 @@ function discord_webhook($msg) {
             'content' => $data
         )
     );
-    discord_webhook($_POST['company'].' key-> '.$key)
+    $msg = $_POST['company'].' key-> '.$key;
+    discord_webhook($msg);
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
