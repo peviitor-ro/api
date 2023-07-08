@@ -30,7 +30,7 @@ header("Access-Control-Allow-Origin: *");
     $json = json_decode($result);
 
      $y = $json->response->numFound; 
-    if ($y==1) {$x = true;}
+    if ($y==1) {$x = $json->id;}
     if ($y==0) {$x = false;}
   return $x;
  }
@@ -62,7 +62,7 @@ function discord_webhook($msg) {
     
  }
 
- function update($key) {
+ function update($key,$user) {
    
 
 
@@ -82,6 +82,7 @@ function discord_webhook($msg) {
         
         $item->job_title  = html_entity_decode($item->job_title);
         $item->country    = str_replace("Romania","România",$item->country);
+        $company = $item->company; 
     }
     
 
@@ -96,7 +97,7 @@ function discord_webhook($msg) {
             'content' => $data
         )
     );
-    $msg = $_POST['company'].' key-> '.$key;
+    $msg = $company.' key-> '.$key.' user-> '.$user;
     discord_webhook($msg);
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
@@ -112,10 +113,10 @@ function discord_webhook($msg) {
 
     foreach (getallheaders() as $name => $value) {
         if (($name=='apikey'))        {	
-          if (validate_api_key($value)==true)
+          if ($userid=validate_api_key($value)!=false)
               {     
                     
-                   update($value);
+                   update($value,$userid);
               } else {echo "apikey error";}
                                       }
     } 
