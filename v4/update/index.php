@@ -41,8 +41,28 @@ header("Access-Control-Allow-Origin: *");
 }
 
 
+function discord_webhook($msg) {
+    $msg .= ' UPDATE'.' ';
+    $msg .= "in PRODUCTION";
+    $msg .= ' '.date("l d-m-Y H:i:s").' ';
+    $method = 'POST';
+    $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
+    $data = '{"content": "'.$msg.'"}';
 
- function update() {
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    
+ }
+
+ function update($key) {
    
 
 
@@ -76,6 +96,7 @@ header("Access-Control-Allow-Origin: *");
             'content' => $data
         )
     );
+    discord_webhook($_POST['company'].' key-> '.$key)
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
@@ -93,7 +114,7 @@ header("Access-Control-Allow-Origin: *");
           if (validate_api_key($value)==true)
               {     
                     
-                   update();
+                   update($value);
               } else {echo "apikey error";}
                                       }
     } 
