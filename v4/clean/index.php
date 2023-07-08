@@ -42,6 +42,7 @@ header("Access-Control-Allow-Origin: *");
 
  function discord_webhook($msg) {
     $msg .= ' CLEAN'.' ';
+    $msg .= "in PRODUCTION";
     $msg = date("l d-m-Y H:i:s").' -> '.$msg;
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
