@@ -1,5 +1,11 @@
 
 <?php 
+    function get_server(){
+        //get the IP of the server
+        //we need a config file to know where is the SOLR
+        require('../../_config/index.php');
+        return $server;
+    }
 function get_user_from_api_key($key) {
     $method = 'GET';
     $server = get_server();
@@ -20,8 +26,9 @@ function get_user_from_api_key($key) {
     if ($result === FALSE) { /* Handle error */ }
     $json = json_decode($result);
 
+    var_dump($json);
      $y = $json->response->numFound; 
-    if ($y==1) {var_dump($json);}
+    if ($y==1) {$x=true;}
     if ($y==0) {$x = false;}
   return $x;
  }
