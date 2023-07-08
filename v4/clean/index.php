@@ -40,6 +40,25 @@ header("Access-Control-Allow-Origin: *");
     return $x;
  }
 
+ function discord_webhook($msg) {
+    $msg = 'CLEAN'.' ';
+    $msg = date("l d-m-Y H:i:s").' -> '.$msg;
+    $method = 'POST';
+    $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
+    $data = '{"content": "'.$msg.'"}';
+
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    
+ }
 
  function clean($xcompany) {
    
@@ -64,12 +83,13 @@ header("Access-Control-Allow-Origin: *");
             'content' => $data
         )
     );
+    discord_webhook($xcompany);
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     
     var_dump($result);
-
+  
  }
  
 
