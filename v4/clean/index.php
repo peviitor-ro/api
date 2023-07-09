@@ -83,11 +83,21 @@ header("Access-Control-Allow-Origin: *");
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
-    
+   
  }
 
+
+ function company_exist($company) {
+
+$url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"'.$company.'"&rows=0&omitHeader=true';
+$string = file_get_contents($url);
+$json = json_decode($string, true);
+$y = $json->response->numFound; 
+  if ($y>0) {return "new";} else {return "existing";}    
+ }
  function clean($xcompany,$key) {
-   
+
+     echo company_exist($xcompany);
     $method = 'POST';
     $server = get_server();
     $core  = 'jobs';
@@ -115,7 +125,7 @@ header("Access-Control-Allow-Origin: *");
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     
-    var_dump($result);
+    //var_dump($result);
   
  }
  
