@@ -67,8 +67,17 @@ header("Access-Control-Allow-Origin: *");
     return $x;
  }
 
+
+ function company_exist($company) {
+
+       $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"endava"&rows=0&omitHeader=true';
+       $string = file_get_contents($url);
+       $json = json_decode($string);
+   if ($json->response->numFound>0) {return "existing";} else {return "new";}    
+ }
  function discord_webhook($msg) {
-    $msg .= ' CLEAN in PRODUCTION at '. date("l d-m-Y H:i:s");
+      if (company_exist($xcompany)=="new") {$msg = "== NEW ENTRY == ".$msg. date("l d-m-Y H:i:s").' == PRODUCTION ==' ;} 
+      else {    $msg .= ' CLEAN in PRODUCTION at '. date("l d-m-Y H:i:s"); }
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
     $data = '{"content": "'.$msg.'"}';
@@ -87,17 +96,10 @@ header("Access-Control-Allow-Origin: *");
  }
 
 
- function company_exist($company) {
 
-$url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"endava"&rows=0&omitHeader=true';
-$string = file_get_contents($url);
-$json = json_decode($string);
-
-  if ($json->response->numFound>0) {return "existing";} else {return "new";}    
- }
  function clean($xcompany,$key) {
 
-    echo company_exist($xcompany);
+   
     $method = 'POST';
     $server = get_server();
     $core  = 'jobs';
