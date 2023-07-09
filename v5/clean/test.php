@@ -16,7 +16,7 @@ function company_exist($company) {
     $core  = 'jobs';
     $command ='/select';
      
-    $qs = '?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&useParams=';
+    $qs = '?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&useParams=&rows=0';
     $url =  $server.$core.$command.$qs;
    
     $options = array(
