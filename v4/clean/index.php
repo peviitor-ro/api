@@ -126,7 +126,7 @@ function discord_webhook($msg) {
         )
     );
     $msg='';
-    if (company_exist($xcompany)) {$msg.="!!! COMPLETELY NEW  !!!";}
+    if (company_exist($xcompany)=="new") {$msg.="!!! COMPLETELY NEW  !!!";}
     $msg .= $xcompany.'  user: '.get_user_from_api_key($key);
     discord_webhook($msg);
     $context  = stream_context_create($options);
