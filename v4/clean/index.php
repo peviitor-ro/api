@@ -94,7 +94,7 @@ $string = file_get_contents($url);
 $json = json_decode($string);
 $y = $json->response->numFound; 
      var_dump($json);
-  if ($y>0) {return "new";} else {return "existing";}    
+  if ($y>0) {return "existing";} else {return "new";}    
  }
  function clean($xcompany,$key) {
 
