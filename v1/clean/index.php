@@ -93,7 +93,7 @@ $options = array(
     )
 );
 $msg='';
-    if (company_exist($company)=="new") {$msg.="!!! COMPLETELY NEW  !!!";}
+    if (company_exist($company)=="new") {$msg.="!!! COMPLETELY NEW  !!!  ";}
     $msg .= $company;
     discord_webhook($msg);
 $context  = stream_context_create($options);
