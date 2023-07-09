@@ -69,7 +69,7 @@ header("Access-Control-Allow-Origin: *");
 
 
  function company_exist($company) {
-     ?indent=true&q.op=OR&q=company%3A%22endava%22&useParams=
+     
  $method = 'GET';
     $server = get_server();
     $core  = 'jobs';
@@ -91,7 +91,7 @@ header("Access-Control-Allow-Origin: *");
     $json = json_decode($result);
 
      $y = $json->response->numFound; 
-   echo $y;
+  
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
  }
  function discord_webhook($msg) {
