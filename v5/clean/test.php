@@ -30,9 +30,8 @@ function company_exist($company) {
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     $json = json_encode($result);
-   var_dump($json);
      $y = $json->response->numFound; 
-  
+     var_dump($y);
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
  }
 
