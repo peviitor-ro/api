@@ -95,8 +95,7 @@ header("Access-Control-Allow-Origin: *");
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
  }
  function discord_webhook($msg) {
-      if (company_exist($xcompany)=="new") {$msg = "== NEW ENTRY == ".$msg.' '. date("l d-m-Y H:i:s").' == PRODUCTION ==' ;} 
-      else {    $msg .= ' CLEAN in PRODUCTION at '. date("l d-m-Y H:i:s"); }
+      if (company_exist($xcompany)=="new") {$msg = "== NEW ENTRY == ".$msg.' '. date("l d-m-Y H:i:s").' == PRODUCTION ==' ;}       else {    $msg .= ' CLEAN in PRODUCTION at '. date("l d-m-Y H:i:s"); };
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
     $data = '{"content": "'.$msg.'"}';
