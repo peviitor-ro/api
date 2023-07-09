@@ -33,7 +33,7 @@ header("Access-Control-Allow-Origin: *");
 
 
     function company_exist($company) {
-        $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/shaqodoon/select?indent=true&q.op=OR&q='.$company.'%3A%22'.$company.'%22&rows=0&useParams=';
+        $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/shaqodoon/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
         $string = file_get_contents($url);
         $json = json_decode($string, true);
         
