@@ -93,11 +93,12 @@ $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"'.$c
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 $y = $json->response->numFound; 
+     var_dump($y);
   if ($y>0) {return "new";} else {return "existing";}    
  }
  function clean($xcompany,$key) {
 
-     echo company_exist($xcompany);
+    echo company_exist($xcompany);
     $method = 'POST';
     $server = get_server();
     $core  = 'jobs';
