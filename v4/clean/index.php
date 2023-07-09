@@ -72,8 +72,9 @@ header("Access-Control-Allow-Origin: *");
     $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/jobs/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
     $string = file_get_contents($url);
     $json = json_decode($string, true);
-    $y= $json['response']['numFound'];
-    return $y;
+    echo $json['response']['numFound'];
+    if ($json['response']['numFound']==0) {echo "new";}
+    if ($json['response']['numFound']!=0) {echo "existing";}
 
      }
 
