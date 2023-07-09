@@ -69,31 +69,15 @@ header("Access-Control-Allow-Origin: *");
 
 
  function company_exist($company) {
-     
- <?php
-header("Access-Control-Allow-Origin: *");
+    $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/jobs/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
+    $string = file_get_contents($url);
+    $json = json_decode($string, true);
+    $y= $json['response']['numFound'];
+   if ($y>0) {return "existing";} else {return "new";}    
 
-    function get_server(){
-        //get the IP of the server
-        //we need a config file to know where is the SOLR
-        require('../../_config/index.php');
-        return $server;
-    }
+     }
 
-function company_exist($company) {
-     
-
-$url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/jobs/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
-$string = file_get_contents($url);
-$json = json_decode($string, true);
-$y= $json['response']['numFound'];
-
-
-if ($y>0) {return "existing";} else {return "new";}    
-
-}
- }
- function discord_webhook($msg) {
+function discord_webhook($msg) {
       if (company_exist($xcompany)=="new") {$msg = "== NEW ENTRY == ".$msg.' '. date("l d-m-Y H:i:s").' == PRODUCTION ==' ;}       else {    $msg .= ' CLEAN in PRODUCTION at '. date("l d-m-Y H:i:s"); };
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
