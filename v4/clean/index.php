@@ -72,15 +72,15 @@ header("Access-Control-Allow-Origin: *");
     $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/jobs/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
     $string = file_get_contents($url);
     $json = json_decode($string, true);
-    echo $json['response']['numFound'];
-    if ($json['response']['numFound']==0) {echo "new";}
-    if ($json['response']['numFound']!=0) {echo "existing";}
+    
+    if ($json['response']['numFound']==0) {return "new";}
+    if ($json['response']['numFound']!=0) {return "existing";}
 
      }
 
 function discord_webhook($msg) {
       
-    $msg =  company_exist($xcompany).'    ' .$msg;
+    
     $msg .= ' CLEAN in PRODUCTION at '. date("l d-m-Y H:i:s"); 
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
@@ -103,7 +103,7 @@ function discord_webhook($msg) {
 
  function clean($xcompany,$key) {
 
-   
+     
     $method = 'POST';
     $server = get_server();
     $core  = 'jobs';
@@ -125,7 +125,9 @@ function discord_webhook($msg) {
             'content' => $data
         )
     );
-    $msg = $xcompany.'  user: '.get_user_from_api_key($key);
+    $msg='';
+    if (company_exist($xcompany)) {$msg.="!!! COMPLETELY NEW  !!!";}
+    $msg .= $xcompany.'  user: '.get_user_from_api_key($key);
     discord_webhook($msg);
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
