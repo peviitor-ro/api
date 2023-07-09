@@ -1,4 +1,3 @@
-co
 <?php
 header("Access-Control-Allow-Origin: *");
 
@@ -11,29 +10,16 @@ header("Access-Control-Allow-Origin: *");
 
 function company_exist($company) {
      
- $method = 'GET';
-    $server = get_server();
-    $core  = 'jobs';
-    $command ='/select';
-     
-    $qs = '?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&useParams=&rows=0';
-    $url =  $server.$core.$command.$qs;
-   
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'GET',
-            'content' => $data
-        )
-    );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) { /* Handle error */ }
-    $json = json_encode($result);
-     $y = $json->response->numFound; 
-     var_dump($y);
-   if ($json->response->numFound>0) {return "existing";} else {return "new";}    
- }
+
+$url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/jobs/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
+$string = file_get_contents($url);
+$json = json_decode($string, true);
+echo $json['response']['numFound'];
+
+
+
+
+}
 
 echo company_exist('endava');
 
