@@ -18,7 +18,7 @@ function company_exist($company) {
     if ($json['response']['numFound']==0) {echo "new";}
     if ($json['response']['numFound']!=0) {echo "existing";}
 
-    return $json['response']['numFound']
+    return $json['response']['numFound'];
 
 
 
