@@ -69,11 +69,29 @@ header("Access-Control-Allow-Origin: *");
 
 
  function company_exist($company) {
+     ?indent=true&q.op=OR&q=company%3A%22endava%22&useParams=
+ $method = 'GET';
+    $server = get_server();
+    $core  = 'jobs';
+    $command ='/select';
+     
+    $qs = '?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&useParams=';
+    $url =  $server.$core.$command.$qs;
+   
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'GET',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    $json = json_decode($result);
 
-       $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"'.$company.'"&rows=0&omitHeader=true';
-       $string = file_get_contents($url);
-       $json = json_decode($string);
-      var_dump($json->response->numFound);
+     $y = $json->response->numFound; 
+
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
  }
  function discord_webhook($msg) {
