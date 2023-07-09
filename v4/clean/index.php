@@ -93,7 +93,7 @@ $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"enda
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 $y = $json->response->numFound; 
-     var_dump($json);
+     var_dump($json->response);
   if ($y>0) {return "new";} else {return "existing";}    
  }
  function clean($xcompany,$key) {
