@@ -92,9 +92,8 @@ header("Access-Control-Allow-Origin: *");
 $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"endava"&rows=0&omitHeader=true';
 $string = file_get_contents($url);
 $json = json_decode($string);
-$y = $json->response->numFound; 
-     var_dump($json);
-  if ($y>0) {return "existing";} else {return "new";}    
+
+  if ($json->response->numFound>0) {return "existing";} else {return "new";}    
  }
  function clean($xcompany,$key) {
 
