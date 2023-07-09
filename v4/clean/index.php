@@ -89,7 +89,7 @@ header("Access-Control-Allow-Origin: *");
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
     $json = json_decode($result);
-
+   var_dump($json);
      $y = $json->response->numFound; 
   
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
