@@ -1,4 +1,4 @@
-
+co
 <?php
 header("Access-Control-Allow-Origin: *");
 
@@ -29,7 +29,7 @@ function company_exist($company) {
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
-    $json = json_decode($result);
+    $json = json_encode($result);
    var_dump($json);
      $y = $json->response->numFound; 
   
