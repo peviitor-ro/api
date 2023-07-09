@@ -70,7 +70,7 @@ header("Access-Control-Allow-Origin: *");
 
  function company_exist($company) {
 
-       $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"endava"&rows=0&omitHeader=true';
+       $url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=company%3A"'.$company.'"&rows=0&omitHeader=true';
        $string = file_get_contents($url);
        $json = json_decode($string);
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
