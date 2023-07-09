@@ -35,6 +35,6 @@ function company_exist($company) {
    if ($json->response->numFound>0) {return "existing";} else {return "new";}    
  }
 
-company_exist('endava');
+echo company_exist('endava');
 
 ?>
