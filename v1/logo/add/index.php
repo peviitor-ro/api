@@ -12,8 +12,7 @@ header("Access-Control-Allow-Origin: *");
      *                 @OA\Property(
      *                     property="id",
      *                     type="string"
-     *                 ),
-     *                 example='[{"id":"3pillar",      "logo":["https://cdn-icons-png.flaticon.com/512/5332/5332306.png"]}]'
+     *                 )
      *                 
      *                      )
      *                  )
