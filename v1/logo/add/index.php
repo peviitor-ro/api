@@ -1,5 +1,30 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+ /**
+     * 
+     * @OA\Post(
+     *     path="/v1/clean/", 
+     *     tags={"scraper"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="id",
+     *                     type="string"
+     *                 ),
+     *                 example="id=Endava",
+     *                 @OA\Property(
+     *                     property="logo",
+     *                     type="string"
+     *                 )
+     *                      )
+     *                  )
+     *          ),
+    
+     *     @OA\Response(response="200", description="Success")
+     * )
+     */
 
 $method = 'POST';
 $server = 'http://zimbor.go.ro/solr/';
