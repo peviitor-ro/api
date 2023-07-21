@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
  /**
      * 
      * @OA\Post(
-     *     path="/v1/logo/", 
+     *     path="/v1/logo/add/", 
      *     tags={"LOGO"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
