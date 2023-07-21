@@ -13,11 +13,8 @@ header("Access-Control-Allow-Origin: *");
      *                     property="id",
      *                     type="string"
      *                 ),
-     *                 example="id=Endava",
-     *                 @OA\Property(
-     *                     property="logo",
-     *                     type="string"
-     *                 )
+     *                 example='[{"id":"3pillar",      "logo":["https://cdn-icons-png.flaticon.com/512/5332/5332306.png"]}]'
+     *                 
      *                      )
      *                  )
      *          ),
