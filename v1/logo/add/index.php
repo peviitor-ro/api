@@ -3,8 +3,8 @@ header("Access-Control-Allow-Origin: *");
  /**
      * 
      * @OA\Post(
-     *     path="/v1/clean/", 
-     *     tags={"scraper"},
+     *     path="/v1/logo/", 
+     *     tags={"LOGO"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
