@@ -12,7 +12,7 @@ header("Access-Control-Allow-Origin: *");
      *                 @OA\Property(
      *                     property="id",
      *                     type="string"
-     *                 )
+     *                 ), example="[{""id"": ""Nova"",""logo"":""https://e-infra.ro/wp-content/uploads/2023/02/logotype-nova.jpg""}]"
      *                 
      *                      )
      *                  )
