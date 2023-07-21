@@ -8,13 +8,18 @@ header("Access-Control-Allow-Origin: *");
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                     property="id",
-     *                     type="string"
-     *                 ), example="[{""id"": ""Nova"",""logo"":""https://e-infra.ro/wp-content/uploads/2023/02/logotype-nova.jpg""}]"
-     *                 
-     *                      )
+      *     @OA\Schema(
+*              
+*             type="array",
+*             
+
+*              @OA\Items( 
+*                   type="object",            
+*                   @OA\Property(property="id", type="string", example="Nova"),
+*                   @OA\Property(property="logo", type="string", example="https://e-infra.ro/wp-content/uploads/2023/02/logotype-nova.jpg"),
+*                   
+*                       )                   
+*           )
      *                  )
      *          ),
     
