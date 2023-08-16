@@ -107,6 +107,7 @@ function discord_webhook($msg) {
         
         $item->job_title  = html_entity_decode($item->job_title);
         $item->country    = str_replace("Romania","România",$item->country);
+        $item->id = md5($item->job_link)."";
         $company = $item->company; 
     }
     
