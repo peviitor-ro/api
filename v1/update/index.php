@@ -93,6 +93,7 @@ print_r($data);
 foreach ($json as $item) {
     $item->job_title=html_entity_decode($item->job_title);
     $item->city = city_fix($item->city);
+    $item->id = md5($item->job_link)."";
     $company= $item->company;
 }
 
