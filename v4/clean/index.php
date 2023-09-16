@@ -15,7 +15,7 @@ header("Access-Control-Allow-Origin: *");
     $core  = 'auth';
     $command ='/select';
     $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=0';
-    $url =  $server.$core.$command.$qs;
+    $url =  $server[0].$core.$command.$qs;
    
     $options = array(
         'http' => array(
@@ -42,7 +42,7 @@ header("Access-Control-Allow-Origin: *");
     $core  = 'auth';
     $command ='/select';
     $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=1';
-    $url =  $server.$core.$command.$qs;
+    $url =  $server[0].$core.$command.$qs;
    
     $options = array(
         'http' => array(
@@ -109,7 +109,7 @@ function discord_webhook($msg) {
     $core  = 'jobs';
     $command ='/update';
     $qs = '?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
-    $url =  $server.$core.$command.$qs;
+    
     $data = "{'delete': {'query': 'company:";
         $data.=$xcompany;
     $data.="'}}";
@@ -130,8 +130,13 @@ function discord_webhook($msg) {
     $msg .= $xcompany.'  user: '.get_user_from_api_key($key);
     discord_webhook($msg);
     $context  = stream_context_create($options);
+     $url =  $server[0].$core.$command.$qs;
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
+      $url =  $server[1].$core.$command.$qs;
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+     
     
     //var_dump($result);
   
