@@ -1,4 +1,5 @@
 <?php   
-   $server = 'http://zimbor.go.ro/solr/';
-   $server1 = 'http://peviitor.go.ro/';
+   $server = array();
+   $server[0] = 'http://zimbor.go.ro/solr/';
+   $server[1] = 'http://peviitor.go.ro/';
 ?>
