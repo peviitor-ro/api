@@ -5,12 +5,17 @@ header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEA
 
 
 
-
+unction get_server(){
+        //get the IP of the server
+        //we need a config file to know where is the SOLR
+        require('../../_config/index.php');
+        return $server;
+    }
 
 $data = file_get_contents('php://input');
 $data = json_decode($data);
 
-
+$server = get_server();
 
 
 if (isset($data[0]->id))
@@ -18,7 +23,7 @@ if (isset($data[0]->id))
 $user = $data[0]->id;
 $user = urlencode($user);
 
-$url =  'http://zimbor.go.ro/solr/auth/select?'.'omitHeader=true&q.op=OR&q=id%3A'.$user;
+$url =  $server[0].'auth/select?'.'omitHeader=true&q.op=OR&q=id%3A'.$user;
 $json = file_get_contents($url);
 $json = json_decode($json);
 unset($json->response->docs[0]->_version_);
@@ -34,15 +39,13 @@ unset($json->response->docs[0]->_version_);
 
 
 $method = 'POST';
-$server = 'http://zimbor.go.ro/solr/';
+
 $core  = 'auth';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
 
-$url =  $server.$core.$command.$qs;
+$url =  $server[0].$core.$command.$qs;
 $data ="[".json_encode($json->response->docs[0])."]" ;
-
-
 
 
 
@@ -57,10 +60,10 @@ $context  = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */ }
 
+ $url =  $server[1].$core.$command.$qs;
+$result = file_get_contents($url, false, $context);
+if ($result === FALSE) { /* Handle error */ }
+    
 echo $data;
-
-
   }
-
-
 ?>
