@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEA
 
 
 
-unction get_server(){
+function get_server(){
         //get the IP of the server
         //we need a config file to know where is the SOLR
         require('../../_config/index.php');
