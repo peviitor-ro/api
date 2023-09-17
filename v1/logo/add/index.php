@@ -47,4 +47,8 @@ $options = array(
 $context  = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { echo $result; }
+
+ $server = 'http://peviitor.go.ro/solr/';
+$result = file_get_contents($url, false, $context);
+if ($result === FALSE) { echo $result; }
 ?>
