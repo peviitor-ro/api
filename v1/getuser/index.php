@@ -5,7 +5,6 @@ header("Access-Control-Allow-Origin: *");
 $qs = $_SERVER['QUERY_STRING'];
 $qs = urldecode($qs);
 
-
 if (isset($_GET['user']))
   {
 $user = $_GET['user'];
