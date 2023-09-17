@@ -40,12 +40,5 @@ for($i=0;$i<count($cities)/2;$i++) {
    
     
 }
-
-
-
-
-
 echo json_encode($results);
-
-
 ?>
