@@ -18,13 +18,10 @@ header("Access-Control-Allow-Origin: *");
 $url = 'https://api.peviitor.ro/v0/search/?facet.field=country&facet=on&q=*%3A*&rows=0';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
-
 $countries = $json['facet_counts']['facet_fields']['country'];
-
 $results =  new stdClass();
 $results->total = count($countries)/2;
 $results->companies = array();
-
 for($i=0;$i<count($countries)/2;$i++) {
     $k=2*$i;
     $l=2*$i+1;
@@ -37,14 +34,6 @@ for($i=0;$i<count($countries)/2;$i++) {
        }
     $results->countries[$i] = new stdClass();
     $results->countries[$i] = $obj;
-   
 }
-
-
-
-
-
 echo json_encode($results);
-
-
 ?>
