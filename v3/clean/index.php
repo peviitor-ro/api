@@ -15,7 +15,7 @@ header("Access-Control-Allow-Origin: *");
     $core  = 'auth';
     $command ='/select';
     $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=0';
-    $url =  $server.$core.$command.$qs;
+    $url =  $server[0].$core.$command.$qs;
    
     $options = array(
         'http' => array(
@@ -46,7 +46,7 @@ header("Access-Control-Allow-Origin: *");
      $core  = 'auth';
      $command ='/select';
      $qs = '?q.op=OR&q=apikey%3A"'.$token.'"%26rows%3D1';
-     $url =  $server.$core.$command.$qs;
+     $url =  $server[0].$core.$command.$qs;
     
      $options = array(
          'http' => array(
@@ -72,15 +72,14 @@ header("Access-Control-Allow-Origin: *");
     $core  = 'jobs';
     $command ='/update';
     $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
-    $url =  $server.$core.$command.$qs;
+    $url =  $server[0].$core.$command.$qs;
     $data = "{'delete': {'query': 'company:";
         $data.=$xcompany;
     $data.="'}}";
 
     //echo $data;
-    $url = $server.$core.$command.$qs;
+    $url = $server[0].$core.$command.$qs;
 
- 
     $options = array(
         'http' => array(
             'header'  => "Content-type: application/json\r\n",
@@ -91,16 +90,14 @@ header("Access-Control-Allow-Origin: *");
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
-    
+
+      $url = $server[1].$core.$command.$qs;
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+  
     var_dump($result);
-
  }
- 
-
-
-
  // endpoint starts here
-
     foreach (getallheaders() as $name => $value) {
         if (($name=='apikey'))        {	
           if (validate_api_key($value)==true)
@@ -110,7 +107,4 @@ header("Access-Control-Allow-Origin: *");
               } else {echo "apikey error";}
                                       }
     } 
-
-
-
 ?>
