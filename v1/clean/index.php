@@ -81,7 +81,7 @@ $data = "{'delete': {'query': 'company:".$company."'}}";
 
 
 
-$url = $server.$core.$command.$qs;
+$url = $server[0].$core.$command.$qs;
 
 
 
@@ -97,6 +97,11 @@ $msg='';
     $msg .= $company;
     discord_webhook($msg);
 $context  = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
+if ($result === FALSE) { /* Handle error */ }
+
+
+$url = $server[1].$core.$command.$qs;
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */ }
 
