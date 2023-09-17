@@ -46,7 +46,7 @@ header("Access-Control-Allow-Origin: *");
      $core  = 'auth';
      $command ='/select';
      $qs = '?q.op=OR&q=apikey%3A"'.$token.'"%26rows%3D1';
-     $url =  $server.$core.$command.$qs;
+     $url =  $server[0].$core.$command.$qs;
     
      $options = array(
          'http' => array(
@@ -58,6 +58,8 @@ header("Access-Control-Allow-Origin: *");
      $context  = stream_context_create($options);
      $result = file_get_contents($url, false, $context);
      if ($result === FALSE) { /* Handle error */ }
+
+     
       $json = json_decode($result);
     
     $x=$json->response->docs[0]->company[0];
@@ -75,7 +77,7 @@ header("Access-Control-Allow-Origin: *");
     $command ='/update';
     $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
     
-    $url =  $server.$core.$command.$qs;
+    $url =  $server[0].$core.$command.$qs;
      
     $data = file_get_contents('php://input');
     
@@ -102,11 +104,14 @@ header("Access-Control-Allow-Origin: *");
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
-    
+
+      $url =  $server[0].$core.$command.$qs;
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+     
     var_dump($result);
  }
  
-
 
 
  // endpoint starts here
@@ -120,7 +125,4 @@ header("Access-Control-Allow-Origin: *");
               } else {echo "apikey error";}
                                       }
     } 
-
-
-
 ?>
