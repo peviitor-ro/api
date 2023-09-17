@@ -36,17 +36,7 @@ for($i=0;$i<count($companies)/2;$i++) {
     $obj->jobs = $companies[$l];
        }
     $results->companies[$i] = new stdClass();
-    $results->companies[$i] = $obj;
-   
-
-    
-}
-
-
-
-
-
+    $results->companies[$i] = $obj;  
+ }
 echo json_encode($results);
-
-
 ?>
