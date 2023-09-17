@@ -60,14 +60,7 @@ if (isset($_GET['page'])) {
     $q .= "&start=".$start;
 }
 
-$url =  get_server().'shaqodoon/select?'.$q;
- 
- 
+$url =  get_server()[0].'shaqodoon/select?'.$q;
 $json = file_get_contents($url);
-
-
 echo $json;
-
-
-
 ?>
