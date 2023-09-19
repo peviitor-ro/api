@@ -8,7 +8,7 @@ function get_server(){
     return $server;
 }
 $core ="jobs";
-$url =  get_server()[1].$core.'/select?'.$qs;
+$url =  get_server()[0].$core.'/select?'.$qs;
 $json = file_get_contents($url);
 echo $json;
 ?>
