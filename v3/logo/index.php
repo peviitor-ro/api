@@ -9,7 +9,7 @@ function get_server(){
     return $server;
 }
 $core ="auth";
-$url =  get_server().$core.'/select?'.$qs;
+$url =  get_server()[1].$core.'/select?'.$qs;
 
 $string = file_get_contents($url);
 $json = json_decode($string, true);
