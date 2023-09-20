@@ -31,6 +31,33 @@ header("Access-Control-Allow-Origin: *");
         return $server;
     }
 
+function get_master_server(){
+    $method = 'GET';
+    $server = "https://api.peviitor.ro/";
+    $core  = 'v0';
+    $command ='/server/';
+    $qs = '';
+    $url =  $server.$core.$command.$qs;
+   
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'GET',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    $json = json_decode($result);
+    foreach($json as $item)
+        {
+            if ($item->status=="up"){
+                return $item->server;
+                break;
+            }
+        }
+}
 
     function company_exist($company) {
         $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/shaqodoon/select?indent=true&q.op=OR&q=company%3A%22'.$company.'%22&rows=0&useParams=';
@@ -63,27 +90,13 @@ header("Access-Control-Allow-Origin: *");
     }         
 
 $method = 'POST';
-
-
-$server = get_server();;
+$server = get_server();
 $core  = 'shaqodoon';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
-$company='xtest';
 
 $company = $_POST['company'];
-
-$url =  $server.$core.$command.$qs;
- 
 $data = "{'delete': {'query': 'company:".$company."'}}";
-
-
-
-
-
-$url = $server[0].$core.$command.$qs;
-
-
 
 $options = array(
     'http' => array(
@@ -97,13 +110,11 @@ $msg='';
     $msg .= $company;
     discord_webhook($msg);
 $context  = stream_context_create($options);
+
+foreach ($server as $solrurl){
+$url = $solrurl.$core.$command.$qs;
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */ }
+}
 
-
-$url = $server[1].$core.$command.$qs;
-$result = file_get_contents($url, false, $context);
-if ($result === FALSE) { /* Handle error */ }
-
-print_r($result);
 ?>
