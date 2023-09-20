@@ -30,12 +30,14 @@ function get_master_server(){
     $json = json_decode($result);
     foreach($json as $item)
         {
-            echo $item->server;
-            echo $item->status;
+            if ($item->status=="up"){
+                return $item->server;
+                break;
+            }
         }
 }
 
-get_master_server();
+echo get_master_server();
 /*
 $core ="shaqodoon";
 $url =  get_server().$core.'/select?'.$qs;
