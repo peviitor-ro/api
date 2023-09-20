@@ -37,9 +37,9 @@ function isSolrServerUp($solrUrl, $coreName) {
 
 // Check if SOLR server is up
 if (isSolrServerUp($solrUrl, $coreName)) {
-    echo "SOLR server is up and running!";
+    echo "SOLR server ".$solrUrl." is up and running!";
 } else {
-    echo "SOLR server is not responding.";
+    echo "SOLR server ".$solrUrl." is not responding.";
 }
 
 ?>
