@@ -42,7 +42,10 @@ function isSolrServerUp($solrUrl, $coreName) {
 }
 
 $message = array();
-$server = get_server();
+//$server = get_server();
+   $server = array();
+   $server[1] = 'http://zimbor.go.ro/solr/';
+   $server[0] = 'http://peviitor.go.ro/solr/';
 foreach ($server as $solrUrl) {
  $msg = new stdClass();
 
