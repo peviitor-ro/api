@@ -27,13 +27,21 @@ header("Access-Control-Allow-Origin: *");
      * )
      */
 
+
+ function get_server(){
+    //get the IP of the server
+    //we need a config file to know where is the SOLR
+    require('../../_config/index.php');
+    return $server;
+}
+
 $method = 'POST';
-$server = 'http://zimbor.go.ro/solr/';
+$server = get_server();
 $core  = 'auth';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
 
-$url =  $server.$core.$command.$qs;
+
  
 $data = file_get_contents('php://input');
 
@@ -45,10 +53,11 @@ $options = array(
     )
 );
 $context  = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
-if ($result === FALSE) { echo $result; }
 
- $server = 'http://peviitor.go.ro/solr/';
+foreach ($server as $solrurl) {
+$url =  $solrurl.$core.$command.$qs;
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { echo $result; }
+}
+
 ?>
