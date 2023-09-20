@@ -41,19 +41,23 @@ function isSolrServerUp($solrUrl, $coreName) {
     return false;
 }
 
-$msg = new stdClass();
+$message = array();
 $server = get_server();
 foreach ($server as $solrUrl) {
+ $msg = new stdClass();
 if (isSolrServerUp($solrUrl, $coreName))
 {
+  
+  $msg-> status = 
   $msg->server = $solrUrl;
   $msg->status = "up";
 } else {
     $msg->server = $solrUrl;
     $msg->status = "down";
 }
+ $message[]= $msg; 
 }
-echo json_encode($msg);
+echo json_encode($message);
 
 
 ?>
