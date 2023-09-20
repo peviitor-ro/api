@@ -7,15 +7,42 @@ header("Access-Control-Allow-Origin: *");
         require('../../_config/index.php');
         return $server;
     }
- 
+
+   function get_master_server(){
+    $method = 'GET';
+    $server = "https://api.peviitor.ro/";
+    $core  = 'v0';
+    $command ='/server/';
+    $qs = '';
+    $url =  $server.$core.$command.$qs;
+   
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'GET',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    $json = json_decode($result);
+    foreach($json as $item)
+        {
+            if ($item->status=="up"){
+                return $item->server;
+                break;
+            }
+        }
+}
 
  function validate_api_key($key) {
     $method = 'GET';
-    $server = get_server();
+    $server = get_master_server();
     $core  = 'auth';
     $command ='/select';
     $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=0';
-    $url =  $server[0].$core.$command.$qs;
+    $url =  $server.$core.$command.$qs;
    
     $options = array(
         'http' => array(
@@ -42,11 +69,11 @@ header("Access-Control-Allow-Origin: *");
 
 
      $method = 'GET';
-     $server = get_server();
+     $server = get_master_server();
      $core  = 'auth';
      $command ='/select';
      $qs = '?q.op=OR&q=apikey%3A"'.$token.'"%26rows%3D1';
-     $url =  $server[0].$core.$command.$qs;
+     $url =  $server.$core.$command.$qs;
     
      $options = array(
          'http' => array(
@@ -72,7 +99,7 @@ header("Access-Control-Allow-Origin: *");
     $core  = 'jobs';
     $command ='/update';
     $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
-    $url =  $server[0].$core.$command.$qs;
+    
     $data = "{'delete': {'query': 'company:";
         $data.=$xcompany;
     $data.="'}}";
@@ -88,12 +115,13 @@ header("Access-Control-Allow-Origin: *");
         )
     );
     $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) { /* Handle error */ }
 
-      $url = $server[1].$core.$command.$qs;
-    $result = file_get_contents($url, false, $context);
+     foreach ($server as $solrurl){
+      $url =  $solrurl.$core.$command.$qs;
+      $result = file_get_contents($url, false, $context);
     if ($result === FALSE) { /* Handle error */ }
+     }
+      
   
     var_dump($result);
  }
