@@ -12,10 +12,38 @@ function get_server(){
         return $server;
     }
 
+   function get_master_server(){
+    $method = 'GET';
+    $server = "https://api.peviitor.ro/";
+    $core  = 'v0';
+    $command ='/server/';
+    $qs = '';
+    $url =  $server.$core.$command.$qs;
+   
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'GET',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */ }
+    $json = json_decode($result);
+    foreach($json as $item)
+        {
+            if ($item->status=="up"){
+                return $item->server;
+                break;
+            }
+        }
+}
+
 $data = file_get_contents('php://input');
 $data = json_decode($data);
 
-$server = get_server();
+$server = get_master_server();
 
 
 if (isset($data[0]->id))
@@ -23,7 +51,7 @@ if (isset($data[0]->id))
 $user = $data[0]->id;
 $user = urlencode($user);
 
-$url =  $server[0].'auth/select?'.'omitHeader=true&q.op=OR&q=id%3A'.$user;
+$url =  $server.'auth/select?'.'omitHeader=true&q.op=OR&q=id%3A'.$user;
 $json = file_get_contents($url);
 $json = json_decode($json);
 unset($json->response->docs[0]->_version_);
@@ -44,10 +72,7 @@ $core  = 'auth';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
 
-$url =  $server[0].$core.$command.$qs;
 $data ="[".json_encode($json->response->docs[0])."]" ;
-
-
 
 $options = array(
     'http' => array(
@@ -57,12 +82,13 @@ $options = array(
     )
 );
 $context  = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
-if ($result === FALSE) { /* Handle error */ }
 
- $url =  $server[1].$core.$command.$qs;
+$server = get_server();
+foreach($server as $solrurl){
+ $url =  $solrurl.$core.$command.$qs;          
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */ }
+}
     
 echo $data;
   }
