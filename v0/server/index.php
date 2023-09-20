@@ -45,10 +45,10 @@ $message = array();
 $server = get_server();
 foreach ($server as $solrUrl) {
  $msg = new stdClass();
+ $msg->response = isSolrServerUp($solrUrl, $coreName);
 if (isSolrServerUp($solrUrl, $coreName))
 {
   
-  $msg-> status = 
   $msg->server = $solrUrl;
   $msg->status = "up";
 } else {
