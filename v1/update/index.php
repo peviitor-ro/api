@@ -81,11 +81,8 @@ $core  = 'shaqodoon';
 $command ='/update';
 $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
 
-$url =  $server[0].$core.$command.$qs;
- 
+
 $data = file_get_contents('php://input');
-
-
 
 $json = json_decode($data);
 print_r($data);
@@ -98,7 +95,7 @@ foreach ($json as $item) {
 }
 
 $data = json_encode($json);
-$url = $server.$core.$command.$qs;
+
 $options = array(
     'http' => array(
         'header'  => "Content-type: application/json\r\n",
@@ -108,7 +105,11 @@ $options = array(
 );
 discord_webhook($company);
 $context  = stream_context_create($options);
+
+foreach ($server as $solrurl){
+$url =  $solrurl.$core.$command.$qs;
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */ }
-//var_dump($result);
+}
+
 ?>
