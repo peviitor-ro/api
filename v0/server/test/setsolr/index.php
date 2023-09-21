@@ -1,9 +1,9 @@
 <?php
 // Data to be written to the file
-$data = "Hello, World!";
+$data = "https://solr.peviitor.ro/solr/";
 
 // File path
-$filePath = "example.txt";
+$filePath = "../server.txt";
 
 // Write data to the file
 if (file_put_contents($filePath, $data) !== false) {
