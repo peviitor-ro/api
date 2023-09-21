@@ -6,9 +6,6 @@ $filePath = "../server.txt";
 $fileContents = file_get_contents($filePath);
 
 if ($fileContents !== false) {
-    echo "File contents:\n";
-    echo $fileContents;
-} else {
-    echo "Unable to read the file.";
-}
+       echo $fileContents;
+} 
 ?>
