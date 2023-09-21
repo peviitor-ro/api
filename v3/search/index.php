@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-function get_server(){
+function get_master_server(){
 // File path
 $filePath = "../../../v0/server/test/server.txt";
 
