@@ -10,7 +10,9 @@ $fileContents = file_get_contents($filePath);
 
 if ($fileContents !== false) {
        $server = $fileContents;
-} 
+} else {
+    $server = 'https://solr.peviitor.ro/solr/';
+}
     return $server;
 }
 
