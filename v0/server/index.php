@@ -12,7 +12,7 @@ $coreName = 'jobs'; // Name of your SOLR core
 
 // Function to check if SOLR server is up and running
 function isSolrServerUp($solrUrl, $coreName) {
-    $pingUrl = $solrUrl . '/' . $coreName . '/admin/ping?wt=json';
+    $pingUrl = $solrUrl  . $coreName . '/admin/ping?wt=json';
 
     // Initialize cURL session with an HTTP HEAD request
     $ch = curl_init($pingUrl);
