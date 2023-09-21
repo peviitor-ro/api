@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 
 function get_master_server(){
 // File path
-$filePath = "../../../v0/server/test/server.txt";
+$filePath = "../../v0/server/test/server.txt";
 
 // Read the contents of the file into a string
 $fileContents = file_get_contents($filePath);
