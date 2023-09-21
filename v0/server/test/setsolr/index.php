@@ -42,7 +42,7 @@ function isSolrServerUp($solrUrl, $coreName) {
     return false;
 }
 $message = array();
-   $server = get_server()
+   $server = get_server();
    
    
    
