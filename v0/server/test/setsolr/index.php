@@ -42,9 +42,8 @@ function isSolrServerUp($solrUrl, $coreName) {
     return false;
 }
 $message = array();
-   $server = array();
-   $server[0] = 'https://solrcluj.peviitor.ro/solr/';
-   $server[1] = 'https://solr.peviitor.ro/solr/';
+   $server = get_server()
+   
    
    
 foreach ($server as $solrUrl) {
