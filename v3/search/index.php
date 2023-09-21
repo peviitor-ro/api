@@ -2,38 +2,16 @@
 header("Access-Control-Allow-Origin: *");
 
 function get_server(){
-    //get the IP of the server
-    //we need a config file to know where is the SOLR
-    require('../../_config/index.php');
-    return $server;
-}
+// File path
+$filePath = "../../../v0/server/test/server.txt";
 
-   function get_master_server(){
-    $method = 'GET';
-    $server = "https://api.peviitor.ro/";
-    $core  = 'v0';
-    $command ='/server/';
-    $qs = '';
-    $url =  $server.$core.$command.$qs;
-   
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'GET',
-            'content' => $data
-        )
-    );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) { /* Handle error */ }
-    $json = json_decode($result);
-    foreach($json as $item)
-        {
-            if ($item->status=="up"){
-                return $item->server;
-                break;
-            }
-        }
+// Read the contents of the file into a string
+$fileContents = file_get_contents($filePath);
+
+if ($fileContents !== false) {
+       $server = $fileContents;
+} 
+    return $server;
 }
 
     
