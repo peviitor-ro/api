@@ -47,7 +47,7 @@ $results->jobs["ro"] = $companies;
 
 
 
-$url = 'https://api.peviitor.ro/v3/search/';
+$url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=*%3A*&rows=0&useParams=';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
