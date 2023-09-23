@@ -22,37 +22,17 @@ function get_server(){
                        return $server;
                                 }
 
-$core ="auth";
-$url =  get_master_server().$core.'/select?'.$qs;
 
-$string = file_get_contents($url);
-$json = json_decode($string, true);
-$companies = $json['response']['docs'];
 
 
 $results =  new stdClass();
-$results->companies = array();
-$results->companies = $companies;
-
-
-$test = array();
-foreach($companies as $company) 
-{
-
-    $item = strtolower($company["id"]);
-    $xurl  =  $company["logo"];
-    $url  = $xurl[0];
-    $test[$item] = $url;
-    
-}
-
 
 $url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
 $companies = $json['facet_counts']['facet_fields']['company_str'];
-$results =  new stdClass();
+
 $results->total = count($companies)/2;
 
 
@@ -61,7 +41,7 @@ $string = file_get_contents($url);
 $json = json_decode($string, true);
 
 $companies = $json['facet_counts']['facet_fields']['company_str'];
-$results =  new stdClass();
+
 $results->ro = count($companies)/2;
 echo json_encode($results);
 ?>
