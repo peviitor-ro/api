@@ -36,7 +36,7 @@ $companies = $json['facet_counts']['facet_fields']['company_str'];
 $results->companies = count($companies)/2;
 $results->jobs=array();
 
-$url = 'https://api.peviitor.ro/v3/search/?country=Rom%C3%A2nia';
+$url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=country%3ARom%C3%A2nia&rows=0&useParams=';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
