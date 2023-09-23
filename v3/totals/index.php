@@ -36,12 +36,23 @@ $companies = $json['facet_counts']['facet_fields']['company_str'];
 $results->total = count($companies)/2;
 
 
-$url = 'https://solr.peviitor.ro/solr/jobs/select?facet.field=company_str&facet=true&indent=true&q.op=OR&q=country%3A%22Rom%C3%A2nia%22&rows=0&useParams=';
+$url = 'https://api.peviitor.ro/v3/search/?country=Rom%C3%A2nia';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
-$companies = $json['facet_counts']['facet_fields']['company_str'];
+$companies = $json['response']['numFound'];
 
-$results->ro = count($companies)/2;
+$results->ro = $companies;
+
+
+
+
+$url = 'https://api.peviitor.ro/v3/search/';
+$string = file_get_contents($url);
+$json = json_decode($string, true);
+
+$companies = $json['response']['numFound'];
+
+$results->all = $companies;
 echo json_encode($results);
 ?>
