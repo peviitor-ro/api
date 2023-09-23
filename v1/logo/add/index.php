@@ -31,7 +31,7 @@ header("Access-Control-Allow-Origin: *");
  function get_server(){
     //get the IP of the server
     //we need a config file to know where is the SOLR
-    require('../../_config/index.php');
+    require('../../../_config/index.php');
     return $server;
 }
 
