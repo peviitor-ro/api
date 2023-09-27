@@ -11,7 +11,7 @@ function get_server(){
     return $server;
 }
 
- $url =  get_server().'shaqodoon/select?'.$qs;
+ $url =  get_server()[0].'shaqodoon/select?'.$qs;
  $json = file_get_contents($url);
  echo $json;
 ?>
