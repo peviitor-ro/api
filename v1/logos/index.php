@@ -53,6 +53,7 @@ for($i=0;$i<count($companies);$i++) {
   
     $obj = new stdClass();
     $obj= $companies[$i];   
+	unset($obj->_version_);
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
