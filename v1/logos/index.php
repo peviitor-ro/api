@@ -52,15 +52,13 @@ for($i=0;$i<count($companies);$i++) {
    
   
     $obj = new stdClass();
-	$temp = json_decode($companies[$i], true);
-    $obj->id= $temp["id"];   
-	$obj->logo= $temp["logo"][0];   
+    $obj= $companies[$i];   
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
 
     
 }
-
-echo json_encode($results);
+var_dump($companies[$i]);
+//echo json_encode($results);
 ?>
