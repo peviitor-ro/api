@@ -70,6 +70,7 @@ $url = get_master_server().'/#/'.$core.'/query?q=logo:*&q.op=OR&indent=true&rows
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
+var_dump($json);
 $companies = $json['response']['docs'];
 
 $results =  new stdClass();
@@ -89,5 +90,5 @@ for($i=0;$i<count($companies);$i++) {
     
 }
 
-echo json_encode($results);
+//echo json_encode($results);
 ?>
