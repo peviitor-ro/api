@@ -50,16 +50,16 @@ $results->companies = array();
 
 for($i=0;$i<count($companies);$i++) {
    
-  var_dump($companies);
+  
     $obj  = new stdClass();
-    $temp = json_encode($companies[$i]);
-	$obj -> id = $temp -> id;
-	$obj -> logo = $temp -> logo[0];
+    
+	$obj -> id = $companies[$i]["id"];
+	$obj -> logo =$companies[$i]["logo"][0];
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
 
     
 }
-//echo json_encode($results);
+echo json_encode($results);
 ?>
