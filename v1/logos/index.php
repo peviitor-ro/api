@@ -52,8 +52,7 @@ for($i=0;$i<count($companies);$i++) {
    
   
     $obj = new stdClass();
-    $obj->name = $companies[$i]['id'];   
-    $obj->logo =$companies[$i]->['logo'][0];
+    $obj= $companies[$i];   
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
