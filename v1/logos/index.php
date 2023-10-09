@@ -4,14 +4,6 @@ header("Access-Control-Allow-Origin: *");
 $qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&omitHeader=true&useParams=";
 
 
-//get all the logo from SOLR
-//https://solr.peviitor.ro/solr/#/auth/query?q=logo:*&q.op=OR&indent=true&rows=100000&useParams=
-
-//remove _version_ 
-
-//add total
-//add companies [{name,logo}]
-
 
    function get_master_server(){
     $method = 'GET';
@@ -42,7 +34,6 @@ $qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&omitHeader=true&useParams=";
 }
 
 $core ="auth";
-//$url =  get_master_server().$core.'/select?'.$qs;
 
 
 
@@ -61,8 +52,8 @@ for($i=0;$i<count($companies);$i++) {
    
   
     $obj = new stdClass();
-    $obj->name = $companies[$i];   
-    $obj->logo = $test[$obj->name];
+    $obj->name = $companies[$i]->id;   
+    $obj->logo =$companies[$i]->id;
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
    
