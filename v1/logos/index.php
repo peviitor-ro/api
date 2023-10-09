@@ -50,7 +50,7 @@ $results->companies = array();
 
 for($i=0;$i<count($companies);$i++) {
    
-  
+  var_dump($companies);
     $obj  = new stdClass();
     $temp = json_encode($companies[$i]);
 	$obj -> id = $temp -> id;
@@ -61,5 +61,5 @@ for($i=0;$i<count($companies);$i++) {
 
     
 }
-echo json_encode($results);
+//echo json_encode($results);
 ?>
