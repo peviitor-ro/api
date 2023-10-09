@@ -42,35 +42,15 @@ $qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&omitHeader=true&useParams=";
 }
 
 $core ="auth";
-$url =  get_master_server().$core.'/select?'.$qs;
-
-$string = file_get_contents($url);
-$json = json_decode($string, true);
-$companies = $json['response']['docs'];
+//$url =  get_master_server().$core.'/select?'.$qs;
 
 
-$results =  new stdClass();
-$results->companies = array();
-$results->companies = $companies;
 
-
-$test = array();
-foreach($companies as $company) 
-{
-
-    $item = $company["id"];
-    $xurl  =  $company["logo"];
-    $url  = $xurl[0];
-    $test[$item] = $url;
-    
-}
-
-
-$url = get_master_server().'/#/'.$core.'/query?q=logo:*&q.op=OR&indent=true&rows=100000&useParams=';
+$url = get_master_server().$core.'/query?q=logo:*&q.op=OR&indent=true&rows=100000&useParams=';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
-var_dump($json);
+
 $companies = $json['response']['docs'];
 
 $results =  new stdClass();
@@ -90,5 +70,5 @@ for($i=0;$i<count($companies);$i++) {
     
 }
 
-//echo json_encode($results);
+echo json_encode($results);
 ?>
