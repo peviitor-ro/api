@@ -11,7 +11,7 @@ function addProtocolToDomain($domain) {
 function checkHumansTxtExistence($domain) {
     $humansTxtURL = $domain . '/humans.txt';
     $headers = @get_headers($humansTxtURL);
-    
+    var_dump($headers);
     return strpos($headers[0], '200 OK') !== false;
 }
 
