@@ -41,6 +41,7 @@ function addWwwAfterHttps($domain) {
 function checkHumansTxtExistence($domain) {
 
     $url = $domain.'/humans.txt';
+    echo $url;
     $headers =[];
 
 
