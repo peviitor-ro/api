@@ -1,4 +1,3 @@
-
 <?php
 $rawDomain = isset($_POST['domain']) ? $_POST['domain'] : "https:\/\/peviitor.ro";
 $rawDomain = isset($_GET['domain']) ? $_GET['domain'] : $rawDomain;
@@ -41,4 +40,3 @@ $response = [
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>
-
