@@ -1,5 +1,7 @@
 <?php
-$url = 'https://humanstxt.org/humans.txt';
+$domain = 'https://www.humanstxt.org';
+$url = $domain.'/humans.txt';
+//$url = 'https://humanstxt.org/humans.txt';
 $headers =[];
 
 
