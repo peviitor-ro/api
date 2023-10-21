@@ -66,13 +66,13 @@ function checkHumansTxtExistence($domain) {
    echo $httpCode;
   
     if ($httpCode == 404) {
-        http_response_code(404);
+        header("HTTP/1.1 404 Not Found");
         echo 'The requested URL returned a 404 error.';
     } elseif (strpos($response, 'humans.txt') !== false) {
         echo $response;
     } else {
-        http_response_code(404);
-        echo "The redirection did not lead to a 'humans.txt' URL.";
+       header("HTTP/1.1 404 Not Found");
+       echo "The redirection did not lead to a 'humans.txt' URL.";
          }
                                                   }
 
