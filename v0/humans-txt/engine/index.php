@@ -86,7 +86,7 @@ if (!$result) {
        if (!$result_r) {
             header("HTTP/1.1 404 Not Found"); 
                       }
-            else { echo $result;}
+            else { echo $result_r;}
              }
               else
                  {
