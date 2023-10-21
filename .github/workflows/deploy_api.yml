@@ -28,7 +28,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref:  master 
+          ref:  master
+      - name: Replace Placeholders
+        run: |
+          SERVER_ID="${{ secrets.SERVER_ID }}"
+          CHANNEL_ID="${{ secrets.CHANNEL_ID }}"
+          sed -i "s/{{SERVER_ID}}/$SERVER_ID/g" v0/humans-txt/engine/index.php
+          sed -i "s/{{CHANNEL_ID}}/$CHANNEL_ID/g" v0/humans-txt/engine/index.php
+    
       - name: Fast FTP
         uses: anvil-solutions/Fast-FTP-Action@2.1.3
         with:
