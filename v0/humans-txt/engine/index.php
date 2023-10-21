@@ -1,6 +1,6 @@
 
 <?php
-$rawDomain = isset($_POST['rawDomain']) ? $_POST['rawDomain'] : "https:\/\/peviitor.ro";
+$rawDomain = isset($_POST['domain']) ? $_POST['domain'] : "https:\/\/peviitor.ro";
 $rawDomain = isset($_GET['domain']) ? $_GET['domain'] : $rawDomain;
 
 function addProtocolToDomain($domain) {
