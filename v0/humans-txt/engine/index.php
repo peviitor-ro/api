@@ -1,5 +1,5 @@
 <?php
-$rawDomain = isset($_POST['domain']) ? $_POST['domain'] : "https:\/\/peviitor.ro";
+$rawDomain = isset($_POST['rawDomain']) ? $_POST['rawDomain'] : "https:\/\/peviitor.ro";
 $rawDomain = isset($_GET['domain']) ? $_GET['domain'] : $rawDomain;
 function addProtocolToDomain($domain) {
     if (strpos($domain, 'http://') !== 0 && strpos($domain, 'https://') !== 0) {
@@ -8,40 +8,34 @@ function addProtocolToDomain($domain) {
     return $domain;
 }
 
-function checkHumansTxtExistence($domain) {
-    // Initialize cURL session
-    $ch = curl_init();
-    
-    // Set cURL options
-    curl_setopt($ch, CURLOPT_URL, $domain . '/humans.txt');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-    curl_setopt($ch, CURLOPT_NOBODY, true); // Only check the header, not the content
+function addWwwToDomain($domain) {
+    if (strpos($domain, 'www.') !== 0) {
+        $domain = 'www.' . $domain; // Add "www" if it's not already there
+    }
+    return $domain;
+}
 
-    // Execute cURL and get the response
-    $headers = curl_exec($ch);
+function checkHumansTxtExistence($domain) {
+    $humansTxtURL = $domain . '/humans.txt';
+    $headers = @get_headers($humansTxtURL);
     
-    // Get the HTTP response code
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    
-    // Close the cURL session
-    curl_close($ch);
-    
-    // Check if the response code is 200 OK
-    return $httpCode === 200;
+    return strpos($headers[0], '200 OK') !== false;
 }
 
 // Remove backslashes and call the function to add the protocol
 $domainWithProtocol = addProtocolToDomain(stripslashes($rawDomain));
 
+// Call the function to add "www" to the domain if necessary
+$domainWithWww = addWwwToDomain($domainWithProtocol);
+
 // Call the function to check the existence of humans.txt
-$humansTxtExists = checkHumansTxtExistence($domainWithProtocol);
+$humansTxtExists = checkHumansTxtExistence($domainWithWww);
 
 $response = [
-    'domain' => $domainWithProtocol,
+    'domain' => $domainWithWww,
     'humans.txt' => $humansTxtExists,
 ];
 
 header('Content-Type: application/json');
-echo json_encode($response, JSON_UNESCAPED_SLASHES);
+echo json_encode($response);
 ?>
