@@ -39,10 +39,45 @@ function addWwwAfterHttps($domain) {
 }
 
 function checkHumansTxtExistence($domain) {
-    $humansTxtURL = $domain . '/humans.txt';
-    $headers = @get_headers($humansTxtURL);
+
+    $url = $domain.'/humans.txt';
+    $headers =[];
+
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+     if ($httpCode == 200) {
+        echo $response;
+     }
+
+     else {
+
+    if (strpos($response, 'humans.txt') !== false) {
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+    $response = curl_exec($ch);
     
-    return strpos($headers[0], '200 OK') !== false;
+    $lastEffectiveURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+    
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+   echo $httpCode;
+  
+    if ($httpCode == 404) {
+        http_response_code(404);
+        echo 'The requested URL returned a 404 error.';
+    } elseif (strpos($response, 'humans.txt') !== false) {
+        echo $response;
+    } else {
+        http_response_code(404);
+        echo "The redirection did not lead to a 'humans.txt' URL.";
+         }
+                                                  }
+
+     }
+    curl_close($ch);
 }
 
 // Remove backslashes and call the function to add the protocol
@@ -54,11 +89,5 @@ $domainWithWww = addWwwAfterHttps($domainWithProtocol);
 // Call the function to check the existence of humans.txt
 $humansTxtExists = checkHumansTxtExistence($domainWithWww);
 
-$response = [
-    'domain' => $domainWithWww,
-    'humans.txt' => $humansTxtExists,
-];
 
-header('Content-Type: application/json');
-echo json_encode($response);
 ?>
