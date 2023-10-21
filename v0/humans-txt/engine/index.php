@@ -39,12 +39,8 @@ function addWwwAfterHttps($domain) {
 }
 
 function checkHumansTxtExistence($domain) {
- echo $domain;
     $url = $domain.'/humans.txt';
-    
     $headers =[];
-
-
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -52,31 +48,27 @@ function checkHumansTxtExistence($domain) {
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
      if ($httpCode == 200) {
-        echo $response;
+        return $response;
      }
 
      else {
 
     if (strpos($response, 'humans.txt') !== false) {
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-    $response = curl_exec($ch);
-    
-    $lastEffectiveURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-    
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-   echo $httpCode;
-  
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+        $response = curl_exec($ch);
+        $lastEffectiveURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+   
     if ($httpCode == 404) {
-        header("HTTP/1.1 404 Not Found");
-        echo 'The requested URL returned a 404 error.';
-    } elseif (strpos($response, 'humans.txt') !== false) {
-        echo $response;
-    } else {
-       header("HTTP/1.1 404 Not Found");
-       echo "The redirection did not lead to a 'humans.txt' URL.";
-         }
+       return false;
+    } elseif (strpos($response, 'humans.txt') !== false) 
+               { 
+        return $response;
+               } 
+                else 
+                     {  return false;
+                     }
                                                   }
-
      }
     curl_close($ch);
 }
@@ -88,7 +80,13 @@ $domainWithProtocol = addProtocolToDomain(stripslashes($rawDomain));
 $domainWithWww = addWwwAfterHttps($domainWithProtocol);
 
 // Call the function to check the existence of humans.txt
-$humansTxtExists = checkHumansTxtExistence($domainWithWww);
-
+ $result = checkHumansTxtExistence($domainWithWww);
+if (!$result) {
+    header("HTTP/1.1 404 Not Found");   
+}
+else
+{
+     echo $result;
+}
 
 ?>
