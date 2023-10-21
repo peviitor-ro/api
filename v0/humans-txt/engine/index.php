@@ -23,7 +23,7 @@ $humansTxtExists = checkHumansTxtExistence($domainWithProtocol);
 
 $response = [
     'domain' => $domainWithProtocol,
-    'humansTxtExists' => $humansTxtExists,
+    'humans.txt' => $humansTxtExists,
 ];
 
 header('Content-Type: application/json');
