@@ -1,6 +1,8 @@
+
 <?php
 $rawDomain = isset($_POST['rawDomain']) ? $_POST['rawDomain'] : "https:\/\/peviitor.ro";
 $rawDomain = isset($_GET['domain']) ? $_GET['domain'] : $rawDomain;
+
 function addProtocolToDomain($domain) {
     if (strpos($domain, 'http://') !== 0 && strpos($domain, 'https://') !== 0) {
         $domain = 'https://' . $domain; // Add "https://" as the protocol
@@ -8,9 +10,9 @@ function addProtocolToDomain($domain) {
     return $domain;
 }
 
-function addWwwToDomain($domain) {
-    if (strpos($domain, 'www.') !== 0) {
-        $domain = 'www.' . $domain; // Add "www" if it's not already there
+function addWwwAfterHttps($domain) {
+    if (strpos($domain, 'https://www.') !== 0) {
+        $domain = str_replace('https://', 'https://www.', $domain); // Add "www" after "https://"
     }
     return $domain;
 }
@@ -25,8 +27,8 @@ function checkHumansTxtExistence($domain) {
 // Remove backslashes and call the function to add the protocol
 $domainWithProtocol = addProtocolToDomain(stripslashes($rawDomain));
 
-// Call the function to add "www" to the domain if necessary
-$domainWithWww = addWwwToDomain($domainWithProtocol);
+// Call the function to add "www" after "https://"
+$domainWithWww = addWwwAfterHttps($domainWithProtocol);
 
 // Call the function to check the existence of humans.txt
 $humansTxtExists = checkHumansTxtExistence($domainWithWww);
@@ -39,3 +41,4 @@ $response = [
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>
+
