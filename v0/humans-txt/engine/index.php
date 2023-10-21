@@ -82,11 +82,15 @@ $domainWithWww = addWwwAfterHttps($domainWithProtocol);
 // Call the function to check the existence of humans.txt
  $result = checkHumansTxtExistence($domainWithWww);
 if (!$result) {
-    header("HTTP/1.1 404 Not Found");   
-}
-else
-{
-     echo $result;
-}
+     $result_r = checkHumansTxtExistence($domainWithProtocol);
+       if (!$result_r) {
+            header("HTTP/1.1 404 Not Found"); 
+                      }
+            else { echo $result;}
+             }
+              else
+                 {
+                  echo $result;
+                  }
 
 ?>
