@@ -9,10 +9,26 @@ function addProtocolToDomain($domain) {
 }
 
 function checkHumansTxtExistence($domain) {
-    $humansTxtURL = $domain . '/humans.txt';
-    $headers = @get_headers($humansTxtURL);
-    var_dump($headers);
-    return strpos($headers[0], '200 OK') !== false;
+    // Initialize cURL session
+    $ch = curl_init();
+    
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_URL, $domain . '/humans.txt');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+    curl_setopt($ch, CURLOPT_NOBODY, true); // Only check the header, not the content
+
+    // Execute cURL and get the response
+    $headers = curl_exec($ch);
+    
+    // Get the HTTP response code
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+    // Close the cURL session
+    curl_close($ch);
+    
+    // Check if the response code is 200 OK
+    return $httpCode === 200;
 }
 
 // Remove backslashes and call the function to add the protocol
