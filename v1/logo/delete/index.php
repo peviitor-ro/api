@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
      * 
      * @OA\Post(
      *     path="/v1/logo/delete/", 
-     *     tags={"scraper"},
+     *     tags={"LOGO"},
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/x-www-form-urlencoded",
