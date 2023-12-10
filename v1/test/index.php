@@ -101,11 +101,11 @@ $jobsArray = json_decode($payload, true);
 // Extrage toate link-urile de job din $jobsArray pentru $jobLinksToCheck
 $jobLinksToCheck = array_map(function ($job) { return $job['job_link'];}, $jobsArray);
 
-var_dump($jobLinksToCheck);
+
 
 // Extrage informația despre companie doar din primul element al $jobsArray
 $companyToFilter = isset($jobsArray[0]['company']) ? $jobsArray[0]['company'] : null;
-
+var_dump($companyToFilter);
 
  // Construirea query-ului Solr
     $query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinksToCheck)) . ')';
