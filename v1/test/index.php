@@ -8,13 +8,13 @@ function callSOLR($solrServer,$coreName, $qs) {
 	
 	 // Construirea URL-ului final pentru apelul către Solr
 	$solrUrl = $solrEndpoint . '?' . $qs;
-	echo "   ". $solrUrl;
+	echo  $solrUrl."   ";
 	$solrResponse = file_get_contents($solrUrl);
 
     // Procesarea răspunsului JSON de la Solr
     $result = json_decode($solrResponse, true);
 
-    print_r($result);
+    echo json_encode($result);
     // Extrage job-urile din răspunsul Solr
     $jobs = [];
     if (isset($result['response']['docs'])) {
