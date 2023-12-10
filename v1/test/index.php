@@ -41,7 +41,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     $toKeep =  array_map(function ($job) {  return $job['job_link']; }, $solrResponse);
  // Afiseaza rezultatele
  
-echo "<br>";
+echo "   to keep";
 echo "<br>";
  var_dump($toKeep);
 	
