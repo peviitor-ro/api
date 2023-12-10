@@ -8,7 +8,7 @@ function callSOLR($solrServer,$coreName, $qs) {
 	
 	 // Construirea URL-ului final pentru apelul către Solr
 	$solrUrl = $solrEndpoint . '?' . $qs;
-	
+	echo "   ". $solrUrl;
 	$solrResponse = file_get_contents($solrUrl);
 
     // Procesarea răspunsului JSON de la Solr
@@ -105,7 +105,7 @@ $jobLinksToCheck = array_map(function ($job) { return $job['job_link'];}, $jobsA
 
 // Extrage informația despre companie doar din primul element al $jobsArray
 $companyToFilter = isset($jobsArray[0]['company']) ? $jobsArray[0]['company'] : null;
-var_dump($companyToFilter);
+
 
  // Construirea query-ului Solr
     $query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinksToCheck)) . ')';
