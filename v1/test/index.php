@@ -14,10 +14,11 @@ function callSOLR($solrServer,$coreName, $qs) {
     // Procesarea răspunsului JSON de la Solr
     $result = json_decode($solrResponse, true);
 
+    print_r($result);
     // Extrage job-urile din răspunsul Solr
     $jobs = [];
     if (isset($result['response']['docs'])) {
-      print_r ( $jobs = $result['response']['docs']);
+        $jobs = $result['response']['docs'];
     }
 
     return $jobs;
