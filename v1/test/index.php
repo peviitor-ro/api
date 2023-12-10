@@ -31,7 +31,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $company) {
 
 // Exemplu de folosire a funcției
 $jobLinksToCheck = ['job_link_A', 'job_link_B', 'job_link_C'];
-$companyToFilter = $_GET['company']';
+$companyToFilter = $_GET['company'];
 
 $jobs = getJobsByJobLinksAndCompany($jobLinksToCheck, $companyToFilter);
 
