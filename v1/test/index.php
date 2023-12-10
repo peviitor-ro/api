@@ -108,7 +108,9 @@ $companyToFilter = isset($jobsArray[0]['company']) ? $jobsArray[0]['company'] : 
 
 
  // Construirea query-ului Solr
-    $query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinksToCheck)) . ')';
+    //$query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinksToCheck)) . ')';
+	$query = 'q=job_link:("' . implode('" OR "', array_map('urlencode', $jobLinksToCheck)) . '")';
+
     $filterQuery = 'fq=company:' . urlencode($companyToFilter);
    
    getJobsByJobLinksAndCompany($jobLinksToCheck,$query,$filterQuery);
