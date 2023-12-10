@@ -53,31 +53,25 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
 
 // Extrage link-urile din $toKeep
 $jobLinksToKeep = array_map(function ($item) {   return $item[0];}, $toKeep);
+echo " TO KEEP: ";
+var_dump($jobLinksToKeep);
 
 // Extrage link-urile din $solrJobLinks
 $solrJobLinksArray = array_map(function ($item) {   return $item[0];}, $solrJobLinks);
-var_dump($solrJobLinksArray);
+
 
 // Găsește link-urile care sunt în $solrJobLinksArray, dar nu sunt în $jobLinksToKeep
 $toDelete = array_diff($solrJobLinksArray, $jobLinksToKeep);
 
-// Numărul de elemente lipsă
-$countMissingJobLinks = count($toDelete);
-
-
-echo "<br>";
-echo "<br>";
-echo "\nNumărul de elemente care sunt în \$solrJobLinks și nu sunt în \$toKeep: $countMissingJobLinks\n";
-
-
-// Afisează link-urile lipsă
+echo " TO DELETE: ";
 var_dump($toDelete);
+
+
 
 // Găsește link-urile care sunt în $jobLinksToCheck, dar nu sunt în $toKeep
 $toInsert = array_diff($jobLinksToCheck, $jobLinksToKeep);
 
-echo "<br>";
-echo "<br>";
+echo " TO INSERT: ";
 var_dump($toInsert);
 
 }
