@@ -8,7 +8,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $company) {
     $solrEndpoint = $solrServer . '/' . $coreName . '/select';
 
     // Construirea query-ului Solr
-    $query = 'job_link:(' . implode(' OR ', array_map('urlencode', $jobLinks)) . ')';
+    $query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinks)) . ')';
 
     $filterQuery = 'fq=company:' . urlencode($company);
 
