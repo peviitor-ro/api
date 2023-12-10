@@ -13,8 +13,8 @@ function getJobsByJobLinksAndCompany($jobLinks, $company) {
     $filterQuery = 'fq=company:' . urlencode($company);
 
     // Construirea URL-ului final pentru apelul către Solr
-    $solrUrl = $solrEndpoint . '?' . $query . '&' . $filterQuery;
-
+    echo $solrUrl = $solrEndpoint . '?' . $query . '&' . $filterQuery;
+    
     // Realizarea apelului către Solr
     $solrResponse = file_get_contents($solrUrl);
 
@@ -31,7 +31,10 @@ function getJobsByJobLinksAndCompany($jobLinks, $company) {
 }
 
 // Exemplu de folosire a funcției
-$jobLinksToCheck = ['job_link_A', 'job_link_B', 'job_link_C'];
+$jobLinksToCheck = [
+    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"', 
+    '"https://bitloop.tech/angular-react-net-developers"'
+    ];
 $companyToFilter = $_GET['company'];
 
 $jobs = getJobsByJobLinksAndCompany($jobLinksToCheck, $companyToFilter);
