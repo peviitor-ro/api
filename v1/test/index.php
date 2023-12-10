@@ -47,7 +47,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     //print_r($solrResponse);
 	
 	// Obține job-urile de la Solr
-    $jobsFromSolr = callSOLR($solrServer,$coreName, $filterQuery);
+   echo $jobsFromSolr = callSOLR($solrServer,$coreName, $filterQuery);
 	
 	// Extrage doar job_link-urile din răspunsul Solr
       $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
