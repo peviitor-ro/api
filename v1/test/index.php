@@ -40,6 +40,9 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     // Extrage doar job_link-urile din răspunsul Solr
     $toKeep =  array_map(function ($job) {  return $job['job_link']; }, $solrResponse);
  // Afiseaza rezultatele
+ 
+echo "<br>";
+echo "<br>";
  var_dump($toKeep);
 	
 	// Obține job-urile de la Solr
@@ -48,7 +51,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
 	
 	// Extrage doar job_link-urile din răspunsul Solr
       $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
-  var_dump($solrJobLinks);
+  
 
 
 // Extrage link-urile din $toKeep
@@ -62,24 +65,47 @@ $solrJobLinksArray = array_map(function ($item) {
 }, $solrJobLinks);
 
 // Găsește link-urile care sunt în $solrJobLinksArray, dar nu sunt în $jobLinksToKeep
-$missingJobLinks = array_diff($solrJobLinksArray, $jobLinksToKeep);
+$toDelete = array_diff($solrJobLinksArray, $jobLinksToKeep);
 
 // Numărul de elemente lipsă
-$countMissingJobLinks = count($missingJobLinks);
+$countMissingJobLinks = count($toDelete);
 
+
+echo "<br>";
+echo "<br>";
 echo "\nNumărul de elemente care sunt în \$solrJobLinks și nu sunt în \$toKeep: $countMissingJobLinks\n";
 
+
 // Afisează link-urile lipsă
-print_r($missingJobLinks);
+var_dump($toDelete);
+
+// Găsește link-urile care sunt în $jobLinksToCheck, dar nu sunt în $toKeep
+$toInsert = array_diff($jobLinksToCheck, $jobLinksToKeep);
+
+echo "<br>";
+echo "<br>";
+var_dump($toInsert);
 
 }
 
-// Exemplu de folosire a funcției
-$jobLinksToCheck = [
-    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"'
-    
-    ];
-$companyToFilter = $_GET['company'];
+
+
+
+//AICI incepe CODUL
+// JSON primit prin POST
+$payload = file_get_contents('php://input');
+// Decodifică JSON-ul într-un array asociativ
+$jobsArray = json_decode($payload, true);
+
+// Extrage toate link-urile de job din $jobsArray pentru $toKeep
+$jobLinksToCheck = array_map(function ($job) {
+    return $job['job_link'];
+}, $jobsArray);
+
+
+
+// Extrage informația despre companie doar din primul element al $jobsArray
+$companyToFilter = isset($jobsArray[0]['company']) ? $jobsArray[0]['company'] : null;
 
 
  // Construirea query-ului Solr
