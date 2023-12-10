@@ -52,15 +52,11 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
 
 
 // Extrage link-urile din $toKeep
-$jobLinksToKeep = array_map(function ($item) {
-    return $item[0];
-}, $toKeep);
-var_dump($jobLinksToKeep);
+$jobLinksToKeep = array_map(function ($item) {   return $item[0];}, $toKeep);
 
 // Extrage link-urile din $solrJobLinks
-$solrJobLinksArray = array_map(function ($item) {
-    return $item[0];
-}, $solrJobLinks);
+$solrJobLinksArray = array_map(function ($item) {   return $item[0];}, $solrJobLinks);
+var_dump($solrJobLinksArray);
 
 // Găsește link-urile care sunt în $solrJobLinksArray, dar nu sunt în $jobLinksToKeep
 $toDelete = array_diff($solrJobLinksArray, $jobLinksToKeep);
