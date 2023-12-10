@@ -24,27 +24,43 @@ function callSOLR($solrServer,$coreName, $qs) {
 }
 
 
+function findExcessJobs($inputJobLinks, $solrJobLinks) {
+    // Găsește job-urile care sunt în solrJobLinks, dar nu sunt în inputJobLinks
+    $excessJobs = array_diff($solrJobLinks, $inputJobLinks);
+
+    return $excessJobs;
+}
+
+
 function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
-    // Configurarea detaliilor despre serverul Solr
-    $solrServer = 'https://solr.peviitor.ro/solr'; // Adresa serverului Solr
-    $coreName = 'jobs'; // Numele core-ului tău Solr
-
-   
-
-      $qs =  $query . '&' . $filterQuery;
+ 
+ // Configurarea detaliilor despre serverul Solr
+    $solrServer = 'https://solr.peviitor.ro/solr'; 
+    $coreName = 'jobs'; 
+    $qs =  $query . '&' . $filterQuery;
    
    
     
     // Realizarea apelului către Solr
     $solrResponse = callSOLR($solrServer,$coreName, $qs);
     // Afiseaza rezultatele
-    print_r($solrResponse);
+    //print_r($solrResponse);
+	
+	// Obține job-urile de la Solr
+    $jobsFromSolr = callSOLR($solrServer,$coreName, $filterQuery);
+	
+	// Extrage doar job_link-urile din răspunsul Solr
+      $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
+
+		// Găsește job-urile excedentare
+		$excessJobs = findExcessJobs($jobLinks, $solrJobLinks);
+		echo json_encode($excessJobs);
 }
 
 // Exemplu de folosire a funcției
 $jobLinksToCheck = [
-    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"', 
-    '"https://bitloop.tech/angular-react-net-developers"'
+    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"'
+    
     ];
 $companyToFilter = $_GET['company'];
 
