@@ -44,10 +44,12 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     // Realizarea apelului către Solr
     $solrResponse = callSOLR($solrServer,$coreName, $qs);
     // Afiseaza rezultatele
-    //print_r($solrResponse);
+    $toKeep = $solrResponse;
+	
 	
 	// Obține job-urile de la Solr
-   echo $jobsFromSolr = callSOLR($solrServer,$coreName, $filterQuery);
+	$qs = 'q=*:*&'.$filterQuery;
+    $jobsFromSolr = callSOLR($solrServer,$coreName, $qs);
 	
 	// Extrage doar job_link-urile din răspunsul Solr
       $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
