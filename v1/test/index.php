@@ -37,22 +37,25 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     
     // Realizarea apelului către Solr
     $solrResponse = callSOLR($solrServer,$coreName, $qs);
-    // Afiseaza rezultatele
-    $toKeep = $solrResponse;
+    // Extrage doar job_link-urile din răspunsul Solr
+    $toKeep =  array_map(function ($job) {  return $job['job_link']; }, $$solrResponse);
+ // Afiseaza rezultatele
  var_dump($toKeep);
 	
 	// Obține job-urile de la Solr
 	$qs = 'q=*:*&'.$filterQuery. '&' .'fl=job_link';
     $jobsFromSolr = callSOLR($solrServer,$coreName, $qs);
 	
+	// Extrage doar job_link-urile din răspunsul Solr
+      $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
+  var_dump($solrJobLinks);
 
 
 }
 
 // Exemplu de folosire a funcției
 $jobLinksToCheck = [
-    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"',
-	'"https://bitloop.tech/angular-react-net-developers"'
+    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"'
     
     ];
 $companyToFilter = $_GET['company'];
