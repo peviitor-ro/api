@@ -37,7 +37,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
  // Configurarea detaliilor despre serverul Solr
     $solrServer = 'https://solr.peviitor.ro/solr'; 
     $coreName = 'jobs'; 
-    $qs =  $query . '&' . $filterQuery;
+    $qs =  $query . '&' . $filterQuery. '&' .'fl=job_link';
    
    
     
@@ -45,18 +45,18 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     $solrResponse = callSOLR($solrServer,$coreName, $qs);
     // Afiseaza rezultatele
     $toKeep = $solrResponse;
-	
+ var_dump($toKeep);
 	
 	// Obține job-urile de la Solr
-	$qs = 'q=*:*&'.$filterQuery;
+	$qs = 'q=*:*&'.$filterQuery. '&' .'fl=job_link';
     $jobsFromSolr = callSOLR($solrServer,$coreName, $qs);
 	
 	// Extrage doar job_link-urile din răspunsul Solr
       $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
-
+  var_dump($solrJobLinks);
 		// Găsește job-urile excedentare
 		$excessJobs = findExcessJobs($jobLinks, $solrJobLinks);
-		echo json_encode($excessJobs);
+	//	echo json_encode($excessJobs);
 }
 
 // Exemplu de folosire a funcției
