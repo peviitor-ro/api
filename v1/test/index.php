@@ -17,7 +17,7 @@ function callSOLR($solrServer,$coreName, $qs) {
     // Extrage job-urile din răspunsul Solr
     $jobs = [];
     if (isset($result['response']['docs'])) {
-        $jobs = $result['response']['docs'];
+      print_r ( $jobs = $result['response']['docs']);
     }
 
     return $jobs;
