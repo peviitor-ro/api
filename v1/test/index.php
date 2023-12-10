@@ -51,6 +51,27 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
   var_dump($solrJobLinks);
 
 
+// Extrage link-urile din $toKeep
+$jobLinksToKeep = array_map(function ($item) {
+    return $item[0];
+}, $toKeep);
+
+// Extrage link-urile din $solrJobLinks
+$solrJobLinksArray = array_map(function ($item) {
+    return $item[0];
+}, $solrJobLinks);
+
+// Găsește link-urile care sunt în $solrJobLinksArray, dar nu sunt în $jobLinksToKeep
+$missingJobLinks = array_diff($solrJobLinksArray, $jobLinksToKeep);
+
+// Numărul de elemente lipsă
+$countMissingJobLinks = count($missingJobLinks);
+
+echo "\nNumărul de elemente care sunt în \$solrJobLinks și nu sunt în \$toKeep: $countMissingJobLinks\n";
+
+// Afisează link-urile lipsă
+print_r($missingJobLinks);
+
 }
 
 // Exemplu de folosire a funcției
