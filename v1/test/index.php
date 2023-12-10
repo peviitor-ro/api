@@ -8,13 +8,11 @@ function callSOLR($solrServer,$coreName, $qs) {
 	
 	 // Construirea URL-ului final pentru apelul către Solr
 	$solrUrl = $solrEndpoint . '?' . $qs;
-	echo  $solrUrl."   ";
 	$solrResponse = file_get_contents($solrUrl);
 
     // Procesarea răspunsului JSON de la Solr
     $result = json_decode($solrResponse, true);
 
-    echo json_encode($result);
     // Extrage job-urile din răspunsul Solr
     $jobs = [];
     if (isset($result['response']['docs'])) {
@@ -39,12 +37,9 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     // Realizarea apelului către Solr
     $solrResponse = callSOLR($solrServer,$coreName, $qs);
     // Extrage doar job_link-urile din răspunsul Solr
-	var_dump($solrResponse);
     $toKeep =  array_map(function ($job) {  return $job['job_link']; }, $solrResponse);
  // Afiseaza rezultatele
- 
-echo "   to keep";
-echo "<br>";
+ echo "to keep ";
  var_dump($toKeep);
 	
 	// Obține job-urile de la Solr
