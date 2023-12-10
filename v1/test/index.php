@@ -2,7 +2,7 @@
 
 function getJobsByJobLinksAndCompany($jobLinks, $company) {
     // Configurarea detaliilor despre serverul Solr
-    $solrServer = 'https://solr.peviitor.ro'; // Adresa serverului Solr
+    $solrServer = 'https://solr.peviitor.ro/solr'; // Adresa serverului Solr
     $coreName = 'jobs'; // Numele core-ului tău Solr
 
     $solrEndpoint = $solrServer . '/' . $coreName . '/select';
