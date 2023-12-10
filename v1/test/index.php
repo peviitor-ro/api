@@ -39,8 +39,8 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     // Extrage doar job_link-urile din răspunsul Solr
     $toKeep =  array_map(function ($job) {  return $job['job_link']; }, $solrResponse);
  // Afiseaza rezultatele
- echo "to keep ";
- var_dump($toKeep);
+ 
+ 
 	
 	// Obține job-urile de la Solr
 	$qs = 'q=*:*&'.$filterQuery. '&' .'fl=job_link';
@@ -55,6 +55,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
 $jobLinksToKeep = array_map(function ($item) {
     return $item[0];
 }, $toKeep);
+var_dump($jobLinksToKeep);
 
 // Extrage link-urile din $solrJobLinks
 $solrJobLinksArray = array_map(function ($item) {
