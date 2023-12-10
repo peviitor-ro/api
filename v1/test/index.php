@@ -50,7 +50,7 @@ $companyToFilter = $_GET['company'];
 
 
  // Construirea query-ului Solr
-    $query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinks)) . ')';
+    $query = 'q=job_link:(' . implode(' OR ', array_map('urlencode', $jobLinksToCheck)) . ')';
     $filterQuery = 'fq=company:' . urlencode($company);
    
    getJobsByJobLinksAndCompany($jobLinksToCheck,$query,$filterQuery);
