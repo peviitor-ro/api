@@ -96,6 +96,7 @@ var_dump($toInsert);
 $payload = file_get_contents('php://input');
 // Decodifică JSON-ul într-un array asociativ
 $jobsArray = json_decode($payload, true);
+var_dump($jobsArray);
 
 // Extrage toate link-urile de job din $jobsArray pentru $toKeep
 $jobLinksToCheck = array_map(function ($job) {
