@@ -7,7 +7,7 @@ function callSOLR($solrServer,$coreName, $qs) {
 	$filterQuery = $qs;
 	
 	 // Construirea URL-ului final pentru apelul către Solr
-	echo $solrUrl = $solrEndpoint . '?' . $qs;
+	$solrUrl = $solrEndpoint . '?' . $qs;
 	
 	$solrResponse = file_get_contents($solrUrl);
 
@@ -38,7 +38,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
     // Realizarea apelului către Solr
     $solrResponse = callSOLR($solrServer,$coreName, $qs);
     // Afiseaza rezultatele
-    print_r($jobs);
+    print_r($solrResponse);
 }
 
 // Exemplu de folosire a funcției
