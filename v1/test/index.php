@@ -9,6 +9,7 @@ function getJobsByJobLinksAndCompany($jobLinks, $company) {
 
     // Construirea query-ului Solr
     $query = 'job_link:(' . implode(' OR ', array_map('urlencode', $jobLinks)) . ')';
+    $query = 'q=*:*';
     $filterQuery = 'fq=company:' . urlencode($company);
 
     // Construirea URL-ului final pentru apelul către Solr
