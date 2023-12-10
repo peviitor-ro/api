@@ -24,12 +24,6 @@ function callSOLR($solrServer,$coreName, $qs) {
 }
 
 
-function findExcessJobs($inputJobLinks, $solrJobLinks) {
-    // Găsește job-urile care sunt în solrJobLinks, dar nu sunt în inputJobLinks
-    $excessJobs = array_diff($solrJobLinks, $inputJobLinks);
-
-    return $excessJobs;
-}
 
 
 function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
@@ -51,17 +45,14 @@ function getJobsByJobLinksAndCompany($jobLinks, $query, $filterQuery) {
 	$qs = 'q=*:*&'.$filterQuery. '&' .'fl=job_link';
     $jobsFromSolr = callSOLR($solrServer,$coreName, $qs);
 	
-	// Extrage doar job_link-urile din răspunsul Solr
-      $solrJobLinks = array_map(function ($job) {  return $job['job_link']; }, $jobsFromSolr);
-  var_dump($solrJobLinks);
-		// Găsește job-urile excedentare
-		$excessJobs = findExcessJobs($jobLinks, $solrJobLinks);
-	//	echo json_encode($excessJobs);
+
+
 }
 
 // Exemplu de folosire a funcției
 $jobLinksToCheck = [
-    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"'
+    '"https://bitloop.tech/microsoft-dynamics-365-business-central-developers"',
+	'"https://bitloop.tech/angular-react-net-developers"'
     
     ];
 $companyToFilter = $_GET['company'];
