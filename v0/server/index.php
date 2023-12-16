@@ -11,35 +11,34 @@
 $coreName = 'jobs'; // Name of your SOLR core
 
 // Function to check if SOLR server is up and running
+
+
 function isSolrServerUp($solrUrl, $coreName) {
-    $pingUrl = $solrUrl .  $coreName . '/admin/ping?wt=json';
+    // Construct the SOLR core URL
+    $coreUrl = rtrim($solrUrl, '/') . '/' . $coreName;
 
-    // Initialize cURL session
-    $ch = curl_init($pingUrl);
+    // Create a sample query URL for a ping request with omitHeader=true
+    $pingUrl = $coreUrl . '/admin/ping?wt=json&omitHeader=true';
 
-    // Set cURL options
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    // Make the external call to SOLR using file_get_contents
+    $response = file_get_contents($pingUrl);
 
-    // Execute cURL request
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    // Close cURL session
-    curl_close($ch);
-
-    // Check the HTTP response code
-    if ($httpCode === 200) {
-        $data = json_decode($response, true);
-
-        // Check if SOLR is up and running based on the response
-        if (isset($data['status']) && $data['status'] === 'OK') {
-            return true;
-        }
+    // Check for errors
+    if ($response === false) {
+        // Handle the error (for simplicity, just return false)
+        return false;
     }
 
-    return false;
+    // Decode the JSON response
+    $decodedResponse = json_decode($response, true);
+
+    // Check if the ping was successful
+    return isset($decodedResponse['status']) && $decodedResponse['status'] == 'OK';
 }
+
+
+
+
 $message = array();
 $server = get_server();
    
@@ -55,6 +54,7 @@ if (isSolrServerUp($solrUrl, $coreName))
 } else {
     $msg->server = $solrUrl;
     $msg->status = "down";
+	
 }
  $message[]= $msg; 
 }
