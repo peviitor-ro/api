@@ -50,9 +50,11 @@ if (isSolrServerUp($solrUrl, $coreName))
 {
   
   $msg->server = $solrUrl;
+  $msg->testUrl = rtrim($solrUrl, '/') . '/' . $coreName.'/admin/ping?wt=json&omitHeader=true';
   $msg->status = "up";
 } else {
     $msg->server = $solrUrl;
+	$msg->testUrl = rtrim($solrUrl, '/') . '/' . $coreName.'/admin/ping?wt=json&omitHeader=true';
     $msg->status = "down";
 	
 }
