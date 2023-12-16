@@ -14,6 +14,17 @@ $coreName = 'jobs'; // Name of your SOLR core
 
 
 function isSolrServerUp($solrUrl, $coreName) {
+	
+	
+	$context = stream_context_create(
+    array(
+        "http" => array(
+            "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+        )
+    )
+);
+
+	
     // Construct the SOLR core URL
     $coreUrl = rtrim($solrUrl, '/') . '/' . $coreName;
 
@@ -21,7 +32,7 @@ function isSolrServerUp($solrUrl, $coreName) {
     $pingUrl = $coreUrl . '/admin/ping?wt=json&omitHeader=true';
 
     // Make the external call to SOLR using file_get_contents
-    $response = file_get_contents($pingUrl);
+    $response = file_get_contents($pingUrl,false,$context);
 
 
     // Decode the JSON response
@@ -47,7 +58,7 @@ if (isSolrServerUp($solrUrl, $coreName))
 {  
 	$msg->status = "up";
 } else {
-    $msg->status = "up";
+    $msg->status = "down";
 }
  $message[]= $msg; 
 }
