@@ -38,7 +38,7 @@ function get_server(){
 }
 
 $core ="auth";
-$url =  get_master_server().$core.'/select?'.$qs;
+$url =  'http://zimbor.go.ro/solr/'.$core.'/select?'.$qs;
 
 $string = file_get_contents($url);
 $json = json_decode($string, true);
