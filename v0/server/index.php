@@ -23,11 +23,6 @@ function isSolrServerUp($solrUrl, $coreName) {
     // Make the external call to SOLR using file_get_contents
     $response = file_get_contents($pingUrl);
 
-    // Check for errors
-    if ($response === false) {
-        // Handle the error (for simplicity, just return false)
-        return false;
-    }
 
     // Decode the JSON response
     $decodedResponse = json_decode($response, true);
@@ -44,19 +39,15 @@ $server = get_server();
    
    
 foreach ($server as $solrUrl) {
- $msg = new stdClass();
-
-if (isSolrServerUp($solrUrl, $coreName))
-{
-  
+  $msg = new stdClass();
   $msg->server = $solrUrl;
   $msg->testUrl = rtrim($solrUrl, '/') . '/' . $coreName.'/admin/ping?wt=json&omitHeader=true';
-  $msg->status = "up";
+  
+if (isSolrServerUp($solrUrl, $coreName))
+{  
+	$msg->status = "up";
 } else {
-    $msg->server = $solrUrl;
-	$msg->testUrl = rtrim($solrUrl, '/') . '/' . $coreName.'/admin/ping?wt=json&omitHeader=true';
     $msg->status = "down";
-	
 }
  $message[]= $msg; 
 }
