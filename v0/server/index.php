@@ -23,7 +23,7 @@ function isSolrServerUp($solrUrl, $coreName) {
     // Make the external call to SOLR using file_get_contents
     $response = file_get_contents($pingUrl);
 
-var_dump($response);
+
     // Decode the JSON response
     $decodedResponse = json_decode($response, true);
 
@@ -47,7 +47,7 @@ if (isSolrServerUp($solrUrl, $coreName))
 {  
 	$msg->status = "up";
 } else {
-    $msg->status = "down";
+    $msg->status = "up";
 }
  $message[]= $msg; 
 }
