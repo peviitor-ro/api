@@ -38,7 +38,8 @@ header("Access-Control-Allow-Origin: *");
 
  function validate_api_key($key) {
     $method = 'GET';
-    $server = get_master_server();
+    //$server = get_master_server();
+	$server = 'http://zimbor.go.ro/solr/;
     $core  = 'auth';
     $command ='/select';
     $qs = '?q.op=OR&q=apikey%3A"'.$key.'"&rows=0';
