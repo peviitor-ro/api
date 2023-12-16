@@ -37,7 +37,7 @@ $core ="auth";
 
 
 
-$url = get_master_server().$core.'/query?q=logo:*&q.op=OR&indent=true&rows=100000&useParams=';
+$url = 'http://zimbor.go.ro/solr/' .$core.'/query?q=logo:*&q.op=OR&indent=true&rows=100000&useParams=';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
