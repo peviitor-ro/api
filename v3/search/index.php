@@ -30,7 +30,7 @@ if (isset($_GET['page'])) {
     $start = ($start-1)*10; 
     $q .= "&start=".$start;
 }
-$url =  get_master_server().'jobs/select?'.$q;
+$url =  'http://zimbor.go.ro/solr/'.'jobs/select?'.$q;
 $json = file_get_contents($url);
 echo $json;
 ?>
