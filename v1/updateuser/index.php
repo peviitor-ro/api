@@ -43,7 +43,7 @@ function get_server(){
 $data = file_get_contents('php://input');
 $data = json_decode($data);
 
-$server = get_master_server();
+$server = 'http://zimbor.go.ro/solr/';
 
 
 if (isset($data[0]->id))
