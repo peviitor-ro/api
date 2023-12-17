@@ -26,8 +26,12 @@ function get_server(){
 
 
 $results =  new stdClass();
+$zimbor = 'http://zimbor.go.ro/solr/';
+$prodcore = 'jobs';
+$qs0 = '/select?';
+$qs = $qs0 . 'facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
 
-$url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
+$url = $zimbor.$prodcore.$qs;
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
@@ -36,7 +40,8 @@ $companies = $json['facet_counts']['facet_fields']['company_str'];
 $results->companies = count($companies)/2;
 $results->jobs=array();
 
-$url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=country%3ARom%C3%A2nia&rows=0&useParams=';
+$qs = $qs0 . 'indent=true&q.op=OR&q=country%3ARom%C3%A2nia&rows=0&useParams=';
+$url = $zimbor.$prodcore.$qs;
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
@@ -45,9 +50,9 @@ $companies = $json['response']['numFound'];
 $results->jobs["ro"] = $companies;
 
 
+$qs = $qs0 . 'indent=true&q.op=OR&q=*%3A*&rows=0&useParams=';
 
-
-$url = 'https://api.peviitor.ro/v0/search/?indent=true&q.op=OR&q=*%3A*&rows=0&useParams=';
+$url = $url = $zimbor.$prodcore.$qs;
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
