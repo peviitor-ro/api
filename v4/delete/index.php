@@ -49,6 +49,7 @@ $response = file_get_contents($solrEndpoint, false, $context);
 // Check for errors
 if ($response === false) {
     echo 'Error sending request to Solr';
+    var_dump($context);
 } else {
     // Decode and print the Solr response
     $solrResponse = json_decode($response, true);
