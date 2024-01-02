@@ -17,25 +17,31 @@ if (empty($data['urls'])) {
 }
 
 // Solr endpoint URL
-$solrEndpoint = 'http://zimbor.go.ro/solr/jobs/update?commit=true';
+$solrEndpoint = 'http://zimbor.go.ro/solr/jobs/update?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
 
 // Create an array to store the delete operations
 $deleteOperations = [];
 
 // Iterate through URLs and create delete operations
+$url_element = "" ;
 foreach ($data['urls'] as $url) {
-    // Create delete operation for each URL
-    $deleteOperations[] = [
-        'delete' => [
-            'query' => 'job_link:' . $url,
-        ],
-    ];
+    $url_element.= '"' . $url . '" OR' ;
 }
 
-// Create HTTP context options for the request
+$url_element = substr($url_element, 0, -3);
+
+// Create delete operation for each URL
+$deleteOperations = [
+    'delete' => [
+        'query' => 'job_link:' . $url_element,
+    ],
+];
+
+
+// Create HTTP context options for the request<
 $options = [
     'http' => [
-        'header' => "Content-type: application/json\r\n",
+        'header' => "Content-type: application/json",
         'method' => 'POST',
         'content' => json_encode($deleteOperations),
     ],
@@ -50,10 +56,8 @@ $response = file_get_contents($solrEndpoint, false, $context);
 // Check for errors
 if ($response === false) {
     echo 'Error sending request to Solr';
-    var_dump($context); // Print the context for debugging
 } else {
     // Decode and print the Solr response
     $solrResponse = json_decode($response, true);
-    echo json_encode($solrResponse);
-}
+}; 
 ?>
