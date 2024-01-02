@@ -18,7 +18,7 @@ foreach ($data['urls'] as $url) {
     // Create delete operation for the extracted job_link
     $deleteOperations[] = [
         'delete' => [
-            'query' => 'job_link:' . $jobLink,
+            'query' => 'job_link:' ."[". $jobLink."]",
         ],
     ];
 }
