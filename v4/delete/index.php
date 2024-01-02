@@ -4,31 +4,32 @@
 $requestBody = file_get_contents('php://input');
 $data = json_decode($requestBody, true);
 
+// Check if 'urls' key exists and is an array
+if (!isset($data['urls']) || !is_array($data['urls'])) {
+    echo 'Invalid or missing "urls" key in the JSON payload.';
+    exit;
+}
+
+// Check if there are URLs to process
+if (empty($data['urls'])) {
+    echo 'No URLs provided in the JSON payload.';
+    exit;
+}
+
 // Solr endpoint URL
 $solrEndpoint = 'http://zimbor.go.ro/solr/jobs/update?commit=true';
 
 // Create an array to store the delete operations
 $deleteOperations = [];
 
-// Iterate through URLs and extract job_link values
+// Iterate through URLs and create delete operations
 foreach ($data['urls'] as $url) {
-    // Extract job_link from the URL (modify this part based on your URL structure)
-    $jobLink = extractJobLinkFromURL($url);
-
-    // Create delete operation for the extracted job_link
+    // Create delete operation for each URL
     $deleteOperations[] = [
         'delete' => [
-            'query' => 'job_link:' ."[". $jobLink."]",
+            'query' => 'job_link:' . $url,
         ],
     ];
-}
-
-// Function to extract job_link from a URL (modify this based on your URL structure)
-function extractJobLinkFromURL($url) {
-    // Implement logic to extract job_link from the URL
-    // Example: parse_url, regular expressions, etc.
-    // Replace the following line with your actual implementation
-    return $url;
 }
 
 // Create HTTP context options for the request
@@ -49,9 +50,10 @@ $response = file_get_contents($solrEndpoint, false, $context);
 // Check for errors
 if ($response === false) {
     echo 'Error sending request to Solr';
-   
+    var_dump($context); // Print the context for debugging
 } else {
     // Decode and print the Solr response
     $solrResponse = json_decode($response, true);
     echo json_encode($solrResponse);
 }
+?>
