@@ -140,6 +140,7 @@ function discord_webhook($msg) {
         $item->country    = str_replace("Romania","România",$item->country);
 	$item->city    = str_replace("Cluj Napoca","Cluj-Napoca",$item->city);
 	$item->city    = str_replace("Bucharest","București",$item->city);
+	$item->city    = str_replace("Bucuresti","București",$item->city);
         $item->id = md5($item->job_link)."";
         $company = $item->company; 
     }
