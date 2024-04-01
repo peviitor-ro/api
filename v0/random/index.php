@@ -1,7 +1,7 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
-header("Access-Control-Allow-Headers: *");
+header('Access-Control-Allow-Headers: *');
 
 
     /**
@@ -39,20 +39,31 @@ header("Access-Control-Allow-Headers: *");
         }
 }
 	
-
-    $url = 'https://api.peviitor.ro/v0/search/?q=*%3A*&rows=0';
+//to do: make this end point independent; try to avoid using v0 search
+    $url = 'https://api.peviitor.ro/v0/search/';
+    $url = $url.'?';
+    $url = $url.'q='.urlencode('*:*');
+    $url = $url.'&';
+    $url = $url.'rows=0';
     $string = file_get_contents($url);
     $json = json_decode($string, true);
     
 $server = get_master_server();	
 
-$max=$json['response']['numFound'];;
+$max=$json['response']['numFound'];
 $start = rand(0,$max);
-$qs = 'q=*%3A*&rows=1&start='.$start.'&omitHeader=true';
-$core = "jobs";
+$qs = 'q='.urlencode('*:*');//query string
+$qs = $qs.'&';
+$qs = $qs.'rows=1';
+$qs = $qs.'&';
+$qs = $qs.'start='.$start;
+$qs = $qs.'&';
+$qs = $qs.'omitHeader=true';
+$core = "jobs";//production
 $url =  $server.$core.'/select?'.$qs;
  
  
 $json = file_get_contents($url);
 echo $json;
+//to do: to add unit tests
 ?>
