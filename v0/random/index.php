@@ -45,7 +45,7 @@ $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
 $qs = $qs . '&';
 $qs = $qs . 'rows=0';
-$url = 'http://zimbor.go.ro/solr/' . $core . '/select?' . $qs;
+$url = 'http://zimbor.go.ro/solr/' . $core . '/select' . $qs;
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
