@@ -23,8 +23,7 @@ function get_master_server()
     $options = array(
         'http' => array(
             'header'  => "Content-type: application/json\r\n",
-            'method'  => 'GET',
-            'content' => $data
+            'method'  => 'GET'
         )
     );
     $context  = stream_context_create($options);
