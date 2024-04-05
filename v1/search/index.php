@@ -64,7 +64,6 @@ function get_server(){
         'http' => array(
             'header'  => "Content-type: application/json\r\n",
             'method'  => 'GET',
-            'content' => $data
         )
     );
     $context  = stream_context_create($options);
