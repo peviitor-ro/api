@@ -10,47 +10,67 @@ function get_server(){
 
 
     /**
-     * @OA\Get(
-     *     path="/v1/search/", tags={"search engine"},
-     *     
-     *          @OA\Parameter(
-     *                in="query", 
-     *                name="q",  example="front end",
-     *               @OA\Schema(type="string")
-     * ),
-     *               @OA\Parameter(
-     *                in="query", 
-     *                name="company",  example="Endava",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="city",  example="Cluj-Napoca",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="county",  example="Bihor",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="country",  example="România",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="remote",  example="remote",
-     *               @OA\Schema(type="string")
-     * ),
-     *           @OA\Parameter(
-     *                in="query", 
-     *                name="page",  example="1",
-     *               @OA\Schema(type="string")
-     * ),
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
+ * @OA\Get(
+ *     path="/v1/search/",
+ *     tags={"search engine"},
+ *     summary="Search for jobs",
+ *     operationId="searchJobs", // Unique operationId for this GET operation
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="q",
+ *         description="Search query",
+ *         example="front end",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="company",
+ *         description="Company name filter",
+ *         example="Endava",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="city",
+ *         description="City filter",
+ *         example="Cluj-Napoca",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="county",
+ *         description="County filter",
+ *         example="Bihor",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="country",
+ *         description="Country filter",
+ *         example="România",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="remote",
+ *         description="Remote job filter",
+ *         example="remote",
+ *         @OA\Schema(type="string", enum={"remote", "true", "false"})
+ *     ),
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="page",
+ *         description="Page number",
+ *         example="1",
+ *         @OA\Schema(type="integer", format="int32", minimum=1)
+ *     ),
+ *     @OA\Response(
+ *         response="200",
+ *         description="Successful search results"
+ *     )
+ * )
+ */
+
 
    function get_master_server(){
     $method = 'GET';
