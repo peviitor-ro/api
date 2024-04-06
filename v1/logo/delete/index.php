@@ -1,26 +1,30 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 /**
-     * 
-     * @OA\Post(
-     *     path="/v1/logo/delete/", 
-     *     tags={"LOGO"},
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
-     *             @OA\Schema(
-     *                 @OA\Property(
-     *                     property="company",
-     *                     type="string"
-     *                 ),
-     *                 example="company=ziramarketing"
-     *                      )
-     *                  )
-     *          ),
-    
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
+ * @OA\Post(
+ *     path="/v1/logo/delete/",
+ *     tags={"LOGO"},
+ *     summary="Delete a logo by company name",
+ *     operationId="deleteLogo", // Unique operationId for this POST operation
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\MediaType(
+ *             mediaType="application/x-www-form-urlencoded",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="company",
+ *                     type="string",
+ *                     example="ziramarketing"
+ *                 )
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response="200",
+ *         description="Success"
+ *     )
+ * )
+ */
 
  function get_server(){
     //get the IP of the server
