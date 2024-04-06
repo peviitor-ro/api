@@ -10,7 +10,7 @@ header('Access-Control-Allow-Headers: *');
  *     @OA\Response(response="200", description="Success")
  * )
  */
-
+//calculează nr max de job-uri
 $server = 'zimbor.go.ro';
 $core = 'shaqodoon'; //QA
 $qs = '?';
@@ -22,7 +22,9 @@ $string = file_get_contents($url);
 $json = json_decode($string, true);
 
 $max = $json['response']['numFound'];
-$start = rand(0, $max);
+$start = rand(0, $max);//alege un job random
+//pana aici
+//extrage din solr job-ul ales
 $qs = '?q=' . urlencode('*:*'); //query string
 $qs = $qs . '&';
 $qs = $qs . 'rows=1';
@@ -32,7 +34,7 @@ $qs = $qs . '&';
 $qs = $qs . 'omitHeader=true';
 $url = 'http://' .$server .'/solr/' . $core . '/select' . $qs;
 
-
-$json = file_get_contents($url);
-echo $json;
+$json = file_get_contents($url);//executa
+echo $json;//afiseaza
+//pana aici
 //to do: to add unit tests
