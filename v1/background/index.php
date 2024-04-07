@@ -10,9 +10,8 @@ header("Access-Control-Allow-Origin: *");
 
 
 $x = date('w');
-$x = $x-1;
 
-$url =  'http://zimbor.go.ro/'.'tech/select?'.'q.op=OR&q='."cat:".$x.'&rows=100';
+$url =  'http://zimbor.go.ro/solr/'.'tech/select?'.'q.op=OR&q='."cat:".$x.'&rows=100';
 $json = file_get_contents($url);
 
 echo $json;
