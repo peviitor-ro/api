@@ -9,9 +9,6 @@ header("Access-Control-Allow-Origin: *");
 
 
 
-$qs = $_SERVER['QUERY_STRING'];
-$qs = urldecode($qs);
-
 $x = date('w');
 $x = $x-1;
 
