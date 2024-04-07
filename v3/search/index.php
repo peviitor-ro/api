@@ -1,23 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-function get_master_server(){
-// File path
-$filePath = "../../v0/server/test/server.txt";
-
-// Read the contents of the file into a string
-$fileContents = file_get_contents($filePath);
-
-if ($fileContents !== false) {
-       $server = $fileContents;
-} else {
-    $server = 'http://zimbor.go.ro/solr/';
-}
-    return $server;
-}
-
-    
-
 
 if (isset($_GET['q'])) {$q  = "q=".urlencode($_GET['q']);} else {$q='q=*:*';}
 if (isset($_GET['company'])) {$q .= "&fq=company:".urlencode($_GET['company']);}
