@@ -32,9 +32,12 @@ function company_exist($company)
     $qs = $qs . 'indent=true&q.op=OR';
     $qs = $qs . '&';
     $qs = $qs . 'q=';
-    $qs = $qs . 'company%3A%22';
-    $url = 'https://' . $server . '/solr/?' . 'https://solr.peviitor.ro/solr/shaqodoon/select' . $qs . $company . '%22&rows=0&useParams=';
-    $url = 'https://api.peviitor.ro/v0/search/?https://solr.peviitor.ro/solr/shaqodoon/select?indent=true&q.op=OR&q=company%3A%22' . $company . '%22&rows=0&useParams=';
+    $qs = $qs . 'company';
+    $qs = $qs . urlencode(':"');
+    $qs = $qs . $company;
+    $qs = $qs . urlencode('"');
+    $qs = $qs . '&rows=0&useParams=';
+    $url = 'http://' . $server . '/solr/shaqodoon/select' . $qs;
     $string = file_get_contents($url);
     $json = json_decode($string, true);
 
