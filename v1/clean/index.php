@@ -70,7 +70,7 @@ function discord_webhook($msg)
     }
 }
 
-$server = 'zimbor.go.ro';
+$server = 'http://zimbor.go.ro';
 $method = 'POST';
 $core  = 'shaqodoon';
 $command = '/update';
