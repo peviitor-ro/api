@@ -63,6 +63,7 @@ if (isset($_GET['page'])) {
     $start = $_GET['page'];
     $start = ($start-1)*10; 
     $q .= "&start=".$start;
+    $q .= "&rows=12";
 }
 
 $url =  'http://zimbor.go.ro/solr/'.'shaqodoon/select?'.$q;
