@@ -15,10 +15,31 @@ header("Access-Control-Allow-Origin: *");
  * )
  */
 
-$server = 'http://zimbor.go.ro';
-$qs
-$url = 
-$url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
+$server = 'zimbor.go.ro';
+$core = 'shaqodoon';
+$command = '/select';
+$qs = '?';
+$qs = $qs . 'facet.field=company_str';
+$qs = $qs . '&';
+$qs = $qs . 'facet.limit=10000&facet=true';
+$qs = $qs . '&';
+$qs = $qs . 'facet=true';
+$qs = $qs . '&';
+$qs = $qs . 'fl=company';
+$qs = $qs . '&';
+$qs = $qs . 'facet.sort=index';
+$qs = $qs . '&';
+$qs = $qs . 'q.op=OR';
+$qs = $qs . '&';
+$qs = $qs . 'q=';
+$qs = $qs . urlencode('*:*');
+$qs = $qs . '&';
+$qs = $qs . 'rows=0';
+$qs = $qs . '&';
+$qs = $qs . 'start=0';
+
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
+//$url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
