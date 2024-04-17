@@ -2,25 +2,30 @@
 header("Access-Control-Allow-Origin: *");
 /**
  * @OA\Post(
- *     path="/v1/logo/delete/",
+ *     path="/v1/logo/{companyName}/delete",
  *     tags={"logo"},
  *     summary="Delete a logo by company name",
- *     @OA\RequestBody(
+ *     @OA\Parameter(
+ *         name="companyName",
+ *         in="path",
  *         required=true,
- *         @OA\MediaType(
- *             mediaType="application/x-www-form-urlencoded",
- *             @OA\Schema(
- *                 @OA\Property(
- *                     property="company",
- *                     type="string",
- *                     example="ziramarketing"
- *                 )
- *             )
+ *         description="The name of the company whose logo will be deleted",
+ *         example="ziramarketing",
+ *         @OA\Schema(
+ *             type="string"
  *         )
  *     ),
  *     @OA\Response(
  *         response="200",
- *         description="Success"
+ *         description="Successful operation. The logo for the specified company has been deleted."
+ *     ),
+ *     @OA\Response(
+ *         response="404",
+ *         description="Company not found. The specified company name does not exist."
+ *     ),
+ *     @OA\Response(
+ *         response="400",
+ *         description="Bad request. The request was malformed or missing required parameters."
  *     )
  * )
  */
