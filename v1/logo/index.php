@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 
  /**
      * @OA\Get(
-     *     path="/v1/logo/", tags={"UI"},
+     *     path="/v1/logo/", tags={"logo"},
      *     @OA\Response(response="200", description="Success")
      * )
      */
