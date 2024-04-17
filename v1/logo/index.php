@@ -1,6 +1,15 @@
 <?php
 //CORS enable
 header("Access-Control-Allow-Origin: *");
+
+ /**
+     * @OA\Get(
+     *     path="/v1/logo/", tags={"UI"},
+     *     @OA\Response(response="200", description="Success")
+     * )
+     */
+
+
 $qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&omitHeader=true&useParams=";
 
 
