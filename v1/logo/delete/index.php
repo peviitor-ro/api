@@ -7,7 +7,7 @@ header("Access-Control-Allow-Origin: *");
  *     summary="Delete a logo by company name",
  *     @OA\Parameter(
  *         name="companyName",
- *         in="path",
+ *         in="body",
  *         required=true,
  *         description="The name of the company whose logo will be deleted",
  *         example="ziramarketing",
