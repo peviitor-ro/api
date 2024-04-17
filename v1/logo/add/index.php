@@ -3,9 +3,8 @@ header("Access-Control-Allow-Origin: *");
 /**
  * @OA\Post(
  *     path="/v1/logo/add/",
- *     tags={"LOGO"},
+ *     tags={"logo"},
  *     summary="Add new logos",
- *     operationId="addLogos", // Unique operationId for this POST operation
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\MediaType(
