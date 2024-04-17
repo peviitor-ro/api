@@ -3,9 +3,8 @@ header("Access-Control-Allow-Origin: *");
 /**
  * @OA\Post(
  *     path="/v1/logo/delete/",
- *     tags={"LOGO"},
+ *     tags={"logo"},
  *     summary="Delete a logo by company name",
- *     operationId="deleteLogo", // Unique operationId for this POST operation
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\MediaType(
