@@ -15,7 +15,7 @@ header("Access-Control-Allow-Origin: *");
      * )
      */
 
-$url = 'https://api.peviitor.ro/v0/search/?facet.field=company_str&facet=on&q=*%3A*&rows=0';
+$url = 'http://zimbor.go.ro/solr/jobs/select?facet.field=company_str&facet=true&indent=true&q.op=OR&useParams=';
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 $companies = $json['facet_counts']['facet_fields']['company_str'];
