@@ -2,9 +2,10 @@
 header("Access-Control-Allow-Origin: *");
 /**
  * @OA\Post(
- *     path="/v1/logo/{companyName}/delete",
+ *     path="/v1/logo/delete/",
  *     tags={"logo"},
  *     summary="Delete a logo by company name",
+ *     operationId="deleteLogoByCompany",
  *     @OA\Parameter(
  *         name="companyName",
  *         in="body",
