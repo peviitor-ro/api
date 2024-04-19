@@ -12,7 +12,7 @@ if (isset($_GET['country'])) {$q .= "&fq=country:".urlencode($_GET['country']);}
 if (isset($_GET['remote'])) {$q .= "&fq=remote:".urlencode($_GET['remote']);}
 if (isset($_GET['page'])) {
     $start = $_GET['page'];
-    $start = ($start-1)*10; 
+    $start = ($start-1)*12; 
     $q .= "&start=".$start;
    $q .= "&rows=12";
 }
