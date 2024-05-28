@@ -5,7 +5,7 @@ header("Access-Control-Allow-Origin: *");
 if (isset($_GET['q'])) {$q  = "q=".urlencode($_GET['q']);} else {$q='q=*:*';}
 if (isset($_GET['company'])) {$q .= "&fq=company:".urlencode($_GET['company']);}
 if (isset($_GET['city'])) {$q .= "&fq=city:".urlencode($_GET['city']);
-                           $q = $q."%20OR%20remote%3Aremote%20OR%20city%3Aall%20OR%20county%3Aall";
+                        //   $q = $q."%20OR%20remote%3Aremote%20OR%20city%3Aall%20OR%20county%3Aall";
                           }
 if (isset($_GET['country'])) {$q .= "&fq=country:".urlencode($_GET['country']);}
 //if (isset($_GET['county'])) {$q .= "&fq=county:".urlencode($_GET['county']);}
