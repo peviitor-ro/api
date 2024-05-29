@@ -22,7 +22,7 @@ $string = file_get_contents($url);
 $json = json_decode($string, true);
 
 $max = $json['response']['numFound'];
-$start = rand(0, $max);
+$start = rand(0, $max-1);
 $qs = '?q=' . urlencode('*:*'); //query string
 $qs = $qs . '&';
 $qs = $qs . 'rows=1';
