@@ -11,3 +11,4 @@ code for api.peviitor.ro
 ```
 docker run -d -p 8080:80 -v C:/php:/var/www/html sebiboga/php-apache:1.0.0
 ```
+4. in browser scrie [http://localhost:8080/api/v0/random/](http://localhost:8080/api/v0/random/)
