@@ -11,8 +11,8 @@ header('Access-Control-Allow-Headers: *');
  * )
  */
 //calculează nr max de job-uri
-$server = 'zimbor.go.ro';
-$core = 'shaqodoon'; //QA
+$server = 'localhost:8983'; //DEV
+$core = 'jobs'; 
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
 $qs = $qs . '&';
