@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Random API
+  description: API for retrieving random data
+  version: 1.0.0
+servers:
+  - url: http://api.peviitor.ro/v0
+paths:
+  /random/:
+    get:
+      summary: Get random data
+      description: Returns random data from the API
+      responses:
+        '200':
+          description: A random data response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: Random data
+      tags:
+        - Random

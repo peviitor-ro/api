@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: Search API
+  description: API for searching data
+  version: 1.0.0
+servers:
+  - url: http://api.peviitor.ro/v0
+paths:
+  /search/:
+    get:
+      summary: Search data
+      description: Returns search results from the API
+      parameters:
+        - name: q
+          in: query
+          description: Query string for search
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A search result response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        // Define properties of each search result item here
+      tags:
+        - Search
