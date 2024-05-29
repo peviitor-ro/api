@@ -4,14 +4,9 @@ header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: *');
 
 
-/**
- * @OA\Get(
- *     path="/v0/random/", tags={"search engine"},
- *     @OA\Response(response="200", description="Success")
- * )
- */
+
 //calculează nr max de job-uri
-$server = 'localhost:8983'; //DEV
+$server = '172.18.0.10:8983'; //DEV
 $core = 'jobs'; 
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
@@ -22,7 +17,7 @@ $string = file_get_contents($url);
 $json = json_decode($string, true);
 
 $max = $json['response']['numFound'];
-$start = rand(0, $max);//alege un job random
+$start = rand(0, $max-1);//alege un job random 
 //pana aici
 //extrage din solr job-ul ales
 $qs = '?q=' . urlencode('*:*'); //query string
