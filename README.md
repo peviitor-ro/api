@@ -9,5 +9,5 @@ code for api.peviitor.ro
 2. clone this repo in C:\php using GitHUB Desktop
 3. `cmd`
 ```
-docker run -d -p 8080:80 -v C:/php:/var/www/html php-apache:1.0.0
+docker run -d -p 8080:80 -v C:/php:/var/www/html sebiboga/php-apache:1.0.0
 ```
