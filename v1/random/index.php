@@ -11,8 +11,8 @@ header('Access-Control-Allow-Headers: *');
  * )
  */
 
-$server = 'zimbor.go.ro';
-$core = 'shaqodoon'; //QA
+$server = 'zimbor.go.ro:8985'; //QA
+$core = 'jobs'; 
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
 $qs = $qs . '&';
