@@ -20,7 +20,7 @@ $qs = $_SERVER['QUERY_STRING'];
 
 
 $core ="jobs";
-$url =  'http://zimbor.go.ro/solr/'.$core.'/select?'.$qs;
+$url =  'http://172.18.0.10:8983/solr/'.$core.'/select?'.$qs;
 $json = file_get_contents($url);
 echo $json;
 ?>
