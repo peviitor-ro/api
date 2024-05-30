@@ -1,4 +1,7 @@
 @echo off
+rem Log in to GitHub CLI (if not already logged in)
+gh auth login
+
 rem Navigate to the PHP repository directory
 cd C:\php
 
