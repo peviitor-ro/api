@@ -43,6 +43,7 @@ $qs = $qs . 'useParams=';
 
 $url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
 
+
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
