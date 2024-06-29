@@ -6,15 +6,13 @@ header('Access-Control-Allow-Headers: *');
 
 /**
  * @OA\Get(
- *     path="/v1/random/", tags={"search engine"},
+ *     path="/v4/random/", tags={"search engine"},
  *     @OA\Response(response="200", description="Success")
  * )
  */
 
-
-$server = 'zimbor.go.ro:8985'; //QA
-$core = 'jobs'; 
-
+$server = 'zimbor.go.ro';
+$core = 'jobs'; //production
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
 $qs = $qs . '&';
