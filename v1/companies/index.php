@@ -15,7 +15,7 @@ header("Access-Control-Allow-Origin: *");
      * )
      */
 
-$server = 'zimbor.go.ro';
+$server = 'zimbor.go.ro:8985';
 $core = "jobs";
 
 $qs = '?';
