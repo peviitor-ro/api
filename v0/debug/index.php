@@ -1,6 +1,6 @@
 <?php
 
-$url = 'https://zimbor.go.ro:8985/solr/jobs/select?q=*:*&wt=json';
+$url = 'http://zimbor.go.ro:8985/solr/jobs/select?q=*:*&wt=json';
 
 // Încercăm să obținem conținutul de la URL folosind file_get_contents
 $content = file_get_contents($url);
