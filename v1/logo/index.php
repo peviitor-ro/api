@@ -11,7 +11,7 @@ header("Access-Control-Allow-Origin: *");
 
 $server = 'zimbor.go.ro:8985';
 $core = "jobs";
-     
+
 $qs = '?';
 $qs = $qs . 'q=logo:*';
 $qs = $qs . '&';
@@ -24,7 +24,7 @@ $qs = $qs . '&';
 $qs = $qs . 'rows=100000';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
-     
+
 $url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
      
 $string = file_get_contents($url);
