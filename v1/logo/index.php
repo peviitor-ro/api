@@ -9,24 +9,20 @@ header("Access-Control-Allow-Origin: *");
      * )
      */
 
-$server = 'zimbor.go.ro:8985';
-$core = "jobs";
+$server = 'zimbor.go.ro:8983';
+$core = "auth";
 
 $qs = '?';
-$qs = $qs . 'q=logo:*';
+$qs = $qs . 'indent=true';
 $qs = $qs . '&';
 $qs = $qs . 'q.op=OR';
 $qs = $qs . '&';
-$qs = $qs . 'indent=true';
-$qs = $qs . '&';
-$qs = $qs . 'q=*%3A*';
-$qs = $qs . '&';
-$qs = $qs . 'rows=100000';
+$qs = $qs . 'q=logo%3A*';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
 
 $url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
-     
+
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
