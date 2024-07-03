@@ -10,10 +10,10 @@ header("Access-Control-Allow-Origin: *");
  *             mediaType="application/x-www-form-urlencoded",
  *             @OA\Schema(
  *                 @OA\Property(
- *                     property="company",
+ *                     property="hiringOrganization.name",
  *                     type="string"
  *                 ),
- *                 example="company=Endava"
+ *                 hiringOrganization.name="company=Endava"
  *                      )
  *                  )
  *          ),
