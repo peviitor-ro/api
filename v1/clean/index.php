@@ -91,7 +91,7 @@ $qs = $qs . 'wt=json';
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 $company = $_POST['company'];
-$data = "{'delete': {'query': 'company:" . $company . "'}}";
+$data = "{'delete': {'query': 'hiringOrganization.name:" . $company . "'}}";
 
 $options = array(
     'http' => array(
