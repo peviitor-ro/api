@@ -9,7 +9,7 @@ header("Access-Control-Allow-Origin: *");
      * )
      */
 
-$server = 'zimbor.go.ro:8983';
+$server = 'zimbor.go.ro:8985';
 $core = "auth";
 
 $qs = '?';
