@@ -27,7 +27,10 @@ header("Access-Control-Allow-Origin: *");
 
 function company_exist($company)
 {
-    $server = 'zimbor.go.ro';
+    $method = 'GET';
+    $server = 'zimbor.go.ro:8985';
+    $core  = 'jobs';
+    
     $qs = '?';
     $qs = $qs . 'indent=true&q.op=OR';
     $qs = $qs . '&';
@@ -37,7 +40,8 @@ function company_exist($company)
     $qs = $qs . $company;
     $qs = $qs . urlencode('"');
     $qs = $qs . '&rows=0&useParams=';
-    $url = 'http://' . $server . '/solr/shaqodoon/select' . $qs;
+
+    $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
     $string = file_get_contents($url);
     $json = json_decode($string, true);
 
@@ -70,11 +74,21 @@ function discord_webhook($msg)
     }
 }
 
-$server = 'http://zimbor.go.ro';
+$server = 'zimbor.go.ro:8985';
 $method = 'POST';
-$core  = 'shaqodoon';
+$core  = 'jobs';
 $command = '/update';
-$qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
+
+$qs = '?';
+$qs = $qs . '_=1617366504771';
+$qs = $qs . '&';
+$qs = $qs . 'commitWithin=1000';
+$qs = $qs . '&';
+$qs = $qs . 'overwrite=true';
+$qs = $qs . '&';
+$qs = $qs . 'wt=json';
+
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 $company = $_POST['company'];
 $data = "{'delete': {'query': 'company:" . $company . "'}}";
@@ -94,8 +108,6 @@ $msg .= $company;
 discord_webhook($msg);
 $context  = stream_context_create($options);
 
-
-$url = $server . '/solr/' . $core . $command . $qs;
 $result = file_get_contents($url, false, $context);
 if ($result === FALSE) { /* Handle error */
 }
