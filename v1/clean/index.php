@@ -13,7 +13,7 @@ header("Access-Control-Allow-Origin: *");
  *                     property="hiringOrganization.name",
  *                     type="string"
  *                 ),
- *                 hiringOrganization.name="company=Endava"
+ *                 example="hiringOrganization.name=Endava"
  *                      )
  *                  )
  *          ),
