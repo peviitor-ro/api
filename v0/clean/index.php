@@ -28,9 +28,20 @@ $options = array(
     )
 );
 
-
 $context  = stream_context_create($options);
 
-$result = file_get_contents($url, false, $context);
-if ($result === FALSE) { /* Handle error */
+try {
+    $json = @file_get_contents($url, false, $context);
+    
+    if ($json === FALSE) {
+        list($version,$status,$msg) = explode(' ', $http_response_header[0], 3);
+        // Force HTTP status code to be 503
+        header("HTTP/1.1 503 Service Unavailable");
+        throw new Exception('Your call to Solr failed and returned HTTP status: ' . $status, $status);
+    }
+
+    echo $json;
+} catch (Exception $e) {
+    echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
+    exit;
 }
