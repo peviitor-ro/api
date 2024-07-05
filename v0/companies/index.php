@@ -1,19 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-   /**
-     * @OA\Get(
-     *     path="/v0/companies/", tags={"UI"},
-   *  @OA\Parameter(
-     *                in="query", 
-     *                 name="count",
-     *                 @OA\Schema(
-     *                   type="string"), 
-     *                 example="true"
-     * ),
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
 
 $server = '172.18.0.10:8983';
 $core = "jobs";
