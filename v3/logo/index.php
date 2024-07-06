@@ -1,59 +1,35 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-$qs = "indent=true&q.op=OR&q=logo%3A*&rows=10000&omitHeader=true&useParams=";
 
-function get_server(){
-    //get the IP of the server
-    //we need a config file to know where is the SOLR
-    require('../../_config/index.php');
-    return $server;
-}
+$server = 'zimbor.go.ro';
+$core = 'auth';
 
-   function get_master_server(){
-    $method = 'GET';
-    $server = "https://api.peviitor.ro/";
-    $core  = 'v0';
-    $command ='/server/';
-    $qs = '';
-    $url =  $server.$core.$command.$qs;
-   
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'GET',
-            'content' => $data
-        )
-    );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) { /* Handle error */ }
-    $json = json_decode($result);
-    foreach($json as $item)
-        {
-            if ($item->status=="up"){
-                return $item->server;
-                break;
-            }
-        }
-}
+$qs = '?';
+$qs = $qs . 'indent=true';
+$qs = $qs . '&';
+$qs = $qs . 'q.op=OR';
+$qs = $qs . '&';
+$qs = $qs . 'q=logo%3A*';
+$qs = $qs . '&';
+$qs = $qs . 'rows=10000';
+$qs = $qs . '&';
+$qs = $qs . 'omitHeader=true';
+$qs = $qs . '&';
+$qs = $qs . 'useParams=';
 
-$core ="auth";
-$url =  'http://zimbor.go.ro/solr/'.$core.'/select?'.$qs;
+$url =  'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 $companies = $json['response']['docs'];
 
-
 $results =  new stdClass();
 $results->companies = array();
 $results->companies = $companies;
 
-
 $test = array();
 foreach($companies as $company) 
 {
-
     $item = strtolower($company["id"]);
     $xurl  =  $company["logo"];
     $url  = $xurl[0];
@@ -61,8 +37,30 @@ foreach($companies as $company)
     
 }
 
+$core = 'jobs';
 
-$url = 'http://zimbor.go.ro/solr/jobs/select?facet.field=company_str&facet.limit=10000&facet=true&fl=company&facet.sort=index&indent=true&q.op=OR&q=*%3A*&rows=0&start=0';
+$qs = '?';
+$qs = $qs . 'facet.field=company_str';
+$qs = $qs . '&';
+$qs = $qs . 'facet.limit=10000';
+$qs = $qs . '&';
+$qs = $qs . 'facet=true';
+$qs = $qs . '&';
+$qs = $qs . 'fl=company';
+$qs = $qs . '&facet.sort=index';
+$qs = $qs . '&';
+$qs = $qs . 'indent=true';
+$qs = $qs . '&';
+$qs = $qs . 'q.op=OR';
+$qs = $qs . '&';
+$qs = $qs . 'q=*%3A*';
+$qs = $qs . '&';
+$qs = $qs . 'rows=0';
+$qs = $qs . '&';
+$qs = $qs . 'start=0';
+
+$url = 'http://' . $server . '/solr/' . '/select' . $qs;
+
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
@@ -87,4 +85,5 @@ for($i=0;$i<count($companies)/2;$i++) {
     $results->companies[$i] = $obj; 
 }
 echo json_encode($results);
+
 ?>
