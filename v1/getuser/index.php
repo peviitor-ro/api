@@ -16,7 +16,7 @@ if (isset($_GET['user']))
   $qs = $qs . '&';
   $qs = $qs . 'q=id%3A';
 
-  $url = 'http://' . $server . '/solr/' . $core . '/select'. $qs . $user;
+  $url = 'http://' . $server . $core . '/solr/' . '/select'. $qs . $user;
 
   $json = file_get_contents($url);
   $json = json_decode($json);
