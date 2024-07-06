@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+
 /**
  * @OA\Post(
  *     path="/v1/logo/add/",
@@ -26,23 +27,21 @@ header("Access-Control-Allow-Origin: *");
  * )
  */
 
-
-
-function get_server()
-{
-    //get the IP of the server
-    //we need a config file to know where is the SOLR
-    require('../../../_config/index.php');
-    return $server;
-}
-
 $method = 'POST';
-$server = get_server();
+$server = 'zimbor.go.ro:8985';
 $core  = 'auth';
 $command = '/update';
-$qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
 
+$qs = '?';
+$qs = $qs . '_=1617366504771';
+$qs = $qs . '&';
+$qs = $qs . 'commitWithin=1000';
+$qs = $qs . '&';
+$qs = $qs . 'overwrite=true';
+$qs = $qs . '&';
+$qs = $qs . 'wt=json';
 
+$url = 'http://' . $server . $core . $command . $qs;
 
 $data = file_get_contents('php://input');
 
@@ -53,12 +52,10 @@ $options = array(
         'content' => $data
     )
 );
+
 $context  = stream_context_create($options);
 
-foreach ($server as $solrurl) {
-    $url =  $solrurl . $core . $command . $qs;
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) {
-        echo $result;
-    }
+$result = file_get_contents($url, false, $context);
+if ($result === FALSE) {
+    echo $result;
 }
