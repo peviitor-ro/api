@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+
    /**
      * @OA\Get(
      *     path="/v0/total/", tags={"UI"},
@@ -38,14 +39,11 @@ $json = json_decode($string, true);
 
 $companies = $json['facet_counts']['facet_fields']['company_str'];
 
-
-
 $obj = new stdClass();
 $obj->total = new stdClass();
 $obj->total -> jobs = ''.$json['response']['numFound'];
 $obj->total -> companies = ''.count($companies)/2;
 
 echo json_encode($obj);
-
 
 ?>
