@@ -31,20 +31,20 @@ header("Access-Control-Allow-Origin: *");
  * )
  */
 
- function city_fix($in){
-     $output = $in;
-     $output = str_replace("Bucharest","București",$output);
-     $output = str_replace("Brasov","Brașov",$output);
-     $output = str_replace("Timisoara","Timișoara",$output);
-     $output = str_replace("Pitesti","Pitești",$output);
-     $output = str_replace("Iasi","Iași",$output);
-     $output = str_replace("Targu Mures","Târgu Mureș",$output);
-     $output = str_replace("Cluj Napoca","Cluj-Napoca",$output);
+function city_fix($in){
+    $output = $in;
+    $output = str_replace("Bucharest","București",$output);
+    $output = str_replace("Brasov","Brașov",$output);
+    $output = str_replace("Timisoara","Timișoara",$output);
+    $output = str_replace("Pitesti","Pitești",$output);
+    $output = str_replace("Iasi","Iași",$output);
+    $output = str_replace("Targu Mures","Târgu Mureș",$output);
+    $output = str_replace("Cluj Napoca","Cluj-Napoca",$output);
 
-  return $output;
- }
+    return $output;
+}
 
- function discord_webhook($msg) {
+function discord_webhook($msg) {
     $msg .= ' UPDATE in TEST '.date("l d-m-Y H:i:s");
     $method = 'POST';
     $url = "https://discord.com/api/webhooks/1127592366614786118/ZOcdq94sqxO4P8iOIkQdRLG9s_vwgRfg1DFxhybwpHkqyet0QTe33rQ7bSDS5AG5HP8n";
@@ -57,11 +57,13 @@ header("Access-Control-Allow-Origin: *");
             'content' => $data
         )
     );
+
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
+
     if ($result === FALSE) { /* Handle error */ }
-    
- }
+}
+
 $method = 'POST';
 $server = '172.18.0.10:8983';
 $core  = 'jobs';
@@ -75,6 +77,8 @@ $qs = $qs . '&';
 $qs = $qs . 'overwrite=true';
 $qs = $qs . '&';
 $qs = $qs . 'wt=json';
+
+$url = 'http://' . $server . $core . $command . $qs;
 
 $data = file_get_contents('php://input');
 
@@ -97,13 +101,11 @@ $options = array(
         'content' => $data
     )
 );
+
 discord_webhook($company);
 $context  = stream_context_create($options);
-
-foreach ($server as $solrurl){
-$url = 'http://' . $server . $core . $command . $qs;
 $result = file_get_contents($url, false, $context);
+
 if ($result === FALSE) { /* Handle error */ }
-}
 
 ?>
