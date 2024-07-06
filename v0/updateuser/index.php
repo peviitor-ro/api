@@ -17,54 +17,56 @@ $qs = $qs . '&';
 $qs = $qs . 'q=id%3A';
 
 if (isset($data[0]->id))
-  {
-$user = $data[0]->id;
-$user = urlencode($user);
+{
+  $user = $data[0]->id;
+  $user = urlencode($user);
 
-$url =  'http://' . $server . '/solr/' . '/select'. $qs . $user;
-$json = file_get_contents($url);
-$json = json_decode($json);
-unset($json->response->docs[0]->_version_);
+  $url =  'http://' . $server . '/solr/' . '/select'. $qs . $user;
 
- if (isset($data[0]->id)) {$json->response->docs[0]->id = $data[0]->id;}
- if (isset($data[0]->url)) {$json->response->docs[0]->url = $data[0]->url;}
- if (isset($data[0]->company)) {$json->response->docs[0]->company = $data[0]->company;}
- if (isset($data[0]->logo)) {$json->response->docs[0]->logo = $data[0]->logo;}
- if (isset($data[0]->apikey)) { $json->response->docs[0]->apikey = $data[0]->apikey;}
+  $json = file_get_contents($url);
+  $json = json_decode($json);
+  unset($json->response->docs[0]->_version_);
 
-//print_r ($json->response->docs[0]);
+  if (isset($data[0]->id)) {$json->response->docs[0]->id = $data[0]->id;}
+  if (isset($data[0]->url)) {$json->response->docs[0]->url = $data[0]->url;}
+  if (isset($data[0]->company)) {$json->response->docs[0]->company = $data[0]->company;}
+  if (isset($data[0]->logo)) {$json->response->docs[0]->logo = $data[0]->logo;}
+  if (isset($data[0]->apikey)) { $json->response->docs[0]->apikey = $data[0]->apikey;}
+
+  //print_r ($json->response->docs[0]);
 
 
-$method = 'POST';
+  $method = 'POST';
+  $command ='/update';
 
-$core  = 'auth';
-$command ='/update';
-$qs = '?';
-$qs = $qs . '_=1617366504771';
-$qs = $qs . '&';
-$qs = $qs . 'commitWithin=1000';
-$qs = $qs . '&';
-$qs = $qs . 'overwrite=true';
-$qs = $qs . '&';
-$qs = $qs . 'wt=json';
+  $qs = '?';
+  $qs = $qs . '_=1617366504771';
+  $qs = $qs . '&';
+  $qs = $qs . 'commitWithin=1000';
+  $qs = $qs . '&';
+  $qs = $qs . 'overwrite=true';
+  $qs = $qs . '&';
+  $qs = $qs . 'wt=json';
 
-$data ="[".json_encode($json->response->docs[0])."]" ;
+  $data ="[".json_encode($json->response->docs[0])."]" ;
 
-$options = array(
+  $options = array(
     'http' => array(
-        'header'  => "Content-type: application/json\r\n",
-        'method'  => 'POST',
-        'content' => $data
+      'header'  => "Content-type: application/json\r\n",
+      'method'  => 'POST',
+      'content' => $data
     )
-);
-$context  = stream_context_create($options);
+  );
 
-$server = '172.18.0.10:8983';
-$url =  'http://' . $server . $core . $command . $qs;
-$result = file_get_contents($url, false, $context);
+  $context  = stream_context_create($options);
 
-if ($result === FALSE) { /* Handle error */ }
+  $url =  'http://' . $server . $core . $command . $qs;
+  
+  $result = file_get_contents($url, false, $context);
+
+  if ($result === FALSE) { /* Handle error */ }
     
-echo $data;
-  }
+  echo $data;
+}
+
 ?>
