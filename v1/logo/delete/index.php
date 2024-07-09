@@ -45,7 +45,7 @@ $qs = $qs . 'overwrite=true';
 $qs = $qs . '&';
 $qs = $qs . 'wt=json';
 
-$url = 'http://' . $server . $core . $command . $qs;
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
  
 $company = $_POST['company'];
 $data = "{'delete': {'query': 'id:".$company."'}}";

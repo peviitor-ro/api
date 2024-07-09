@@ -15,7 +15,7 @@ $qs = $qs . 'overwrite=true';
 $qs = $qs . '&';
 $qs = $qs . 'wt=json';
 
-$url = 'http://' . $server . $core . $command . $qs;
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 $data = file_get_contents('php://input');
 
