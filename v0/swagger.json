@@ -159,6 +159,104 @@
           }
         }
       }
+    },
+    "/jobs/": {
+      "get": {
+        "tags": ["Machine Learning"],
+        "summary": "Get jobs",
+        "operationId": "getJobs",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "start",
+            "schema": {
+              "type": "string"
+            },
+            "example": "100",
+            "description": "Start index for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "job_id": {
+                            "type": "integer"
+                          },
+                          "job_title": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Invalid input parameter.",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized. Authentication failure.",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error. Something went wrong on the server side.",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/logo/": {
+      "get": {
+        "tags": ["Logo"],
+        "summary": "Get logos",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer",
+                      "description": "Total number of logos"
+                    },
+                    "companies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Company ID"
+                          },
+                          "logo": {
+                            "type": "string",
+                            "description": "URL or identifier of the logo"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
