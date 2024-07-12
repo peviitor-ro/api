@@ -1,7 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-$server = 'zimbor.go.ro';
+require_once '../config.php';
+
 $core = "jobs";
      
 $qs = '?';
