@@ -9,7 +9,8 @@ header("Access-Control-Allow-Origin: *");
      * )
      */
 
-$server = 'zimbor.go.ro:8985';
+require_once '../config.php';
+
 $core = "auth";
 
 $qs = '?';

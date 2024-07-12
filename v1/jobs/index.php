@@ -23,7 +23,8 @@ if (isset($_GET["start"])) {
     $qs .= "&start=" . $start;
 }
 
-$server = 'zimbor.go.ro:8985';
+require_once '../config.php';
+
 $core = "jobs";
 
 $qs = '?';

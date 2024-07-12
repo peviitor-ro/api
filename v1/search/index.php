@@ -66,7 +66,11 @@ if (isset($_GET['page'])) {
     $q .= "&rows=12";
 }
 
-$url =  'http://zimbor.go.ro:8985/solr/'.'jobs/select?'.$q;
+require_once '../config.php';
+
+$core = 'jobs';
+
+$url =  'http://' . '/solr/' . $core . '/select?' . $q;
 $json = file_get_contents($url);
 echo $json;
 ?>

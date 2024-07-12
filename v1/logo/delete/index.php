@@ -32,7 +32,9 @@ header("Access-Control-Allow-Origin: *");
  */
 
 $method = 'POST';
-$server = 'zimbor.go.ro:8985';
+
+require_once '../config.php';
+
 $core  = 'auth';
 $command ='/update';
 

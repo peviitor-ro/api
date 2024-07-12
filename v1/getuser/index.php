@@ -6,7 +6,8 @@ if (isset($_GET['user']))
   $user = $_GET['user'];
   $user = urlencode($user);
 
-  $server = 'zimbor.go.ro:8985';
+  require_once '../config.php';
+
   $core = 'auth';
 
   $qs = '?';

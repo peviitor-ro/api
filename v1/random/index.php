@@ -11,15 +11,17 @@ header('Access-Control-Allow-Headers: *');
  * )
  */
 
+require_once '../config.php';
 
-$server = 'zimbor.go.ro:8985'; //QA
 $core = 'jobs'; 
 
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
 $qs = $qs . '&';
 $qs = $qs . 'rows=0';
+
 $url = 'http://' .$server .'/solr/' . $core . '/select' . $qs;
+
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
