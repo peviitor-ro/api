@@ -17,7 +17,22 @@ if (empty($data['urls'])) {
 }
 
 // Solr endpoint URL
-$solrEndpoint = 'http://zimbor.go.ro/solr/jobs/update?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
+
+require_once '../config.php';
+
+$core = 'jobs';
+$command = '/update';
+
+$qs = '?';
+$qs = $qs . '_=1617366504771';
+$qs = $qs . '&';
+$qs = $qs . 'commitWithin=100';
+$qs = $qs . '&';
+$qs = $qs . 'overwrite=true';
+$qs = $qs . '&';
+$qs = $qs . 'wt=json';
+
+$solrEndpoint = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 // Create an array to store the delete operations
 $deleteOperations = [];
