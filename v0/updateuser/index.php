@@ -6,7 +6,8 @@ header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEA
 $data = file_get_contents('php://input');
 $data = json_decode($data);
 
-$server = '172.18.0.10:8983';
+require_once '../config.php';
+
 $core = 'auth';
 
 $qs = '?';

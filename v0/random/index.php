@@ -3,7 +3,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: *');
 
-$server = '172.18.0.10:8983'; //DEV
+require_once '../config.php';
+
 $core = 'jobs';
 
 try {

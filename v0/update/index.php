@@ -65,7 +65,9 @@ function discord_webhook($msg) {
 }
 
 $method = 'POST';
-$server = '172.18.0.10:8983';
+
+require_once '../config.php';
+
 $core  = 'jobs';
 $command ='/update';
 
