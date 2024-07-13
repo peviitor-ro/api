@@ -3,7 +3,8 @@ header("Access-Control-Allow-Origin: *");
 
 $company = $_POST['company'];
 
-$server = '172.18.0.10:8983';
+require_once '../config.php';
+
 $method = 'POST';
 $core  = 'jobs';
 $command = '/update';

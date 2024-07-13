@@ -1,7 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-$server = '172.18.0.10:8983';
+require_once '../config.php';
+
 $core = 'jobs';
 $qs = '?';
 $qs = $qs . $_SERVER['QUERY_STRING'];

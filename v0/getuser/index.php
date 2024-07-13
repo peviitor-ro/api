@@ -8,7 +8,8 @@ if (isset($_GET['user']))
   $user = $_GET['user'];
   $user = urlencode($user);
 
-  $server = '172.18.0.10:8983';
+  require_once '../config.php';
+
   $core = 'auth';
 
   $qs = '?';
