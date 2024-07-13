@@ -11,7 +11,8 @@ header('Access-Control-Allow-Headers: *');
  * )
  */
 
-$server = 'zimbor.go.ro';
+require_once '../config.php';
+
 $core = 'jobs'; //production
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');

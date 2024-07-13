@@ -3,7 +3,9 @@ header("Access-Control-Allow-Origin: *");
 
 function validate_api_key($key) {
     $method = 'GET';
-    $server = 'zimbor.go.ro';
+
+    require_once '../config.php';
+    
     $core  = 'auth';
     $command ='/select';
 
