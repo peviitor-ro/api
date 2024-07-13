@@ -21,7 +21,8 @@ require_once '../config.php';
 
 $core = 'jobs';
 
-$url =  'http://' . '/solr/' . '/select?' . $q;
+$url =  'http://' . $server . '/solr/' . '/select?' . $q;
+
 
 $json = file_get_contents($url);
 echo $json;
