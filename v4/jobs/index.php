@@ -17,7 +17,9 @@ header("Access-Control-Allow-Origin: *");
      */
 
 $method = 'GET';
-$server = 'zimbor.go.ro';
+
+require_once '../config.php';
+
 $core  = 'jobs';
 
 $qs = 'q=*%3A*';
@@ -26,7 +28,7 @@ $qs = $qs . 'rows=100';
 $qs = $qs . '&';
 $qs = $qs . 'omitHeader=true';
 
-$url =  'http://' . $server . '/solr/' . '/select?' . $qs;
+$url =  'http://' . $server . '/solr/' . $core . '/select?' . $qs;
 
 if (isset($_GET["start"])) {$start=$_GET["start"];$qs.="&start=".$start;}
 

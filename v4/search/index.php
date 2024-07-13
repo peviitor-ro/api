@@ -13,9 +13,12 @@ if (isset($_GET['page'])) {
     $q .= "&start=".$start;
 }
 
-$server = 'zimbor.go.ro';
-$core = 'jobs'; //production
-$url = 'http://' .$server .'/solr/' . $core . '/select/?' . $q;
+require_once '../config.php';
+
+$core = 'jobs'; 
+
+$url = 'http://' . $server . '/solr/' . $core . '/select/?' . $q;
+
 $json = file_get_contents($url);
 echo $json;
 ?>
