@@ -60,7 +60,7 @@ $qs = $qs . 'rows=0';
 $qs = $qs . '&';
 $qs = $qs . 'start=0';
 
-$url = 'http://' . $server . '/solr/' . '/select' . $qs;
+$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $string = file_get_contents($url);
 $json = json_decode($string, true);
