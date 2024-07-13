@@ -22,7 +22,7 @@ if (isset($data[0]->id))
   $user = $data[0]->id;
   $user = urlencode($user);
 
-  $url =  'http://' . $server . '/solr/' . '/select'. $qs . $user;
+  $url =  'http://' . $server . '/solr/' . $core . '/select'. $qs . $user;
 
   $json = file_get_contents($url);
   $json = json_decode($json);
@@ -61,7 +61,7 @@ if (isset($data[0]->id))
 
   $context  = stream_context_create($options);
 
-  $url =  'http://' . $server . $core . $command . $qs;
+  $url =  'http://' . $server . '/solr/' . $core . $command . $qs;
   
   $result = file_get_contents($url, false, $context);
 
