@@ -4,7 +4,9 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
 $method = 'GET';
-$server = 'zimbor.go.ro:8985';
+
+require_once '../config.php';
+
 $core  = 'auth';
 
 $qs = '?';

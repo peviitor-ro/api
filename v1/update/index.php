@@ -64,7 +64,9 @@ function discord_webhook($msg) {
 }
 
 $method = 'POST';
-$server = 'zimbor.go.ro:8985';
+
+require_once '../config.php';
+
 $core  = 'jobs';
 $command ='/update';
 
