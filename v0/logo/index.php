@@ -2,13 +2,6 @@
 //CORS enable
 header("Access-Control-Allow-Origin: *");
 
- /**
-     * @OA\Get(
-     *     path="/v0/logo/", tags={"logo"},
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
-
 require_once '../config.php';
 
 $core = "auth";
@@ -19,6 +12,8 @@ $qs = $qs . '&';
 $qs = $qs . 'q.op=OR';
 $qs = $qs . '&';
 $qs = $qs . 'q=logo%3A*';
+$qs = $qs . '&';
+$qs = $qs . 'rows=20000000';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
 
