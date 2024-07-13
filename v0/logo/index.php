@@ -2,13 +2,6 @@
 //CORS enable
 header("Access-Control-Allow-Origin: *");
 
- /**
-     * @OA\Get(
-     *     path="/v0/logo/", tags={"logo"},
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
-
 require_once '../config.php';
 
 $core = "auth";
