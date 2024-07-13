@@ -1,36 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-/**
- * @OA\Post(
- * path="/v0/update/",
- * tags={"scraper"},
- * @OA\RequestBody(
- *  @OA\MediaType(
- *             mediaType="application/json",
- *     @OA\Schema(
-*              
-*             type="array",
-*             
-
-*              @OA\Items( 
-*                   type="object",            
-*                   @OA\Property(property="id", type="string", example="95b81d8a-f60a-4efb-a8ba-1369b3b4ee79"),
-*                   @OA\Property(property="job_title", type="string", example="test"),
-*                   @OA\Property(property="job_link", type="string", example="https://www.epam.com/careers/job-listings/job.55552.software-test-automation-engineer-java_mykolaiv_ukraine"),
-*                   @OA\Property(property="company", type="string", example="test"),
-*                   @OA\Property(property="country", type="string", example="Romania"),
-*                   @OA\Property(property="remote", type="string", example="remote"),
-*                   @OA\Property(property="city", type="string", example="Cluj-Napoca")
-*                       )                   
-*           )
- *               )
- *                 ),
- *     @OA\Response(response="200", description="Success")
- *               
- * )
- */
-
 function city_fix($in){
     $output = $in;
     $output = str_replace("Bucharest","București",$output);
