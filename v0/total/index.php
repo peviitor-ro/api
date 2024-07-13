@@ -1,13 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-   /**
-     * @OA\Get(
-     *     path="/v0/total/", tags={"UI"},
-     *     @OA\Response(response="200", description="Success")
-     * )
-     */
-
 require_once '../config.php';
 
 $core = "jobs";
@@ -33,7 +26,7 @@ $qs = $qs . 'start=0';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
      
-$url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
+$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $string = file_get_contents($url);
 $json = json_decode($string, true);
