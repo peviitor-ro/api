@@ -1,27 +1,5 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-/**
- * @OA\Get(
- *     path="/v0/jobs/",
- *     tags={"machine learning"},
- *     operationId="getJobs",
- *     @OA\Parameter(
- *         in="query",
- *         name="start",
- *         @OA\Schema(type="string"),
- *         example="100"
- *     ),
- *     @OA\Response(
- *         response="200",
- *         description="Success"
- *     )
- * )
- */
-
-if (isset($_GET["start"])) {
-    $start = $_GET["start"];
-    $qs .= "&start=" . $start;
-}
 
 require_once '../config.php';
 
@@ -41,6 +19,11 @@ $qs = $qs . '&';
 $qs = $qs . 'omitHeader=true';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
+
+if (isset($_GET["start"])) {
+    $start = $_GET["start"];
+    $qs .= "&start=" . $start;
+}
 
 $url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
 
