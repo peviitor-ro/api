@@ -1,36 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-/**
- * @OA\Post(
- *     path="/v0/logo/delete/",
- *     tags={"logo"},
- *     summary="Delete a logo by company name",
- *     operationId="deleteLogoByCompany",
- *     @OA\Parameter(
- *         name="company",
- *         required=true,
- *         description="The name of the company whose logo will be deleted",
- *         example="ziramarketing",
- *         @OA\Schema(
- *             type="string"
- *         )
- *     ),
- *     @OA\Response(
- *         response="200",
- *         description="Successful operation. The logo for the specified company has been deleted."
- *     ),
- *     @OA\Response(
- *         response="404",
- *         description="Company not found. The specified company name does not exist."
- *     ),
- *     @OA\Response(
- *         response="400",
- *         description="Bad request. The request was malformed or missing required parameters."
- *     )
- * )
- */
-
 $method = 'POST';
 
 require_once '../config.php';
@@ -47,7 +17,7 @@ $qs = $qs . 'overwrite=true';
 $qs = $qs . '&';
 $qs = $qs . 'wt=json';
 
-$url = 'http://' . $server . $core . $command . $qs;
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
  
 $company = $_POST['company'];
 $data = "{'delete': {'query': 'id:".$company."'}}";
