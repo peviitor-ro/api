@@ -6,25 +6,15 @@ require_once '../config.php';
 $core = "jobs";
 
 $qs = '?';
-$qs = $qs . 'facet.field=company_str';
-$qs = $qs . '&';
-$qs = $qs . 'facet.limit=100000';
-$qs = $qs . '&';
-$qs = $qs . 'facet=true';
-$qs = $qs . '&';
-$qs = $qs . 'fl=company';
-$qs = $qs . '&';
-$qs = $qs . 'indent=true';
-$qs = $qs . '&';
-$qs = $qs . 'q.op=OR';
-$qs = $qs . '&';
-$qs = $qs . 'q=*%3A*';
-$qs = $qs . '&';
-$qs = $qs . 'rows=0';
-$qs = $qs . '&';
-$qs = $qs . 'start=0';
-$qs = $qs . '&';
-$qs = $qs . 'useParams=';
+$qs = $qs . 'q=*:*';
+$qs .= '&rows=0';
+$qs .= '&facet=true';
+$qs .= '&facet.field=company_str';
+$qs .= '&facet.mincount=1';
+$qs .= '&facet.limit=1000000';
+
+
+
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
@@ -50,6 +40,7 @@ for($i=0;$i<count($companies)/2;$i++) {
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;  
  }
+//echo json_encode($results, JSON_PRETTY_PRINT);
 echo json_encode($results);
 
 ?>
