@@ -68,3 +68,4 @@ try {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
     exit;
 }
+?>
