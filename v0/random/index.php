@@ -29,7 +29,11 @@ try {
         throw new Exception('Your call to Solr failed and returned HTTP status: ' . $status, $status);
     }
 
-    echo $json;
+    $jsonArray = json_decode($json, true);
+    unset($jsonArray['response']['docs'][0]['_version_']);
+    $newJson = json_encode($jsonArray, JSON_PRETTY_PRINT);
+    echo $newJson;
+
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
     exit;
