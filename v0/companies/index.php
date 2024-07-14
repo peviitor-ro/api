@@ -26,7 +26,7 @@ $qs = $qs . 'start=0';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
 
-$url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
+$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $string = file_get_contents($url);
 $json = json_decode($string, true);
