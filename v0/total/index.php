@@ -8,7 +8,7 @@ $core = "jobs";
 $qs = '?';
 $qs = $qs . 'facet.field=company_str';
 $qs = $qs . '&';
-$qs = $qs . 'facet.limit=10000';
+$qs = $qs . 'facet.limit=2000000';
 $qs = $qs . '&';
 $qs = $qs . 'facet=true';
 $qs = $qs . '&';

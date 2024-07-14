@@ -42,6 +42,19 @@ try {
         exit;
     }
     $json = @file_get_contents($url, false, $context);
+
+
+    $data = "{'delete': {'query': 'company:".rawurlencode($company)."'}}";
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => $data
+        )
+    );
+    $context  = stream_context_create($options);
+    $json = @file_get_contents($url, false, $context);
+
     
     if ($json === FALSE) {
         list($version, $status, $msg) = explode(' ', $http_response_header[0], 3);
