@@ -3,6 +3,7 @@ header("Access-Control-Allow-Origin: *");
 
 $company = $_POST['company'];
 
+
 require_once '../config.php';
 
 $method = 'POST';
@@ -20,8 +21,9 @@ $qs = $qs . 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
-$data = "{'delete': {'query': 'hiringOrganization.name:" . $company . "'}}";
+$data = "{'delete': {'query': 'hiringOrganization.name:".rawurlencode($company)."'}}";
 
+echo $data;
 $options = array(
     'http' => array(
         'header'  => "Content-type: application/json\r\n",
