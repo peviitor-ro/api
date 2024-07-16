@@ -519,7 +519,7 @@
           {
             "name": "q",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "The search query",
             "schema": {
               "type": "string"
