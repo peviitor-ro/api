@@ -33,7 +33,7 @@ header("Access-Control-Allow-Origin: *");
 
 $method = 'POST';
 
-require_once '../config.php';
+require_once '../../config.php';
 
 $core  = 'auth';
 $command ='/update';

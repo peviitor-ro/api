@@ -1,6 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
+require_once '../../config.php';
+
 $core = 'auth';
 $command = '/update';
 
@@ -51,4 +53,5 @@ if ($http_code >= 400) {
 }
 
 echo $response;
+
 ?>
