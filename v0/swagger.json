@@ -12,28 +12,41 @@
   ],
   "paths": {
     "/random/": {
-      "get": {
-        "tags": ["General"],
-        "summary": "Get random data",
-        "responses": {
-          "200": {
-            "description": "A random job",
-            "content": {
-              "application/json": {
-                "schema": {
+  "get": {
+    "tags": ["General"],
+    "summary": "Get random data",
+    "responses": {
+      "200": {
+        "description": "A random job or message indicating no jobs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
                   "type": "object",
                   "properties": {
                     "job": {
                       "type": "integer"
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "There are no jobs"
+                    }
+                  }
                 }
-              }
+              ]
             }
           }
         }
       }
-    },
+    }
+  }
+},
     "/clean/": {
       "post": {
         "tags": ["General"],
