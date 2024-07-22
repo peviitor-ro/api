@@ -11,29 +11,93 @@
     }
   ],
   "paths": {
-    "/random/": {
-      "get": {
-        "tags": ["General"],
-        "summary": "Get random data",
-        "responses": {
-          "200": {
-            "description": "A random job",
-            "content": {
-              "application/json": {
-                "schema": {
+            "/random/": {
+  "get": {
+    "tags": ["General"],
+    "summary": "Get random data",
+    "responses": {
+      "200": {
+        "description": "A random job or a message indicating no jobs found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "oneOf": [
+                {
                   "type": "object",
                   "properties": {
-                    "job": {
-                      "type": "integer"
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "numFound": {
+                          "type": "integer"
+                        },
+                        "start": {
+                          "type": "integer"
+                        },
+                        "numFoundExact": {
+                          "type": "boolean"
+                        },
+                        "docs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        }
+                      }
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "There are no jobs to display"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Container not opened",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "Container is not opened"
+                }
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable - Solr server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "integer"
                 }
               }
             }
           }
         }
       }
-    },
+    }
+  }
+},
     "/clean/": {
       "post": {
         "tags": ["General"],
