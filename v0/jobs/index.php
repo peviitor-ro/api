@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json"); // Ensure the content type is JSON
 
 require_once '../config.php';
 
@@ -22,10 +23,16 @@ $qs = $qs . 'useParams=';
 
 if (isset($_GET["start"])) {
     $start = $_GET["start"];
+    if (!is_numeric($start) || $start <= 0) {
+        // Return a JSON error response if start is not a positive number
+        echo json_encode(["error" => "You must type a positive number"]);
+        exit;
+    }
     $qs .= "&start=" . $start;
 }
 
-$url = 'http://' . $server . '/solr/' . $core . '/select'. $qs;
+$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $json = file_get_contents($url);
 echo $json;
+?>

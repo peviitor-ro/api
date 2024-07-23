@@ -319,10 +319,11 @@
             "in": "query",
             "name": "start",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "minimum": 1
             },
-            "example": "100",
-            "description": "Start index for pagination"
+            "example": 100,
+            "description": "Start index for pagination. Must be a positive number."
           }
         ],
         "responses": {
@@ -354,7 +355,18 @@
           },
           "400": {
             "description": "Bad Request. Invalid input parameter.",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized. Authentication failure.",
