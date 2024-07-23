@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
 require_once '../config.php';
 
@@ -8,7 +9,8 @@ $qs = '?';
 $qs = $qs . $_SERVER['QUERY_STRING'];
 
 if ($_SERVER['QUERY_STRING'] == "page=1") {
-    $qs .= "&q=%22*%3A*%22"; // Enclose the search query in quotes
+    $qs = '&';
+    $qs .= 'q=%22*%3A*%22'; // Enclose the search query in quotes
 } else {
     // Ensure other queries are also enclosed in quotes
     parse_str($_SERVER['QUERY_STRING'], $queryParams);
@@ -23,5 +25,17 @@ if ($_SERVER['QUERY_STRING'] == "page=1") {
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $json = file_get_contents($url);
-echo $json;
+$data = json_decode($json, true);
+
+if (isset($data['response']['numFound']) && $data['response']['numFound'] == 0) {
+    // Return a 400 error with a custom message if no results are found
+    http_response_code(400);
+    echo json_encode([
+        "error" => "This is not a correct company name",
+        "code" => 400
+    ]);
+} else {
+    // Return the original response if results are found
+    echo $json;
+}
 ?>
