@@ -1,5 +1,5 @@
 <?php
 
-$server = '84.117.157.10:8983';
+$server = 'zimbor.go.ro';
 
 ?>
