@@ -11,96 +11,100 @@
     }
   ],
   "paths": {
-  "/random/": {
-  "get": {
-    "tags": ["General"],
-    "summary": "Get random data",
-    "responses": {
-      "200": {
-        "description": "A random job or a message indicating no jobs found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "oneOf": [
-                {
-                  "type": "object",
-                  "properties": {
-                    "response": {
+    "/random/": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Get random data",
+        "responses": {
+          "200": {
+            "description": "A random job or a message indicating no jobs found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
                       "type": "object",
                       "properties": {
-                        "numFound": {
-                          "type": "integer"
-                        },
-                        "start": {
-                          "type": "integer"
-                        },
-                        "numFoundExact": {
-                          "type": "boolean"
-                        },
-                        "docs": {
-                          "type": "array",
-                          "items": {
-                            "type": "object"
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "numFound": {
+                              "type": "integer"
+                            },
+                            "start": {
+                              "type": "integer"
+                            },
+                            "numFoundExact": {
+                              "type": "boolean"
+                            },
+                            "docs": {
+                              "type": "array",
+                              "items": {
+                                "type": "object"
+                              }
+                            }
                           }
                         }
                       }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "default": "There are no jobs to display"
+                        }
+                      }
                     }
-                  }
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "default": "There are no jobs to display"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      },
-      "400": {
-        "description": "Container not opened",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "example": "Container is not opened"
+                  ]
                 }
               }
             }
-          }
-        }
-      },
-      "503": {
-        "description": "Service Unavailable - Solr server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string"
-                },
-                "code": {
-                  "type": "integer"
+          },
+          "400": {
+            "description": "Container not opened",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Container is not opened"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  }
-},
+    },
     "/clean/": {
       "post": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Delete jobs for a company",
         "requestBody": {
           "description": "Company name",
@@ -139,7 +143,9 @@
     },
     "/cleanjobs/": {
       "delete": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Delete jobs by company name",
         "description": "Deletes all job postings for a specified company.",
         "requestBody": {
@@ -224,7 +230,9 @@
     },
     "/companies/": {
       "get": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Get list of companies",
         "parameters": [
           {
@@ -260,7 +268,9 @@
     },
     "/getuser/": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get a user by ID",
         "parameters": [
           {
@@ -311,7 +321,9 @@
     },
     "/jobs/": {
       "get": {
-        "tags": ["Machine Learning"],
+        "tags": [
+          "Machine Learning"
+        ],
         "summary": "Get jobs",
         "operationId": "getJobs",
         "parameters": [
@@ -381,7 +393,9 @@
     },
     "/logo/": {
       "get": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Get logos",
         "responses": {
           "200": {
@@ -421,7 +435,9 @@
     },
     "/logo/add/": {
       "post": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Add a new logo",
         "requestBody": {
           "description": "Logo data",
@@ -442,7 +458,10 @@
                       "description": "URL or identifier of the logo"
                     }
                   },
-                  "required": ["id", "logo"]
+                  "required": [
+                    "id",
+                    "logo"
+                  ]
                 }
               }
             }
@@ -478,7 +497,9 @@
     },
     "/logo/delete/": {
       "post": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Delete a logo",
         "requestBody": {
           "description": "Company name to delete logo",
@@ -493,7 +514,9 @@
                     "description": "Company name whose logo is to be deleted"
                   }
                 },
-                "required": ["company"]
+                "required": [
+                  "company"
+                ]
               }
             }
           }
@@ -528,7 +551,9 @@
     },
     "/logo/clean/": {
       "delete": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Clean up all logos",
         "description": "Deletes all logos.",
         "responses": {
@@ -588,7 +613,9 @@
     },
     "/search/": {
       "get": {
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "summary": "Search jobs",
         "description": "Search for jobs using Solr",
         "parameters": [
@@ -600,25 +627,6 @@
             "schema": {
               "type": "string"
             }
-
-          }
-        }
-      },
-      "404": {
-        "description": "Invalid search query",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "example": "This job is not in the Database"
-                },
-                "code": {
-                  "type": "integer",
-                  "example": 404
-
           },
           {
             "name": "start",
@@ -655,7 +663,6 @@
               "application/json": {
                 "schema": {
                   "type": "object"
-
                 }
               }
             }
@@ -664,95 +671,25 @@
             "description": "Bad Request. Invalid input parameter.",
             "content": {}
           },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/total/": {
-      "get": {
-        "tags": ["General"],
-        "summary": "Get total job count",
-        "responses": {
-          "200": {
-            "description": "Total job count",
+          "404": {
+            "description": "Invalid search query",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "total": {
+                    "error": {
+                      "type": "string",
+                      "example": "This job is not in the Database"
+                    },
+                    "code": {
                       "type": "integer",
-                      "description": "Total number of jobs"
+                      "example": 404
                     }
                   }
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/update/": {
-      "post": {
-        "tags": ["Jobs"],
-        "summary": "Update jobs",
-        "description": "Update jobs using Solr",
-        "requestBody": {
-          "description": "Jobs data to be updated",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "job_title": {
-                      "type": "string",
-                      "description": "Job title"
-                    },
-                    "city": {
-                      "type": "string",
-                      "description": "City"
-                    },
-                    "job_link": {
-                      "type": "string",
-                      "description": "Job link"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    }
-                  },
-                  "required": ["job_title", "city", "job_link", "company"]
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Jobs updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
           },
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
@@ -760,199 +697,25 @@
           }
         }
       }
-    },
-    "/updateuser/": {
-      "post": {
-        "tags": ["User"],
-        "summary": "Update user",
-        "description": "Update user details in Solr",
-        "requestBody": {
-          "description": "User data to be updated",
-          "required": true,
+    }
+  },
+  "/total/": {
+    "get": {
+      "tags": [
+        "General"
+      ],
+      "summary": "Get total job count",
+      "responses": {
+        "200": {
+          "description": "Total job count",
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "User ID"
-                    },
-                    "url": {
-                      "type": "string",
-                      "description": "User URL"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    },
-                    "logo": {
-                      "type": "string",
-                      "description": "Logo URL"
-                    },
-                    "apikey": {
-                      "type": "string",
-                      "description": "API key"
-                    }
-                  },
-                  "required": ["id"]
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "User updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
-          }
-        }
-      }
-    },
-    "/updateusr/": {
-      "put": {
-        "tags": ["User"],
-        "summary": "Update user",
-        "description": "Update user details in Solr",
-        "requestBody": {
-          "description": "User data to be updated",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "User ID"
-                    },
-                    "url": {
-                      "type": "string",
-                      "description": "User URL"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    },
-                    "logo": {
-                      "type": "string",
-                      "description": "Logo URL"
-                    },
-                    "apikey": {
-                      "type": "string",
-                      "description": "API key"
-                    }
-                  },
-                  "required": ["id"]
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "User updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
-          }
-        }
-      }
-    },
-
-    "/empty/": {
-      "delete": {
-        "tags": ["General"],
-        "summary": "Delete all jobs from jobs core",
-        "responses": {
-          "200": {
-            "description": "Successfully deleted all jobs",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service Unavailable",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
+                "type": "object",
+                "properties": {
+                  "total": {
+                    "type": "integer",
+                    "description": "Total number of jobs"
                   }
                 }
               }
@@ -960,70 +723,359 @@
           }
         }
       }
-    },
-"/updatejobs/": {
-      "put": {
-        "tags": ["Jobs"],
-        "summary": "Update jobs",
-        "description": "Update jobs using Solr",
-        "requestBody": {
-          "description": "Jobs data to be updated",
-          "required": true,
+    }
+  },
+  "/update/": {
+    "post": {
+      "tags": [
+        "Jobs"
+      ],
+      "summary": "Update jobs",
+      "description": "Update jobs using Solr",
+      "requestBody": {
+        "description": "Jobs data to be updated",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "job_title": {
+                    "type": "string",
+                    "description": "Job title"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "City"
+                  },
+                  "job_link": {
+                    "type": "string",
+                    "description": "Job link"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name"
+                  }
+                },
+                "required": [
+                  "job_title",
+                  "city",
+                  "job_link",
+                  "company"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Jobs updated successfully",
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "job_title": {
-                      "type": "string",
-                      "description": "Job title"
-                    },
-                    "city": {
-                      "type": "string",
-                      "description": "City"
-                    },
-                    "job_link": {
-                      "type": "string",
-                      "description": "Job link"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    }
-                  },
-                  "required": ["job_title", "city", "job_link", "company"]
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Success message"
+                  }
                 }
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "Jobs updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
+        "400": {
+          "description": "Bad Request. Invalid input parameter.",
+          "content": {}
+        },
+        "500": {
+          "description": "Internal Server Error. Something went wrong on the server side.",
+          "content": {}
+        }
+      }
+    }
+  },
+  "/updateuser/": {
+    "post": {
+      "tags": [
+        "User"
+      ],
+      "summary": "Update user",
+      "description": "Update user details in Solr",
+      "requestBody": {
+        "description": "User data to be updated",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "User URL"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": "Logo URL"
+                  },
+                  "apikey": {
+                    "type": "string",
+                    "description": "API key"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "User updated successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Success message"
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
           }
+        },
+        "400": {
+          "description": "Bad Request. Invalid input parameter.",
+          "content": {}
+        },
+        "500": {
+          "description": "Internal Server Error. Something went wrong on the server side.",
+          "content": {}
+        }
+      }
+    }
+  },
+  "/updateusr/": {
+    "put": {
+      "tags": [
+        "User"
+      ],
+      "summary": "Update user",
+      "description": "Update user details in Solr",
+      "requestBody": {
+        "description": "User data to be updated",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "User ID"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "User URL"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": "Logo URL"
+                  },
+                  "apikey": {
+                    "type": "string",
+                    "description": "API key"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "User updated successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Success message"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request. Invalid input parameter.",
+          "content": {}
+        },
+        "500": {
+          "description": "Internal Server Error. Something went wrong on the server side.",
+          "content": {}
+        }
+      }
+    }
+  },
+  "/empty/": {
+    "delete": {
+      "tags": [
+        "General"
+      ],
+      "summary": "Delete all jobs from jobs core",
+      "responses": {
+        "200": {
+          "description": "Successfully deleted all jobs",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "503": {
+          "description": "Service Unavailable",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/updatejobs/": {
+    "put": {
+      "tags": [
+        "Jobs"
+      ],
+      "summary": "Update jobs",
+      "description": "Update jobs using Solr",
+      "requestBody": {
+        "description": "Jobs data to be updated",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "job_title": {
+                    "type": "string",
+                    "description": "Job title"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "City"
+                  },
+                  "job_link": {
+                    "type": "string",
+                    "description": "Job link"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name"
+                  }
+                },
+                "required": [
+                  "job_title",
+                  "city",
+                  "job_link",
+                  "company"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Jobs updated successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Success message"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request. Invalid input parameter.",
+          "content": {}
+        },
+        "500": {
+          "description": "Internal Server Error. Something went wrong on the server side.",
+          "content": {}
         }
       }
     }
