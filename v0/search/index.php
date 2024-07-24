@@ -31,7 +31,7 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] == 0) 
     // Return a 404 error with a custom message if no results are found
     http_response_code(404);
     echo json_encode([
-        "error" => "This company is not in the Database",
+        "error" => "This job is not in the Database",
         "code" => 404
     ]);
 } else {

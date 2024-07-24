@@ -637,7 +637,7 @@
               "properties": {
                 "error": {
                   "type": "string",
-                  "example": "This company is not in the Database"
+                  "example": "This job is not in the Database"
                 },
                 "code": {
                   "type": "integer",
@@ -944,12 +944,8 @@
           }
         }
       }
-    }
-  
-,
-
-
-    "/updatejobs/": {
+    },
+"/updatejobs/": {
       "put": {
         "tags": ["Jobs"],
         "summary": "Update jobs",
