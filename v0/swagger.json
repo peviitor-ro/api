@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-            "/random/": {
+  "/random/": {
   "get": {
     "tags": ["General"],
     "summary": "Get random data",
@@ -628,7 +628,7 @@
           }
         }
       },
-      "400": {
+      "404": {
         "description": "Invalid search query",
         "content": {
           "application/json": {
@@ -637,11 +637,11 @@
               "properties": {
                 "error": {
                   "type": "string",
-                  "example": "This is not a correct company name"
+                  "example": "This company is not in the Database"
                 },
                 "code": {
                   "type": "integer",
-                  "example": 400
+                  "example": 404
                 }
               }
             }

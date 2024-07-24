@@ -28,11 +28,11 @@ $json = file_get_contents($url);
 $data = json_decode($json, true);
 
 if (isset($data['response']['numFound']) && $data['response']['numFound'] == 0) {
-    // Return a 400 error with a custom message if no results are found
-    http_response_code(400);
+    // Return a 404 error with a custom message if no results are found
+    http_response_code(404);
     echo json_encode([
-        "error" => "This is not a correct company name",
-        "code" => 400
+        "error" => "This company is not in the Database",
+        "code" => 404
     ]);
 } else {
     // Return the original response if results are found
