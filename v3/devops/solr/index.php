@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../v3/config.php';
+require_once '../../config.php';
 
 echo 'http://' . $server . '/';
 
