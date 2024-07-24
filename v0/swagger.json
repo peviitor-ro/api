@@ -319,10 +319,11 @@
             "in": "query",
             "name": "start",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "minimum": 1
             },
-            "example": "100",
-            "description": "Start index for pagination"
+            "example": 100,
+            "description": "Start index for pagination. Must be a positive number."
           }
         ],
         "responses": {
@@ -354,7 +355,18 @@
           },
           "400": {
             "description": "Bad Request. Invalid input parameter.",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized. Authentication failure.",
@@ -575,56 +587,20 @@
       }
     },
     "/search/": {
-  "get": {
-    "tags": ["Search"],
-    "summary": "Search jobs",
-    "description": "Search for jobs using Solr",
-    "parameters": [
-      {
-        "name": "q",
-        "in": "query",
-        "required": false,
-        "description": "The search query",
-        "schema": {
-          "type": "string"
-        }
-      },
-      {
-        "name": "start",
-        "in": "query",
-        "required": false,
-        "description": "Pagination start index",
-        "schema": {
-          "type": "integer"
-        }
-      },
-      {
-        "name": "rows",
-        "in": "query",
-        "required": false,
-        "description": "Number of results to return",
-        "schema": {
-          "type": "integer"
-        }
-      },
-      {
-        "name": "sort",
-        "in": "query",
-        "required": false,
-        "description": "Sort order",
-        "schema": {
-          "type": "string"
-        }
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "Search results",
-        "content": {
-          "application/json": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Search jobs",
+        "description": "Search for jobs using Solr",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "The search query",
             "schema": {
-              "type": "object"
+              "type": "string"
             }
+
           }
         }
       },
@@ -642,19 +618,59 @@
                 "code": {
                   "type": "integer",
                   "example": 404
+
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "description": "Pagination start index",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "required": false,
+            "description": "Number of results to return",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort order",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request. Invalid input parameter.",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error. Something went wrong on the server side.",
+            "content": {}
           }
         }
-      },
-      "500": {
-        "description": "Internal Server Error. Something went wrong on the server side.",
-        "content": {}
       }
-    }
-  }
-},
+    },
     "/total/": {
       "get": {
         "tags": ["General"],

@@ -3,67 +3,71 @@ header("Access-Control-Allow-Origin: *");
 
 $company = $_POST['company'];
 
-
 require_once '../config.php';
 
-$method = 'POST';
 $core  = 'jobs';
-$command = '/update';
 
-$qs = '?';
-$qs = $qs . '_=1617366504771';
-$qs = $qs . '&';
-$qs = $qs . 'commitWithin=1000';
-$qs = $qs . '&';
-$qs = $qs . 'overwrite=true';
-$qs = $qs . '&';
-$qs = $qs . 'wt=json';
+// Step 1: Get the count of jobs for the given company
+$countCommand = '/select';
 
-$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
+$countQS = '?';
+$countQS .= 'q=hiringOrganization.name:"';
+$countQS .= rawurlencode($company);
+$countQS .= '"&';
+$countQS .= 'wt=json';
+$countQS .= '&';
+$countQS .= 'rows=0';
 
-$data = "{'delete': {'query': 'hiringOrganization.name:".rawurlencode($company)."'}}";
-
-echo $data;
-$options = array(
-    'http' => array(
-        'header'  => "Content-type: application/json\r\n",
-        'method'  => 'POST',
-        'content' => $data
-    )
-);
-
-$context  = stream_context_create($options);
+$countUrl = 'http://' . $server . '/solr/' . $core . $countCommand . $countQS;
 
 try {
-    // Check if the company parameter is empty
     if (empty($company)) {
         header("HTTP/1.1 400 Bad Request");
         echo json_encode(['error' => 'Company name is required', 'code' => 400]);
         exit;
     }
-    $json = @file_get_contents($url, false, $context);
 
+    $countJson = @file_get_contents($countUrl);
+    if ($countJson === FALSE) {
+        list($version, $status, $msg) = explode(' ', $http_response_header[0], 3);
+        header("HTTP/1.1 503 Service Unavailable");
+        throw new Exception('Failed to query Solr for count, HTTP status: ' . $status, $status);
+    }
 
-    $data = "{'delete': {'query': 'company:".rawurlencode($company)."'}}";
+    $countResponse = json_decode($countJson, true);
+    $jobCount = $countResponse['response']['numFound'];
+
+    if ($jobCount === 0) {
+        echo json_encode(['message' => 'No jobs found for the specified company', 'jobCount' => 0]);
+        exit;
+    }
+
+    // Step 2: Delete the jobs
+    $deleteCommand = '/update';
+
+    $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand;
+
+    $deleteData = json_encode(['delete' => ['query' => 'hiringOrganization.name:"' . rawurlencode($company) . '"']]);
+    
     $options = array(
         'http' => array(
             'header'  => "Content-type: application/json\r\n",
             'method'  => 'POST',
-            'content' => $data
+            'content' => $deleteData
         )
     );
-    $context  = stream_context_create($options);
-    $json = @file_get_contents($url, false, $context);
 
-    
-    if ($json === FALSE) {
+    $context  = stream_context_create($options);
+    $deleteJson = @file_get_contents($deleteUrl, false, $context);
+
+    if ($deleteJson === FALSE) {
         list($version, $status, $msg) = explode(' ', $http_response_header[0], 3);
-        // Force HTTP status code to be 503
         header("HTTP/1.1 503 Service Unavailable");
-        throw new Exception('Your call to Solr failed and returned HTTP status: ' . $status, $status);
+        throw new Exception('Failed to delete jobs from Solr, HTTP status: ' . $status, $status);
     }
 
-    echo $json;
+    echo json_encode(['message' => 'Jobs deleted successfully', 'Jobs deleted' => $jobCount]);
+
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
     exit;
