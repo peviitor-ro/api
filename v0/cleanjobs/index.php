@@ -48,7 +48,16 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             // Step 2: Delete the jobs
             $deleteCommand = '/update';
 
-            $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand;
+            $qs = '?';
+            $qs .= '_=1617366504771';
+            $qs .= '&';
+            $qs .= 'commitWithin=1000';
+            $qs .= '&';
+            $qs .= 'overwrite=true';
+            $qs .= '&';
+            $qs .= 'wt=json';
+
+            $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand . $qs;
 
             $deleteData = json_encode(['delete' => ['query' => 'hiringOrganization.name:"' . rawurlencode($company) . '"']]);
             
