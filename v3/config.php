@@ -1,7 +1,7 @@
 <?php
 
 //main server
-//$server = 'zimbor.go.ro';
+$server = 'zimbor.go.ro';
 
 //QA server
 //$server = 'zimbor.go.ro:8985';
@@ -10,6 +10,6 @@
 //$server = '84.117.157.10:8983';
 
 //Alex's server
-$server = 'srvalx.duckdns.org:8983';
+//$server = 'srvalx.duckdns.org:8983';
 
 ?>
