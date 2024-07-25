@@ -19,10 +19,30 @@ function replaceSpaces($string) {
 if (isset($_GET['q'])) {$q  .= "q=" . replaceSpaces($_GET['q']);} else {$q .= 'q=*:*';}
 
 // company query
-if (isset($_GET['company'])) {$q .= "&fq=company%3A%22" . replaceSpaces($_GET['company']) . "%22";}
+if (isset($_GET['company'])) {
+  $company = explode(',', $_GET['company']);
+  if (count($company) > 1) {
+    $q .= "&fq=company%3A%22".replaceSpaces($company[0]). "%22";
+    for ($i = 1; $i < count($company); $i++) {
+      $q .= "%20OR%20company%3A%22".replaceSpaces($company[$i]). "%22";
+    }
+  } else {
+    $q .= "&fq=company%3A%22".replaceSpaces($company[0]). "%22";
+  }
+}
 
 // city query
-if (isset($_GET['city'])) {$q .= "&fq=city%3A%22" . replaceSpaces($_GET['city']) . "%22";}
+if (isset($_GET['city'])) {
+  $city = explode(',', $_GET['city']);
+  if (count($city) > 1) {
+    $q .= "&fq=city%3A%22".replaceSpaces($city[0]). "%22";
+    for ($i = 1; $i < count($city); $i++) {
+      $q .= "%20OR%20city%3A%22".replaceSpaces($city[$i]). "%22";
+    }
+  } else {
+    $q .= "&fq=city%3A%22".replaceSpaces($city[0]). "%22";
+  }
+}
 
 // county query
 //if (isset($_GET['county'])) {$q .= "&q=county%3A%22".urlencode($_GET['county']). "%22";}
@@ -31,8 +51,19 @@ if (isset($_GET['city'])) {$q .= "&fq=city%3A%22" . replaceSpaces($_GET['city'])
 if (isset($_GET['country'])) {$q .= "&q=country%3A%22".urlencode($_GET['country']) . "%22";}
 
 // remote query
-if (isset($_GET['remote'])) {$q .= "&fq=remote%3A%22".urlencode($_GET['remote']). "%22";} else {$q .= "&q=remote%3A%22remote%22";}
-
+if (isset($_GET['remote'])) {
+  $remote = explode(',', $_GET['remote']);
+  if (count($remote) > 1) {
+    $q .= "&fq=remote%3A%22".replaceSpaces($remote[0]). "%22";
+    for ($i = 1; $i < count($remote); $i++) {
+      $q .= "%20OR%20remote%3A%22".replaceSpaces($remote[$i]). "%22";
+    }
+  } else {
+    $q .= "&fq=remote%3A%22".replaceSpaces($remote[0]). "%22";
+  }
+} else {
+  $q .= "&q=remote%3A%22remote%22";
+}
 
 if (isset($_GET['page'])) {
     $start = $_GET['page'];
