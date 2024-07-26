@@ -1,6 +1,9 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
+
+require_once './getLogo.php';
+
 $q = '?';
 $q .= 'indent=true';
 $q .= '&';
@@ -82,5 +85,14 @@ $core = 'jobs';
 $url =  'http://' . $server . '/solr/' . $core . '/select' . $q;
 
 $json = file_get_contents($url);
-echo $json;
+$jobs = json_decode($json, true);
+
+for ($i = 0; $i < count($jobs['response']['docs']); $i++) {
+  $company = $jobs['response']['docs'][$i]['company'];
+
+  $logo = getLogo($company[0]);
+  $jobs['response']['docs'][$i]['logoUrl'] = $logo;
+}
+
+echo json_encode($jobs);
 ?>
