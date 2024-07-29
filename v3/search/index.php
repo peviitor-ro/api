@@ -18,35 +18,30 @@ function replaceSpaces($string) {
   return $withoutDollar;
 }
 
-// title query
+function buildParamQuery($param, $queryName) {
+  $arrayParams = explode(',', $param);
+  if (count($arrayParams) > 1) {
+     $query = "&fq=" .$queryName ."%3A%22" . replaceSpaces($arrayParams[0]) . "%22";
+      for ($i = 1; $i < count($arrayParams); $i++) {
+          $query .= "%20OR%20". $queryName ."%3A%22" . replaceSpaces($arrayParams[$i]) . "%22";
+      }
+  } else {
+      $query = "&fq=". $queryName ."%3A%22" . replaceSpaces($arrayParams[0]) . "%22";
+  }
+  return $query;
+}
+
 if (isset($_GET['q'])) {$q  .= "q=" . replaceSpaces($_GET['q']);} else {$q .= 'q=*:*';}
 
 // company query
 if (isset($_GET['company'])) {
-  $company = explode(',', $_GET['company']);
-  if (count($company) > 1) {
-    $q .= "&fq=company%3A%22".replaceSpaces($company[0]). "%22";
-    for ($i = 1; $i < count($company); $i++) {
-      $q .= "%20OR%20company%3A%22".replaceSpaces($company[$i]). "%22";
-    }
-  } else {
-    $q .= "&fq=company%3A%22".replaceSpaces($company[0]). "%22";
-  }
+  $q .= buildParamQuery($_GET['company'],'company');
 }
 
 // city query
 if (isset($_GET['city'])) {
-  $city = explode(',', $_GET['city']);
-  if (count($city) > 1) {
-    $q .= "&fq=city%3A%22".replaceSpaces($city[0]). "%22";
-    for ($i = 1; $i < count($city); $i++) {
-      $q .= "%20OR%20city%3A%22".replaceSpaces($city[$i]). "%22";
-    }
-  } else {
-    $q .= "&fq=city%3A%22".replaceSpaces($city[0]). "%22";
-  }
+  $q .= buildParamQuery($_GET['city'], 'city');
 }
-
 // county query
 //if (isset($_GET['county'])) {$q .= "&q=county%3A%22".urlencode($_GET['county']). "%22";}
 
@@ -55,15 +50,7 @@ if (isset($_GET['country'])) {$q .= "&q=country%3A%22".urlencode($_GET['country'
 
 // remote query
 if (isset($_GET['remote'])) {
-  $remote = explode(',', $_GET['remote']);
-  if (count($remote) > 1) {
-    $q .= "&fq=remote%3A%22".replaceSpaces($remote[0]). "%22";
-    for ($i = 1; $i < count($remote); $i++) {
-      $q .= "%20OR%20remote%3A%22".replaceSpaces($remote[$i]). "%22";
-    }
-  } else {
-    $q .= "&fq=remote%3A%22".replaceSpaces($remote[0]). "%22";
-  }
+  $q .= buildParamQuery($_GET['remote'],'remote');
 } else {
   $q .= "&q=remote%3A%22remote%22";
 }
