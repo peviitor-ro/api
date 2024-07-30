@@ -17,7 +17,7 @@ function getCompanies($userInput) {
         'fl' => 'company_str',
         'indent' => 'true',
         'q.op' => 'OR',
-        'q' => 'company:*' . urlencode($userInput) . '*',
+        'q' => 'company:*' . $userInput . '*',
         'sort' => 'company_str asc',
         'useParams' => '',
         'group' => 'true',
@@ -27,7 +27,6 @@ function getCompanies($userInput) {
 
     // Construct the URL for the Solr request
     $url = 'http://' . $server . '/solr/' . $core . '/select?' . http_build_query($qs);
-
     // Fetch the data from Solr
     $string = @file_get_contents($url);
 
