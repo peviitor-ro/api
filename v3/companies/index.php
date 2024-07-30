@@ -13,7 +13,7 @@ function escapeSpecialCharacters($string) {
     return preg_quote($string, '/');
 }
 
-// Function to fetch companies from Solr
+// Function to fetch companies from Solr based on user input
 function getCompanies($userInput) {
     global $server, $core;
 
@@ -26,20 +26,13 @@ function getCompanies($userInput) {
     // Construct the query string with the regex pattern and wildcard
     $qs = '?';
     $qs .= 'facet.field=company_str';
-    $qs .= '&';
-    $qs .= 'facet=true';
-    $qs .= '&';
-    $qs .= 'facet.limit=10000';
-    $qs .= '&';
-    $qs .= 'fl=company';
-    $qs .= '&';
-    $qs .= 'indent=true';
-    $qs .= '&';
-    $qs .= 'q.op=OR';
-    $qs .= '&';
-    $qs .= 'useParams=';
-    $qs .= '&';
-    $qs .= 'q=company_str:/'. urlencode($pattern) . '/';
+    $qs .= '&facet=true';
+    $qs .= '&facet.limit=10000';
+    $qs .= '&fl=company';
+    $qs .= '&indent=true';
+    $qs .= '&q.op=OR';
+    $qs .= '&useParams=';
+    $qs .= '&q=company_str:/'. urlencode($pattern) . '/';
 
     // Construct the URL for the Solr request
     $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
@@ -77,7 +70,57 @@ function getCompanies($userInput) {
 
     // Check if no matching companies were found
     if (empty($results)) {
-        return json_encode(array("message" => "There are not companies with these letters"));
+        return json_encode(array("message" => "There are no companies with these letters"));
+    }
+
+    // Return the results as a JSON-encoded array
+    return json_encode($results);
+}
+
+// Function to fetch the first 25 companies from Solr
+function getFirst25Companies() {
+    global $server, $core;
+
+    // Construct the query string to fetch the first 25 companies
+    $qs = '?';
+    $qs .= 'facet.field=company_str';
+    $qs .= '&facet=true';
+    $qs .= '&facet.limit=25';
+    $qs .= '&fl=company';
+    $qs .= '&indent=true';
+    $qs .= '&q.op=OR';
+    $qs .= '&useParams=';
+    $qs .= '&q=*:*';
+
+    // Construct the URL for the Solr request
+    $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
+
+    // Fetch the data from Solr
+    $string = file_get_contents($url);
+
+    if ($string === FALSE) {
+        return json_encode(array("message" => "Failed to fetch data from Solr."));
+    }
+
+    $json = json_decode($string, true);
+
+    if ($json === null) {
+        return json_encode(array("message" => "Invalid JSON response from Solr."));
+    }
+
+    // Extract the companies from the response
+    if (!isset($json['facet_counts']['facet_fields']['company_str'])) {
+        return json_encode(array("message" => "No company data found in Solr response."));
+    }
+
+    $companies = $json['facet_counts']['facet_fields']['company_str'];
+    $results = array();
+
+    // Iterate through the companies and add them to the results
+    for ($i = 0; $i < count($companies) / 2; $i++) {
+        $k = 2 * $i;
+        $companyName = $companies[$k];
+        $results[] = $companyName;
     }
 
     // Return the results as a JSON-encoded array
@@ -87,10 +130,10 @@ function getCompanies($userInput) {
 // Retrieve the user input from the query parameter
 $userInput = isset($_GET['userInput']) ? $_GET['userInput'] : '';
 
-// Fetch the companies based on the user input
+// Fetch the companies based on the user input or fetch the first 25 companies if no input is provided
 if ($userInput) {
     echo getCompanies($userInput);
 } else {
-    echo json_encode(array());
+    echo getFirst25Companies();
 }
 ?>
