@@ -15,7 +15,6 @@ function getCompanies($userInput) {
 
   // Construct the regex pattern for Solr without special character allowance
   $pattern = '.*' . implode('', str_split($userInput)) . '.*';
-  echo $userInput;
   // Construct the query string with the regex pattern and wildcard
   $qs = '?';
   $qs .= 'facet.field=company_str';
