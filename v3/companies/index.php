@@ -33,18 +33,18 @@ function getCompanies($userInput) {
   $string = file_get_contents($url);
 
   if ($string === FALSE) {
-      return json_encode(array("message" => "Failed to fetch data from Solr."));
+      return json_encode(array(array("message" => "Failed to fetch data from Solr.")));
   }
 
   $json = json_decode($string, true);
 
   if ($json === null) {
-      return json_encode(array("message" => "Invalid JSON response from Solr."));
+      return json_encode(array(array("message" => "Invalid JSON response from Solr.")));
   }
 
   // Extract the companies from the response
   if (!isset($json['facet_counts']['facet_fields']['company_str'])) {
-      return json_encode(array("message" => "No company data found in Solr response."));
+      return json_encode(array(array("message" => "No company data found in Solr response.")));
   }
 
   $companies = $json['facet_counts']['facet_fields']['company_str'];
@@ -62,8 +62,9 @@ function getCompanies($userInput) {
 
   // Check if no matching companies were found
   if (empty($results)) {
-      return json_encode(array("message" => "There are no companies with these letters"));
-  }
+    echo json_encode(array(array("message" => "Nu au fost găsite companii cu acest nume")));
+    exit;
+}
 
   // Return the results as a JSON-encoded array
   return json_encode($results);
