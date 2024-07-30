@@ -98,20 +98,7 @@ function getFirst25Companies() {
     // Fetch the data from Solr
     $string = file_get_contents($url);
 
-    if ($string === FALSE) {
-        return json_encode(array("message" => "Failed to fetch data from Solr."));
-    }
-
     $json = json_decode($string, true);
-
-    if ($json === null) {
-        return json_encode(array("message" => "Invalid JSON response from Solr."));
-    }
-
-    // Extract the companies from the response
-    if (!isset($json['facet_counts']['facet_fields']['company_str'])) {
-        return json_encode(array("message" => "No company data found in Solr response."));
-    }
 
     $companies = $json['facet_counts']['facet_fields']['company_str'];
     $results = array();
