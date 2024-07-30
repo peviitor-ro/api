@@ -57,7 +57,7 @@ function getCompanies($userInput) {
 
     // Check if no matching companies were found
     if (empty($results)) {
-        return json_encode(array("message" => "There are no companies with these letters"));
+        return json_encode(array("message" => "Nu au fost găsite companii cu acest nume"));
     }
 
     // Return the results as a JSON-encoded array
