@@ -8,27 +8,27 @@ require_once '../config.php';
 // Define the core for Solr
 $core = "jobs";
 
-
 // Function to fetch companies from Solr based on user input
 function getCompanies($userInput) {
   global $server, $core;
 
-  // Construct the regex pattern for Solr without special character allowance
-  $pattern = '.*' . implode('', str_split($userInput)) . '.*';
-  // Construct the query string with the regex pattern and wildcard
-  $qs = '?';
-  $qs .= 'facet.field=company_str';
-  $qs .= '&facet=true';
-  $qs .= '&facet.limit=10000';
-  $qs .= '&fl=company';
-  $qs .= '&indent=true';
-  $qs .= '&q.op=OR';
-  $qs .= '&useParams=';
-  $qs .= '&q=company_str:/' . urlencode($pattern) . '/';
+   // Construct the query string for the company
+   $companyQuery = 'company%3A*' . ($userInput) . '*';
+
+ // Create the query string parameter, properly encoded
+ $qs = 'fl=company_str';
+ $qs .= '&indent=true';
+ $qs .= '&q.op=OR';
+ $qs .= '&q=' . $companyQuery;
+ $qs .= '&sort=company_str%20asc';
+ $qs .= '&useParams=';
+ $qs .= '&group=true';
+ $qs .= '&group.field=company_str';
+ $qs .= '&group.limit=1';
 
   // Construct the URL for the Solr request
-  $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
-
+  $url = 'http://' . $server . '/solr/' . $core . '/select?' . $qs;
+  echo $url;
   // Fetch the data from Solr
   $string = file_get_contents($url);
 
