@@ -31,14 +31,20 @@ function buildParamQuery($param, $queryName) {
   return $query;
 }
 
-// Function to normalize strings by replacing special characters with their normal counterparts using iconv
-function removeDiacriticsIconv($text) {
-    $normalized = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $text);
-    return $normalized;
+// Function to normalize strings by replacing special characters with their normal counterparts using RegEx
+function normalizeString($str) {
+  $charMap = [
+      'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
+      'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
+  ];
+
+  return preg_replace_callback('/[ăîâșțĂÎÂȘȚ]/u', function($matches) use ($charMap) {
+      return $charMap[$matches[0]];
+  }, $str);
 }
 // Normalize all query parameters
 foreach ($_GET as $key => $value) {
-    $_GET[$key] = removeDiacriticsIconv($value);
+  $_GET[$key] = normalizeString($value);
 }
 // title query
 if (isset($_GET['q'])) {$q  .= "q=" . replaceSpaces($_GET['q']);} else {$q .= 'q=*:*';}
