@@ -1,6 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
+date_default_timezone_set('Europe/Bucharest');
+
 function city_fix($in){
     $output = $in;
     $output = str_replace("Bucharest","București",$output);
@@ -62,6 +64,7 @@ foreach ($json as $item) {
     $item->city = city_fix($item->city);
     $item->id = md5($item->job_link)."";
     $company= $item->company;
+    $item->updated_at = date('Y-m-d\TH:i:s\Z');
 }
 
 $data = json_encode($json);
