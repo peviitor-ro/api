@@ -38,5 +38,4 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] == 0) 
     echo $json;
 }
 
-echo $json;
 ?>
