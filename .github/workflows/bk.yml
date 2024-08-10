@@ -23,7 +23,10 @@ jobs:
           curl "${{ env.MASTER_SOLR_URL }}/solr/jobs/select?q=*:*&fl=job_title,job_link,company,hiringOrganization.name,country,remote,jobLocationType,validThrough,city,sursa,id,county&rows=1000000&wt=json&indent=true" -o backup.json
 
       - name: Clean the JSON File
-        run: jq '.response.docs' backup.json > cleaned_backup.json
+         
+        run: |
+         cat backup.json # Add this line to debug the output
+         jq '.response.docs' backup.json > cleaned_backup.json
 
       # Define servers array for better management and iteration
       - name: Define Backup Servers
