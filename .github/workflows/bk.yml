@@ -1,9 +1,7 @@
 name: Solr Data Sync Across Multiple BK Servers
 
-on: 
-  push:
-    branches:
-      - main  # or any branches appropriate for your scenario
+on:
+  workflow_dispatch:
 
 jobs:
   data-transfer-and-clean:
