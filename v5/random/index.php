@@ -11,7 +11,7 @@ header('Access-Control-Allow-Headers: *');
  * )
  */
 
-$server = 'zimbor.go.ro';
+$server = 'peviitor.go.ro';
 $core = 'jobs'; //production
 $qs = '?';
 $qs = $qs . 'q=' . urlencode('*:*');
