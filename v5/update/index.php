@@ -6,7 +6,7 @@ header("Access-Control-Allow-Origin: *");
 
 
     $method = 'POST';
-    $server = 'http://zimbor.go.ro/solr/';
+    $server = 'http://peviitor.go.ro/solr/';
     $core  = 'jobs';
     $command ='/update';
     $qs = '?_=1617366504771&commitWithin=1000&overwrite=true&wt=json';
