@@ -11,27 +11,33 @@ header('Access-Control-Allow-Headers: *');
  * )
  */
 
-$server = 'zimbor.go.ro';
+require_once '../config.php';
+
 $core = 'jobs'; //production
+$command = '/select';
+
 $qs = '?';
-$qs = $qs . 'q=' . urlencode('*:*');
-$qs = $qs . '&';
-$qs = $qs . 'rows=0';
-$url = 'http://' .$server .'/solr/' . $core . '/select' . $qs;
+$qs .= 'q=' . urlencode('*:*');
+$qs .= '&';
+$qs .= 'rows=0';
+
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
+
 $string = file_get_contents($url);
 $json = json_decode($string, true);
 
 $max = $json['response']['numFound'];
-$start = rand(0, $max-1);
-$qs = '?q=' . urlencode('*:*'); //query string
-$qs = $qs . '&';
-$qs = $qs . 'rows=1';
-$qs = $qs . '&';
-$qs = $qs . 'start=' . $start;
-$qs = $qs . '&';
-$qs = $qs . 'omitHeader=true';
-$url = 'http://' .$server .'/solr/' . $core . '/select' . $qs;
+$start = rand(0, $max - 1);
 
+$qs = '?q=' . urlencode('*:*'); //query string
+$qs .= '&';
+$qs .= 'rows=1';
+$qs .= '&';
+$qs .= 'start=' . $start;
+$qs .= '&';
+$qs .= 'omitHeader=true';
+
+$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 $json = file_get_contents($url);
 echo $json;
