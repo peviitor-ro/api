@@ -6,21 +6,21 @@ $method = 'POST';
 require_once '../../config.php';
 
 $core  = 'auth';
-$command ='/update';
+$command = '/update';
 
 $qs = '?';
-$qs = $qs . '_=1617366504771';
-$qs = $qs . '&';
-$qs = $qs . 'commitWithin=1000';
-$qs = $qs . '&';
-$qs = $qs . 'overwrite=true';
-$qs = $qs . '&';
-$qs = $qs . 'wt=json';
+$qs .= '_=1617366504771';
+$qs .= '&';
+$qs .= 'commitWithin=1000';
+$qs .= '&';
+$qs .= 'overwrite=true';
+$qs .= '&';
+$qs .= 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
- 
+
 $company = $_POST['company'];
-$data = "{'delete': {'query': 'id:".$company."'}}";
+$data = "{'delete': {'query': 'id:" . $company . "'}}";
 
 $options = array(
     'http' => array(
@@ -32,6 +32,6 @@ $options = array(
 $context  = stream_context_create($options);
 
 $result = file_get_contents($url, false, $context);
-if ($result === FALSE) { echo $result; }
-
-?>
+if ($result === FALSE) {
+    echo $result;
+}

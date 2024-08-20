@@ -9,13 +9,13 @@ $core  = 'auth';
 $command = '/update';
 
 $qs = '?';
-$qs = $qs . '_=1617366504771';
-$qs = $qs . '&';
-$qs = $qs . 'commitWithin=1000';
-$qs = $qs . '&';
-$qs = $qs . 'overwrite=true';
-$qs = $qs . '&';
-$qs = $qs . 'wt=json';
+$qs .= '_=1617366504771';
+$qs .= '&';
+$qs .= 'commitWithin=1000';
+$qs .= '&';
+$qs .= 'overwrite=true';
+$qs .= '&';
+$qs .= 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
