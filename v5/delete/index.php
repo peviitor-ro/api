@@ -17,7 +17,7 @@ if (empty($data['urls'])) {
 }
 
 // Solr endpoint URL
-$solrEndpoint = 'http://zimbor.go.ro/solr/jobs/update?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
+$solrEndpoint = 'http://peviitor.go.ro/solr/jobs/update?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
 
 // Create an array to store the delete operations
 $deleteOperations = [];
