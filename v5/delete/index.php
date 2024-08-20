@@ -17,15 +17,29 @@ if (empty($data['urls'])) {
 }
 
 // Solr endpoint URL
-$solrEndpoint = 'http://peviitor.go.ro/solr/jobs/update?_=1617366504771&commitWithin=100&overwrite=true&wt=json';
+require_once '../config.php';
+
+$core = 'jobs';
+$command = '/update';
+
+$qs = '?';
+$qs .= '_=1617366504771';
+$qs .= '&';
+$qs .= 'commitWithin=100';
+$qs .= '&';
+$qs .= 'overwrite=true';
+$qs .= '&';
+$qs .= 'wt=json';
+
+$solrEndpoint = 'http://' . $server . '/solr/' . $command . $qs;
 
 // Create an array to store the delete operations
 $deleteOperations = [];
 
 // Iterate through URLs and create delete operations
-$url_element = "" ;
+$url_element = "";
 foreach ($data['urls'] as $url) {
-    $url_element.= '"' . $url . '" OR' ;
+    $url_element .= '"' . $url . '" OR';
 }
 
 $url_element = substr($url_element, 0, -3);
@@ -59,5 +73,4 @@ if ($response === false) {
 } else {
     // Decode and print the Solr response
     $solrResponse = json_decode($response, true);
-}; 
-?>
+};
