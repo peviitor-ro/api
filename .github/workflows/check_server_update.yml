@@ -2,7 +2,7 @@ name: Check Servers and Update Configuration
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Runs every 5 minutes
+    - cron: "*/1 * * * *" # Runs every 5 minutes
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -10,89 +10,88 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Check Server Status
-      id: check_status
-      run: |
-        primary_server="http://zimbor.go.ro"
-        servers=(
-          "http://srvalx.duckdns.org:8983"
-          "http://zimbor.go.ro:8985"
-          "http://peviitor.go.ro"
-        )
-        
-        available_server=""
+      - name: Check Server Status
+        id: check_status
+        run: |
+          primary_server="http://peviitor.go.ro"
+          servers=(
+            "http://srvalx.duckdns.org:8983"
+            "http://zimbor.go.ro:8985"
+          )
 
-        echo "Checking $primary_server..."
-        response=$(curl -s -L -o /dev/null -w "%{http_code}" "$primary_server" || true)
-        if [ "$response" -eq 200 ]; then
-          echo "$primary_server is up and running (HTTP 200 OK)"
-        else
-          echo "$primary_server is not available or returned status code $response"
-        fi
+          available_server=""
 
-        # Check backup server
-        if [ -z "$available_server" ]; then
-          for server in "${servers[@]}"; do
-            echo "Checking $server..."
-            response=$(curl -s -L -o /dev/null -w "%{http_code}" "$server" || true)
-            if [ "$response" -eq 200 ]; then
-              echo "$server is up and running (HTTP 200 OK)"
-              available_server="${server#http://}"
-              available_server="${available_server%%/*}"
+          echo "Checking $primary_server..."
+          response=$(curl -s -L -o /dev/null -w "%{http_code}" "$primary_server" || true)
+          if [ "$response" -eq 200 ]; then
+            echo "$primary_server is up and running (HTTP 200 OK)"
+          else
+            echo "$primary_server is not available or returned status code $response"
+          fi
+
+          # Check backup server
+          if [ -z "$available_server" ]; then
+            for server in "${servers[@]}"; do
+              echo "Checking $server..."
+              response=$(curl -s -L -o /dev/null -w "%{http_code}" "$server" || true)
+              if [ "$response" -eq 200 ]; then
+                echo "$server is up and running (HTTP 200 OK)"
+                available_server="${server#http://}"
+                available_server="${available_server%%/*}"
+                echo "Available server: $available_server"
+                break
+              else
+                echo "$server is not available or returned status code $response"
+              fi
+              echo "---------------------------------"
+            done
+          fi
+
+          echo "available_server=$available_server" >> $GITHUB_ENV
+
+      - name: Check Current Active Server
+        id: check_current_active
+        run: |
+          # Fetch the current active server from the API
+          current_active_server=$(curl -s https://api.peviitor.ro/devops/solr/)
+          current_active_server="${current_active_server#http://}"
+          current_active_server="${current_active_server%%/*}"
+          echo "Current_active_server=$current_active_server"
+          echo "current_active_server=$current_active_server" >> $GITHUB_ENV
+
+      - name: Update configuration config.php
+        run: |
+          CONFIG_FILE="v3/config.php"
+
+          # Read the available server and the current active server from the environment variables
+          if [ "$current_active_server" != "zimbor.go.ro" ] && [ -n "$available_server" ]; then
+            if [ "$current_active_server" = "$available_server" ]; then
               echo "Available server: $available_server"
-              break
-            else
-              echo "$server is not available or returned status code $response"
+              echo "Current active server: $current_active_server"
+              echo "The current active server is $available_server. No changes needed."
+              exit 0
             fi
-            echo "---------------------------------"
-          done
-        fi
 
-        echo "available_server=$available_server" >> $GITHUB_ENV
-
-    - name: Check Current Active Server
-      id: check_current_active
-      run: |
-        # Fetch the current active server from the API
-        current_active_server=$(curl -s https://api.peviitor.ro/devops/solr/)
-        current_active_server="${current_active_server#http://}"
-        current_active_server="${current_active_server%%/*}"
-        echo "Current_active_server=$current_active_server"
-        echo "current_active_server=$current_active_server" >> $GITHUB_ENV
-        
-    - name: Update configuration config.php
-      run: |
-        CONFIG_FILE="v3/config.php"
-
-        # Read the available server and the current active server from the environment variables
-        if [ "$current_active_server" != "zimbor.go.ro" ] && [ -n "$available_server" ]; then
-          if [ "$current_active_server" = "$available_server" ]; then
-            echo "Available server: $available_server"
             echo "Current active server: $current_active_server"
-            echo "The current active server is $available_server. No changes needed."
-            exit 0
+            echo "Available server: $available_server"
+            # Backup the original config file
+            cp $CONFIG_FILE $CONFIG_FILE.bak
+
+            # Update the config file to comment out zimbor and uncomment the available server
+            sed -i 's/\$server = '\''zimbor.go.ro'\'';/\/\/\$server = '\''zimbor.go.ro'\'';/' $CONFIG_FILE
+            sed -i "s/\/\/\$server = '$available_server';/\$server = '$available_server';/" $CONFIG_FILE
+
+            # Check if the configuration file has been updated
+            if ! cmp -s $CONFIG_FILE $CONFIG_FILE.bak; then
+              git config --global user.name "github-actions"
+              git config --global user.email "github-actions@github.com"
+              git add $CONFIG_FILE
+              git commit -m "Switched to $available_server"
+              git push
+            fi
+          else
+            echo "Zimbor server is available or no other server is up or or no change needed. No changes made."
           fi
-
-          echo "Current active server: $current_active_server"
-          echo "Available server: $available_server"
-          # Backup the original config file
-          cp $CONFIG_FILE $CONFIG_FILE.bak
-
-          # Update the config file to comment out zimbor and uncomment the available server
-          sed -i 's/\$server = '\''zimbor.go.ro'\'';/\/\/\$server = '\''zimbor.go.ro'\'';/' $CONFIG_FILE
-          sed -i "s/\/\/\$server = '$available_server';/\$server = '$available_server';/" $CONFIG_FILE
-
-          # Check if the configuration file has been updated
-          if ! cmp -s $CONFIG_FILE $CONFIG_FILE.bak; then
-            git config --global user.name "github-actions"
-            git config --global user.email "github-actions@github.com"
-            git add $CONFIG_FILE
-            git commit -m "Switched to $available_server"
-            git push
-          fi
-        else
-          echo "Zimbor server is available or no other server is up or or no change needed. No changes made."
-        fi
