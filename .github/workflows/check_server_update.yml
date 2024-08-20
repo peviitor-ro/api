@@ -67,7 +67,7 @@ jobs:
           CONFIG_FILE="v3/config.php"
 
           # Read the available server and the current active server from the environment variables
-          if [ "$current_active_server" != "zimbor.go.ro" ] && [ -n "$available_server" ]; then
+          if [ "$current_active_server" != "peviitor.go.ro" ] && [ -n "$available_server" ]; then
             if [ "$current_active_server" = "$available_server" ]; then
               echo "Available server: $available_server"
               echo "Current active server: $current_active_server"
@@ -80,8 +80,8 @@ jobs:
             # Backup the original config file
             cp $CONFIG_FILE $CONFIG_FILE.bak
 
-            # Update the config file to comment out zimbor and uncomment the available server
-            sed -i 's/\$server = '\''zimbor.go.ro'\'';/\/\/\$server = '\''zimbor.go.ro'\'';/' $CONFIG_FILE
+            # Update the config file to comment out peviitor.go.ro and uncomment the available server
+            sed -i 's/\$server = '\''peviitor.go.ro'\'';/\/\/\$server = '\''peviitor.go.ro'\'';/' $CONFIG_FILE
             sed -i "s/\/\/\$server = '$available_server';/\$server = '$available_server';/" $CONFIG_FILE
 
             # Check if the configuration file has been updated
@@ -93,5 +93,5 @@ jobs:
               git push
             fi
           else
-            echo "Zimbor server is available or no other server is up or or no change needed. No changes made."
+            echo "peviitor.go.ro server is available or no other server is up or or no change needed. No changes made."
           fi
