@@ -8,11 +8,10 @@ on:
         required: true
         type: choice
         options:
-          - 'zimbor.go.ro'
-          - 'peviitor.go.ro'
           - 'zimbor.go.ro:8985'
           - 'srvalx.duckdns.org:8983'
-        default: 'zimbor.go.ro'
+          -  'peviitor.go.ro'
+        default: 'peviitor.go.ro'
 
 jobs:
   manual-update:
@@ -22,13 +21,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install GitHub CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install gh -y
+
     - name: Update Configuration File Manually
       run: |
         CONFIG_FILE="v3/config.php"
         BACKUP_FILE="$CONFIG_FILE.bak"
         manual_server="${{ github.event.inputs.server }}"
 
-        # Backup the original config file
         cp $CONFIG_FILE $BACKUP_FILE
 
         # Escape single quotes and other special characters in the server name
@@ -38,15 +41,38 @@ jobs:
         sed -i -e 's/^\s*\$server = /\/\/\$server = /' $CONFIG_FILE
 
         # Uncomment the line for the manual server
-        sed -i "s/\/\/\$server = '$manual_server';/\$server = '$manual_server';/" $CONFIG_FILE
+        sed -i "s/\/\/\$server = '$escaped_manual_server';/\$server = '$escaped_manual_server';/" $CONFIG_FILE
 
-        # Check if the configuration file has been updated
-        if ! cmp -s $CONFIG_FILE $BACKUP_FILE; then
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add $CONFIG_FILE
-          git commit -m "Manually updated server to $manual_server"
-          git push
-        else
-          echo "No changes made to the config file."
-        fi
+        git checkout -b update-server-${{ github.sha }}
+
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git add $CONFIG_FILE
+        git commit -m "Manually updated server to $manual_server"
+
+    - name: Fetch and Rebase
+      run: |
+        git fetch origin
+        git rebase origin/master || { echo 'Rebase failed'; exit 1; }
+
+    - name: Push changes and create PR
+      run: |
+        unset GH_TOKEN
+        git push origin update-server-${{ github.sha }}
+        echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+        gh pr create --title "Update server to $manual_server" --body "This PR updates the server configuration." --head update-server-${{ github.sha }} --base master
+
+    - name: Approve PR
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      run: |
+        echo "${{ secrets.PAT_TOKEN }}" | gh auth login --with-token
+        PR_NUMBER=$(gh pr list --head update-server-${{ github.sha }} --json number --jq '.[0].number')
+        gh pr review $PR_NUMBER --approve
+
+    - name: Merge PR
+      run: |
+        unset GH_TOKEN
+        echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+        PR_NUMBER=$(gh pr list --head update-server-${{ github.sha }} --json number --jq '.[0].number')
+        gh pr merge $PR_NUMBER --squash --delete-branch
