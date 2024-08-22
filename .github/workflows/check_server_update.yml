@@ -16,8 +16,9 @@ jobs:
       - name: Check Server Status
         id: check_status
         run: |
-          primary_server="http://peviitor.go.ro"
+          primary_server="http://zimbor.go.ro"
           servers=(
+            "http://peviitor.go.ro"
             "http://srvalx.duckdns.org:8983"
             "http://zimbor.go.ro:8985"
           )
@@ -64,7 +65,7 @@ jobs:
         id: update_config
         run: |
           CONFIG_FILE="v3/config.php"
-          if [ "$current_active_server" != "peviitor.go.ro" ] && [ -n "$available_server" ]; then
+          if [ "$current_active_server" != "zimbor.go.ro" ] && [ -n "$available_server" ]; then
             if [ "$current_active_server" = "$available_server" ]; then
               echo "The current active server is $available_server. No changes needed."
               exit 0
@@ -73,7 +74,7 @@ jobs:
             echo "Switching to available server: $available_server"
             cp $CONFIG_FILE $CONFIG_FILE.bak
 
-            sed -i 's/\$server = '\''peviitor.go.ro'\'';/\/\/\$server = '\''peviitor.go.ro'\'';/' $CONFIG_FILE
+            sed -i 's/\$server = '\''zimbor.go.ro'\'';/\/\/\$server = '\''zimbor.go.ro'\'';/' $CONFIG_FILE
             sed -i "s/\/\/\$server = '$available_server';/\$server = '$available_server';/" $CONFIG_FILE
 
             if ! cmp -s $CONFIG_FILE $CONFIG_FILE.bak; then
@@ -89,7 +90,7 @@ jobs:
               echo "needs_update=false" >> $GITHUB_ENV
             fi
           else
-            echo "peviitor.go.ro server is available or no change needed. No changes made."
+            echo "zimbor.go.ro server is available or no change needed. No changes made."
             echo "needs_update=false" >> $GITHUB_ENV
           fi
 

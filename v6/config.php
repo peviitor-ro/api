@@ -1,4 +1,4 @@
 <?php
 
-$server = 'peviitor.go.ro';
+$server = 'zimbor.go.ro';
 ?>
