@@ -10,8 +10,9 @@ on:
         options:
           - 'zimbor.go.ro:8985'
           - 'srvalx.duckdns.org:8983'
-          -  'peviitor.go.ro'
-        default: 'peviitor.go.ro'
+          - 'peviitor.go.ro'
+          - 'zimbor.go.ro'
+        default: 'zimbor.go.ro'
 
 jobs:
   manual-update:
