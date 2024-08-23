@@ -16,9 +16,17 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
+        tools: phpunit # Ensure phpunit is available
+        coverage: xdebug # Enable xdebug for coverage
 
     - name: Update dependencies
       run: composer update --prefer-dist --no-progress
 
-    - name: Run PHPUnit tests
-      run: vendor/bin/phpunit --configuration phpunit.xml
+    - name: Run PHPUnit tests and generate report
+      run: vendor/bin/phpunit --configuration phpunit.xml --coverage-html coverage-report
+
+    - name: Archive coverage reports
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: coverage-report/
