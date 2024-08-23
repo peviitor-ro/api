@@ -5,4 +5,25 @@
             <directory>unitTest</directory>
         </testsuite>
     </testsuites>
+
+    <!-- Adăugăm configurarea pentru acoperirea codului -->
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <!-- Fișierele sau directoarele care să fie excluse din raportul de acoperire -->
+        <!-- De exemplu:
+        <exclude>
+            <directory>src/ExcludeThisDirectory</directory>
+        </exclude>
+        -->
+    </coverage>
+
+    <!-- Configurații pentru logging -->
+    <logging>
+        <log type="coverage-html" target="coverage-report" />
+        <!-- Pentru a genera și un raport în format Clover XML:
+        <log type="coverage-clover" target="coverage-report/clover.xml"/>
+        -->
+    </logging>
 </phpunit>
