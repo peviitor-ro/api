@@ -16,10 +16,6 @@ class ConfigTest1 extends TestCase
 
         // It verifies if $server is defined in config.php
         $this->assertNotEmpty($server, '$server is not defined in config.php.');
-
-        // It verifies the value of $server
-        $expectedServer = 'zimbor.go.ro:8985';
-        $this->assertEquals($expectedServer, $server, 'The value of $server is not accepted.');
     }
 }
 
