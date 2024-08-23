@@ -2,7 +2,7 @@ name: Run PHPUnit Tests
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   run-tests:
@@ -15,10 +15,10 @@ jobs:
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.0'
+        php-version: '8.1'
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress 
+    - name: Update dependencies
+      run: composer update --prefer-dist --no-progress
 
     - name: Run PHPUnit tests
       run: vendor/bin/phpunit --configuration phpunit.xml
