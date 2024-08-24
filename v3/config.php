@@ -1,10 +1,10 @@
 <?php
 
 //main server
-//$server = 'zimbor.go.ro';
+$server = 'zimbor.go.ro';
 
 //Cluj server
-$server = 'peviitor.go.ro';
+//$server = 'peviitor.go.ro';
 
 //QA server
 //$server = 'zimbor.go.ro:8985';
