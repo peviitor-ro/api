@@ -2,7 +2,7 @@ name: Check Servers and Update Configuration
 
 on:
   schedule:
-    - cron: "*/1 * * * *" # Runs every 1 minutes
+    - cron: "30 * * * *" # Runs every 1 minutes
   workflow_dispatch: # Allows manual triggering
 
 jobs:
