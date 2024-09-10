@@ -1,12 +1,12 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-
+$server = 'zimbor.go.ro';
 
 function validate_api_key($key)
 {
     $method = 'GET';
 
-    require_once '../config.php';
+    
 
     $core  = 'auth';
     $command = '/select';
@@ -52,7 +52,7 @@ function get_user_from_api_key($key)
 {
     $method = 'GET';
 
-    require_once '../config.php';
+    
 
     $core  = 'auth';
     $command = '/select';
@@ -127,7 +127,7 @@ function update($key)
 {
     $method = 'POST';
 
-    require_once '../config.php';
+    
 
     $core  = 'jobs';
     $command = '/update';
