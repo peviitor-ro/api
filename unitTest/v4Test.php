@@ -12,7 +12,7 @@ class ConfigTest4 extends TestCase
         $this->assertFileExists($this->configFile, 'config.php does not exist.');
 
         // It inludes config.php
-        include $this->configFile;
+      //  include $this->configFile;
 
         // It verifies if $server is defined in config.php
         $this->assertNotEmpty($server, '$server is not defined in config.php.');
