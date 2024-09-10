@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-
+$server = 'zimbor.go.ro';
 function validate_api_key($key)
 {
     $method = 'GET';
