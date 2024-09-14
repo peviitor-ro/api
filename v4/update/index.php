@@ -7,7 +7,7 @@ function validate_api_key($key)
     $method = 'GET';
 
     require_once '../config.php';
-
+   $server = 'zimbor.go.ro';
     $core  = 'auth';
     $command = '/select';
 
@@ -53,7 +53,8 @@ function get_user_from_api_key($key)
     $method = 'GET';
 
     require_once '../config.php';
-
+$server = 'zimbor.go.ro';
+    
     $core  = 'auth';
     $command = '/select';
 
@@ -128,7 +129,8 @@ function update($key)
     $method = 'POST';
 
     require_once '../config.php';
-
+$server = 'zimbor.go.ro';
+    
     $core  = 'jobs';
     $command = '/update';
 
