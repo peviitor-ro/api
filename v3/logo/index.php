@@ -12,7 +12,7 @@ $qs .= 'q.op=OR';
 $qs .= '&';
 $qs .= 'q=logo%3A*';
 $qs .= '&';
-$qs .= 'rows=10000';
+$qs .= 'rows=1000000';
 $qs .= '&';
 $qs .= 'omitHeader=true';
 $qs .= '&';
