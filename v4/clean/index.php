@@ -5,6 +5,7 @@ header("Access-Control-Allow-Origin: *");
 function validate_api_key($key)
 {
     $method = 'GET';
+    global $server;
 
     require_once '../config.php';
 
@@ -52,6 +53,7 @@ function validate_api_key($key)
 function get_user_from_api_key($key)
 {
     $method = 'GET';
+    global $server;
 
     require_once '../config.php';
 
@@ -103,6 +105,7 @@ function get_company($token)
 
 function company_exist($company)
 {
+    global $server;
     require_once '../config.php';
 
     $core = 'jobs';
@@ -158,6 +161,7 @@ function discord_webhook($msg)
 function clean($xcompany, $key)
 {
     $method = 'POST';
+    global $server;
 
     require_once '../config.php';
 
