@@ -100,6 +100,95 @@
         }
       }
     },
+	
+	"/suggest/": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Get job title suggestions",
+        "description": "Retrieve suggestions for job titles based on a user's query.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The search query string for which suggestions are needed.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suggestions retrieval successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "suggestions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "term": {
+                            "type": "string",
+                            "description": "Suggested term"
+                          },
+                          "weight": {
+                            "type": "integer",
+                            "description": "Weight or score of the suggestion"
+                          },
+                          "payload": {
+                            "type": "string",
+                            "description": "Additional data associated with the suggestion"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, no query provided or invalid input.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable. SOLR server is down or request failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  
+
+	
     "/clean/": {
       "post": {
         "tags": [
