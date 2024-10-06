@@ -24,7 +24,25 @@ $options = array(
 $context  = stream_context_create($options);
 
 try {
+    //Count the jobs before deletion
+    $countUrl = 'http://' . $server . '/solr/' . $core . '/select?q=*:*&wt=json&rows=0';  // Count all jobs
+    $countJson = @file_get_contents($countUrl);
+    $countResponse = json_decode($countJson, true);
+    $jobCount = $countResponse['response']['numFound'];
 
+    //Count companies
+    $qsCompanies = '?facet.field=company_str&facet.limit=2000000&facet=true&fl=company&q=*%3A*&rows=0';
+    $companyUrl = 'http://' . $server . '/solr/' . $core . '/select' . $qsCompanies;
+    $companyJson = @file_get_contents($companyUrl);
+    $companyResponse = json_decode($companyJson, true);
+    $companies = $companyResponse['facet_counts']['facet_fields']['company_str'];
+
+    $companyCount = 0;
+    for ($i = 1; $i < count($companies); $i += 2) {
+        if ($companies[$i] > 0) {
+            $companyCount++;
+        }
+    }
     $json = @file_get_contents($url, false, $context);
 
     if ($json === FALSE) {
@@ -35,6 +53,11 @@ try {
     }
 
     echo $json;
+    echo json_encode([
+        'message' => 'Jobs deleted successfully',
+        'jobsDeleted' => $jobCount,
+        'companiesDeleted' => $companyCount
+    ]);
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
 }
