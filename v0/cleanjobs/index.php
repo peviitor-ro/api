@@ -12,15 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
         // Step 1: Get the count of jobs for the given company
         $countCommand = '/select';
-
-        $countQS = '?';
-        $countQS .= 'q=hiringOrganization.name:"';
-        $countQS .= rawurlencode($company);
-        $countQS .= '"&';
-        $countQS .= 'wt=json';
-        $countQS .= '&';
-        $countQS .= 'rows=0';
-
+        $countQS = '?q=' . rawurlencode('hiringOrganization.name:"' . $company . '"') . '&wt=json&rows=0';
         $countUrl = 'http://' . $server . '/solr/' . $core . $countCommand . $countQS;
 
         try {
@@ -47,19 +39,10 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
             // Step 2: Delete the jobs
             $deleteCommand = '/update';
-
-            $qs = '?';
-            $qs .= '_=1617366504771';
-            $qs .= '&';
-            $qs .= 'commitWithin=1000';
-            $qs .= '&';
-            $qs .= 'overwrite=true';
-            $qs .= '&';
-            $qs .= 'wt=json';
-
+            $qs = '?commit=true&wt=json';
             $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand . $qs;
 
-            $deleteData = json_encode(['delete' => ['query' => 'hiringOrganization.name:"' . rawurlencode($company) . '"']]);
+            $deleteData = json_encode(['delete' => ['query' => 'hiringOrganization.name:"' . $company . '"']]);
             
             $options = array(
                 'http' => array(
