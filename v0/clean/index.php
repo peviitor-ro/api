@@ -37,7 +37,6 @@ try {
     }
 
     // Step 2: Delete the jobs
-    $deleteCommand = '/update';
     $qs = '?commit=true&wt=json';
     $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand . $qs;
 
@@ -61,9 +60,7 @@ try {
     }
 
     echo json_encode(['message' => 'Jobs deleted successfully', 'jobsDeleted' => $jobCount]);
-
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
     exit;
 }
-?>
