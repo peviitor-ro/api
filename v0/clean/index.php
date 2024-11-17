@@ -37,6 +37,7 @@ try {
     }
 
     // Step 2: Delete the jobs
+
     $qs = '?commit=true&wt=json';
     $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand . $qs;
 
