@@ -33,7 +33,7 @@ if (isset($data[0]->id)) {
   if (isset($data[0]->logo)) { $json->response->docs[0]->logo = $data[0]->logo; }
   if (isset($data[0]->apikey)) { $json->response->docs[0]->apikey = $data[0]->apikey; }
 
-  $method = 'POST';
+  $method = 'PUT';
   $command = '/update';
 
   $qs = '?';
