@@ -243,6 +243,7 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "type": "object",
+                "required": [ "company" ],
                 "properties": {
                   "company": {
                     "type": "string",
