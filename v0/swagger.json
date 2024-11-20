@@ -329,9 +329,11 @@
             "in": "query",
             "name": "count",
             "schema": {
-              "type": "boolean"
+              "type": "boolean",
+              "enum": [ true, false ]
             },
-            "description": "Whether to count the number of jobs for each company"
+            "description": "Whether to count the number of jobs for each company",
+            "required": true
           }
         ],
         "responses": {
