@@ -186,50 +186,6 @@
         }
       }
     },
-  
-
-	
-    "/clean/": {
-      "post": {
-        "tags": [
-          "General"
-        ],
-        "summary": "Delete jobs for a company",
-        "requestBody": {
-          "description": "Company name",
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "company": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Deleted jobs successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/cleanjobs/": {
       "delete": {
         "tags": [
