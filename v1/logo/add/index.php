@@ -1,32 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-/**
- * @OA\Post(
- *     path="/v1/logo/add/",
- *     tags={"logo"},
- *     summary="Add new logos",
- *     @OA\RequestBody(
- *         required=true,
- *         @OA\MediaType(
- *             mediaType="application/json",
- *             @OA\Schema(
- *                 type="array",
- *                 @OA\Items(
- *                     type="object",
- *                     @OA\Property(property="id", type="string", example="Nova"),
- *                     @OA\Property(property="logo", type="string", example="https://e-infra.ro/wp-content/uploads/2023/02/logotype-nova.jpg")
- *                 )
- *             )
- *         )
- *     ),
- *     @OA\Response(
- *         response="200",
- *         description="Success"
- *     )
- * )
- */
-
 $method = 'POST';
 
 require_once '../../config.php';
@@ -56,8 +30,8 @@ $options = array(
 );
 
 $context  = stream_context_create($options);
-
 $result = file_get_contents($url, false, $context);
+
 if ($result === FALSE) {
     echo $result;
 }
