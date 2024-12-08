@@ -13,9 +13,7 @@
   "paths": {
     "/random/": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Get random data",
         "responses": {
           "200": {
@@ -100,8 +98,8 @@
         }
       }
     },
-	
-	"/suggest/": {
+
+    "/suggest/": {
       "get": {
         "tags": ["Search"],
         "summary": "Get job title suggestions",
@@ -188,9 +186,7 @@
     },
     "/cleanjobs/": {
       "delete": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Delete jobs by company name",
         "description": "Deletes all job postings for a specified company.",
         "requestBody": {
@@ -199,7 +195,7 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "type": "object",
-                "required": [ "company" ],
+                "required": ["company"],
                 "properties": {
                   "company": {
                     "type": "string",
@@ -276,9 +272,7 @@
     },
     "/companies/": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Get list of companies",
         "parameters": [
           {
@@ -286,7 +280,7 @@
             "name": "count",
             "schema": {
               "type": "boolean",
-              "enum": [ true, false ]
+              "enum": [true, false]
             },
             "description": "Whether to count the number of jobs for each company",
             "required": true
@@ -316,9 +310,7 @@
     },
     "/getuser/": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Get a user by ID",
         "parameters": [
           {
@@ -369,9 +361,7 @@
     },
     "/jobs/": {
       "get": {
-        "tags": [
-          "Machine Learning"
-        ],
+        "tags": ["Machine Learning"],
         "summary": "Get jobs",
         "operationId": "getJobs",
         "parameters": [
@@ -441,9 +431,7 @@
     },
     "/logo/": {
       "get": {
-        "tags": [
-          "Logo"
-        ],
+        "tags": ["Logo"],
         "summary": "Get logos",
         "responses": {
           "200": {
@@ -483,9 +471,7 @@
     },
     "/logo/add/": {
       "post": {
-        "tags": [
-          "Logo"
-        ],
+        "tags": ["Logo"],
         "summary": "Add a new logo",
         "requestBody": {
           "description": "Logo data",
@@ -506,10 +492,7 @@
                       "description": "URL or identifier of the logo"
                     }
                   },
-                  "required": [
-                    "id",
-                    "logo"
-                  ]
+                  "required": ["id", "logo"]
                 }
               }
             }
@@ -545,9 +528,7 @@
     },
     "/logo/delete/": {
       "post": {
-        "tags": [
-          "Logo"
-        ],
+        "tags": ["Logo"],
         "summary": "Delete a logo",
         "requestBody": {
           "description": "Company name to delete logo",
@@ -562,9 +543,7 @@
                     "description": "Company name whose logo is to be deleted"
                   }
                 },
-                "required": [
-                  "company"
-                ]
+                "required": ["company"]
               }
             }
           }
@@ -599,9 +578,7 @@
     },
     "/logo/clean/": {
       "delete": {
-        "tags": [
-          "Logo"
-        ],
+        "tags": ["Logo"],
         "summary": "Clean up all logos",
         "description": "Deletes all logos.",
         "responses": {
@@ -661,9 +638,7 @@
     },
     "/search/": {
       "get": {
-        "tags": [
-          "Search"
-        ],
+        "tags": ["Search"],
         "summary": "Search jobs",
         "description": "Search for jobs using Solr",
         "parameters": [
@@ -748,9 +723,7 @@
     },
     "/total/": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Get total job count",
         "description": "Returns the total number of jobs and companies",
         "responses": {
@@ -771,15 +744,10 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "jobs",
-                        "companies"
-                      ]
+                      "required": ["jobs", "companies"]
                     }
                   },
-                  "required": [
-                    "total"
-                  ]
+                  "required": ["total"]
                 }
               }
             }
@@ -789,9 +757,7 @@
     },
     "/update/": {
       "post": {
-        "tags": [
-          "Jobs"
-        ],
+        "tags": ["Jobs"],
         "summary": "Update jobs",
         "description": "Update jobs using Solr",
         "requestBody": {
@@ -821,12 +787,7 @@
                       "description": "Company name"
                     }
                   },
-                  "required": [
-                    "job_title",
-                    "city",
-                    "job_link",
-                    "company"
-                  ]
+                  "required": ["job_title", "city", "job_link", "company"]
                 }
               }
             }
@@ -862,9 +823,7 @@
     },
     "/updateuser/": {
       "post": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Update user",
         "description": "Update user details in Solr",
         "requestBody": {
@@ -898,9 +857,7 @@
                       "description": "API key"
                     }
                   },
-                  "required": [
-                    "id"
-                  ]
+                  "required": ["id"]
                 }
               }
             }
@@ -936,50 +893,57 @@
     },
     "/updateusr/": {
       "put": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Update user",
-        "description": "Update user details in Solr",
-        "requestBody": {
-          "description": "User data to be updated",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "User ID"
-                    },
-                    "url": {
-                      "type": "string",
-                      "description": "User URL"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    },
-                    "logo": {
-                      "type": "string",
-                      "description": "Logo URL"
-                    },
-                    "apikey": {
-                      "type": "string",
-                      "description": "API key"
-                    }
-                  },
-                  "required": [
-                    "id"
-                  ]
-                }
-              }
+        "description": "Update usedr details in Solr",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "User URL",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "description": "Company name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logo",
+            "in": "query",
+            "required": true,
+            "description": "Logo URL",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "query",
+            "required": true,
+            "description": "API key",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
+
         "responses": {
           "200": {
             "description": "User updated successfully",
@@ -999,20 +963,42 @@
           },
           "400": {
             "description": "Bad Request. Invalid input parameter.",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Missing required field"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Success message"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
     "/empty/": {
       "delete": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Delete all jobs from jobs core",
         "responses": {
           "200": {
@@ -1029,7 +1015,7 @@
                       "type": "integer"
                     },
                     "companiesDeleted": {
-                      "type":  "integer"
+                      "type": "integer"
                     }
                   }
                 }
@@ -1077,9 +1063,7 @@
     },
     "/updatejobs/": {
       "put": {
-        "tags": [
-          "Jobs"
-        ],
+        "tags": ["Jobs"],
         "summary": "Update jobs",
         "description": "Update jobs using Solr",
         "requestBody": {
@@ -1109,12 +1093,7 @@
                       "description": "Company name"
                     }
                   },
-                  "required": [
-                    "job_title",
-                    "city",
-                    "job_link",
-                    "company"
-                  ]
+                  "required": ["job_title", "city", "job_link", "company"]
                 }
               }
             }
