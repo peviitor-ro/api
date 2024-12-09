@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API for LOCAL ENV of peviitor.ro",
+    "title": "API for QA ENV of peviitor.ro",
     "description": "API documentation",
     "version": "1.0"
   },
