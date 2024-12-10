@@ -755,72 +755,7 @@
         }
       }
     },
-    "/update/": {
-      "post": {
-        "tags": ["Jobs"],
-        "summary": "Update jobs",
-        "description": "Update jobs using Solr",
-        "requestBody": {
-          "description": "Jobs data to be updated",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "job_title": {
-                      "type": "string",
-                      "description": "Job title"
-                    },
-                    "city": {
-                      "type": "string",
-                      "description": "City"
-                    },
-                    "job_link": {
-                      "type": "string",
-                      "description": "Job link"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    }
-                  },
-                  "required": ["job_title", "city", "job_link", "company"]
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Jobs updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
-          }
-        }
-      }
-    },
+
     "/updateuser/": {
       "put": {
         "tags": ["User"],
