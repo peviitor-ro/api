@@ -821,7 +821,7 @@
         }
       }
     },
-    "/updateusr/": {
+    "/updateuser/": {
       "put": {
         "tags": ["User"],
         "summary": "Update user",
@@ -996,42 +996,47 @@
         "tags": ["Jobs"],
         "summary": "Update jobs",
         "description": "Update jobs using Solr",
-        "requestBody": {
-          "description": "Jobs data to be updated",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "job_title": {
-                      "type": "string",
-                      "description": "Job title"
-                    },
-                    "city": {
-                      "type": "string",
-                      "description": "City"
-                    },
-                    "job_link": {
-                      "type": "string",
-                      "description": "Job link"
-                    },
-                    "company": {
-                      "type": "string",
-                      "description": "Company name"
-                    }
-                  },
-                  "required": ["job_title", "city", "job_link", "company"]
-                }
-              }
+        "parameters": [
+          {
+            "name": "job_title",
+            "in": "query",
+            "required": true,
+            "description": "Job title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "description": "City",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "job_link",
+            "in": "query",
+            "required": true,
+            "description": "Job link",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "description": "Company name",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "Jobs updated successfully",
+            "description": "User updated successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1048,11 +1053,35 @@
           },
           "400": {
             "description": "Bad Request. Invalid input parameter.",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Missing required field"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Success message"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
