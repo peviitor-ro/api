@@ -19,7 +19,7 @@ jobs:
           primary_server="http://zimbor.go.ro"
           servers=(
             "http://peviitor.go.ro"
-            "http://srvalx.duckdns.org:8983"
+            "peviitorqa.duckdns.org:8983"
             "http://zimbor.go.ro:8985"
           )
 
