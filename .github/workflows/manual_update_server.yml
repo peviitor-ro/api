@@ -9,7 +9,7 @@ on:
         type: choice
         options:
           - 'zimbor.go.ro:8985'
-          - 'srvalx.duckdns.org:8983'
+          - 'peviitorqa.duckdns.org:8983'
           - 'peviitor.go.ro'
           - 'zimbor.go.ro'
         default: 'zimbor.go.ro'
