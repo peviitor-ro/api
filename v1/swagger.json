@@ -526,56 +526,6 @@
         }
       }
     },
-    "/logo/delete/": {
-      "post": {
-        "tags": ["Logo"],
-        "summary": "Delete a logo",
-        "requestBody": {
-          "description": "Company name to delete logo",
-          "required": true,
-          "content": {
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "company": {
-                    "type": "string",
-                    "description": "Company name whose logo is to be deleted"
-                  }
-                },
-                "required": ["company"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Logo deleted successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
-          }
-        }
-      }
-    },
     "/logo/clean/": {
       "delete": {
         "tags": ["Logo"],
