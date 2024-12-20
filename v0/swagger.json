@@ -597,7 +597,6 @@
         }
       }
     },
-
     "/search/": {
       "get": {
         "tags": ["Search"],

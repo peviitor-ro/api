@@ -526,14 +526,25 @@
         }
       }
     },
-    "/logo/clean/": {
+    "/logo/delete/": {
       "delete": {
         "tags": ["Logo"],
-        "summary": "Clean up all logos",
-        "description": "Deletes all logos.",
+        "summary": "Remove a specific field from a document",
+        "description": "Deletes the 'url' field from the document with the specified ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The ID of the document to update.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successfully cleaned up logos",
+            "description": "Successfully removed the field",
             "content": {
               "application/json": {
                 "schema": {
@@ -705,7 +716,6 @@
         }
       }
     },
-
     "/updateuser/": {
       "put": {
         "tags": ["User"],
