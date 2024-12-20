@@ -526,7 +526,7 @@
         }
       }
     },
-    "/logo/clean/": {
+    "/logo/delete/": {
       "delete": {
         "tags": ["Logo"],
         "summary": "Remove a specific field from a document",
