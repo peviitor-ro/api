@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://peviitorqa.duckdns.org/api/v0"
+      "url": "http://peviitorqa.go.ro/api/v0"
     }
   ],
   "paths": {
