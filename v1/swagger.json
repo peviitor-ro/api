@@ -606,7 +606,7 @@
           {
             "name": "q",
             "in": "query",
-            "required": false,
+            "required": true,
             "description": "The search query",
             "schema": {
               "type": "string"
