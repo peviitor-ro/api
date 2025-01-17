@@ -479,7 +479,7 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "User ID",
+            "description": "Company id",
             "schema": {
               "type": "string"
             }
@@ -488,7 +488,7 @@
             "name": "logo",
             "in": "query",
             "required": true,
-            "description": "User URL",
+            "description": "URL or identifier of the logo",
             "schema": {
               "type": "string"
             }
