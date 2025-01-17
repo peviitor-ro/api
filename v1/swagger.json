@@ -314,7 +314,7 @@
         "summary": "Get a user by ID",
         "parameters": [
           {
-            "name": "user",
+            "name": "ID",
             "in": "query",
             "required": true,
             "description": "The ID of the user",
