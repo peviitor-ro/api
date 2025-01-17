@@ -473,31 +473,27 @@
       "post": {
         "tags": ["Logo"],
         "summary": "Add a new logo",
-        "requestBody": {
           "description": "Logo data",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "Company id"
-                    },
-                    "logo": {
-                      "type": "string",
-                      "description": "URL or identifier of the logo"
-                    }
-                  },
-                  "required": ["id", "logo"]
-                }
-              }
+          "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logo",
+            "in": "query",
+            "required": true,
+            "description": "User URL",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Logo added successfully",
@@ -769,7 +765,6 @@
             }
           }
         ],
-
         "responses": {
           "200": {
             "description": "User updated successfully",
