@@ -1,5 +1,5 @@
 <?php
 
-$server = 'peviitorqa.duckdns.org';
+$server = 'peviitorqa.go.ro';
 
 ?>
