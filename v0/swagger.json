@@ -432,7 +432,7 @@
     "/logo/": {
       "get": {
         "tags": ["Logo"],
-        "summary": "Get logos",
+        "summary": "Get all logos",
         "responses": {
           "200": {
             "description": "Successful operation",
