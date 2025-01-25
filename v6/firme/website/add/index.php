@@ -1,9 +1,25 @@
-
-text/x-generic index.php ( PHP script, ASCII text, with CRLF line terminators )
 <?php
-header("Access-Control-Allow-Origin: *");
+// Permit doar anumite origini
+$allowed_origins = ['https://peviitor-ro.github.io'];
+
+// Verificăm headerul Origin al cererii
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if (in_array($origin, $allowed_origins)) {
+    header("Access-Control-Allow-Origin: $origin");
+} else {
+    http_response_code(403); // Forbidden
+    exit('Origin not allowed');
+}
+
 header("Access-Control-Allow-Methods: PUT, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+
+// Respond to preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    // Stop script from executing further, return only headers and 200 OK status
+    http_response_code(200);
+    exit;
+}
 
 // Adjust your Solr server configuration settings
 $server = 'zimbor.go.ro';
