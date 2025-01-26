@@ -1,5 +1,3 @@
-
-text/x-generic index.php ( PHP script, ASCII text, with CRLF line terminators )
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: DELETE, OPTIONS");
