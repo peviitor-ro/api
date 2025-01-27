@@ -1,102 +1,103 @@
 <?php
+
 header("Access-Control-Allow-Origin: *");
 
-
 require_once './getLogo.php';
-
-$q = '?';
-$q .= 'indent=true';
-$q .= '&';
-$q .= 'q.op=OR';
-$q .= '&';
-
-function replaceSpaces($string) {
-  $withoutSpaces = str_replace(' ', '%20', $string);
-  $withoutAmpersand = str_replace('&', '%26', $withoutSpaces);
-  $withoutDollar = str_replace('$', '%24', $withoutAmpersand);
-  
-  return $withoutDollar;
-}
-
-function buildParamQuery($param, $queryName) {
-  $arrayParams = explode(',', $param);
-  if (count($arrayParams) > 1) {
-      $query = "&fq=" . $queryName . "%3A%22" . replaceSpaces($arrayParams[0]) . "%22";
-      for ($i = 1; $i < count($arrayParams); $i++) {
-          $query .= "%20OR%20" . $queryName . "%3A%22" . replaceSpaces($arrayParams[$i]) . "%22";
-      }
-  } else {
-      $query = "&fq=" . $queryName . "%3A%22" . replaceSpaces($arrayParams[0]) . "%22";
-  }
-  return $query;
-}
-
-// Function to normalize strings by replacing special characters with their normal counterparts using RegEx
-function normalizeString($str) {
-  $charMap = [
-      'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
-      'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
-  ];
-
-  return preg_replace_callback('/[ăîâșțĂÎÂȘȚ]/u', function($matches) use ($charMap) {
-      return $charMap[$matches[0]];
-  }, $str);
-}
-// Normalize all query parameters
-foreach ($_GET as $key => $value) {
-  $_GET[$key] = normalizeString($value);
-}
-// title query
-if (isset($_GET['q'])) {$q  .= "q=" . replaceSpaces($_GET['q']);} else {$q .= 'q=*:*';}
-
-// company query
-if (isset($_GET['company'])) {
-  $q .= buildParamQuery($_GET['company'],'company');
-}
-
-// city query
-if (isset($_GET['city'])) {
-  $q .= buildParamQuery($_GET['city'], 'city');
-}
-
-// county query
-//if (isset($_GET['county'])) {$q .= "&q=county%3A%22".urlencode($_GET['county']). "%22";}
-
-// country query but is deprecated
-if (isset($_GET['country'])) {$q .= "&q=country%3A%22".urlencode($_GET['country']) . "%22";}
-
-// remote query
-if (isset($_GET['remote'])) {
-  $q .= buildParamQuery($_GET['remote'],'remote');
-} else {
-  $q .= "&q=remote%3A%22remote%22";
-}
-
-if (isset($_GET['page'])) {
-    $start = $_GET['page'];
-    $start = ($start-1)*12; 
-    $q .= "&start=".$start;
-   $q .= "&rows=12";
-}
-
-$q .= '&';
-$q .= 'useParams=';
-
 require_once '../config.php';
 
-$core = 'jobs';
+class SolrQueryBuilder {
+    public static function replaceSpaces($string) {
+        return str_replace([' ', '&', '$'], ['%20', '%26', '%24'], $string);
+    }
 
-$url =  'http://' . $server . '/solr/' . $core . '/select' . $q;
+    public static function buildParamQuery($param, $queryName) {
+        $arrayParams = explode(',', $param);
+        $queries = array_map(function ($item) use ($queryName) {
+            return $queryName . '%3A%22' . self::replaceSpaces($item) . '%22';
+        }, $arrayParams);
 
-$json = file_get_contents($url);
-$jobs = json_decode($json, true);
+        return '&fq=' . implode('%20OR%20', $queries);
+    }
 
-for ($i = 0; $i < count($jobs['response']['docs']); $i++) {
-  $company = $jobs['response']['docs'][$i]['company'];
+    public static function normalizeString($str) {
+        $charMap = [
+            'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
+            'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
+        ];
 
-  $logo = getLogo($company[0]);
-  $jobs['response']['docs'][$i]['logoUrl'] = $logo;
+        return strtr($str, $charMap);
+    }
 }
 
-echo json_encode($jobs);
-?>
+// Normalizează parametrii din $_GET
+foreach ($_GET as $key => $value) {
+    $_GET[$key] = SolrQueryBuilder::normalizeString($value);
+}
+
+try {
+    $core = 'jobs';
+    $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
+
+    // Construim query string-ul
+    $query = '?indent=true&q.op=OR&';
+    $query .= isset($_GET['q']) ? 'q=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : 'q=*:*';
+    $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
+    $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
+    $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
+
+    if (isset($_GET['page'])) {
+        $start = ($_GET['page'] - 1) * 12;
+        $query .= "&start=$start&rows=12";
+    }
+
+    $query .= '&useParams=';
+    $url = $baseUrl . $query;
+
+    // Verificăm disponibilitatea endpoint-ului
+    $headers = @get_headers($url);
+    if ($headers === false || strpos($headers[0], '200') === false) {
+        throw new Exception('Endpoint-ul nu este disponibil');
+    }
+
+    // Obținem datele din Solr
+    $json = file_get_contents($url);
+    $jobs = json_decode($json, true);
+
+    // Adăugăm logo pentru fiecare job
+    foreach ($jobs['response']['docs'] as &$job) {
+        $company = $job['company'];
+        $job['logoUrl'] = getLogo($company[0]);
+    }
+
+    echo json_encode($jobs);
+
+} catch (Exception $e) {
+    // Fallback la endpoint-ul de rezervă
+    $backupUrl = $backup . '/mobile/';
+    $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
+   
+    $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
+
+    $json = file_get_contents($backupUrl . $fallbackQuery);
+    $jobs = json_decode($json, true);
+
+    $newJobs = array_map(function ($job) {
+        return [
+            'job_title' => $job['job_title'],
+            'company' => $job['company_name'],
+            'city' => [$job['city']],
+            'county' => [$job['county']],
+            'remote' => $job['remote'],
+            'job_link' => $job['job_link'],
+            'id' => $job['id']
+        ];
+    }, $jobs['results'] ?? []);
+
+    $response = (object)[
+        'response' => (object)[
+            'docs' => $newJobs
+        ]
+    ];
+
+    echo json_encode($response);
+}

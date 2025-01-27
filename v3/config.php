@@ -2,6 +2,7 @@
 
 //main server
 $server = 'zimbor.go.ro';
+$backup = 'https://api.laurentiumarian.ro';
 
 //Cluj server
 //$server = 'peviitor.go.ro';
