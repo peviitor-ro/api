@@ -77,6 +77,10 @@ try {
     $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
    
     $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
+    $citiesString = str_replace('~', '', $_GET['city'] ?? '');
+    $fallbackQuery .= isset($_GET['city']) ? '&cities=' . $citiesString : '';
+    $fallbackQuery .= isset($_GET['company']) ? '&companies=' . SolrQueryBuilder::replaceSpaces($_GET['company']) : '';
+    $fallbackQuery .= isset($_GET['remote']) ? '&remote=' . SolrQueryBuilder::replaceSpaces($_GET['remote']) : '';
 
     $json = file_get_contents($backupUrl . $fallbackQuery);
     $jobs = json_decode($json, true);
@@ -95,7 +99,8 @@ try {
 
     $response = (object)[
         'response' => (object)[
-            'docs' => $newJobs
+            'docs' => $newJobs,
+            'numFound' => $jobs['count'] ?? 0
         ]
     ];
 

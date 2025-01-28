@@ -106,13 +106,31 @@ function getFirst25Companies() {
     return json_encode($results);
 }
 
-// Retrieve the user input from the query parameter
-$userInput = isset($_GET['userInput']) ? $_GET['userInput'] : '';
+try{
+    
+    // Verificăm disponibilitatea endpoint-ului
+    $headers = @get_headers(
+        'http://' . $server . '/solr/' . $core . '/select?q=*:*&rows=1'
+    );
+    if ($headers === false || strpos($headers[0], '200') === false) {
+        throw new Exception('Endpoint-ul nu este disponibil');
+    }
+    // Retrieve the user input from the query parameter
+    $userInput = isset($_GET['userInput']) ? $_GET['userInput'] : '';
 
-// Fetch the companies based on the user input or fetch the first 25 companies if no input is provided
-if ($userInput) {
-    echo getCompanies($userInput);
-} else {
-    echo getFirst25Companies();
+    // Fetch the companies based on the user input or fetch the first 25 companies if no input is provided
+    if ($userInput) {
+        echo getCompanies($userInput);
+    } else {
+        echo getFirst25Companies();
+    }
+} catch (Exception $e) {
+    // Fallback at the backup endpoint
+    $backupUrl = $backup . '/mobile/companies/';
+    $fallbackQuery = isset($_GET['userInput']) ? '?search=' . $_GET['userInput'] : '';
+    $json = file_get_contents($backupUrl . $fallbackQuery);
+    $companies = json_decode($json, true);
+    echo json_encode($companies['results'] ?? []);
 }
+
 ?>
