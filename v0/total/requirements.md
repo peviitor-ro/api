@@ -1,14 +1,14 @@
-# Business Requirement Document: Retrieve Companies from SOLR Index
+# Business Requirement Document: Retrieve Total Job and Company Counts from SOLR Index
 
 ## Objective:
-The objective of this project is to develop an API endpoint that retrieves a list of companies from a SOLR index. This endpoint will be used to provide users with a comprehensive list of companies that have job listings available.
+The objective of this project is to develop an API endpoint that retrieves the total number of jobs and companies from a SOLR index. This endpoint will be used to provide users with an overview of the job market by company.
 
 ## Key Requirements:
 
 1. **Functionality:**
-   - The endpoint should retrieve a list of unique company names from the SOLR index.
-   - Optionally, it should include the number of jobs associated with each company if requested.
-   - The endpoint should return the total count of companies.
+   - The endpoint should retrieve the total number of jobs available in the SOLR index.
+   - It should also retrieve the total number of companies that have at least one job listing.
+   - The endpoint should return both counts in a single response.
 
 2. **Error Handling:**
    - The endpoint should handle errors gracefully, providing meaningful error messages to users.
@@ -16,11 +16,11 @@ The objective of this project is to develop an API endpoint that retrieves a lis
 
 3. **User Experience:**
    - The endpoint should respond quickly to ensure a seamless user experience.
-   - The response should include a clear and organized list of companies.
+   - The response should include clear and concise counts for both jobs and companies.
 
 4. **Data Integrity:**
-   - Ensure that the retrieved company data is accurate and up-to-date.
-   - The endpoint should not return duplicate company names.
+   - Ensure that the retrieved counts are accurate and up-to-date.
+   - The endpoint should only count companies with at least one active job listing.
 
 5. **Security:**
    - Implement appropriate security measures to protect user data and prevent unauthorized access to the SOLR index.
@@ -30,9 +30,8 @@ The objective of this project is to develop an API endpoint that retrieves a lis
 
 ## Acceptance Criteria:
 
-- The endpoint successfully retrieves a list of companies from the SOLR index.
-- The endpoint returns the correct total count of companies.
-- If requested, the endpoint includes the correct job count for each company.
+- The endpoint successfully retrieves the total number of jobs from the SOLR index.
+- The endpoint correctly counts the number of companies with at least one job listing.
 - Error messages are clear and informative for users.
 - The endpoint responds within an acceptable time frame.
 
@@ -49,5 +48,5 @@ The objective of this project is to develop an API endpoint that retrieves a lis
 - **Risk:** High traffic could impact performance.
   - **Mitigation:** Implement load balancing and optimize server resources to handle increased traffic.
 
-- **Risk:** Data inconsistencies could lead to incorrect company listings.
+- **Risk:** Data inconsistencies could lead to incorrect counts.
   - **Mitigation:** Regularly validate data integrity in the SOLR index.
