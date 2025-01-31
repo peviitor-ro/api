@@ -1,7 +1,19 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, OPTIONS");
-header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+header('Content-Type: application/json; charset=utf-8');
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+// Ensure the request is PUT
+if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only PUT method is allowed"]);
+    exit;
+}
 
 function city_fix($in)
 {
@@ -35,10 +47,24 @@ $qs = $qs . 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
-$job_title = isset($_GET['job_title']) ? htmlspecialchars(trim($_GET['job_title']), ENT_QUOTES, 'UTF-8') : null;
-$company = isset($_GET['company']) ? htmlspecialchars(trim($_GET['company']), ENT_QUOTES, 'UTF-8') : null;
-$city = isset($_GET['city']) ? htmlspecialchars(trim(city_fix($_GET['city'])), ENT_QUOTES, 'UTF-8') : null;
-$job_link = isset($_GET['job_link']) ? filter_var(trim($_GET['job_link']), FILTER_VALIDATE_URL) : null;
+$putdata = fopen("php://input", "r");
+$raw_data = '';
+while ($data = fread($putdata, 1024)) {
+    $raw_data .= $data;
+}
+fclose($putdata);
+
+$data = json_decode($raw_data);
+$job_title = isset($data->job_title) ? htmlspecialchars($data->job_title) : null;
+$company = isset($data->company) ? htmlspecialchars($data->company) : null;
+$city = isset($data->city) ? htmlspecialchars($data->city) : null;
+$job_link = isset($data->job_link) ? htmlspecialchars($data->job_link ) : null;
+
+if (!$job_title || !$company || !$city || !$job_link) {
+    http_response_code(400);
+    echo json_encode(["error" => "Missing required fields: job_title, company, city, or job_link"]);
+    exit;
+}
 
 // Create data for Solr
 $item = new stdClass();
@@ -67,5 +93,4 @@ if ($result === FALSE) {
 }
 
 // Return success response
-echo $data;
 echo json_encode(["success" => "Data successfully inserted into Solr"]);
