@@ -1,17 +1,6 @@
 <?php
-// Lista originilor permise
-$allowed_origins = ['https://peviitor-ro.github.io'];
-
-// Determinarea originii cererii
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-if (in_array($origin, $allowed_origins)) {
-    header("Access-Control-Allow-Origin: $origin");
-} else {
-    http_response_code(403); // Forbidden
-    exit('Origin not allowed');
-}
-
 // Setează header-urile corespunzătoare pentru CORS
+ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
