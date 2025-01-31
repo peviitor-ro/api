@@ -101,29 +101,6 @@ function get_company($token)
     return $x;
 }
 
-
-function discord_webhook($msg)
-{
-    $msg .= ' UPDATE in PRODUCTION ' . date("l d-m-Y H:i:s");
-    $method = 'POST';
-    $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
-    $data = '{"content": "' . $msg . '"}';
-
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'POST',
-            'content' => $data
-        )
-    );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-
-    if ($result === FALSE) { /* Handle error */
-    }
-}
-
-
 function update($key)
 {
     $method = 'POST';
@@ -169,7 +146,6 @@ $server = 'zimbor.go.ro';
     );
 
     $msg = $company . ' user: ' . get_user_from_api_key($key);
-    discord_webhook($msg);
     $context  = stream_context_create($options);
 
     $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
