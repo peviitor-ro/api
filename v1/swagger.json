@@ -887,55 +887,50 @@
         "tags": ["Jobs"],
         "summary": "Update jobs",
         "description": "Update jobs using Solr",
-        "parameters": [
-          {
-            "name": "job_title",
-            "in": "query",
-            "required": true,
-            "description": "Job title",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "city",
-            "in": "query",
-            "required": true,
-            "description": "City",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "job_link",
-            "in": "query",
-            "required": true,
-            "description": "Job link",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "company",
-            "in": "query",
-            "required": true,
-            "description": "Company name",
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_title": {
+                    "type": "string",
+                    "description": "Job title",
+                    "example": "Software Engineer"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name",
+                    "example": "Tech Corp"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "City",
+                    "example": "Bucharest"
+                  },
+                  "job_link": {
+                    "type": "string",
+                    "description": "Job link",
+                    "example": "https://example.com/job/software-engineer"
+                  }
+                },
+                "required": ["job_title", "company", "city", "job_link"]
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "User updated successfully",
+            "description": "Job updated successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "success": {
                       "type": "string",
-                      "description": "Success message"
+                      "example": "Data successfully inserted into Solr"
                     }
                   }
                 }
@@ -949,9 +944,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "description": "Missing required field"
+                      "example": "Missing required fields: job_title, company, city, or job_link"
                     }
                   }
                 }
@@ -965,9 +960,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "error": {
                       "type": "string",
-                      "description": "Success message"
+                      "example": "Failed to insert data into Solr"
                     }
                   }
                 }
