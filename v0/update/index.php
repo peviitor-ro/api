@@ -17,28 +17,6 @@ function city_fix($in)
     return $output;
 }
 
-function discord_webhook($msg)
-{
-    $msg .= ' UPDATE in TEST ' . date("l d-m-Y H:i:s");
-    $method = 'POST';
-    $url = "https://discord.com/api/webhooks/1127592366614786118/ZOcdq94sqxO4P8iOIkQdRLG9s_vwgRfg1DFxhybwpHkqyet0QTe33rQ7bSDS5AG5HP8n";
-    $data = '{"content": "' . $msg . '"}';
-
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'POST',
-            'content' => $data
-        )
-    );
-
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-
-    if ($result === FALSE) { /* Handle error */
-    }
-}
-
 $method = 'PUT';
 
 require_once '../config.php';
@@ -79,7 +57,6 @@ $options = array(
     )
 );
 
-discord_webhook($company);
 $context = stream_context_create($options);
 $result = file_get_contents($url, false, $context);
 

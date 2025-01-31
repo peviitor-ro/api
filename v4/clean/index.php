@@ -136,28 +136,6 @@ function company_exist($company)
     }
 }
 
-function discord_webhook($msg)
-{
-    $msg .= ' CLEAN in PRODUCTION at ' . date("l d-m-Y H:i:s");
-    $method = 'POST';
-    $url = "https://discord.com/api/webhooks/1127143279977308240/etcQT4Roo02_6sy38WwUWwUmaNGKEylEJxJuq_bWw0HZLiynXKPLAt3qnyWpGnRd6X8Y";
-    $data = '{"content": "' . $msg . '"}';
-
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'POST',
-            'content' => $data
-        )
-    );
-
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-
-    if ($result === FALSE) { /* Handle error */
-    }
-}
-
 function clean($xcompany, $key)
 {
     $method = 'POST';
@@ -198,7 +176,6 @@ function clean($xcompany, $key)
     }
 
     $msg .= $xcompany . '  user: ' . get_user_from_api_key($key);
-    discord_webhook($msg);
     $context  = stream_context_create($options);
 
     $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
