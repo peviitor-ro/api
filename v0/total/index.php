@@ -28,7 +28,15 @@ $qs .= 'useParams=';
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
-$string = file_get_contents($url);
+$string = @file_get_contents($url);
+if ($string === FALSE) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    exit;
+}
 $json = json_decode($string, true);
 
 $companies = $json['facet_counts']['facet_fields']['company_str'];
@@ -43,8 +51,7 @@ for ($i = 1; $i < count($companies); $i += 2) {
 
 $obj = new stdClass();
 $obj->total = new stdClass();
-$obj->total->jobs = ''.$json['response']['numFound'];
-$obj->total->companies = ''.$companyCount;
+$obj->total->jobs = '' . $json['response']['numFound'];
+$obj->total->companies = '' . $companyCount;
 
 echo json_encode($obj);
-?>

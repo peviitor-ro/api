@@ -21,6 +21,18 @@ $qs = $qs . 'omitHeader=true';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
 
+$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
+
+$string = @file_get_contents($url);
+if ($string === FALSE) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    exit;
+}
+
 if (isset($_GET["start"])) {
     $start = $_GET["start"];
     if (!is_numeric($start) || $start <= 0) {
@@ -31,8 +43,5 @@ if (isset($_GET["start"])) {
     $qs .= "&start=" . $start;
 }
 
-$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
-
 $json = file_get_contents($url);
 echo $json;
-?>

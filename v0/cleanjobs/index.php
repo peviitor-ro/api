@@ -2,9 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     parse_str(file_get_contents('php://input'), $deleteData);
-    if(isset($deleteData['company'])) {
+    if (isset($deleteData['company'])) {
         $company = $deleteData['company'];
 
         require_once '../config.php';
@@ -15,6 +15,16 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         $countCommand = '/select';
         $countQS = '?q=' . rawurlencode('hiringOrganization.name:"' . $company . '"') . '&wt=json&rows=0';
         $countUrl = 'http://' . $server . '/solr/' . $core . $countCommand . $countQS;
+
+        $string = @file_get_contents($countUrl);
+        if ($string === FALSE) {
+            http_response_code(503);
+            echo json_encode([
+                "error" => "SOLR server in DEV is down",
+                "code" => 503
+            ]);
+            exit;
+        }
 
         try {
             if (empty($company)) {
@@ -44,7 +54,7 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             $deleteUrl = 'http://' . $server . '/solr/' . $core . $deleteCommand . $qs;
 
             $deleteData = json_encode(['delete' => ['query' => 'hiringOrganization.name:"' . $company . '"']]);
-            
+
             $options = array(
                 'http' => array(
                     'header'  => "Content-type: application/json\r\n",
@@ -63,12 +73,10 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             }
 
             echo json_encode(['message' => 'Jobs deleted successfully', 'jobCount' => $jobCount]);
-
         } catch (Exception $e) {
             echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
             exit;
         }
-
     } else {
         echo json_encode(['error' => 'Company parameter is missing', 'code' => 400]);
         exit;
@@ -77,4 +85,3 @@ if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     echo json_encode(['error' => 'Invalid request method', 'code' => 405]);
     exit;
 }
-?>
