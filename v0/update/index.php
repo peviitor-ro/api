@@ -47,6 +47,16 @@ $qs = $qs . 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
+$string = @file_get_contents($url);
+if ($string === FALSE) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    exit;
+}
+
 $putdata = fopen("php://input", "r");
 $raw_data = '';
 while ($data = fread($putdata, 1024)) {
@@ -58,7 +68,7 @@ $data = json_decode($raw_data);
 $job_title = isset($data->job_title) ? htmlspecialchars($data->job_title) : null;
 $company = isset($data->company) ? htmlspecialchars($data->company) : null;
 $city = isset($data->city) ? htmlspecialchars($data->city) : null;
-$job_link = isset($data->job_link) ? htmlspecialchars($data->job_link ) : null;
+$job_link = isset($data->job_link) ? htmlspecialchars($data->job_link) : null;
 
 if (!$job_title || !$company || !$city || !$job_link) {
     http_response_code(400);

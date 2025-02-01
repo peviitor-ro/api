@@ -13,14 +13,16 @@ try {
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=0';
     $string = @file_get_contents($url);
     if ($string === FALSE) {
-        // Force HTTP status code to be 503
-        header("HTTP/1.1 503 Service Unavailable");
-        throw new Exception('SOLR server in DEV is down', 503);
+        http_response_code(503);
+        echo json_encode([
+            "error" => "SOLR server in DEV is down",
+            "code" => 503
+        ]);
+        exit;
     }
-
     $json = json_decode($string, true);
     $max = $json['response']['numFound'];
-    
+
     // If no documents are found, return a specific message
     if ($max == 0) {
         echo json_encode(['message' => 'There are no jobs to display']);
@@ -28,7 +30,7 @@ try {
     }
 
     // Randomly select a document if there are jobs
-    $start = rand(0, $max - 1); 
+    $start = rand(0, $max - 1);
 
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=1' . '&start=' . $start . '&omitHeader=true';
     $json = @file_get_contents($url);
@@ -43,9 +45,7 @@ try {
     unset($jsonArray['response']['docs'][0]['_version_']);
     $newJson = json_encode($jsonArray, JSON_PRETTY_PRINT);
     echo $newJson;
-
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
     exit;
 }
-?>

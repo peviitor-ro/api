@@ -27,7 +27,15 @@ $id = urlencode($id);
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs . $id;
 
-$json = file_get_contents($url);
+$string = @file_get_contents($url);
+if ($string === FALSE) {
+  http_response_code(503);
+  echo json_encode([
+    "error" => "SOLR server in DEV is down",
+    "code" => 503
+  ]);
+  exit;
+}
 $json = json_decode($json);
 unset($json->response->docs[0]->version);
 

@@ -98,7 +98,6 @@
         }
       }
     },
-
     "/suggest/": {
       "get": {
         "tags": ["Search"],
@@ -304,6 +303,24 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -425,6 +442,24 @@
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
             "content": {}
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -460,6 +495,24 @@
                           }
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
                     }
                   }
                 }
@@ -518,6 +571,24 @@
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
             "content": {}
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -674,6 +745,24 @@
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
             "content": {}
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -708,11 +797,28 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-
     "/updateuser/": {
       "put": {
         "tags": ["User"],
@@ -808,6 +914,24 @@
                     "message": {
                       "type": "string",
                       "description": "Success message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
                     }
                   }
                 }
@@ -963,6 +1087,24 @@
                     "error": {
                       "type": "string",
                       "example": "Failed to insert data into Solr"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
                     }
                   }
                 }

@@ -1,13 +1,13 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API for QA ENV of peviitor.ro",
+    "title": "API for LOCAL ENV of peviitor.ro",
     "description": "API documentation",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://peviitorqa.go.ro/api/v0"
+      "url": "http://localhost:8080/api/v0"
     }
   ],
   "paths": {
@@ -98,7 +98,6 @@
         }
       }
     },
-
     "/suggest/": {
       "get": {
         "tags": ["Search"],
@@ -304,6 +303,24 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -425,6 +442,24 @@
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
             "content": {}
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -465,6 +500,24 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -473,8 +526,8 @@
       "post": {
         "tags": ["Logo"],
         "summary": "Add a new logo",
-          "description": "Logo data",
-          "parameters": [
+        "description": "Logo data",
+        "parameters": [
           {
             "name": "id",
             "in": "query",
@@ -518,6 +571,24 @@
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
             "content": {}
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -674,6 +745,24 @@
           "500": {
             "description": "Internal Server Error. Something went wrong on the server side.",
             "content": {}
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -705,6 +794,24 @@
                     }
                   },
                   "required": ["total"]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  }
                 }
               }
             }
@@ -764,7 +871,6 @@
             }
           }
         ],
-
         "responses": {
           "200": {
             "description": "User updated successfully",
@@ -808,6 +914,24 @@
                     "message": {
                       "type": "string",
                       "description": "Success message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
                     }
                   }
                 }
@@ -963,6 +1087,24 @@
                     "error": {
                       "type": "string",
                       "example": "Failed to insert data into Solr"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Solr server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
                     }
                   }
                 }

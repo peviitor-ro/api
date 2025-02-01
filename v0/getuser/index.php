@@ -4,8 +4,7 @@ header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: *');
 header('Content-Type: application/json; charset=utf-8');
 
-if (isset($_GET['user']))
-{
+if (isset($_GET['user'])) {
   $user = $_GET['user'];
   $user = urlencode($user);
 
@@ -22,10 +21,18 @@ if (isset($_GET['user']))
 
   $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs . $user;
 
+  $string = @file_get_contents($url);
+  if ($string === FALSE) {
+    http_response_code(503);
+    echo json_encode([
+      "error" => "SOLR server in DEV is down",
+      "code" => 503
+    ]);
+    exit;
+  }
+
   $json = file_get_contents($url);
   $json = json_decode($json);
   unset($json->response->docs[0]->_version_);
   echo json_encode($json->response->docs[0]);
 }
-
-?>

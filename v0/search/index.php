@@ -23,8 +23,15 @@ if ($_SERVER['QUERY_STRING'] == "page=1") {
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
-$json = file_get_contents($url);
-
+$string = @file_get_contents($url);
+if ($string === FALSE) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    exit;
+}
 $data = json_decode($json, true);
 
 if (isset($data['response']['numFound']) && $data['response']['numFound'] == 0) {
@@ -38,5 +45,3 @@ if (isset($data['response']['numFound']) && $data['response']['numFound'] == 0) 
     // Return the original response if results are found
     echo $json;
 }
-
-?>

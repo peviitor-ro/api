@@ -18,16 +18,19 @@ try {
 
     // Request suggestions from Solr
     $url = 'http://' . $server . '/solr/' . $core . '/suggest?suggest=true&suggest.build=true&suggest.dictionary=jobTitleSuggester&suggest.q=' . urlencode($query) . '&wt=json';
-    $response = @file_get_contents($url);
-    
-    if ($response === FALSE) {
-        // Force HTTP status code to be 503
-        header("HTTP/1.1 503 Service Unavailable");
-        throw new Exception('SOLR server is down or request failed', 503);
+
+    $string = @file_get_contents($url);
+    if ($string === FALSE) {
+        http_response_code(503);
+        echo json_encode([
+            "error" => "SOLR server in DEV is down",
+            "code" => 503
+        ]);
+        exit;
     }
-    
+
     $jsonArray = json_decode($response, true);
-    
+
     if (empty($jsonArray['suggest']['jobTitleSuggester'][$query]['suggestions'])) {
         echo json_encode(['message' => 'No suggestions found']);
         exit;
@@ -36,9 +39,7 @@ try {
     // Extracting suggestions and sending them back as JSON
     $suggestions = $jsonArray['suggest']['jobTitleSuggester'][$query]['suggestions'];
     echo json_encode(['suggestions' => $suggestions], JSON_PRETTY_PRINT);
-
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
     exit;
 }
-?>

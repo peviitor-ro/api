@@ -13,6 +13,16 @@ $qs .= '&wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
+$string = @file_get_contents($url);
+if ($string === FALSE) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    exit;
+}
+
 // Get the required parameters
 $id = $_GET['id'] ?? ''; // Document ID to update
 $field = 'url';          // Field to remove (hardcoded for this endpoint)
@@ -41,16 +51,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Length: ' . strlen($data)
 ]);
 
-$response = curl_exec($ch);
-
-if ($response === false) {
-    $error_message = curl_error($ch);
-    curl_close($ch);
-    header("HTTP/1.1 503 Service Unavailable");
-    echo json_encode(['error' => 'Failed to execute request: ' . $error_message, 'code' => 503]);
-    exit;
-}
-
 $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
@@ -61,4 +61,3 @@ if ($http_code >= 400) {
 }
 
 echo $response;
-?>
