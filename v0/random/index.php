@@ -22,6 +22,15 @@ require_once '../config.php';
 $core = 'jobs';
 
 try {
+    // Check for authorization (example condition)
+    $userAuthorized = false; // Change this based on your authorization logic
+    if (!$userAuthorized) {
+        // Return 403 Forbidden if user is not authorized
+        header("HTTP/1.1 403 Forbidden");
+        echo json_encode(['error' => 'PHP code is not found.']);
+        exit;
+    }
+
     // Request the total number of documents
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=0';
     $string = @file_get_contents($url);
