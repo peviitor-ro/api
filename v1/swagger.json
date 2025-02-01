@@ -77,6 +77,22 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden - User does not have permission to access PHP code",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "PHP code is not found."
+                    }
+                  }
+                }
+              }
+            }
+          },
           "503": {
             "description": "Service Unavailable - Solr server error",
             "content": {
