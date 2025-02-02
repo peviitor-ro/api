@@ -94,7 +94,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -245,38 +245,38 @@
                 }
               }
             }
-          }
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "error": {
-                    "type": "string"
-                  },
-                  "code": {
-                    "type": "integer"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
                   }
                 }
               }
             }
-          }
-        },
-        "503": {
-          "description": "Service Unavailable",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "error": {
-                    "type": "string"
-                  },
-                  "code": {
-                    "type": "integer"
+          },
+          "503": {
+            "description": "Service unavailable. SOLR server is down or request failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
                   }
                 }
               }
@@ -321,7 +321,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -372,7 +372,7 @@
             "content": {}
           },
           "503": {
-            "description": "Service Unavailable. SOLR server is down or your call to Solr failed",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -460,7 +460,7 @@
             "content": {}
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -518,7 +518,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -589,7 +589,7 @@
             "content": {}
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -660,7 +660,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -763,7 +763,7 @@
             "content": {}
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -815,7 +815,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -937,7 +937,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1002,7 +1002,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1110,7 +1110,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable - Solr server error",
+            "description": "Service unavailable. SOLR server is down or request failed.",
             "content": {
               "application/json": {
                 "schema": {
