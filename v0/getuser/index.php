@@ -4,8 +4,8 @@ header('Access-Control-Allow-Methods: GET, POST');
 header('Access-Control-Allow-Headers: *');
 header('Content-Type: application/json; charset=utf-8');
 
-if (isset($_GET['user'])) {
-  $user = $_GET['user'];
+if (isset($_GET['ID'])) {
+  $user = $_GET['ID'];
   $user = urlencode($user);
 
   require_once '../config.php';
