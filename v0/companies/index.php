@@ -33,8 +33,8 @@ $string = @file_get_contents($url);
 if ($string === FALSE) {
    http_response_code(503);
    echo json_encode([
-       "error" => "SOLR server in DEV is down",
-       "code" => 503
+      "error" => "SOLR server in DEV is down",
+      "code" => 503
    ]);
    exit;
 }
@@ -50,11 +50,16 @@ for ($i = 0; $i < count($companies) / 2; $i++) {
    $k = 2 * $i;
    $l = 2 * $i + 1;
    $obj = new stdClass();
-   $obj->name = $companies[$k];
-   if (isset($_GET['count']))
-      if ($_GET['count'] == 'true') {
-         $obj->jobs = $companies[$l];
-      }
+   if ($_GET['count'] == 'false') {
+      $obj->name = $companies[$k];
+   } else if ($_GET['count'] == 'true') {
+      $obj->name = $companies[$k];
+      $obj->jobs = $companies[$l];
+   } else {
+      http_response_code(400);
+      echo json_encode(["error" => "Missing or wrong required field: count"]);
+      exit;
+   }
    $results->companies[$i] = new stdClass();
    $results->companies[$i] = $obj;
 }
