@@ -48,15 +48,15 @@ $qs = $qs . 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
-$string = @file_get_contents($url);
-if ($string === FALSE) {
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+if ($response === false) {
     http_response_code(503);
-    echo json_encode([
-        "error" => "SOLR server in DEV is down",
-        "code" => 503
-    ]);
+    echo json_encode(["error" => "Failed to connect to Solr: " . curl_error($ch)]);
     exit;
 }
+curl_close($ch);
 
 $putdata = fopen("php://input", "r");
 $raw_data = '';
