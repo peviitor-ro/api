@@ -294,7 +294,7 @@
             "in": "query",
             "name": "count",
             "schema": {
-              "type": "boolean"
+              "type": "string"
             },
             "description": "Whether to count the number of jobs for each company",
             "required": true
