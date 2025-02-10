@@ -361,11 +361,35 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
-                }
+                  "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "url": { "type": "string" },
+                    "company": { "type": "string" },
+                    "apikey": { "type": "string" }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "apikey": { "type": "string" }
+                  }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "logo": { "type": "string" }
+                  }
+                } 
+              ]
               }
             }
-          },
+          }
+        },
           "404": {
             "description": "No user found",
             "content": {}
