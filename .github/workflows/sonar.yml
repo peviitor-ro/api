@@ -1,0 +1,43 @@
+name: SonarQube Analysis
+
+on:
+  workflow_dispatch:    # Allows manual triggering
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarqube:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, curl, intl, json, xdebug
+          coverage: xdebug
+
+      - name: Install Composer dependencies
+        run: |
+          composer install --prefer-dist --no-progress
+
+      - name: Run PHPUnit tests with coverage
+        run: vendor/bin/phpunit --coverage-clover clover.xml
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.php.coverage.reportPaths=clover.xml
+            -Dsonar.php.exclusions=**/vendor/**
+            -Dsonar.tests=tests
