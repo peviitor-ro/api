@@ -1,7 +1,7 @@
 name: SonarQube Analysis
 
 on:
-  workflow_dispatch:    # Allows manual triggering
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -29,7 +29,8 @@ jobs:
           composer install --prefer-dist --no-progress
 
       - name: Run PHPUnit tests with coverage
-        run: vendor/bin/phpunit --coverage-clover clover.xml
+        run: |
+          vendor/bin/phpunit --coverage-clover ./clover.xml --testsuite "API Tests"
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
@@ -38,6 +39,10 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.php.coverage.reportPaths=clover.xml
-            -Dsonar.php.exclusions=**/vendor/**
-            -Dsonar.tests=tests
+            -Dsonar.projectKey=php-api_v0-v6
+            -Dsonar.php.coverage.reportPaths=./clover.xml
+            -Dsonar.php.exclusions=**/vendor/**,**/documentation/**,**/swagger/**,**/testing/**,**/devops/**,**/humans-txt/**
+            -Dsonar.sources=v0,v1,v3,v4,v5,v6
+            -Dsonar.tests=unitTest
+            -Dsonar.test.inclusions=unitTest/**/*
+            -Dsonar.coverage.exclusions=**/config.php
