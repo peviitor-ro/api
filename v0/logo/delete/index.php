@@ -4,7 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 require_once '../../config.php';
 
-$core = 'auth'; // Core name
+$core = 'logo'; // Core name
 $command = '/update';
 
 $qs = '?_=' . time(); // Use current time as a cache buster
@@ -13,15 +13,6 @@ $qs .= '&wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
-$string = @file_get_contents($url);
-if ($string === FALSE) {
-    http_response_code(503);
-    echo json_encode([
-        "error" => "SOLR server in DEV is down",
-        "code" => 503
-    ]);
-    exit;
-}
 
 // Get the required parameters
 $id = $_GET['id'] ?? ''; // Document ID to update
