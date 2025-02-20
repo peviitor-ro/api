@@ -6,7 +6,7 @@ $method = 'POST';
 
 require_once '../../config.php';
 
-$core  = 'logo';
+$core  = 'auth';
 $command = '/update';
 
 $qs = '?';
@@ -16,6 +16,25 @@ $qs .= '&overwrite=true';
 $qs .= '&wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
+
+$context = stream_context_create([
+    'http' => [
+        'header' => "Authorization: Basic " . base64_encode("$username:$password")
+    ]
+]);
+
+// Fetch data from Solr
+$string = @file_get_contents($url, false, $context);
+
+// Check if Solr is down (server not responding)
+if ($string == false) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    exit;
+}
 
 // Fetch parameters from query string
 $id = isset($_GET['id']) ? trim(urlencode($_GET['id'])) : null;
@@ -39,7 +58,8 @@ $data = json_encode([$item]);
 
 $options = array(
     'http' => array(
-        'header'  => "Content-type: application/json\r\nAuthorization: Basic " . base64_encode("solr:SolrRocks") . "\r\n",
+        'header'  => "Content-type: application/json\r\n",
+        "Authorization: Basic " . base64_encode("$username:$password"),
         'method'  => 'POST',
         'content' => $data
     )
