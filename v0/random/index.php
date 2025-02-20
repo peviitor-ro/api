@@ -24,15 +24,20 @@ $core = 'jobs';
 try {
     // Request the total number of documents
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=0';
-    $string = @file_get_contents($url);
-    if ($string === FALSE) {
-        http_response_code(503);
-        echo json_encode([
-            "error" => "SOLR server in DEV is down",
-            "code" => 503
-        ]);
-        exit;
+
+    $context = stream_context_create([
+        'http' => [
+            'header' => "Authorization: Basic " . base64_encode("$username:$password")
+        ]
+    ]);
+    
+    $string = @file_get_contents($url, false, $context);
+    if ($string === "false") {
+        // Force HTTP status code to be 503
+        header("HTTP/1.1 503 Service Unavailable");
+        throw new Exception('SOLR server in DEV is down', 503);
     }
+
     $json = json_decode($string, true);
     $max = $json['response']['numFound'];
 
@@ -46,7 +51,7 @@ try {
     $start = rand(0, $max - 1);
 
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=1' . '&start=' . $start . '&omitHeader=true';
-    $json = @file_get_contents($url);
+    $json = @file_get_contents($url, false, $context);
     if ($json === FALSE) {
         list($version, $status, $msg) = explode(' ', $http_response_header[0], 3);
         // Force HTTP status code to be 503

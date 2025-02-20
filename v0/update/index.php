@@ -12,7 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // Ensure the request is PUT
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     http_response_code(405); // Method Not Allowed
-    echo json_encode(["error" => "Only PUT method is allowed"]);
+    echo json_encode([
+        "error" => "Only PUT method is allowed",
+        "code" => 400
+    ]);
     exit;
 }
 
@@ -48,15 +51,12 @@ $qs = $qs . 'wt=json';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
+// Prepare for cURL
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$response = curl_exec($ch);
-if ($response === false) {
-    http_response_code(503);
-    echo json_encode(["error" => "Failed to connect to Solr: " . curl_error($ch)]);
-    exit;
-}
-curl_close($ch);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    "Authorization: Basic " . base64_encode("$username:$password")
+));
 
 $putdata = fopen("php://input", "r");
 $raw_data = '';
@@ -73,7 +73,10 @@ $job_link = isset($data->job_link) ? htmlspecialchars($data->job_link) : null;
 
 if (!$job_title || !$company || !$city || !$job_link) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing required fields: job_title, company, city, or job_link"]);
+    echo json_encode([
+        "error" => "Missing required fields: job_title, company, city, or job_link",
+        "code" => 400
+    ]);
     exit;
 }
 
@@ -81,27 +84,46 @@ if (!$job_title || !$company || !$city || !$job_link) {
 $item = new stdClass();
 $item->job_title = $job_title;
 $item->company = $company;
-$item->city = $city;
+$item->city = city_fix($city);  // Apply city fix
 $item->job_link = $job_link;
 
 $data = json_encode([$item]);
 
-$options = array(
-    'http' => array(
-        'header'  => "Content-type: application/json\r\n",
-        'method'  => 'POST',
-        'content' => $data
-    )
-);
+// Set cURL options for POST
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    "Content-Type: application/json",
+    "Authorization: Basic " . base64_encode("$username:$password")
+));
 
-$context = stream_context_create($options);
-$result = file_get_contents($url, false, $context);
+// Execute the cURL request and capture the response
+$response = curl_exec($ch);
 
-if ($result === FALSE) {
-    http_response_code(500); // Internal Server Error
-    echo json_encode(["error" => "Failed to insert data into Solr"]);
+// Check for errors in cURL execution
+if (curl_errno($ch)) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    curl_close($ch);
     exit;
 }
+
+// Check if Solr returns a successful response
+$response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+if ($response_code !== 200) {
+    http_response_code(503);
+    echo json_encode([
+        "error" => "SOLR server in DEV is down",
+        "code" => 503
+    ]);
+    curl_close($ch);
+    exit;
+}
+
+curl_close($ch);
 
 // Return success response
 echo json_encode(["success" => "Data successfully inserted into Solr"]);

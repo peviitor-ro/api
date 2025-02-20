@@ -51,15 +51,26 @@ try {
     $query .= '&useParams=';
     $url = $baseUrl . $query;
 
-    // Verificăm disponibilitatea endpoint-ului
-    $headers = @get_headers($url);
-    if ($headers === false || strpos($headers[0], '200') === false) {
-        throw new Exception('Endpoint-ul nu este disponibil');
+    $context = stream_context_create([
+        'http' => [
+            'header' => "Authorization: Basic " . base64_encode("$username:$password")
+        ]
+    ]);
+    
+    // Fetch data from Solr
+    $string = @file_get_contents($url, false, $context);
+    
+    // Check if Solr is down (server not responding)
+    if ($string == false) {
+        http_response_code(503);
+        echo json_encode([
+            "error" => "SOLR server in DEV is down",
+            "code" => 503
+        ]);
+        exit;
     }
 
-    // Obținem datele din Solr
-    $json = file_get_contents($url);
-    $jobs = json_decode($json, true);
+    $jobs = json_decode($string, true);
 
     if (isset($jobs['response']['numFound']) && $jobs['response']['numFound'] == 0) {
         http_response_code(404);
