@@ -25,17 +25,14 @@ try {
     // Request the total number of documents
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=0';
 
-    $username = $solr_user;
-    $password = $solr_password;
-
     $context = stream_context_create([
         'http' => [
             'header' => "Authorization: Basic " . base64_encode("$username:$password")
         ]
     ]);
-
+    
     $string = @file_get_contents($url, false, $context);
-    if ($string === FALSE) {
+    if ($string === "false") {
         // Force HTTP status code to be 503
         header("HTTP/1.1 503 Service Unavailable");
         throw new Exception('SOLR server in DEV is down', 503);
