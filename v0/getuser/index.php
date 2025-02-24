@@ -21,7 +21,14 @@ if (isset($_GET['ID'])) {
 
   $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs . $id;
 
-  $string = @file_get_contents($url);
+  $context = stream_context_create([
+    'http' => [
+      'header' => "Authorization: Basic " . base64_encode("$username:$password")
+    ]
+  ]);
+
+  // Fetch data from Solr
+  $string = @file_get_contents($url, false, $context);
   if ($string === FALSE) {
     http_response_code(503);
     echo json_encode([
@@ -45,7 +52,6 @@ if (isset($_GET['ID'])) {
     echo json_encode(["error" => "Invalid ID format", "received" => $id]);
     exit;
   }
-
 
   unset($json->response->docs[0]->_version_);
   echo json_encode($json->response->docs[0]);
