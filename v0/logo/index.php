@@ -2,6 +2,29 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
+// Verifică dacă există parametri în URL
+if (!empty($_GET)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Bad Request: This endpoint does not accept parameters.",
+        "code" => 400
+    ]);
+    exit;
+}
+
+// Verifică dacă URL-ul conține caractere incorecte
+$request_uri = $_SERVER['REQUEST_URI'];  // URL-ul complet cerut
+
+// Verifică dacă există secvențe de caractere invalid
+if (preg_match('/%[0-9A-Fa-f]{2}/', $request_uri)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Bad Request: Invalid characters in the URL.",
+        "code" => 400
+    ]);
+    exit;
+}
+
 require_once '../config.php';
 
 $core = "auth";
