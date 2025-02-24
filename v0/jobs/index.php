@@ -6,6 +6,7 @@ require_once '../config.php';
 
 $core = "jobs";
 
+// Parametrii pentru interogarea Solr
 $qs = '?';
 $qs = $qs . 'facet=true';
 $qs = $qs . '&';
@@ -15,11 +16,21 @@ $qs = $qs . 'q.op=OR';
 $qs = $qs . '&';
 $qs = $qs . 'q=*%3A*';
 $qs = $qs . '&';
-$qs = $qs . 'rows=100';
-$qs = $qs . '&';
 $qs = $qs . 'omitHeader=true';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
+
+// Parametru pentru numărul de joburi
+$rows = 100;  // Valoare implicită
+if (isset($_GET["rows"])) {
+    $rows = $_GET["rows"];
+    if (!is_numeric($rows) || $rows <= 0) {
+        // Dacă rows nu este valid, returnează o eroare
+        echo json_encode(["error" => "You must provide a positive number for 'rows'"]);
+        exit;
+    }
+}
+$qs = $qs . '&rows=' . $rows;
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
@@ -32,7 +43,7 @@ $context = stream_context_create([
 // Fetch data from Solr
 $string = @file_get_contents($url, false, $context);
 
-// Check if Solr is down (server not responding)
+// Verifică dacă Solr este în picioare (server nefuncțional)
 if ($string == false) {
     http_response_code(503);
     echo json_encode([
@@ -42,15 +53,17 @@ if ($string == false) {
     exit;
 }
 
-if (isset($_GET["start"])) {
-    $start = $_GET["start"];
-    if (!is_numeric($start) || $start <= 0) {
-        // Return a JSON error response if start is not a positive number
-        echo json_encode(["error" => "You must type a positive number"]);
-        exit;
-    }
-    $qs .= "&start=" . $start;
+$json = json_decode($string, true);
+
+// Verifică dacă Solr a returnat un răspuns valid
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo json_encode(["error" => "Failed to parse Solr response as JSON"]);
+    exit;
 }
 
-$json = file_get_contents($url);
-echo $json;
+// Elimină secțiunea "facet_counts" din răspuns
+unset($json['facet_counts']);
+
+// Returnează doar partea relevantă din răspuns
+echo json_encode($json);
+?>
