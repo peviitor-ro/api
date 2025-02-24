@@ -399,13 +399,13 @@
         "parameters": [
           {
             "in": "query",
-            "name": "start",
+            "name": "rows",
             "schema": {
               "type": "integer",
-              "minimum": 1
-            },
-            "example": 100,
-            "description": "Start index for pagination. Must be a positive number."
+              "minimum": 1,
+              "example": 100,
+              "description": "Number of job results to return. Default is 100."
+            }
           }
         ],
         "responses": {
@@ -416,17 +416,31 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "jobs": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "job_id": {
-                            "type": "integer"
+                    "response": {
+                      "type": "object",
+                      "properties": {
+                        "numFound": {
+                          "type": "integer",
+                          "description": "Total number of jobs found"
+                        },
+                        "rows": {
+                          "type": "integer",
+                          "description": "Start index used for pagination"
+                        },
+                        "docs": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "job_id": {
+                                "type": "integer"
+                              },
+                              "job_title": {
+                                "type": "string"
+                              }
+                            }
                           },
-                          "job_title": {
-                            "type": "string"
-                          }
+                          "description": "List of job records"
                         }
                       }
                     }
