@@ -19,12 +19,12 @@ $apikey = isset($_GET['apikey']) ? trim($_GET['apikey']) : null;
 
 if (!$id) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing required parameter: id"]);
+    echo json_encode(["error" => "Missing required parameter: apikey"]);
     exit;
 }
 
-$id = urlencode($id);
-$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs . $id;
+$apikey = urlencode($apikey);
+$url = 'http://' . $server . '/solr/' . $core . '/select' . $qs . $apikey;
 
 $context = stream_context_create([
     'http' => [
@@ -62,7 +62,7 @@ unset($doc->_version_);
 if ($urlParam) $doc->url = $urlParam;
 if ($company) $doc->company = $company;
 if ($logo) $doc->logo = $logo;
-if ($apikey) $doc->apikey = $apikey;
+if ($id) $doc->id = $id;
 
 // Convert updated document into JSON
 $data = json_encode([$doc]);
