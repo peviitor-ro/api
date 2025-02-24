@@ -4,7 +4,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 $method = 'POST';
 
-require_once '../../config.php';  // Asigură-te că fișierul config.php conține corect username și password
+require_once '../../config.php'; 
 
 $core  = 'auth';
 $command = '/update';
