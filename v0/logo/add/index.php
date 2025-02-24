@@ -26,16 +26,6 @@ $context = stream_context_create([
 // Fetch data from Solr
 $string = @file_get_contents($url, false, $context);
 
-// Check if Solr is down (server not responding)
-if ($string == false) {
-    http_response_code(503);
-    echo json_encode([
-        "error" => "SOLR server in DEV is down",
-        "code" => 503
-    ]);
-    exit;
-}
-
 // Fetch parameters from query string
 $id = isset($_GET['id']) ? trim(urlencode($_GET['id'])) : null;
 $logo = isset($_GET['logo']) ? trim(htmlspecialchars($_GET['logo'])) : null;
