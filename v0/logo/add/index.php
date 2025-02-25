@@ -6,14 +6,10 @@ $method = 'POST';
 
 require_once '../../config.php'; 
 
-$core  = 'auth';
+$core  = 'logo';
 $command = '/update';
 
-$qs = '?';
-$qs .= '_=1617366504771';
-$qs .= '&commitWithin=1000';
-$qs .= '&overwrite=true';
-$qs .= '&wt=json';
+$qs = '?indent=true&q.op=OR&q=*%3A*&useParams=';
 
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 

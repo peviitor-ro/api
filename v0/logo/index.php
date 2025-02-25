@@ -11,18 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 require_once '../config.php';
 
-$core = "auth";
+$core  = 'logo';
 
-$qs = '?';
-$qs = $qs . 'indent=true';
-$qs = $qs . '&';
-$qs = $qs . 'q.op=OR';
-$qs = $qs . '&';
-$qs = $qs . 'q=logo%3A*';
-$qs = $qs . '&';
-$qs = $qs . 'rows=20000000';
-$qs = $qs . '&';
-$qs = $qs . 'useParams=';
+$qs = '?indent=true&q.op=OR&q=*%3A*&useParams=';
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
@@ -62,4 +53,3 @@ for ($i = 0; $i < count($companies); $i++) {
 }
 
 echo json_encode($results);
-?>
