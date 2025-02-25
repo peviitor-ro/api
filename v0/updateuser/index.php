@@ -17,7 +17,7 @@ $company = isset($_GET['company']) ? trim($_GET['company']) : null;
 $logo = isset($_GET['logo']) ? trim($_GET['logo']) : null;
 $apikey = isset($_GET['apikey']) ? trim($_GET['apikey']) : null;
 
-if (!$id) {
+if (!$apikey) {
     http_response_code(400);
     echo json_encode(["error" => "Missing required parameter: apikey"]);
     exit;
