@@ -7,15 +7,14 @@ header('Content-Type: application/json; charset=utf-8');
 require_once '../config.php';
 
 $core = 'auth';
-
-$qs = '?omitHeader=true&q.op=OR&q=id%3A';
+$qs = '?omitHeader=true&q.op=OR&q=apikey%3A';
 
 // Retrieve parameters from the query string
+$apikey = isset($_GET['apikey']) ? trim($_GET['apikey']) : null;
 $id = isset($_GET['id']) ? trim($_GET['id']) : null;
 $urlParam = isset($_GET['url']) ? trim($_GET['url']) : null;
 $company = isset($_GET['company']) ? trim($_GET['company']) : null;
 $logo = isset($_GET['logo']) ? trim($_GET['logo']) : null;
-$apikey = isset($_GET['apikey']) ? trim($_GET['apikey']) : null;
 
 if (!$apikey) {
     http_response_code(400);
@@ -26,9 +25,11 @@ if (!$apikey) {
 $apikey = urlencode($apikey);
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs . $apikey;
 
+$authHeader = "Authorization: Basic " . base64_encode("$username:$password") . "\r\n";
+
 $context = stream_context_create([
     'http' => [
-        'header' => "Authorization: Basic " . base64_encode("$username:$password")
+        'header' => $authHeader
     ]
 ]);
 
@@ -36,7 +37,7 @@ $context = stream_context_create([
 $string = @file_get_contents($url, false, $context);
 
 // Check if Solr is down (server not responding)
-if ($string == false) {
+if ($string === false) {
     http_response_code(503);
     echo json_encode([
         "error" => "SOLR server in DEV is down",
@@ -49,7 +50,7 @@ $json = json_decode($string);
 
 if (!isset($json->response->docs[0])) {
     http_response_code(404);
-    echo json_encode(["error" => "User not found"]);
+    echo json_encode(["error" => "User with this apikey not found"]);
     exit;
 }
 
@@ -59,17 +60,17 @@ $doc = $json->response->docs[0];
 unset($doc->_version_);
 
 // Update user fields if provided
+if ($id) $doc->id = $id;
 if ($urlParam) $doc->url = $urlParam;
 if ($company) $doc->company = $company;
 if ($logo) $doc->logo = $logo;
-if ($id) $doc->id = $id;
 
 // Convert updated document into JSON
 $data = json_encode([$doc]);
 
 $options = [
     'http' => [
-        'header'  => "Content-type: application/json\r\n",
+        'header'  => "Content-type: application/json\r\n" . $authHeader,
         'method'  => 'POST',
         'content' => $data
     ]
