@@ -855,6 +855,15 @@
         "description": "Update usedr details in Solr",
         "parameters": [
           {
+            "name": "apikey",
+            "in": "query",
+            "required": true,
+            "description": "API key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "id",
             "in": "query",
             "required": true,
@@ -886,15 +895,6 @@
             "in": "query",
             "required": true,
             "description": "Logo URL",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "apikey",
-            "in": "query",
-            "required": true,
-            "description": "API key",
             "schema": {
               "type": "string"
             }
