@@ -5,37 +5,21 @@ header('Content-Type: application/json; charset=utf-8');
 require_once '../../config.php';
 
 $core  = 'logo';
-$command = '/update';
+$command = '/update?commit=true'; // Adăugăm commit=true pentru a aplica modificările imediat
+$url = 'http://' . $server . '/solr/' . $core . $command;
 
-$qs = '?_=' . time(); // Use current time as a cache buster
-$qs .= '?indent=true&q.op=OR&q=*%3A*&useParams=';
-
-$url = 'http://' . $server . '/solr/' . $core . $command . $qs;
-
-$context = stream_context_create([
-    'http' => [
-        'header' => "Authorization: Basic " . base64_encode("$username:$password")
-    ]
-]);
-
-// Fetch data from Solr
-$string = @file_get_contents($url, false, $context);
-
-// Get the required parameters
-$id = $_GET['id'] ?? ''; // Document ID to update
-$field = 'url';          // Field to remove (hardcoded for this endpoint)
+$id = $_GET['id'] ?? '';
 
 if (empty($id)) {
-    header("HTTP/1.1 400 Bad Request");
+    http_response_code(400);
     echo json_encode(['error' => 'Document ID is required', 'code' => 400]);
     exit;
 }
 
-// Create the atomic update payload
+// Payload pentru ștergerea documentului pe baza id-ului
 $data = json_encode([
-    [
-        "id" => $id,
-        $field => ["set" => null] // Use Solr's atomic update syntax to remove the field
+    "delete" => [
+        "id" => $id // Id-ul documentului pe care vrem să-l ștergem
     ]
 ]);
 
@@ -46,16 +30,38 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Type: application/json',
-    'Content-Length: ' . strlen($data)
+    'Content-Length: ' . strlen($data),
+    'Authorization: Basic ' . base64_encode("$username:$password")
 ]);
 
-$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
+// Execută cererea cURL
+$response = curl_exec($ch);
 
-if ($http_code >= 400) {
-    header("HTTP/1.1 " . $http_code . " Bad Request");
-    echo $response;
+// Verifică erorile cURL
+if (curl_errno($ch)) {
+    // Dacă există o eroare de cURL
+    echo json_encode(['error' => curl_error($ch)]);
+    curl_close($ch);
     exit;
 }
 
-echo $response;
+// Obține codul HTTP din răspunsul cURL
+$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+// Dacă codul de răspuns HTTP este 400 sau mai mare, afisează eroarea
+if ($http_code >= 400) {
+    echo json_encode([
+        'error' => 'Failed to delete document',
+        'response' => $response,
+        'http_code' => $http_code
+    ]);
+    exit;
+}
+
+// Dacă documentul a fost șters cu succes
+echo json_encode([
+    'message' => 'Document with ID ' . $id . ' has been successfully deleted.',
+    'response' => json_decode($response), // Răspunsul de la Solr pentru confirmare
+]);
+?>
