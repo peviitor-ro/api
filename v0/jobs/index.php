@@ -2,8 +2,15 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-require_once '../config.php';
+// Ensure the request is GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only GET method is allowed"]);
+    exit;
+}
 
+require_once '../config.php';
+    
 $core = "jobs";
 
 // Parametrii pentru interogarea Solr
