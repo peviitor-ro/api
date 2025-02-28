@@ -2,6 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
+// Ensure the request is GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only GET method is allowed"]);
+    exit;
+}
+
 require_once '../config.php';
 
 $core = "jobs";
@@ -26,7 +33,11 @@ if (isset($_GET["rows"])) {
     $rows = $_GET["rows"];
     if (!is_numeric($rows) || $rows <= 0) {
         // Dacă rows nu este valid, returnează o eroare
-        echo json_encode(["error" => "You must provide a positive number for 'rows'"]);
+        http_response_code(400);
+        echo json_encode([
+            "error" => "You must provide a positive number for 'rows'",
+            "code" => 400
+        ]);
         exit;
     }
 }
@@ -66,4 +77,3 @@ unset($json['facet_counts']);
 
 // Returnează doar partea relevantă din răspuns
 echo json_encode($json);
-?>
