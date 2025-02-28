@@ -71,8 +71,9 @@ for ($i = 1; $i < count($companies); $i += 2) {
 // Prepare response
 $obj = new stdClass();
 $obj->total = new stdClass();
-$obj->total->jobs = (string) ($json['response']['numFound'] ?? 0);
-$obj->total->companies = (string) $companyCount;
+$obj->total->jobs = (int) ($json['response']['numFound'] ?? 0);
+$obj->total->companies = (int) $companyCount;
+
 
 echo json_encode($obj);
 ?>

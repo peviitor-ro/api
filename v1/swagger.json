@@ -361,7 +361,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "url": { "type": "string" },
+                        "company": { "type": "string" },
+                        "apikey": { "type": "string" }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "apikey": { "type": "string" }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "logo": { "type": "string" }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -377,12 +401,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
+                    "error": { "type": "string" },
+                    "code": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID format. Special characters are not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" },
+                    "received": { "type": "string" },
+                    "message": { "type": "string" }
                   }
                 }
               }
