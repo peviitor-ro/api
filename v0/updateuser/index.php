@@ -58,6 +58,7 @@ $doc = $json->response->docs[0];
 
 // Remove version field if present
 unset($doc->_version_);
+unset($doc->_root_);
 
 // Update user fields if provided
 if ($id) $doc->id = $id;
