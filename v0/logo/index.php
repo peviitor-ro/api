@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
-require_once '../config.php';
 
 $core  = 'logo';
 
