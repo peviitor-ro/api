@@ -8,12 +8,12 @@ if (isset($_GET['ID'])) {
     $id = $_GET['ID'];
 
     // Definim lista de caractere speciale care sunt interzise
-    $invalid_chars = '/[\/,.<>+=\-_:;?"\'\{\}\[\]\|\\\)\(\*&^%$#@!~`]/';
+    $invalid_chars = '/[\s\/,.<>+=\-_:;?"\'\{\}\[\]\|\\\)\(\*&^%$#@!~`]/';
 
     // Verificăm dacă ID-ul conține caractere invalide
     if (preg_match($invalid_chars, $id)) {
         http_response_code(400);  // Returnăm 400 pentru un ID invalid
-        echo json_encode(["error" => "Invalid ID format: special characters are not allowed", "received" => $id]);
+        echo json_encode(["error" => "Invalid ID format: special characters and spaces are not allowed", "received" => $id]);
         exit;
     }
 
