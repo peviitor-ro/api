@@ -13,7 +13,7 @@ if (isset($_GET['ID'])) {
     // Verificăm dacă ID-ul conține caractere invalide
     if (preg_match($invalid_chars, $id)) {
         http_response_code(400);  // Returnăm 400 pentru un ID invalid
-        echo json_encode(["error" => "Invalid ID format: special characters are not allowed", "received" => $id]);
+        echo json_encode(["error" => "Invalid ID format: special characters and spaces are not allowed", "received" => $id]);
         exit;
     }
 
