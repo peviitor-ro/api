@@ -2,6 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only POST method is allowed"]);
+    exit;
+}
+
 require_once '../config.php';
 
 $method = 'POST';
