@@ -4,6 +4,12 @@ header("Access-Control-Allow-Methods: PUT, OPTIONS");
 header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 header('Content-Type: application/json; charset=utf-8');
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only GET method is allowed"]);
+    exit;
+}
+
 require_once '../config.php';
 
 $core = 'auth';
