@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     }
 } else {
     http_response_code(405);
-    echo json_encode(['error' => 'Invalid request method', 'code' => 405]);
+    echo json_encode(['error' => "Only DELETE method is allowed", 'code' => 405]);
 }
 
 function fetchSolrData($url, $method = 'GET', $postData = null) {

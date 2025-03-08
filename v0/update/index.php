@@ -1,21 +1,13 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: PUT, OPTIONS");
+header("Access-Control-Allow-Methods: PUT");
 header('Content-Type: application/json; charset=utf-8');
-
-// Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
 
 // Ensure the request is PUT
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     http_response_code(405); // Method Not Allowed
     echo json_encode([
-        "error" => "Only PUT method is allowed",
-        "code" => 400
-    ]);
+        "error" => "Only PUT method is allowed"]);
     exit;
 }
 
