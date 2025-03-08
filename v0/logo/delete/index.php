@@ -2,6 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only GET method is allowed"]);
+    exit;
+}
+
 require_once '../../config.php';
 
 $core  = 'logo';
