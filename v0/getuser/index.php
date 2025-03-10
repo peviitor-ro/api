@@ -84,4 +84,8 @@ if (isset($_GET['ID'])) {
 
   echo json_encode($json->response->docs[0]);
 }
+else {
+    http_response_code(400);
+    echo json_encode(['error' => 'Bad request. Parameter is missing.', 'code' => 400]);
+}
 ?>
