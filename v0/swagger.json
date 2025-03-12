@@ -296,7 +296,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Whether to count the number of jobs for each company",
+            "description": "Whether to count the number of jobs for each company; only boolean values (true/false) are accepted.",
             "required": true
           }
         ],
