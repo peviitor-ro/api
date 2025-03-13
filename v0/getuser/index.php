@@ -26,7 +26,44 @@ if (isset($_GET['ID'])) {
 
     $id = urlencode($id); // URL encode pentru a fi sigur că ID-ul este tratat corect în URL
 
-    require_once '../config.php';
+    // Load variables from the .env file
+    function loadEnv($file)
+    {
+        $file = realpath($file);
+
+        // Check if the .env file exists
+        if (!$file || !file_exists($file)) {
+            die(json_encode(["error" => "The .env file does not exist!", "path" => $file]));
+        }
+
+        $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            // Skip comments (lines starting with '#')
+            if (strpos(trim($line), '#') === 0) continue;
+
+            // Split the line into key and value, and add to environment
+            list($key, $value) = explode('=', $line, 2) + [NULL, NULL];
+            if ($key && $value) {
+                $key = trim($key);
+                $value = trim($value);
+                $_SERVER[$key] = $value;
+                putenv("$key=$value");
+            }
+        }
+    }
+
+    // Load .env file
+    loadEnv('../../.env');
+
+    // Retrieve SOLR variables from environment
+    $server = getenv('SOLR_SERVER') ?: ($_SERVER['SOLR_SERVER'] ?? null);
+    $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
+    $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
+
+    // Debugging: Check if the server is set
+    if (!$server) {
+        die(json_encode(["error" => "SOLR_SERVER is not set in .env"]));
+    }
 
     $core = 'auth';
 
@@ -71,21 +108,19 @@ if (isset($_GET['ID'])) {
         exit;
     }
 
-  $id = urldecode($_GET['ID']); // Decodează în caz că e URL encoded
+    $id = urldecode($_GET['ID']); // Decodează în caz că e URL encoded
 
-  if (!filter_var($id, FILTER_VALIDATE_EMAIL) && !preg_match('/^[a-zA-Z0-9_.-]+$/', $id)) {
-    http_response_code(400);
-    echo json_encode(["error" => "Invalid ID format", "received" => $id]);
-    exit;
-  }
+    if (!filter_var($id, FILTER_VALIDATE_EMAIL) && !preg_match('/^[a-zA-Z0-9_.-]+$/', $id)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid ID format", "received" => $id]);
+        exit;
+    }
 
-  unset($json->response->docs[0]->_version_);
-  unset($json->response->docs[0]->_root_);
+    unset($json->response->docs[0]->_version_);
+    unset($json->response->docs[0]->_root_);
 
-  echo json_encode($json->response->docs[0]);
-}
-else {
+    echo json_encode($json->response->docs[0]);
+} else {
     http_response_code(400);
     echo json_encode(['error' => 'Bad request. Parameter is missing.', 'code' => 400]);
 }
-?>
