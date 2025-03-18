@@ -74,6 +74,27 @@ foreach ($_GET as $key => $value) {
     $_GET[$key] = SolrQueryBuilder::normalizeString($value);
 }
 
+// Definim câmpurile opționale
+$requiredFields = ['q'];
+$optionalFields = ['start', 'rows', 'sort'];
+
+foreach ($requiredFields as $field) {
+    if (!isset($_GET[$field])) {
+        http_response_code(400);
+        echo json_encode(["error" => "Missing required field: $field"]);
+        exit;
+    }
+}
+
+//Verificam daca a fost introdus altceva in afara de campurile prestabilite
+foreach ($_GET as $key => $value) {
+    if (!in_array($key, $requiredFields) && !in_array($key, $optionalFields)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Unknown field: $key"]);
+        exit;
+    }
+}
+
 try {
     $core = 'jobs';
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
