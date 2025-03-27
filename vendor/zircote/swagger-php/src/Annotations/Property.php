@@ -6,6 +6,8 @@
 
 namespace OpenApi\Annotations;
 
+use OpenApi\Generator;
+
 /**
  * @Annotation
  */
@@ -16,29 +18,37 @@ class Property extends Schema
      *
      * @var string
      */
-    public $property = UNDEFINED;
+    public $property = Generator::UNDEFINED;
+
+    /**
+     * Indicates the property is nullable.
+     *
+     * @var bool
+     */
+    public $nullable = Generator::UNDEFINED;
 
     /**
      * @inheritdoc
      */
     public static $_parents = [
-        'OpenApi\Annotations\AdditionalProperties',
-        'OpenApi\Annotations\Schema',
-        'OpenApi\Annotations\JsonContent',
-        'OpenApi\Annotations\XmlContent',
-        'OpenApi\Annotations\Property',
-        'OpenApi\Annotations\Items',
+        AdditionalProperties::class,
+        Schema::class,
+        JsonContent::class,
+        XmlContent::class,
+        Property::class,
+        Items::class,
     ];
 
     /**
      * @inheritdoc
      */
     public static $_nested = [
-        'OpenApi\Annotations\Items' => 'items',
-        'OpenApi\Annotations\Property' => ['properties', 'property'],
-        'OpenApi\Annotations\AdditionalProperties' => 'additionalProperties',
-        'OpenApi\Annotations\ExternalDocumentation' => 'externalDocs',
-        'OpenApi\Annotations\Xml' => 'xml',
-        'OpenApi\Annotations\Discriminator' => 'discriminator'
+        Discriminator::class => 'discriminator',
+        Items::class => 'items',
+        Property::class => ['properties', 'property'],
+        ExternalDocumentation::class => 'externalDocs',
+        Xml::class => 'xml',
+        AdditionalProperties::class => 'additionalProperties',
+        Attachable::class => ['attachables'],
     ];
 }

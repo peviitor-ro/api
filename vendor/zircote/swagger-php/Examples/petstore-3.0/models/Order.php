@@ -61,7 +61,6 @@ class Order
      *     format="datetime",
      *     description="Shipping date",
      *     title="Shipping date",
-     *     title="Pet ID",
      *     type="string"
      * )
      *
@@ -75,7 +74,6 @@ class Order
      *     title="Order status",
      *     description="Order status",
      *     enum={"placed", "approved", "delivered"},
-     *     title="Pet ID",
      * )
      *
      * @var string
@@ -84,7 +82,7 @@ class Order
 
     /**
      * @OA\Property(
-     *     default="false",
+     *     default=false,
      *     format="int64",
      *     description="Complete status",
      *     title="Complete status",

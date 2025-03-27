@@ -6,6 +6,8 @@
 
 namespace OpenApi\Annotations;
 
+use OpenApi\Generator;
+
 /**
  * @Annotation
  *
@@ -18,35 +20,35 @@ class Xml extends AbstractAnnotation
      *
      * @var string
      */
-    public $name = UNDEFINED;
+    public $name = Generator::UNDEFINED;
 
     /**
      * The URL of the namespace definition. Value SHOULD be in the form of a URL.
      *
      * @var string
      */
-    public $namespace = UNDEFINED;
+    public $namespace = Generator::UNDEFINED;
 
     /**
      * The prefix to be used for the name.
      *
      * @var string
      */
-    public $prefix = UNDEFINED;
+    public $prefix = Generator::UNDEFINED;
 
     /**
      * Declares whether the property definition translates to an attribute instead of an element. Default value is false.
      *
-     * @var boolean
+     * @var bool
      */
-    public $attribute = UNDEFINED;
+    public $attribute = Generator::UNDEFINED;
 
     /**
      * MAY be used only for an array definition. Signifies whether the array is wrapped (for example, <books><book/><book/></books>) or unwrapped (<book/><book/>). Default value is false. The definition takes effect only when defined alongside type being array (outside the items).
      *
-     * @var boolean
+     * @var bool
      */
-    public $wrapped = UNDEFINED;
+    public $wrapped = Generator::UNDEFINED;
 
     /**
      * @inheritdoc
@@ -56,19 +58,25 @@ class Xml extends AbstractAnnotation
         'namespace' => 'string',
         'prefix' => 'string',
         'attribute' => 'boolean',
-        'wrapped' => 'boolean'
+        'wrapped' => 'boolean',
     ];
 
     /**
      * @inheritdoc
      */
     public static $_parents = [
-        'OpenApi\Annotations\AdditionalProperties',
-        'OpenApi\Annotations\Schema',
-        'OpenApi\Annotations\Property',
-        'OpenApi\Annotations\Schema',
-        'OpenApi\Annotations\Items',
-        'OpenApi\Annotations\JsonContent',
-        'OpenApi\Annotations\XmlContent',
+        AdditionalProperties::class,
+        Schema::class,
+        Property::class,
+        Schema::class,
+        Items::class,
+        XmlContent::class,
+    ];
+
+    /**
+     * @inheritdoc
+     */
+    public static $_nested = [
+        Attachable::class => ['attachables'],
     ];
 }
