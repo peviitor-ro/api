@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 // Load variables from the .env file
-function loadEnv($file) {
-    $file = realpath($file); 
+function loadEnv($file)
+{
+    $file = realpath($file);
 
     // Check if the .env file exists
     if (!$file || !file_exists($file)) {
@@ -46,12 +47,15 @@ if (!$server) {
     die(json_encode(["error" => "LOCAL_SERVER is not set in .env"]));
 }
 
-class SolrQueryBuilder {
-    public static function replaceSpaces($string) {
+class SolrQueryBuilder
+{
+    public static function replaceSpaces($string)
+    {
         return str_replace([' ', '&', '$'], ['%20', '%26', '%24'], $string);
     }
 
-    public static function buildParamQuery($param, $queryName) {
+    public static function buildParamQuery($param, $queryName)
+    {
         $arrayParams = explode(',', $param);
         $queries = array_map(function ($item) use ($queryName) {
             return $queryName . '%3A%22' . self::replaceSpaces($item) . '%22';
@@ -60,10 +64,19 @@ class SolrQueryBuilder {
         return '&fq=' . implode('%20OR%20', $queries);
     }
 
-    public static function normalizeString($str) {
+    public static function normalizeString($str)
+    {
         $charMap = [
-            'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
-            'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
+            'ă' => 'a',
+            'î' => 'i',
+            'â' => 'a',
+            'ș' => 's',
+            'ț' => 't',
+            'Ă' => 'A',
+            'Î' => 'I',
+            'Â' => 'A',
+            'Ș' => 'S',
+            'Ț' => 'T'
         ];
         return strtr($str, $charMap);
     }
@@ -106,9 +119,15 @@ try {
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
 
-    if (isset($_GET['page'])) {
-        $start = ($_GET['page'] - 1) * 12;
-        $query .= "&start=$start&rows=12";
+    if (isset($_GET['start'])) {
+        $start = ($_GET['start'] - 1) * 12;
+        if($start >= 0)
+            $query .= "&start=$start&rows=12";
+        else {
+            http_response_code(400);
+        echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive number."]);
+        exit;
+        }
     }
 
     $query .= '&useParams=';
@@ -119,10 +138,10 @@ try {
             'header' => "Authorization: Basic " . base64_encode("$username:$password")
         ]
     ]);
-    
+
     // Fetch data from Solr
     $string = @file_get_contents($url, false, $context);
-    
+
     // Check if Solr is down (server not responding)
     if ($string == false) {
         http_response_code(503);
@@ -145,12 +164,11 @@ try {
     }
 
     echo json_encode($jobs);
-
 } catch (Exception $e) {
     // Fallback la endpoint-ul de rezervă
     $backupUrl = $backup . '/mobile/';
     $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
-   
+
     $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
     $citiesString = str_replace('~', '', $_GET['city'] ?? '');
     $fallbackQuery .= isset($_GET['city']) ? '&cities=' . $citiesString : '';
@@ -181,4 +199,3 @@ try {
 
     echo json_encode($response);
 }
-?>
