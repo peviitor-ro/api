@@ -114,7 +114,9 @@ try {
 
     // Construim query string-ul
     $query = '?indent=true&q.op=OR&';
-    $query .= isset($_GET['q']) ? 'q=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : 'q=*:*';
+    $query .= isset($_GET['q']) && !empty(trim($_GET['q']))
+    ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
+    : 'q=*:*';
     $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
