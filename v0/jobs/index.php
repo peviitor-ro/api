@@ -38,13 +38,13 @@ function loadEnv($file) {
 loadEnv('../../.env');
 
 // Retrieve SOLR variables from environment
-$server = getenv('SOLR_SERVER') ?: ($_SERVER['SOLR_SERVER'] ?? null);
+$server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
 $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
 // Debugging: Check if the server is set
 if (!$server) {
-    die(json_encode(["error" => "SOLR_SERVER is not set in .env"]));
+    die(json_encode(["error" => "LOCAL_SERVER is not set in .env"]));
 }
 
 $core = "jobs";
