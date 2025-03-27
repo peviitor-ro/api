@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use PHPUnit\Framework\TestCase;
 use Dotenv\Dotenv;
 
@@ -8,8 +10,14 @@ class v4Test extends TestCase
     public function testServer()
     {
         // Încarcă variabilele din .env
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Merge un nivel în sus
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
         $dotenv->load();
+
+        if (isset($_ENV['PROD_SERVER'])) {
+            echo "PROD_SERVER loaded.";
+        } else {
+            echo "PROD_SERVER is not loaded.";
+        }
 
         // Verifică dacă PROD_SERVER este definit
         $this->assertArrayHasKey('PROD_SERVER', $_ENV, 'PROD_SERVER is not defined in .env.');
@@ -20,4 +28,3 @@ class v4Test extends TestCase
         $this->assertEquals($expectedServer, $_ENV['PROD_SERVER'], 'The value of PROD_SERVER is not accepted.');
     }
 }
-?>
