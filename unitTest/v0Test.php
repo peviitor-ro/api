@@ -1,26 +1,23 @@
-<?php
+    <?php
 
-use PHPUnit\Framework\TestCase;
+    use PHPUnit\Framework\TestCase;
+    use Dotenv\Dotenv;
 
-class ConfigTest0 extends TestCase
-{
-    private $configFile = 'v0/config.php';
-
-    public function testServer()
+    class v0Test extends TestCase
     {
-        // It verifies if config.php exists before including it
-        $this->assertFileExists($this->configFile, 'config.php does not exist.');
+        public function testServer()
+        {
+            // Încarcă variabilele din .env
+            $dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Merge un nivel în sus
+            $dotenv->load();
 
-        // It inludes config.php
-        include $this->configFile;
+            // Verifică dacă LOCAL_SERVER este definit
+            $this->assertArrayHasKey('LOCAL_SERVER', $_ENV, 'LOCAL_SERVER is not defined in .env.');
+            $this->assertNotEmpty($_ENV['LOCAL_SERVER'], 'LOCAL_SERVER is empty.');
 
-        // It verifies if $server is defined in config.php
-        $this->assertNotEmpty($server, '$server is not defined in config.php.');
-
-        // It verifies the value of $server
-        $expectedServer = '172.18.0.10:8983';
-        $this->assertEquals($expectedServer, $server, 'The value of $server is not accepted.');
+            // Verifică valoarea variabilei
+            $expectedServer = '172.18.0.10:8983';
+            $this->assertEquals($expectedServer, $_ENV['LOCAL_SERVER'], 'The value of LOCAL_SERVER is not accepted.');
+        }
     }
-}
-
 ?>

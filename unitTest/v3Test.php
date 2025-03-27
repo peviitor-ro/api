@@ -1,22 +1,23 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Dotenv\Dotenv;
 
-class ConfigTest3 extends TestCase
+class v3Test extends TestCase
 {
-    private $configFile = 'v3/config.php';
-
     public function testServer()
     {
-        // Verifică dacă fișierul de configurare există înainte de a-l include
-        $this->assertFileExists($this->configFile, 'Fișierul de configurare nu există.');
+        // Încarcă variabilele din .env
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Merge un nivel în sus
+        $dotenv->load();
 
-        // Include fișierul de configurare
-        include $this->configFile;
+        // Verifică dacă PROD_SERVER este definit
+        $this->assertArrayHasKey('PROD_SERVER', $_ENV, 'PROD_SERVER is not defined in .env.');
+        $this->assertNotEmpty($_ENV['PROD_SERVER'], 'PROD_SERVER is empty.');
 
-        // Verifică dacă variabila $server este definită
-        $this->assertNotEmpty($server, 'Variabila $server nu este definită în fișierul de configurare.');
+        // Verifică valoarea variabilei
+        $expectedServer = 'zimbor.go.ro';
+        $this->assertEquals($expectedServer, $_ENV['PROD_SERVER'], 'The value of PROD_SERVER is not accepted.');
     }
 }
-
 ?>
