@@ -115,25 +115,42 @@ try {
     // Construim query string-ul
     $query = '?indent=true&q.op=OR&';
     $query .= isset($_GET['q']) && !empty(trim($_GET['q']))
-    ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
-    : 'q=*:*';
+        ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
+        : 'q=*:*';
     $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
 
     if (isset($_GET['start'])) {
-        if (!ctype_digit($_GET['start'])) { 
+        if (!ctype_digit($_GET['start'])) {
             http_response_code(400);
             echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer."]);
             exit;
         }
-        $start = ($_GET['start']);
-        if($start >= 0 && $start <= 2147483647)
-            $query .= "&start=$start&rows=12";
+        $start = $_GET['start'];
+        if ($start >= 0 && $start <= 2147483647)
+            $query .= "&start=" . $start;
         else {
             http_response_code(400);
-        echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer."]);
-        exit;
+            echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer."]);
+            exit;
+        }
+    }
+
+    if (isset($_GET['rows'])) {
+        if (!ctype_digit($_GET['rows'])) {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a non-negative positive integer."]);
+            exit;
+        }
+        $rows = $_GET['rows'];
+
+        if ($rows > 0 && $rows <= 2147483647)
+            $query .= "&rows=" . $rows;
+        else {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a non-negative positive integer."]);
+            exit;
         }
     }
 
