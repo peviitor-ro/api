@@ -122,12 +122,17 @@ try {
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
 
     if (isset($_GET['start'])) {
-        $start = ($_GET['start'] - 1) * 12;
-        if($start >= 0)
+        if (!ctype_digit($_GET['start'])) { 
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer."]);
+            exit;
+        }
+        $start = ($_GET['start']);
+        if($start >= 0 && $start <= 2147483647)
             $query .= "&start=$start&rows=12";
         else {
             http_response_code(400);
-        echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive number."]);
+        echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer."]);
         exit;
         }
     }
