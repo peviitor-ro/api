@@ -127,7 +127,7 @@ try {
             echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer."]);
             exit;
         }
-        $start = ($_GET['start'] - 1) * 12;
+        $start = ($_GET['start']);
         if($start >= 0 && $start <= 2147483647)
             $query .= "&start=$start&rows=12";
         else {
