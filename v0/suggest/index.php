@@ -54,6 +54,7 @@ $core = 'jobs';
 try {
     // Verifică prezența parametrului 'q'
     if (!isset($_GET['q']) || empty(trim($_GET['q']))) {
+        http_response_code(400);
         echo json_encode(['message' => 'No query provided']);
         exit;
     }
@@ -101,10 +102,11 @@ try {
     $jsonArray = json_decode($response, true);
 
     if (empty($jsonArray['suggest']['jobTitleSuggester'][$query]['suggestions'])) {
+        http_response_code(404);
         echo json_encode(['message' => 'No suggestions found']);
         exit;
     }
-
+    
     // Extrage sugestiile
     $suggestions = $jsonArray['suggest']['jobTitleSuggester'][$query]['suggestions'];
     echo json_encode(['suggestions' => $suggestions], JSON_PRETTY_PRINT);
