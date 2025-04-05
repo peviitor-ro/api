@@ -124,30 +124,23 @@ try {
     $finalStart = 0;
     $finalRows = 12; // default
 
-    if (isset($_GET['start']) && ctype_digit($_GET['start'])) {
-        $s = intval($_GET['start']);
-        if ($s >= 0 && $s < $numFound) {
-            $finalStart = $s;
-        }
-        else {
-            http_response_code(400);
-            echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer less than $numFound."]);
-            exit;
-        }
+    if (!isset($_GET['start']) || !ctype_digit($_GET['start']) || ($_GET['start'] < 0 || $_GET['start'] >= $numFound)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer less than $numFound."]);
+        exit;
     }
+    
+    $finalStart = intval($_GET['start']);
+    
 
-    if (isset($_GET['rows']) && ctype_digit($_GET['rows'])) {
-        $r = intval($_GET['rows']);
-        if ($r > 0 && $r <= $numFound-$finalStart) {
-            $finalRows = $r;
-        }   
-        else {
-            http_response_code(400);
-            echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer less than " . ($numFound-$finalStart) . "."]);
-            exit;
-        }
+    if (!isset($_GET['rows']) || !ctype_digit($_GET['rows']) || ($_GET['rows'] <= 0 || $_GET['rows'] > $numFound - $finalStart)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer less than " . ($numFound - $finalStart) . "."]);
+        exit;
     }
-
+    
+    $finalRows = intval($_GET['rows']);
+    
     if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
         $page = intval($_GET['page']);
         if ($page > 0) {
