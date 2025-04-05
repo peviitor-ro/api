@@ -90,7 +90,7 @@ try {
     $core = 'jobs';
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
 
-    // Build query string
+    // Build base query
     $query = '?indent=true&q.op=OR&';
     $query .= isset($_GET['q']) && !empty(trim($_GET['q']))
         ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
@@ -100,12 +100,7 @@ try {
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
 
-    // Set default pagination values
-    $query .= isset($_GET['start']) && ctype_digit($_GET['start']) ? "&start=" . $_GET['start'] : "&start=0";
-    $query .= isset($_GET['rows']) && ctype_digit($_GET['rows']) ? "&rows=" . $_GET['rows'] : "&rows=10";
-
     $query .= '&useParams=';
-    $url = $baseUrl . $query;
 
     $context = stream_context_create([
         'http' => [
@@ -113,7 +108,65 @@ try {
         ]
     ]);
 
-    // Fetch data from Solr
+    // Step 1: Get numFound
+    $countUrl = $baseUrl . $query . "&rows=0";
+    $countResponse = @file_get_contents($countUrl, false, $context);
+    if ($countResponse === false) {
+        http_response_code(503);
+        echo json_encode(["error" => "Failed to fetch count from Solr"]);
+        exit;
+    }
+
+    $countData = json_decode($countResponse, true);
+    $numFound = $countData['response']['numFound'] ?? 0;
+
+    // Step 2: Validate start and rows
+    $finalStart = 0;
+    $finalRows = 12; // default
+
+    if (isset($_GET['start']) && ctype_digit($_GET['start'])) {
+        $s = intval($_GET['start']);
+        if ($s >= 0 && $s < $numFound) {
+            $finalStart = $s;
+        }
+        else {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer less than $numFound."]);
+            exit;
+        }
+    }
+
+    if (isset($_GET['rows']) && ctype_digit($_GET['rows'])) {
+        $r = intval($_GET['rows']);
+        if ($r > 0 && $r <= $numFound-$finalStart) {
+            $finalRows = $r;
+        }   
+        else {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer less than " . ($numFound-$finalStart) . "."]);
+            exit;
+        }
+    }
+
+    if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
+        $page = intval($_GET['page']);
+        if ($page > 0) {
+            $finalStart = ($page - 1) * $finalRows;
+            if ($finalStart >= $numFound) $finalStart = 0;
+        }
+        else {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer."]);
+            exit;
+        }
+    }
+
+    // Append start & rows
+    $query .= "&start=$finalStart&rows=$finalRows";
+
+    // Final Solr URL
+    $url = $baseUrl . $query;
+
     $string = @file_get_contents($url, false, $context);
 
     if ($string == false) {
