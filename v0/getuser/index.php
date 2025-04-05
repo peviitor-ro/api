@@ -15,7 +15,7 @@ if (isset($_GET['ID'])) {
     $id = $_GET['ID'];
 
     // Definim lista de caractere speciale care sunt interzise
-    $invalid_chars = '/[\s\/,.<>+=\-_:;?"\'\{\}\[\]\|\\\)\(\*&^%$#@!~`]/';
+    $invalid_chars = '/[\s\/,<>+=\-_:;?"\'\{\}\[\]\|\\\)\(\*&^%$#!~`]/';
 
     // Verificăm dacă ID-ul conține caractere invalide
     if (preg_match($invalid_chars, $id)) {
