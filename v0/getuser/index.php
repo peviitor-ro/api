@@ -24,7 +24,17 @@ if (isset($_GET['ID'])) {
         exit;
     }
 
-    $id = urlencode($id); // URL encode pentru a fi sigur că ID-ul este tratat corect în URL
+
+    if (!preg_match('/^[a-zA-Z]{3,}@[a-zA-Z]+\.[a-zA-Z]{2,}$/', $id)) {
+        http_response_code(400);
+        echo json_encode([
+            "error" => "Invalid ID format. It must be in the format: at least 3 letters, then '@', at least 1 letter, then '.', and at least 2 letters.",
+            "received" => $id
+        ]);
+        exit;   
+    } 
+
+    $id = urlencode($id); // URL encode pentru a fi sigur că ID-ul este tratat corect în URL   
 
     // Load variables from the .env file
     function loadEnv($file)
@@ -108,13 +118,7 @@ if (isset($_GET['ID'])) {
         exit;
     }
 
-    $id = urldecode($_GET['ID']); // Decodează în caz că e URL encoded
-
-    if (!filter_var($id, FILTER_VALIDATE_EMAIL) && !preg_match('/^[a-zA-Z0-9_.-]+$/', $id)) {
-        http_response_code(400);
-        echo json_encode(["error" => "Invalid ID format", "received" => $id]);
-        exit;
-    }
+    $id = urldecode($_GET['ID']); // Decodează în caz că e URL encoded  
 
     unset($json->response->docs[0]->_version_);
     unset($json->response->docs[0]->_root_);
