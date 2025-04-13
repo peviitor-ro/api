@@ -56,13 +56,13 @@ $qs = '?indent=true&q.op=OR&q=*%3A*&useParams=';
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 // Fetch parameters from query string
-$id = isset($_GET['id']) ? trim(urlencode($_GET['id'])) : null;
+$id = isset($_GET['id']) ? trim($_GET['id']) : null;
 $logo = isset($_GET['logo']) ? trim(htmlspecialchars($_GET['logo'])) : null;
 
 // Validate required fields
 if (!$id || !$logo) {
     http_response_code(400); // Bad Request
-    echo json_encode(["error" => "Missing required parameters"]);
+    echo json_encode(["error" => "Missing required parameters."]);
     exit;
 }
 
