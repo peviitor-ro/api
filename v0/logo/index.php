@@ -81,8 +81,6 @@ $results = new stdClass();
 $results->total = count($companies);
 $results->companies = array();
 
-echo count($companies);
-
 for ($i = 0; $i < count($companies); $i++) {
     $obj  = new stdClass();
     $obj->name = $companies[$i]["id"];
