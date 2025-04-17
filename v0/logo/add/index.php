@@ -66,6 +66,15 @@ if (!$id || !$logo) {
     exit;
 }
 
+if (!preg_match('/^www.[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/', $logo)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Invalid ID format. It must be in the format: 'www.', then at least 1 character, then '.', and at least 2 characters.",
+        "received" => $logo
+    ]);
+    exit;   
+}
+
 // Set up data for Solr
 $item = new stdClass();
 $item->id = $id;
