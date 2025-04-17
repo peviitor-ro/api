@@ -49,7 +49,7 @@ if (!$server) {
 
 $core  = 'logo';
 
-$qs = '?indent=true&q.op=OR&q=*%3A*&useParams=';
+$qs = '?indent=true&q.op=OR&q=*%3A*&rows=1000000000&useParams=';
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
@@ -60,7 +60,7 @@ $context = stream_context_create([
 ]);
 
 // Fetch data from Solr
-$string = file_get_contents($url, false, $context);
+$string = file_get_contents($url, true, $context);
 
 // Check if Solr is down (server not responding)
 if ($string === false) {
@@ -80,6 +80,8 @@ $companies = $json['response']['docs'];
 $results = new stdClass();
 $results->total = count($companies);
 $results->companies = array();
+
+echo count($companies);
 
 for ($i = 0; $i < count($companies); $i++) {
     $obj  = new stdClass();
