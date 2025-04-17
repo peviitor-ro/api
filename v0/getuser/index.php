@@ -18,22 +18,11 @@ if (isset($_GET['ID'])) {
     $invalid_chars = '/[\s\/,<>+=\-:;?"\'\{\}\[\]\|\\\)\(\*&^%$#!~`]/';
 
     // Verificăm dacă ID-ul conține caractere invalide
-    if (preg_match($invalid_chars, $id)) {
+    if (!preg_match('/^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/', $id) || preg_match($invalid_chars, $id)) {
         http_response_code(400);  // Returnăm 400 pentru un ID invalid
         echo json_encode(["error" => "Invalid ID format: special characters and spaces are not allowed", "received" => $id]);
         exit;
-    }
-
-
-    if (!preg_match('/^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $id)) {
-        http_response_code(400);
-        echo json_encode([
-            "error" => "Invalid ID format. It must be in the format: at least 3 characters, then '@', at least 1 character, then '.', and at least 2 characters.",
-            "received" => $id
-        ]);
-        exit;   
-    }
-    
+    }    
 
     $id = urlencode($id); // URL encode pentru a fi sigur că ID-ul este tratat corect în URL   
 
