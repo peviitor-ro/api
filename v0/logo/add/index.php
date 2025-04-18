@@ -43,6 +43,9 @@ $server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
 $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
+// Set up authentication header
+$authHeader = base64_encode("$username:$password");
+
 // Debugging: Check if the server is set
 if (!$server) {
     die(json_encode(["error" => "LOCAL_SERVER is not set in .env"]));
@@ -66,13 +69,54 @@ if (!$id || !$logo) {
     exit;
 }
 
-if (!preg_match('/^www.[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/', $logo)) {
+if (!preg_match('/^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/', $logo)) {
     http_response_code(400);
     echo json_encode([
-        "error" => "Invalid ID format. It must be in the format: 'www.', then at least 1 character, then '.', and at least 2 characters.",
+        "error" => "Invalid logo URL. It must start with http:// or https:// and be a valid domain.",
         "received" => $logo
     ]);
     exit;   
+}
+
+// Step: Check if logo already exists with a different ID
+$checkUrl = 'http://' . $server . '/solr/' . $core . '/select?q=logo:"' . urlencode($logo) . '"&wt=json';
+
+$checkCh = curl_init();
+curl_setopt($checkCh, CURLOPT_URL, $checkUrl);
+curl_setopt($checkCh, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($checkCh, CURLOPT_HTTPHEADER, [
+    "Authorization: Basic $authHeader"
+]);
+
+$checkResponse = curl_exec($checkCh);
+curl_close($checkCh);
+
+if (!$checkResponse) {
+    http_response_code(500);
+    echo json_encode(["error" => "Error querying Solr for existing logo."]);
+    exit;
+}
+
+$checkData = json_decode($checkResponse, true);
+
+if (isset($checkData['response']['docs']) && count($checkData['response']['docs']) > 0) {
+    http_response_code(409); // Conflict
+    echo json_encode([
+        "error" => "No updates to be made. The logo and ID combination already exists."
+    ]);
+    exit;
+}
+
+if (isset($checkData['response']['docs'])) {
+    foreach ($checkData['response']['docs'] as $doc) {
+        if (isset($doc['id']) && $doc['id'] !== $id) {
+            http_response_code(409); // Conflict
+            echo json_encode([
+                "error" => "This logo is already registered with another company."
+            ]);
+            exit;
+        }
+    }
 }
 
 // Set up data for Solr
@@ -81,9 +125,6 @@ $item->id = $id;
 $item->logo = $logo;
 
 $data = json_encode([$item]);
-
-// Set up authentication header
-$authHeader = base64_encode("$username:$password");
 
 // Use curl to send the POST request to Solr
 $ch = curl_init();
