@@ -100,8 +100,9 @@ if (!$checkResponse) {
 $checkData = json_decode($checkResponse, true);
 
 if (isset($checkData['response']['docs']) && count($checkData['response']['docs']) > 0) {
+    http_response_code(409); // Conflict
     echo json_encode([
-        "message" => "No updates to be made. The logo and ID combination already exists."
+        "error" => "No updates to be made. The logo and ID combination already exists."
     ]);
     exit;
 }
