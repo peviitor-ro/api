@@ -70,7 +70,7 @@ $stop = $start * $page;
 if (isset($_GET["start_page"]) && isset($_GET["stop_page"])) {
     $stop = ($_GET["stop_page"] - 1) * $page;
     $start = ($_GET["start_page"] - 1) * $page;
-    if (!is_numeric($stop) || $stop <= $start) {
+    if (!is_numeric($stop) || $stop < $start) {
         http_response_code(400);
         echo json_encode([
             "error" => "You must provide a positive number for 'stop_page' less than " . ($start/100)+1,
@@ -86,7 +86,8 @@ if (isset($_GET["start_page"]) && isset($_GET["stop_page"])) {
         ]);
         exit;
     }
-    $rows = $stop - $start;  
+    if ($start === $stop) $rows = 100;
+    else $rows = $stop - $start;  
 }
 
 $qs = $qs . '&rows=' . $rows . '&start=' . $start;
