@@ -434,13 +434,25 @@
         "parameters": [
           {
             "in": "query",
-            "name": "rows",
+            "name": "start_page",
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "example": 100,
-              "description": "Number of job results to return. Default is 100."
-            }
+              "example": 1
+            },
+            "description": "Starting page to be returned. Default is 1."
+          },
+          {
+            "in": "query",
+            "name": "stop_page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "example": 2
+            },
+            "description": "Last page to be returned. Default is 2."
           }
         ],
         "responses": {
@@ -458,12 +470,9 @@
                           "type": "integer",
                           "description": "Total number of jobs found"
                         },
-                        "rows": {
-                          "type": "integer",
-                          "description": "Start index used for pagination"
-                        },
                         "docs": {
                           "type": "array",
+                          "description": "List of job records",
                           "items": {
                             "type": "object",
                             "properties": {
@@ -474,8 +483,7 @@
                                 "type": "string"
                               }
                             }
-                          },
-                          "description": "List of job records"
+                          }
                         }
                       }
                     }
