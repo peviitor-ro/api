@@ -1,11 +1,13 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: PUT, OPTIONS");
+header("Access-Control-Allow-Methods: PATCH");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json; charset=utf-8');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+// Allow ONLY PATCH
+if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
     http_response_code(405); // Method Not Allowed
-    echo json_encode(["error" => "Only PUT method is allowed"]);
+    echo json_encode(["error" => "Only PATCH method is allowed"]);
     exit;
 }
 
@@ -13,17 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
 function loadEnv($file) {
     $file = realpath($file); 
 
-    // Check if the .env file exists
     if (!$file || !file_exists($file)) {
         die(json_encode(["error" => "The .env file does not exist!", "path" => $file]));
     }
 
     $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
-        // Skip comments (lines starting with '#')
         if (strpos(trim($line), '#') === 0) continue;
 
-        // Split the line into key and value, and add to environment
         list($key, $value) = explode('=', $line, 2) + [NULL, NULL];
         if ($key && $value) {
             $key = trim($key);
@@ -37,12 +36,11 @@ function loadEnv($file) {
 // Load .env file
 loadEnv('../../.env');
 
-// Retrieve SOLR variables from environment
+// SOLR connection variables
 $server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
 $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
-// Debugging: Check if the server is set
 if (!$server) {
     die(json_encode(["error" => "LOCAL_SERVER is not set in .env"]));
 }
@@ -50,7 +48,7 @@ if (!$server) {
 $core = 'auth';
 $qs = '?omitHeader=true&q.op=OR&q=apikey%3A';
 
-// Retrieve parameters from the query string
+// Retrieve parameters from the PATCH request
 $input = json_decode(file_get_contents("php://input"), true);
 $apikey = isset($input['apikey']) ? trim($input['apikey']) : null;
 $id = isset($input['id']) ? trim($input['id']) : null;
@@ -87,7 +85,6 @@ $context = stream_context_create([
 // Fetch data from Solr
 $string = @file_get_contents($url, false, $context);
 
-// Check if Solr is down (server not responding)
 if ($string === false) {
     http_response_code(503);
     echo json_encode([
@@ -107,7 +104,6 @@ if (!isset($json->response->docs[0])) {
 
 $doc = $json->response->docs[0];
 
-// Remove version field if present
 unset($doc->_version_);
 unset($doc->_root_);
 
@@ -117,7 +113,6 @@ if ($urlParam) $doc->url = $urlParam;
 if ($company) $doc->company = $company;
 if ($logo) $doc->logo = $logo;
 
-// Convert updated document into JSON
 $data = json_encode([$doc]);
 
 $options = [
@@ -139,4 +134,5 @@ if ($result === FALSE) {
     exit;
 }
 
+// Return the updated document
 echo $data;
