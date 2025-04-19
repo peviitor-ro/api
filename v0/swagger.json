@@ -892,57 +892,43 @@
       }
     },
     "/updateuser/": {
-      "put": {
+      "patch": {
         "tags": ["User"],
         "summary": "Update user",
-        "description": "Update usedr details in Solr",
-        "parameters": [
-          {
-            "name": "apikey",
-            "in": "query",
-            "required": true,
-            "description": "API key",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "description": "User ID",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "url",
-            "in": "query",
-            "required": true,
-            "description": "User URL",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "company",
-            "in": "query",
-            "required": true,
-            "description": "Company name",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "logo",
-            "in": "query",
-            "required": true,
-            "description": "Logo URL",
-            "schema": {
-              "type": "string"
+        "description": "Update user details in Solr using PATCH",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apikey": {
+                    "type": "string",
+                    "description": "API key"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "User ID (optional)"
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "User URL (optional)"
+                  },
+                  "company": {
+                    "type": "string",
+                    "description": "Company name (optional)"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": "Logo URL (optional)"
+                  }
+                },
+                "required": ["apikey"]
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "User updated successfully",
@@ -951,60 +937,67 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
+                    "id": { "type": "string" },
+                    "url": { "type": "string" },
+                    "company": { "type": "string" },
+                    "logo": { "type": "string" },
+                    "apikey": { "type": "string" }
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Missing required field"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service unavailable. SOLR server is down or request failed.",
+            "description": "Bad Request. Invalid or missing input.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
+                      "type": "string",
+                      "description": "Details about the error"
                     }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User with given apikey not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Something went wrong on the server.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable. SOLR server is down or unreachable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" },
+                    "code": { "type": "integer" }
                   }
                 }
               }
