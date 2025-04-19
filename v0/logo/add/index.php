@@ -72,7 +72,7 @@ $logo = isset($input['logo']) ? trim(htmlspecialchars($input['logo'])) : null;
 
 if (!$id || !$logo) {
     http_response_code(400); // Bad Request
-    echo json_encode(["error" => "Missing required parameters."]);
+    echo json_encode(["error" => "Missing required parameters: id and logo."]);
     exit;
 }
 
