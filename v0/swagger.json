@@ -450,9 +450,9 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "example": 2
+              "example": 1
             },
-            "description": "Last page to be returned. Default is 2."
+            "description": "Last page to be returned. Default is 1."
           }
         ],
         "responses": {
