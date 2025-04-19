@@ -52,16 +52,38 @@ if (!$server) {
 $core = 'jobs';
 
 try {
+    class StringNormalizer
+    {
+        public static function normalizeString($str)
+        {
+            $charMap = [
+                'ă' => 'a',
+                'î' => 'i',
+                'â' => 'a',
+                'ș' => 's',
+                'ț' => 't',
+                'Ă' => 'A',
+                'Î' => 'I',
+                'Â' => 'A',
+                'Ș' => 'S',
+                'Ț' => 'T'
+            ];
+            return strtr($str, $charMap);
+        }
+    }
+
     // Verifică prezența parametrului 'q'
     if (!isset($_GET['q']) || empty(trim($_GET['q']))) {
         http_response_code(400);
         echo json_encode(['message' => 'No query provided']);
         exit;
     }
-    $query = trim($_GET['q']);
+    $query = StringNormalizer::normalizeString(trim($_GET['q']));
 
     // Construiește URL-ul
     $url = "http://" . $server . "/solr/" . $core . "/suggest?suggest=true&suggest.build=true&suggest.dictionary=jobTitleSuggester&suggest.q=" . urlencode($query) . "&wt=json";
+    $url .= "&suggest.cfq=job_title:\"" . urlencode($query) . "\"";
+    $url .= "&suggest.count=100"; // Marim numarul de sugestii returnate
 
     // Inițializează cURL
     $ch = curl_init($url);
@@ -106,11 +128,26 @@ try {
         echo json_encode(['message' => 'No suggestions found']);
         exit;
     }
-    
+
     // Extrage sugestiile
     $suggestions = $jsonArray['suggest']['jobTitleSuggester'][$query]['suggestions'];
-    echo json_encode(['suggestions' => $suggestions], JSON_PRETTY_PRINT);
+    $filteredSuggestions = [];
+    
+    foreach ($suggestions as $suggestion) {
+        // Verificam daca sugestia contine intregul query (case insensitive)
+        $normalizedTerm = StringNormalizer::normalizeString($suggestion['term']);
+        if (stripos($normalizedTerm, $query) !== false) {
+            $filteredSuggestions[] = $suggestion;
+        }
+    }
+    
+    if (empty($filteredSuggestions)) {
+        http_response_code(404);
+        echo json_encode(['message' => 'No suggestions found']);
+        exit;
+    }
 
+    echo json_encode(['suggestions' => $filteredSuggestions], JSON_PRETTY_PRINT);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage(), 'code' => $e->getCode()]);
