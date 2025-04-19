@@ -59,10 +59,17 @@ $qs = '?indent=true&q.op=OR&q=*%3A*&useParams=';
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
 // Fetch parameters from query string
-$id = isset($_GET['id']) ? trim($_GET['id']) : null;
-$logo = isset($_GET['logo']) ? trim(htmlspecialchars($_GET['logo'])) : null;
+$input = json_decode(file_get_contents("php://input"), true);
 
-// Validate required fields
+if (!is_array($input)) {
+    http_response_code(400); // Bad Request
+    echo json_encode(["error" => "Invalid JSON format."]);
+    exit;
+}
+
+$id = isset($input['id']) ? trim($input['id']) : null;
+$logo = isset($input['logo']) ? trim(htmlspecialchars($input['logo'])) : null;
+
 if (!$id || !$logo) {
     http_response_code(400); // Bad Request
     echo json_encode(["error" => "Missing required parameters."]);
