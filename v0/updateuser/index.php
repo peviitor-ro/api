@@ -51,16 +51,26 @@ $core = 'auth';
 $qs = '?omitHeader=true&q.op=OR&q=apikey%3A';
 
 // Retrieve parameters from the query string
-$apikey = isset($_GET['apikey']) ? trim($_GET['apikey']) : null;
-$id = isset($_GET['id']) ? trim($_GET['id']) : null;
-$urlParam = isset($_GET['url']) ? trim($_GET['url']) : null;
-$company = isset($_GET['company']) ? trim($_GET['company']) : null;
-$logo = isset($_GET['logo']) ? trim($_GET['logo']) : null;
+$input = json_decode(file_get_contents("php://input"), true);
+$apikey = isset($input['apikey']) ? trim($input['apikey']) : null;
+$id = isset($input['id']) ? trim($input['id']) : null;
+$urlParam = isset($input['url']) ? trim($input['url']) : null;
+$company = isset($input['company']) ? trim($input['company']) : null;
+$logo = isset($input['logo']) ? trim($input['logo']) : null;
 
 if (!$apikey) {
     http_response_code(400);
     echo json_encode(["error" => "Missing required parameter: apikey"]);
     exit;
+}
+
+if (!preg_match('/[a-zA-Z0-9]/', $apikey)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Invalid apikey. It must contain only letters and numbers.",
+        "received" => $apikey
+    ]);
+    exit;   
 }
 
 $apikey = urlencode($apikey);
