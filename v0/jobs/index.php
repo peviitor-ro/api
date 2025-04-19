@@ -49,7 +49,6 @@ if (!$server) {
 
 $core = "jobs";
 
-// Parametrii pentru interogarea Solr
 $qs = '?';
 $qs = $qs . 'facet=true';
 $qs = $qs . '&';
@@ -63,21 +62,34 @@ $qs = $qs . 'omitHeader=true';
 $qs = $qs . '&';
 $qs = $qs . 'useParams=';
 
-// Parametru pentru numărul de joburi
-$rows = 100;  // Valoare implicită
-if (isset($_GET["rows"])) {
-    $rows = $_GET["rows"];
-    if (!is_numeric($rows) || $rows <= 0) {
-        // Dacă rows nu este valid, returnează o eroare
+$page = 100;
+$start = 1;
+$rows = 100;  
+$stop = $start * $page;
+
+if (isset($_GET["start_page"]) && isset($_GET["stop_page"])) {
+    $stop = ($_GET["stop_page"] - 1) * $page;
+    $start = ($_GET["start_page"] - 1) * $page;
+    if (!is_numeric($stop) || $stop <= $start) {
         http_response_code(400);
         echo json_encode([
-            "error" => "You must provide a positive number for 'rows'",
+            "error" => "You must provide a positive number for 'stop_page' less than " . ($start/100)+1,
             "code" => 400
         ]);
         exit;
     }
+    if (!is_numeric($start) || $start < 0) {
+        http_response_code(400);
+        echo json_encode([
+            "error" => "You must provide a positive number for 'start_page'",
+            "code" => 400
+        ]);
+        exit;
+    }
+    $rows = $stop - $start;  
 }
-$qs = $qs . '&rows=' . $rows;
+
+$qs = $qs . '&rows=' . $rows . '&start=' . $start;
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
@@ -90,7 +102,6 @@ $context = stream_context_create([
 // Fetch data from Solr
 $string = @file_get_contents($url, false, $context);
 
-// Verifică dacă Solr este în picioare (server nefuncțional)
 if ($string == false) {
     http_response_code(503);
     echo json_encode([
@@ -102,14 +113,13 @@ if ($string == false) {
 
 $json = json_decode($string, true);
 
-// Verifică dacă Solr a returnat un răspuns valid
+// Check for a valid response
 if (json_last_error() !== JSON_ERROR_NONE) {
     echo json_encode(["error" => "Failed to parse Solr response as JSON"]);
     exit;
 }
 
-// Elimină secțiunea "facet_counts" din răspuns
 unset($json['facet_counts']);
 
-// Returnează doar partea relevantă din răspuns
+// Return only relevant part 
 echo json_encode($json);
