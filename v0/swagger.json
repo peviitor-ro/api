@@ -599,26 +599,27 @@
         "tags": ["Logo"],
         "summary": "Add a new logo",
         "description": "Logo data",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "required": true,
-            "description": "Company id",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "logo",
-            "in": "query",
-            "required": true,
-            "description": "URL or identifier of the logo",
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "User ID (optional)"
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": "Logo URL (optional)"
+                  }
+                },
+                "required": ["id", "logo"]
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Logo added successfully",
