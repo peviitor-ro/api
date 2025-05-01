@@ -38,10 +38,10 @@ jobs:
 
       - name: Generate .env File
         run: |
-          echo "PROD_SERVER=${{ secrets.PROD_SERVER }}" >> .env
-          echo "BACK_SERVER=${{ secrets.BACK_SERVER }}" >> .env
-          echo "SOLR_USER=${{ secrets.USERNAME_SOLR }}" >> .env
-          echo "SOLR_PASS=${{ secrets.PASSWORD_SOLR }}" >> .env
+          echo "PROD_SERVER=${{ secrets.PROD_SERVER }}" >> api.env
+          echo "BACK_SERVER=${{ secrets.BACK_SERVER }}" >> api.env
+          echo "SOLR_USER=${{ secrets.USERNAME_SOLR }}" >> api.env
+          echo "SOLR_PASS=${{ secrets.PASSWORD_SOLR }}" >> api.env
           pwd
           ls
           
