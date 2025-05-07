@@ -3,7 +3,6 @@
 header("Access-Control-Allow-Origin: *");
 
 require_once './getLogo.php';
-require_once '../config.php';
 
 class SolrQueryBuilder {
     public static function replaceSpaces($string) {
