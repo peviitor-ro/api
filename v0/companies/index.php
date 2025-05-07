@@ -2,12 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-// Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-   http_response_code(200);
-   exit;
-}
-
 // Ensure the request is GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
    http_response_code(405); // Method Not Allowed
@@ -71,7 +65,7 @@ $context = stream_context_create([
 ]);
 
 // Fetch data from Solr
-$string = @file_get_contents($url, false, $context);
+$string = file_get_contents($url, false, $context);
 
 // Check if Solr is down (server not responding)
 if ($string == false) {
