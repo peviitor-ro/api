@@ -1,8 +1,40 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json; charset=utf-8');
 
 require_once './getLogo.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["error" => "Only GET method is allowed"]);
+    exit;
+}
+
+// Load variables from the api.env file
+function loadEnv($file)
+{
+    $file = realpath($file);
+
+    // Check if the api.env file exists
+    if (!$file || !file_exists($file)) {
+        die(json_encode(["error" => "The api.env file does not exist!", "path" => $file]));
+    }
+
+    $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        // Skip comments (lines starting with '#')
+        if (strpos(trim($line), '#') === 0) continue;
+
+        // Split the line into key and value, and add to environment
+        list($key, $value) = explode('=', $line, 2) + [NULL, NULL];
+        if ($key && $value) {
+            $key = trim($key);
+            $value = trim($value);
+            $_SERVER[$key] = $value;
+            putenv("$key=$value");
+        }
+    }
+}
 
 class SolrQueryBuilder {
     public static function replaceSpaces($string) {
@@ -34,6 +66,19 @@ foreach ($_GET as $key => $value) {
 }
 
 try {
+    // Load api.env file
+    loadEnv('../../api.env');
+
+    // Retrieve SOLR variables from environment
+    $server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
+    $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
+    $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
+
+    // Debugging: Check if the server is set
+    if (!$server) {
+        die(json_encode(["error" => "PROD_SERVER is not set in api.env"]));
+    }
+    
     $core = 'jobs';
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
 
@@ -43,6 +88,12 @@ try {
     $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
+
+    $context = stream_context_create([
+        'http' => [
+            'header' => "Authorization: Basic " . base64_encode("$username:$password")
+        ]
+    ]);
 
     if (isset($_GET['page'])) {
         $start = ($_GET['page'] - 1) * 12;
@@ -59,7 +110,7 @@ try {
     }
 
     // Obținem datele din Solr
-    $json = file_get_contents($url);
+    $json = file_get_contents($url, false, $context);
     $jobs = json_decode($json, true);
 
     // Adăugăm logo pentru fiecare job
