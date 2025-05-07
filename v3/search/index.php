@@ -71,10 +71,10 @@ class SolrQueryBuilder
 
 try{
     // Load api.env file
-loadEnv('../../.env');
+loadEnv('../../api.env');
 
 // Retrieve SOLR variables from environment
-$server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
+$server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
 $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
