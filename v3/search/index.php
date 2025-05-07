@@ -2,8 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-require_once './getLogo.php';
-
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405); // Method Not Allowed
     echo json_encode(["error" => "Only GET method is allowed"]);
@@ -36,12 +34,15 @@ function loadEnv($file)
     }
 }
 
-class SolrQueryBuilder {
-    public static function replaceSpaces($string) {
+class SolrQueryBuilder
+{
+    public static function replaceSpaces($string)
+    {
         return str_replace([' ', '&', '$'], ['%20', '%26', '%24'], $string);
     }
 
-    public static function buildParamQuery($param, $queryName) {
+    public static function buildParamQuery($param, $queryName)
+    {
         $arrayParams = explode(',', $param);
         $queries = array_map(function ($item) use ($queryName) {
             return $queryName . '%3A%22' . self::replaceSpaces($item) . '%22';
@@ -50,76 +51,143 @@ class SolrQueryBuilder {
         return '&fq=' . implode('%20OR%20', $queries);
     }
 
-    public static function normalizeString($str) {
+    public static function normalizeString($str)
+    {
         $charMap = [
-            'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
-            'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
+            'ă' => 'a',
+            'î' => 'i',
+            'â' => 'a',
+            'ș' => 's',
+            'ț' => 't',
+            'Ă' => 'A',
+            'Î' => 'I',
+            'Â' => 'A',
+            'Ș' => 'S',
+            'Ț' => 'T'
         ];
-
         return strtr($str, $charMap);
     }
 }
 
-// Normalizează parametrii din $_GET
+try{
+    // Load api.env file
+loadEnv('../../.env');
+
+// Retrieve SOLR variables from environment
+$server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
+$username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
+$password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
+
+// Debugging: Check if the server is set
+if (!$server) {
+    die(json_encode(["error" => "PROD_SERVER is not set in api.env"]));
+}
+
+// Normalize GET parameters
 foreach ($_GET as $key => $value) {
     $_GET[$key] = SolrQueryBuilder::normalizeString($value);
 }
 
-try {
-    // Load api.env file
-    loadEnv('../../api.env');
+// Define allowed fields
+$optionalFields = ['start', 'rows', 'sort', 'page', 'q'];
 
-    // Retrieve SOLR variables from environment
-    $server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
-    $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
-    $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
-
-    // Debugging: Check if the server is set
-    if (!$server) {
-        die(json_encode(["error" => "PROD_SERVER is not set in api.env"]));
+foreach ($_GET as $key => $value) {
+    if (!in_array($key, $optionalFields)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Unknown field: $key"]);
+        exit;
     }
-    
-    $core = 'jobs';
-    $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
+}
 
-    // Construim query string-ul
-    $query = '?indent=true&q.op=OR&';
-    $query .= isset($_GET['q']) ? 'q=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : 'q=*:*';
-    $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
-    $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
-    $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
+$core = 'jobs';
+$baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
 
-    $context = stream_context_create([
-        'http' => [
-            'header' => "Authorization: Basic " . base64_encode("$username:$password")
-        ]
-    ]);
+$query = '?indent=true&q.op=OR&';
+$query .= isset($_GET['q']) && !empty(trim($_GET['q']))
+    ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
+    : 'q=*:*'; // Return all jobs if 'q' is missing
 
-    if (isset($_GET['page'])) {
-        $start = ($_GET['page'] - 1) * 12;
-        $query .= "&start=$start&rows=12";
+$query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
+$query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
+$query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
+
+$query .= '&useParams=';
+
+$context = stream_context_create([
+    'http' => [
+        'header' => "Authorization: Basic " . base64_encode("$username:$password")
+    ]
+]);
+
+// Step 1: Get numFound
+$countUrl = $baseUrl . $query . "&rows=0";
+$countResponse = @file_get_contents($countUrl, false, $context);
+if ($countResponse === false) {
+    http_response_code(503);
+    echo json_encode(["error" => "Failed to fetch count from Solr"]);
+    exit;
+}
+
+$countData = json_decode($countResponse, true);
+$numFound = $countData['response']['numFound'] ?? 0;
+
+// Step 2: Validate start and rows
+$finalStart = 0;
+$finalRows = 12; // default
+
+if (isset($_GET['start'])) {
+    if (!ctype_digit($_GET['start']) || ($_GET['start'] < 0 || $_GET['start'] >= $numFound)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer less than $numFound."]);
+        exit;
     }
+    $finalStart = intval($_GET['start']);
+}
 
-    $query .= '&useParams=';
-    $url = $baseUrl . $query;
-
-    // Verificăm disponibilitatea endpoint-ului
-    $headers = @get_headers($url);
-    if ($headers === false || strpos($headers[0], '200') === false) {
-        throw new Exception('Endpoint-ul nu este disponibil');
+if (isset($_GET['rows'])) {
+    if (!ctype_digit($_GET['rows']) || ($_GET['rows'] <= 0 || $_GET['rows'] > $numFound - $finalStart)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer less than " . ($numFound - $finalStart) . "."]);
+        exit;
     }
+    $finalRows = intval($_GET['rows']);
+}
 
-    // Obținem datele din Solr
-    $json = file_get_contents($url, false, $context);
-    $jobs = json_decode($json, true);
-
-    // Adăugăm logo pentru fiecare job
-    foreach ($jobs['response']['docs'] as &$job) {
-        $company = $job['company'];
-        $job['logoUrl'] = getLogo($company[0]);
+if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
+    $page = intval($_GET['page']);
+    if ($page > 0) {
+        $finalStart = ($page - 1) * $finalRows;
+        if ($finalStart >= $numFound) $finalStart = 0;
+    } else {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer."]);
+        exit;
     }
+}
 
-    echo json_encode($jobs);
+// Append start & rows
+$query .= "&start=$finalStart&rows=$finalRows";
+
+// Final Solr URL
+$url = $baseUrl . $query;
+
+$string = @file_get_contents($url, false, $context);
+
+if ($string == false) {
+    http_response_code(503);
+    echo json_encode(["error" => "SOLR server in DEV is down", "code" => 503]);
+    exit;
+}
+
+$jobs = json_decode($string, true);
+
+if (isset($jobs['response']['numFound']) && $jobs['response']['numFound'] == 0) {
+    http_response_code(404);
+    echo json_encode(["error" => "No jobs found in the database", "code" => 404]);
+    exit;
+}
+
+echo json_encode($jobs);
 
 } catch (Exception $e) {
     // Fallback la endpoint-ul de rezervă
