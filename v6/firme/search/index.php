@@ -76,7 +76,7 @@ class SolrQueryBuilder
 
 
     // Load api.env file
-loadEnv('../../api.env');
+loadEnv('../../../api.env');
 
 // Retrieve SOLR variables from environment
 $server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
