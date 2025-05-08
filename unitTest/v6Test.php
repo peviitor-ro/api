@@ -9,21 +9,15 @@ class v6Test extends TestCase
 {
     public function testServer()
     {
-        // Încarcă variabilele din .env
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+        // Load environment variables from api.env
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/..', 'api.env');
         $dotenv->load();
 
-        if (isset($_ENV['PROD_SERVER'])) {
-            echo "PROD_SERVER loaded.";
-        } else {
-            echo "PROD_SERVER is not loaded.";
-        }
-
-        // Verifică dacă PROD_SERVER este definit
-        $this->assertArrayHasKey('PROD_SERVER', $_ENV, 'PROD_SERVER is not defined in .env.');
+        // Assert that PROD_SERVER is set and not empty
+        $this->assertArrayHasKey('PROD_SERVER', $_ENV, 'PROD_SERVER is not defined in api.env.');
         $this->assertNotEmpty($_ENV['PROD_SERVER'], 'PROD_SERVER is empty.');
 
-        // Verifică valoarea variabilei
+        // Assert that PROD_SERVER has the expected value
         $expectedServer = 'zimbor.go.ro';
         $this->assertEquals($expectedServer, $_ENV['PROD_SERVER'], 'The value of PROD_SERVER is not accepted.');
     }
