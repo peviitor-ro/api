@@ -165,7 +165,7 @@ try {
     echo json_encode($jobs);
 } catch (Exception $e) {
     // Fallback to backup endpoint
-    $backupUrl = $back . '/mobile/';
+    $backupUrl = rtrim($back, '/') . '/mobile/';
     $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
     $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
     $citiesString = str_replace('~', '', $_GET['city'] ?? '');
