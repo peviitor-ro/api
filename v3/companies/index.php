@@ -41,6 +41,7 @@ loadEnv('../../api.env');
 
 // Retrieve SOLR variables from environment
 $server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
+$backup = getenv('BACK_SERVER') ?: ($_SERVER['BACK_SERVER'] ?? null);
 $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 

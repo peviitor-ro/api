@@ -105,14 +105,7 @@ try {
     $string = @file_get_contents($url, false, $context);
 
     if ($string === false) {
-        $error = error_get_last();  // Get the last error
-        http_response_code(503);
-        echo json_encode([
-            "error" => "SOLR server in DEV is down",
-            "code" => 503,
-            "details" => $error
-        ]);
-        exit;
+        throw new EndpointNotAvailableException('Nu s-a putut obține conținutul de la: ' . $url);
     }
 
     // Decode the JSON response from Solr
