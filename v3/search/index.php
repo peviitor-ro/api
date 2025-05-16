@@ -4,6 +4,13 @@ header('Content-Type: application/json; charset=utf-8');
 
 require_once '../utils/env.php';
 
+loadEnv('../../api.env');
+
+$server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
+$username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
+$password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
+$backup = getenv('BACK_SERVER') ?: ($_SERVER['BACK_SERVER'] ?? null);
+
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405); // Method Not Allowed
     echo json_encode(["error" => "Only GET method is allowed"]);
@@ -54,12 +61,6 @@ class SolrQueryBuilder
 }
 
 try {
-    loadEnv('../../api.env');
-
-    $server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
-    $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
-    $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
-
     if (!$server) {
         die(json_encode(["error" => "PROD_SERVER is not set in api.env"]));
     }
@@ -139,7 +140,7 @@ try {
     echo json_encode($jobs);
 } catch (Exception $e) {
     // Fallback to backup endpoint
-    $backupUrl = $back . '/mobile/';
+    $backupUrl = $backup . '/mobile/';
     $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
     $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
     $citiesString = str_replace('~', '', $_GET['city'] ?? '');
