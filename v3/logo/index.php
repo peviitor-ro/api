@@ -2,7 +2,30 @@
 header("Access-Control-Allow-Origin: *");
 
 require_once '../config.php';
+require_once '../utils/env.php';
 
+// Load environment variables
+loadEnv('../../api.env');
+
+// Retrieve SOLR variables from environment
+$server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
+$username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
+$password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
+
+// Function to fetch content with authentication
+function file_get_contents_auth($url, $username, $password) {
+    $options = [
+        "http" => [
+            "header" => "Authorization: Basic " . base64_encode("$username:$password")
+        ]
+    ];
+    $context = stream_context_create($options);
+    $result = @file_get_contents($url, false, $context); // Suppress warnings
+
+    return $result;
+}
+
+// Core 'auth'
 $core = 'auth';
 
 $qs = '?';
@@ -20,8 +43,25 @@ $qs .= 'useParams=';
 
 $url =  'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
-$string = file_get_contents($url);
+// Use the authentication function
+$string = file_get_contents_auth($url, $username, $password);
+
+// Error handling
+if ($string === false) {
+    error_log("Failed to fetch data from $url");
+    echo json_encode(['error' => 'Failed to fetch data from Solr']);
+    exit;
+}
+
 $json = json_decode($string, true);
+
+// Check if JSON decoding was successful
+if ($json === null) {
+    error_log("JSON decode failed for data from $url");
+    echo json_encode(['error' => 'Failed to decode JSON data']);
+    exit;
+}
+
 $companies = $json['response']['docs'];
 
 $results =  new stdClass();
@@ -36,6 +76,7 @@ foreach ($companies as $company) {
     $test[$item] = $url;
 }
 
+// Core 'jobs'
 $core = 'jobs';
 
 $qs = '?';
@@ -60,10 +101,33 @@ $qs .= 'start=0';
 
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
-$string = file_get_contents($url);
+// Use the authentication function
+$string = file_get_contents_auth($url, $username, $password);
+
+// Error handling
+if ($string === false) {
+    error_log("Failed to fetch data from $url");
+    echo json_encode(['error' => 'Failed to fetch data from Solr']);
+    exit;
+}
+
 $json = json_decode($string, true);
 
+// Check if JSON decoding was successful
+if ($json === null) {
+    error_log("JSON decode failed for data from $url");
+    echo json_encode(['error' => 'Failed to decode JSON data']);
+    exit;
+}
+
 $companies = $json['facet_counts']['facet_fields']['company_str'];
+
+// Validate $companies before using it
+if (!is_array($companies)) {
+    error_log("Companies data is not an array");
+    echo json_encode(['error' => 'Companies data is not an array']);
+    exit;
+}
 
 $results =  new stdClass();
 $results->total = count($companies) / 2;
@@ -82,4 +146,6 @@ for ($i = 0; $i < count($companies) / 2; $i++) {
     $results->companies[$i] = new stdClass();
     $results->companies[$i] = $obj;
 }
+
 echo json_encode($results);
+?>
