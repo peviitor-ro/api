@@ -1,6 +1,6 @@
 <?php
 // Permit doar anumite origini
-$allowed_origins = ['https://peviitor-ro.github.io'];
+$allowed_origins = ['https://admin.zira.ro'];
 
 // Verificăm headerul Origin al cererii
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
