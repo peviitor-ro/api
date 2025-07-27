@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit;
 }
 
-// Load variables from the .env file
+// Load variables from the api.env file
 function loadEnv($file) {
     $file = realpath($file); 
 
-    // Check if the .env file exists
+    // Check if the api.env file exists
     if (!$file || !file_exists($file)) {
-        die(json_encode(["error" => "The .env file does not exist!", "path" => $file]));
+        die(json_encode(["error" => "The api.env file does not exist!", "path" => $file]));
     }
 
     $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -34,8 +34,8 @@ function loadEnv($file) {
     }
 }
 
-// Load .env file
-loadEnv('../../.env');
+// Load api.env file
+loadEnv('../../api.env');
 
 // Retrieve SOLR variables from environment
 $server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
@@ -44,7 +44,7 @@ $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
 // Debugging: Check if the server is set
 if (!$server) {
-    die(json_encode(["error" => "LOCAL_SERVER is not set in .env"]));
+    die(json_encode(["error" => "LOCAL_SERVER is not set in api.env"]));
 }
 
 $core = "jobs";

@@ -9,7 +9,7 @@ class v0Test extends TestCase
 {
     public function testServer()
     {
-        // Încarcă variabilele din .env
+        // Încarcă variabilele din api.env
         $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
         $dotenv->load();
 
@@ -20,7 +20,7 @@ class v0Test extends TestCase
         }
 
         // Verifică dacă LOCAL_SERVER este definit
-        $this->assertArrayHasKey('LOCAL_SERVER', $_ENV, 'LOCAL_SERVER is not defined in .env.');
+        $this->assertArrayHasKey('LOCAL_SERVER', $_ENV, 'LOCAL_SERVER is not defined in api.env.');
         $this->assertNotEmpty($_ENV['LOCAL_SERVER'], 'LOCAL_SERVER is empty.');
 
         // Verifică valoarea variabilei

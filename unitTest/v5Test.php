@@ -9,7 +9,7 @@ class v5Test extends TestCase
 {
     public function testServer()
     {
-        // Încarcă variabilele din .env
+        // Încarcă variabilele din api.env
         $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
         $dotenv->load();
 
@@ -20,7 +20,7 @@ class v5Test extends TestCase
         }
 
         // Verifică dacă PROD_SERVER este definit
-        $this->assertArrayHasKey('PROD_SERVER', $_ENV, 'PROD_SERVER is not defined in .env.');
+        $this->assertArrayHasKey('PROD_SERVER', $_ENV, 'PROD_SERVER is not defined in api.env.');
         $this->assertNotEmpty($_ENV['PROD_SERVER'], 'PROD_SERVER is empty.');
 
         // Verifică valoarea variabilei
