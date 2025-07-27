@@ -11,12 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
     exit;
 }
 
-// Load variables from the .env file
+// Load variables from the api.env file
 function loadEnv($file) {
     $file = realpath($file); 
 
     if (!$file || !file_exists($file)) {
-        die(json_encode(["error" => "The .env file does not exist!", "path" => $file]));
+        die(json_encode(["error" => "The api.env file does not exist!", "path" => $file]));
     }
 
     $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -33,8 +33,8 @@ function loadEnv($file) {
     }
 }
 
-// Load .env file
-loadEnv('../../.env');
+// Load api.env file
+loadEnv('../../api.env');
 
 // SOLR connection variables
 $server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
@@ -42,7 +42,7 @@ $username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
 if (!$server) {
-    die(json_encode(["error" => "LOCAL_SERVER is not set in .env"]));
+    die(json_encode(["error" => "LOCAL_SERVER is not set in api.env"]));
 }
 
 $core = 'auth';
