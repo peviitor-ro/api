@@ -2,9 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405); // Method Not Allowed
-    echo json_encode(["error" => "Only POST method is allowed"]);
+    echo json_encode(["error" => "Only DELETE method is allowed"]);
     exit;
 }
 
