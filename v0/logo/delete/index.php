@@ -47,7 +47,7 @@ if (!$server) {
 }
 
 $core  = 'logo';
-$command = '/update?commit=true'; // Adăugăm commit=true pentru a aplica modificările imediat
+$command = '/update?commit=true';
 $url = 'http://' . $server . '/solr/' . $core . $command;
 
 $id = $_GET['id'] ?? '';
@@ -58,10 +58,39 @@ if (empty($id)) {
     exit;
 }
 
-// Payload pentru ștergerea documentului pe baza id-ului
+// Verify if the ID exists
+$checkUrl = 'http://' . $server . '/solr/' . $core . '/select?q=id:' . urlencode($id) . '&rows=0';
+$ch_check = curl_init();
+curl_setopt($ch_check, CURLOPT_URL, $checkUrl);
+curl_setopt($ch_check, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch_check, CURLOPT_HTTPHEADER, [
+    'Authorization: Basic ' . base64_encode("$username:$password")
+]);
+
+$checkResp = curl_exec($ch_check);
+curl_close($ch_check);
+
+$found = false;
+
+if ($checkResp) {
+    $jsonCheck = json_decode($checkResp, true);
+    if (isset($jsonCheck['response']['numFound']) && $jsonCheck['response']['numFound'] > 0) {
+        $found = true;
+    }
+}
+
+if (!$found) {
+    http_response_code(404);
+    echo json_encode([
+        'message' => 'ID "' . $id . '" does not exist! Please try another ID.'
+    ]);
+    exit;
+}
+
+// Delete the json by ID
 $data = json_encode([
     "delete" => [
-        "id" => $id // Id-ul documentului pe care vrem să-l ștergem
+        "id" => $id // ID to be deleted
     ]
 ]);
 
