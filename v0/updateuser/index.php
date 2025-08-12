@@ -12,29 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
 }
 
 // Load variables from the api.env file
-function loadEnv($file) {
-    $file = realpath($file); 
-
-    if (!$file || !file_exists($file)) {
-        die(json_encode(["error" => "The api.env file does not exist!", "path" => $file]));
-    }
-
-    $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-
-        list($key, $value) = explode('=', $line, 2) + [NULL, NULL];
-        if ($key && $value) {
-            $key = trim($key);
-            $value = trim($value);
-            $_SERVER[$key] = $value;
-            putenv("$key=$value");
-        }
-    }
-}
-
-// Load api.env file
-loadEnv('../../api.env');
+require_once __DIR__ . '/../../includes/loadEnv.php';
+loadEnv(__DIR__ . '/../../api.env');
 
 // SOLR connection variables
 $server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
