@@ -26,28 +26,38 @@ if (!$server) {
 }
 
 // Check if POST parameters are present
-if (!isset($_POST['id']) || !isset($_POST['brands'])) {
+if (!isset($_POST['id']) || !isset($_POST['brand'])) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing id or brands"]);
+    echo json_encode(["error" => "Missing id or brand"]);
     exit;
 }
 
 // Read values from POST
 $id     = $_POST['id'];
-$brands = $_POST['brands'];
+$brand = $_POST['brand'];
 
 // Build JSON payload for Solr update
 $payload = [
     [
         "id" => $id,
-        "brands" => ["add" => $brands]
+        "brand" => ["add" => $brand]
     ]
 ];
 $jsonPayload = json_encode($payload);
 
 // Solr update API endpoint
 $core = "firme";
-$url = "http://{$server}/solr/{$core}/update?commitWithin=1000&overwrite=true&wt=json";
+
+$command = "/update";
+
+$qs = "?";
+$qs .= "commitWithin=1000";
+$qs .= "&overwrite=true";
+$qs .= "&wt=json";
+
+$url = "http://" . $server . "/solr/" .$core . $command . $qs;
+
+$authHeader = "Authorization: Basic " . base64_encode("$username:$password") . "\r\n";
 
 // Set HTTP context for file_get_contents
 $options = [
