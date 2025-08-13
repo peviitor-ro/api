@@ -67,7 +67,7 @@ $core = "firme";
 
 $qs = '?';
 $qs .= 'omitHeader=true&';
-$qs .= '?fl=denumire%2C%20brands';
+$qs .= '?fl=denumire%2C%20id';
 $qs .= '&indent=true';
 $qs .= '&q.op=OR';
 $qs .= '&q=brands%3A';
