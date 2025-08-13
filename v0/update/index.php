@@ -36,7 +36,7 @@ function city_fix($in)
 $method = 'PUT';
 
 // Load variables from the api.env file
-require_once __DIR__ . '/../../includes/loadEnv.php';
+require_once __DIR__ . '/../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../api.env');
 
 // Retrieve SOLR variables from environment
