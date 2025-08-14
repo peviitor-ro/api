@@ -15,5 +15,3 @@ $GLOBALS['authHeader'] = getAuthHeader($username, $password);
 
 // Load Solr helper & make credentials available globally
 require_once __DIR__ . '/../util/solr.php';
-$GLOBALS['solr'] = getSolrCredentials();
-

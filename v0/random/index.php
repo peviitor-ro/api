@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../bootstrap.php';
+$GLOBALS['solr'] = getSolrCredentials('LOCAL');
 
 // Asigură că metoda HTTP este GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
