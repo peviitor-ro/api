@@ -41,7 +41,7 @@ $qs = "?";
 $qs .= "indent=true";
 $qs .= "&q.op=OR";
 $qs .= "&q=";
-$qs .= urlencode('scrapers:"' . $scraper . '"');
+$qs .= urlencode('scraper:"' . $scraper . '"');
 $qs .= "&fl=denumire,id";
 $qs .= "&wt=json";
 
