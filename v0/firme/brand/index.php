@@ -36,13 +36,19 @@ $brand = $_GET['brand'];
 
 // Build Solr query URL
 $core = "firme";
-$query = urlencode('brands:"' . $brand . '"');
-$url = "http://{$server}/solr/{$core}/select"
-     . "?indent=true"
-     . "&q.op=OR"
-     . "&q={$query}"
-     . "&fl=denumire,id"
-     . "&wt=json";
+
+$qs = "?";
+$qs .= "indent=true";
+$qs .= "&q.op=OR";
+$qs .= "&q=";
+$qs .= urlencode('brands:"' . $brand . '"');
+$qs .= "&fl=denumire,id";
+$qs .= "&wt=json";
+
+
+$url = "http://" . $server . "/solr/" . $core . "/select" . $qs;
+
+$authHeader = "Authorization: Basic " . base64_encode("$username:$password") . "\r\n";
 
 // Prepare HTTP context with Basic Auth
 $options = [
@@ -50,7 +56,7 @@ $options = [
         'method' => 'GET',
         'header' => 
             "Accept: application/json\r\n" .
-            "Authorization: Basic " . base64_encode("$username:$password") . "\r\n" .
+            $authHeader .
             "User-Agent: PHP-FileGetContents\r\n"
     ]
 ];

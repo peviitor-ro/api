@@ -1,6 +1,6 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/../bootstrap.php';
+$GLOBALS['solr'] = getSolrCredentials('LOCAL');
 
 // Ensure the request is GET
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
@@ -9,14 +9,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
    exit;
 }
 
-// Load variables from the api.env file
-require_once __DIR__ . '/../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../api.env');
+$solr = $GLOBALS['solr'] ?? null;
+$authHeader = $GLOBALS['authHeader'] ?? null;
 
-// Retrieve SOLR variables from environment
-$server = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
-$username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
-$password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
+if (!$solr || !$authHeader) {
+    echo json_encode(["error" => "Solr credentials or auth header not set"]);
+    exit;
+}
+
+$server = $solr['server'];
+$username = $solr['username'];
+$password = $solr['password'];
 
 // Debugging: Check if the server is set
 if (!$server) {
@@ -35,10 +38,10 @@ $qs .= '&facet.limit=1000000';
 $url = 'http://' . $server . '/solr/' . $core . '/select' . $qs;
 
 $context = stream_context_create([
-   'http' => [
-       'header' => "Authorization: Basic " . base64_encode("$username:$password")
-   ]
-]);
+        'http' => [
+            'header' => $authHeader
+        ]
+    ]);
 
 // Fetch data from Solr
 $string = file_get_contents($url, false, $context);
