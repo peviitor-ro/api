@@ -12,7 +12,7 @@ if (in_array($origin, $allowed_origins)) {
     exit('Origin not allowed');
 }
 
-header("Access-Control-Allow-Methods: PUT, OPTIONS");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 // Respond to preflight requests
