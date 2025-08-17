@@ -4,49 +4,6 @@
     <meta charset="UTF-8" />
     <title>Acord GDPR - Campania "Pe Gard" | ZIRA MARKETING S.R.L.</title>
     <style>
-    @media print {
-        body, .container {
-            margin: 0;
-            padding: 1cm;
-            width: 100%;
-            box-shadow: none;
-            background: white;
-            color: black;
-            font-size: 12pt;
-            line-height: 1.2;
-            page-break-after: avoid;
-            page-break-inside: avoid;
-        }
-        h2, h3 {
-            page-break-after: avoid;
-            page-break-inside: avoid;
-            margin-top: 0.5em;
-            margin-bottom: 0.3em;
-        }
-        table {
-            width: 100%;
-            border-spacing: 0 8px;
-            font-size: 12pt;
-        }
-        th, td {
-            padding: 6px 8px;
-            border: 1px solid #444;
-        }
-        tbody tr {
-            box-shadow: none;
-            background: white !important;
-            border: 1px solid #444;
-        }
-        .actions {
-            display: none; /* ascunde butonul de email la print */
-        }
-        p {
-            margin: 0.5em 0;
-            line-height: 1.2;
-        }
-    }
-</style>
-    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 2em;
@@ -63,10 +20,17 @@
         }
         h2 {
             color: #004d80;
-            margin-bottom: 1.2em;
+            margin-bottom: 0.2em;
             text-align: center;
             font-weight: 700;
             letter-spacing: 1px;
+        }
+        #document-id {
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            margin-bottom: 1.5em;
+            font-style: italic;
         }
         table {
             width: 100%;
@@ -107,11 +71,60 @@
             margin-bottom: 1.2em;
             padding: 0 8px;
         }
+        @media print {
+            body, .container {
+                margin: 0;
+                padding: 1cm;
+                width: 100%;
+                box-shadow: none;
+                background: white;
+                color: black;
+                font-size: 12pt;
+                line-height: 1.2;
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            h2, h3 {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+                margin-top: 0.5em;
+                margin-bottom: 0.3em;
+            }
+            table {
+                width: 100%;
+                border-spacing: 0 8px;
+                font-size: 12pt;
+            }
+            th, td {
+                padding: 6px 8px;
+                border: 1px solid #444;
+            }
+            tbody tr {
+                box-shadow: none;
+                background: white !important;
+                border: 1px solid #444;
+            }
+            .actions {
+                display: none; /* ascunde butonul de email la print */
+            }
+            p {
+                margin: 0.5em 0;
+                line-height: 1.2;
+            }
+            #document-id {
+                font-style: normal;
+                font-size: 10pt;
+                color: black;
+                text-align: left;
+                margin-bottom: 1em;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Acord GDPR - Campania "Pe Gard"</h2>
+    <div id="document-id"></div>
 
     <section>
         <h3>Informații generale despre operator</h3>
@@ -201,6 +214,11 @@
         alert('Parametrul "id" lipsește din URL');
         throw new Error('Parametrul "id" lipsește din URL');
     }
+
+    // Afiseaza id-ul ca numar document/data sub titlu
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString("ro", {day: "2-digit", month: "2-digit", year: "numeric"});
+    document.getElementById("document-id").textContent = `Nr. document: ${id} / Data: ${formattedDate}`;
 
     fetch(`http://localhost:8081/api/zira/pegard/gdpr/?id=${encodeURIComponent(id)}`)
         .then(r => r.json())
