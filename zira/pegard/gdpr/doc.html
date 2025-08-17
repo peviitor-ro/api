@@ -220,7 +220,7 @@
     const formattedDate = now.toLocaleDateString("ro", {day: "2-digit", month: "2-digit", year: "numeric"});
     document.getElementById("document-id").textContent = `Nr. document: ${id} / Data: ${formattedDate}`;
 
-    fetch(`http://localhost:8081/api/zira/pegard/gdpr/?id=${encodeURIComponent(id)}`)
+    fetch(`https://api.peviitor.ro/zira/pegard/gdpr/?id=${encodeURIComponent(id)}`)
         .then(r => r.json())
         .then(data => {
             if (!data[0]) return;
