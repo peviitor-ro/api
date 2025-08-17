@@ -38,7 +38,7 @@ foreach ($docs as $doc) {
     $county = isset($doc['county'][0]) ? $doc['county'][0] : '';
 
 
-    $title = $street . ', ' . $city . ', ' . $county.'Romania';
+    $title = $street . ', ' . $city . ', ' . $county.', Romania';
 
     if ($lat !== null && $lng !== null) {
         $markers[] = [
@@ -50,5 +50,5 @@ foreach ($docs as $doc) {
 }
 
 
-header('Content-Type: application/json; charset=utf-8');
+//header('Content-Type: application/json; charset=utf-8');
 echo json_encode($markers, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
