@@ -41,6 +41,7 @@ if (!isset($_GET['id']) || trim($_GET['id']) === '') {
         $email = (isset($doc['email'][0])) ? $doc['email'][0] : null;
         $gdprconsent = (isset($doc['gdprconsent'][0])) ? $doc['gdprconsent'][0] : false;
         $timestamp = (isset($doc['timestamp'][0])) ? $doc['timestamp'][0] : null;
+        $contractpreference = (isset($doc['contractpreference'][0])) ? $doc['contractpreference'][0] : 'inchiriere';
 
         if ($gdprconsent === true) {
             $personalData[] = [
@@ -48,7 +49,8 @@ if (!isset($_GET['id']) || trim($_GET['id']) === '') {
                 'phone' => $phone,
                 'email' => $email,
                 'gdprconsent' => $gdprconsent,
-                'timestamp' => $timestamp
+                'timestamp' => $timestamp,
+                'contract' => $contractpreference
             ];
         }
     }
