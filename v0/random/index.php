@@ -54,6 +54,7 @@ try {
     $url = 'http://' . $server . '/solr/' . $core . '/select?q=' . urlencode('*:*') . '&rows=1' . '&start=' . $start . '&omitHeader=true';
 
     $json = @file_get_contents($url, false, $context);
+    
     if ($json === false) {
         list($version, $status, $msg) = explode(' ', $http_response_header[0], 3);
         header("HTTP/1.1 503 Service Unavailable");
