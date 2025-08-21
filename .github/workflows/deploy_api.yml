@@ -46,7 +46,7 @@ jobs:
           ls
           
       - name: Fast FTP
-        uses: anvil-solutions/Fast-FTP-Action@2.1.3
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{secrets.FTP_HOST}}
           username: ${{secrets.FTP_USER}}
