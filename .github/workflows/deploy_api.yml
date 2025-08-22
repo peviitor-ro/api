@@ -52,4 +52,4 @@ jobs:
           username: ${{secrets.FTP_USER}}
           password: ${{secrets.FTP_PASSWD}}
           local-dir: ./
-          remote_dir: /api.peviitor.ro
+          server-dir: /api.peviitor.ro/
