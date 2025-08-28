@@ -1,10 +1,16 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
+require_once(__DIR__ . '/../../../../api.env');
 
-$solrUrl = 'http://zimbor.go.ro:80/solr/pegard/select?q=*:*&wt=json&omitHeader=true';
-$username = 'solr';
-$password = 'SolrRocks';
+
+//$username = ' ';
+//$password = ' ';
+//$server = '';
+//$protocol ='';
+//$port ='';
+$solrUrl = $protocol.'://'. $server .':'.$port.'/solr/pegard/select?q=*:*&wt=json&omitHeader=true';
+
 
 $opts = [
     "http" => [
