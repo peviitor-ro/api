@@ -3,10 +3,6 @@
 require_once __DIR__ . '/../util/loadEnv.php';
 loadEnv(__DIR__ . '/../api.env');
 
-// Load CORS helper & set CORS headers
-require_once __DIR__ . '/../util/cors.php';
-setCORSHeaders();
-
 // Load Auth helper & build global HTTP auth header
 require_once __DIR__ . '/../util/auth.php';
 $username = getenv('SOLR_USER');
