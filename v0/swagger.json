@@ -1084,6 +1084,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "job_link": {
+                    "type": "string",
+                    "description": "Job link",
+                    "example": "https://example.com/job/software-engineer"
+                  },
                   "job_title": {
                     "type": "string",
                     "description": "Job title",
@@ -1094,18 +1099,28 @@
                     "description": "Company name",
                     "example": "Tech Corp"
                   },
+                  "country": {
+                    "type": "string",
+                    "description": "Country",
+                    "example": "România"
+                  },
                   "city": {
                     "type": "string",
                     "description": "City",
-                    "example": "Bucharest"
+                    "example": "București"
                   },
-                  "job_link": {
+                  "county": {
                     "type": "string",
-                    "description": "Job link",
-                    "example": "https://example.com/job/software-engineer"
+                    "description": "County",
+                    "example": "Ilfov"
+                  },
+                  "remote": {
+                    "type": "string",
+                    "description": "Remote",
+                    "example": "on-site"
                   }
                 },
-                "required": ["job_title", "company", "city", "job_link"]
+                "required": ["job_link", "job_title", "company", "country", "city", "county", "remote"]
               }
             }
           }
@@ -1136,7 +1151,7 @@
                   "properties": {
                     "error": {
                       "type": "string",
-                      "example": "Missing required fields: job_title, company, city, or job_link"
+                      "example": "Missing required fields: job_link, job_title, company, country, city, county, remote"
                     }
                   }
                 }
