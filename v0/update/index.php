@@ -86,10 +86,10 @@ $city = isset($data->city) ? htmlspecialchars($data->city) : null;
 $county = isset($data->county) ? htmlspecialchars($data->county) : null;
 $remote = isset($data->remote) ? htmlspecialchars($data->remote) : null;
 
-if (!$job_link || !$job_title || !$company || !$country || !$city || !$county || !$remote) {
+if (!$job_link || !$job_title || !$company) {
     http_response_code(400);
     echo json_encode([
-        "error" => "Missing required fields: job_link, job_title, company, country, city, county, remote",
+        "error" => "Missing required fields: job_link, job_title, company",
         "code" => 400
     ]);
     exit;
@@ -97,13 +97,13 @@ if (!$job_link || !$job_title || !$company || !$country || !$city || !$county ||
 
 // Create data for Solr
 $item = new stdClass();
-$item->job_link = $job_link;
-$item->job_title = $job_title;
-$item->company = $company;
-$item->country = str_ireplace("Romania", "România", $country);
-$item->city = city_fix($city);  // Apply city fix
-$item->county = $county;
-$item->remote = $remote;
+$item->job_link = trim($job_link);
+$item->job_title = trim($job_title);
+$item->company = trim($company);
+$item->country = $country ? str_ireplace("Romania", "România", trim($country)) : null;
+$item->city = $city ? city_fix(trim($city)) : null;  // Apply city fix if exists
+$item->county = $county ? trim($county) : null;
+$item->remote = $remote ? trim($remote) : null;
 
 $data = json_encode([$item]);
 
