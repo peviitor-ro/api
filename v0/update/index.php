@@ -86,10 +86,10 @@ $city = isset($data->city) ? htmlspecialchars($data->city) : null;
 $county = isset($data->county) ? htmlspecialchars($data->county) : null;
 $remote = isset($data->remote) ? htmlspecialchars($data->remote) : null;
 
-if (!$job_link || !$job_title || !$company || !$country || !$city || !$county || !$remote) {
+if (!$job_link || !$job_title || !$company) {
     http_response_code(400);
     echo json_encode([
-        "error" => "Missing required fields: job_link, job_title, company, country, city, county, remote",
+        "error" => "Missing required fields: job_link, job_title, company",
         "code" => 400
     ]);
     exit;
