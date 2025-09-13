@@ -906,23 +906,28 @@
                 "properties": {
                   "apikey": {
                     "type": "string",
-                    "description": "API key"
+                    "description": "API key",
+                    "example": "abc123xyz"
                   },
                   "id": {
                     "type": "string",
-                    "description": "User ID (optional)"
+                    "description": "User ID (optional)",
+                    "example": "local-part@domain"
                   },
                   "url": {
                     "type": "string",
-                    "description": "User URL (optional)"
+                    "description": "User URL (optional)",
+                    "example": "http://example.com"
                   },
                   "company": {
                     "type": "string",
-                    "description": "Company name (optional)"
+                    "description": "Company name (optional)",
+                    "example": "Company name"
                   },
                   "logo": {
                     "type": "string",
-                    "description": "Logo URL (optional)"
+                    "description": "Logo URL (optional)",
+                    "example": "http://example.com"
                   }
                 },
                 "required": ["apikey"]
