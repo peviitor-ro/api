@@ -11,6 +11,8 @@ if (in_array($origin, $allowed_origins)) {
     exit('Origin not allowed');
 }
 
+header('Content-Type: application/json; charset=utf-8');
+
 // Allow only DELETE requests
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405); // Method Not Allowed
