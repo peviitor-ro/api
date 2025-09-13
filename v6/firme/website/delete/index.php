@@ -11,7 +11,16 @@ if (in_array($origin, $allowed_origins)) {
     exit('Origin not allowed');
 }
 
-header('Content-Type: application/json; charset=utf-8');
+header("Access-Control-Allow-Methods: DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+// Respond to preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    // Stop script from executing further, return only headers and 200 OK status
+    http_response_code(200);
+    exit;
+}
+
 
 // Allow only DELETE requests
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
