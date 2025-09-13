@@ -41,13 +41,39 @@ if (!$apikey) {
     exit;
 }
 
+$invalid_chars = '/[\s\/,<>+=\-:;?"\'\{\}\[\]\|\\\)\(\*&^%$#!~`]/';
+
+if (!preg_match('/^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]/', $id) || preg_match($invalid_chars, $id)) {
+    http_response_code(400);
+    echo json_encode(["error" => "Invalid ID format: special characters and spaces are not allowed. Please try something like `local-part@domain`", "received" => $id]);
+    exit;
+}
+
 if (!preg_match('/[a-zA-Z0-9]/', $apikey)) {
     http_response_code(400);
     echo json_encode([
         "error" => "Invalid apikey. It must contain only letters and numbers.",
         "received" => $apikey
     ]);
-    exit;   
+    exit;
+}
+
+if (!preg_match('/^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/', $urlParam)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Invalid logo URL. It must start with http:// or https:// and be a valid domain.",
+        "received" => $urlParam
+    ]);
+    exit;
+}
+
+if (!preg_match('/^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/', $logo)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Invalid logo URL. It must start with http:// or https:// and be a valid domain.",
+        "received" => $logo
+    ]);
+    exit;
 }
 
 $apikey = urlencode($apikey);
