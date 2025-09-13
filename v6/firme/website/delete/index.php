@@ -1,4 +1,16 @@
 <?php
+// Permit doar anumite origini
+$allowed_origins = ['https://admin.zira.ro'];
+
+// Verificăm headerul Origin al cererii
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if (in_array($origin, $allowed_origins)) {
+    header("Access-Control-Allow-Origin: $origin");
+} else {
+    http_response_code(403); // Forbidden
+    exit('Origin not allowed');
+}
+
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
