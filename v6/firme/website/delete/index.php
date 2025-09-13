@@ -11,7 +11,6 @@ if (in_array($origin, $allowed_origins)) {
     exit('Origin not allowed');
 }
 
-header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
 // Allow only DELETE requests
