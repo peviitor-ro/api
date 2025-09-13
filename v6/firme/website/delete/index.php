@@ -16,10 +16,13 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 // Respond to preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    // Stop script from executing further, return only headers and 200 OK status
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Methods: DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
     http_response_code(200);
     exit;
 }
+
 
 
 // Allow only DELETE requests
