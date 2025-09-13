@@ -42,7 +42,7 @@ $qs .= "indent=true";
 $qs .= "&q.op=OR";
 $qs .= "&q=";
 $qs .= urlencode('brands:"' . $brand . '"');
-$qs .= "&fl=denumire,id";
+$qs .= "&fl=denumire,cui";
 $qs .= "&wt=json";
 
 

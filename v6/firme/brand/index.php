@@ -41,7 +41,7 @@ $url = "http://{$server}/solr/{$core}/select"
      . "?indent=true"
      . "&q.op=OR"
      . "&q={$query}"
-     . "&fl=denumire,id"
+     . "&fl=denumire,cui"
      . "&wt=json";
 
 // Prepare HTTP context with Basic Auth
