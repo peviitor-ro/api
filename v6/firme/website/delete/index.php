@@ -14,16 +14,14 @@ if (in_array($origin, $allowed_origins)) {
 header("Access-Control-Allow-Methods: DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Respond to preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header("Access-Control-Allow-Origin: $origin");
-    header("Access-Control-Allow-Methods: DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type");
-    http_response_code(200);
-    exit;
-}
-
-
+// // Respond to preflight requests
+// if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+//     header("Access-Control-Allow-Origin: $origin");
+//     header("Access-Control-Allow-Methods: DELETE, OPTIONS");
+//     header("Access-Control-Allow-Headers: Content-Type");
+//     http_response_code(200);
+//     exit;
+// }
 
 // Allow only DELETE requests
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
