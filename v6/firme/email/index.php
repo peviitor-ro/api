@@ -42,7 +42,7 @@ $qs .= "indent=true";
 $qs .= "&q.op=OR";
 $qs .= "&q=";
 $qs .= urlencode('email:"' . $email . '"');
-$qs .= "&fl=denumire,id";
+$qs .= "&fl=denumire,cui";
 $qs .= "&wt=json";
 
 
