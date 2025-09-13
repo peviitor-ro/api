@@ -14,14 +14,14 @@ require_once __DIR__ . '/../../../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../../../api.env');
 
 // Get Solr connection details from .env
-$server   = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
+$server   = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
 $username = getenv('SOLR_USER')    ?: ($_SERVER['SOLR_USER'] ?? null);
 $password = getenv('SOLR_PASS')    ?: ($_SERVER['SOLR_PASS'] ?? null);
 
 // If server is not set, stop execution
 if (!$server) {
     http_response_code(500);
-    echo json_encode(["error" => "PROD_SERVER is not set in api.env"]);
+    echo json_encode(["error" => "LOCAL_SERVER is not set in api.env"]);
     exit;
 }
 
