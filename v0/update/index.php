@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     http_response_code(405); // Method Not Allowed
     echo json_encode([
         "error" => "Only PUT method is allowed",
-        "code" => 400
+        "code" => 405
     ]);
     exit;
 }
