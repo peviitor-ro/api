@@ -2,6 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/../../../bootstrap.php';
+$GLOBALS['solr'] = getSolrCredentials('LOCAL');
+
 // Allow only POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); // Method Not Allowed
@@ -9,14 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Load variables from api.env
-require_once __DIR__ . '/../../../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../../../api.env');
+$solr = $GLOBALS['solr'] ?? null;
+$authHeader = $GLOBALS['authHeader'] ?? null;
 
-// Get Solr connection details from .env
-$server   = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
-$username = getenv('SOLR_USER')    ?: ($_SERVER['SOLR_USER'] ?? null);
-$password = getenv('SOLR_PASS')    ?: ($_SERVER['SOLR_PASS'] ?? null);
+if (!$solr || !$authHeader) {
+    echo json_encode(["error" => "Solr credentials or auth header not set"]);
+    exit;
+}
+
+$server = $solr['server'];
+$username = $solr['username'];
+$password = $solr['password'];
 
 // If server is not set, stop execution
 if (!$server) {
@@ -26,38 +32,28 @@ if (!$server) {
 }
 
 // Check if POST parameters are present
-if (!isset($_POST['id']) || !isset($_POST['brand'])) {
+if (!isset($_POST['id']) || !isset($_POST['brands'])) {
     http_response_code(400);
-    echo json_encode(["error" => "Missing id or brand"]);
+    echo json_encode(["error" => "Missing id or brands"]);
     exit;
 }
 
 // Read values from POST
 $id     = $_POST['id'];
-$brand = $_POST['brand'];
+$brands = $_POST['brands'];
 
 // Build JSON payload for Solr update
 $payload = [
     [
         "id" => $id,
-        "brand" => ["add" => $brand]
+        "brands" => ["add" => $brands]
     ]
 ];
 $jsonPayload = json_encode($payload);
 
 // Solr update API endpoint
 $core = "firme";
-
-$command = "/update";
-
-$qs = "?";
-$qs .= "commitWithin=1000";
-$qs .= "&overwrite=true";
-$qs .= "&wt=json";
-
-$url = "http://" . $server . "/solr/" .$core . $command . $qs;
-
-$authHeader = "Authorization: Basic " . base64_encode("$username:$password") . "\r\n";
+$url = "http://{$server}/solr/{$core}/update?commitWithin=1000&overwrite=true&wt=json";
 
 // Set HTTP context for file_get_contents
 $options = [
