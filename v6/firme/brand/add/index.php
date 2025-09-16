@@ -13,7 +13,7 @@ if (in_array($origin, $GLOBALS['allowed_origins'])) {
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-$GLOBALS['solr'] = getSolrCredentials('LOCAL');
+$GLOBALS['solr'] = getSolrCredentials('PROD');
 
 // Allow only POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
