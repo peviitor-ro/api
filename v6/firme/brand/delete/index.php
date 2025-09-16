@@ -1,10 +1,9 @@
 <?php
-// Permit doar anumite origini
-$allowed_origins = ['https://admin.zira.ro'];
+require_once __DIR__ . '/../../../bootstrap.php';
 
 // Verificăm headerul Origin al cererii
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-if (in_array($origin, $allowed_origins)) {
+if (in_array($origin, $GLOBALS['allowed_origins'])) {
     header("Access-Control-Allow-Origin: $origin");
 } else {
     http_response_code(403); // Forbidden
