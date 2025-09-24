@@ -22,6 +22,7 @@ concurrency:
 
 jobs:
   deploy_to_PROD:
+  needs: deploy_to_QA
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
