@@ -21,29 +21,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
+  deploy_to_PROD:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref:  master
-      - name: Replace Placeholders
-        run: |
-          SERVER_ID="${{ secrets.SERVER_ID }}"
-          CHANNEL_ID="${{ secrets.CHANNEL_ID }}"
-          sed -i "s/{{SERVER_ID}}/$SERVER_ID/g" humans-txt/engine/index.php
-          sed -i "s/{{CHANNEL_ID}}/$CHANNEL_ID/g" humans-txt/engine/index.php
-
       - name: Generate .env File
         run: |
           echo "PROD_SERVER=${{ secrets.PROD_SERVER }}" >> api.env
           echo "BACK_SERVER=${{ secrets.BACK_SERVER }}" >> api.env
           echo "SOLR_USER=${{ secrets.USERNAME_SOLR }}" >> api.env
           echo "SOLR_PASS=${{ secrets.PASSWORD_SOLR }}" >> api.env
-          pwd
-          ls
           
       - name: Fast FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -53,3 +43,25 @@ jobs:
           password: ${{secrets.FTP_PASSWD}}
           local-dir: ./
           server-dir: /api.peviitor.ro/
+          
+  deploy_to_QA:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref:  master
+      - name: Generate .env File
+        run: |
+          echo "LOCAL_SERVER=172.168.0.10:8983" >> api.env
+          echo "SOLR_USER=${{ secrets.USERNAME_SOLR }}" >> api.env
+          echo "SOLR_PASS=${{ secrets.PASSWORD_SOLR }}" >> api.env
+          
+      - name: Fast FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{secrets.QA_FTP_HOST}}
+          username: ${{secrets.QA_FTP_USER}}
+          password: ${{secrets.QA_FTP_PASSWD}}
+          local-dir: ./
+          server-dir: /htdocs/
