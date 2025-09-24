@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.QA_FTP_USER }}
           password: ${{ secrets.QA_FTP_PASSWD }}
           local-dir: ./
-          server-dir: /htdocs/
+          server-dir: /htdocs/api/
 
   deploy_to_PROD:
     needs: deploy_to_QA
