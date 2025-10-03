@@ -2,6 +2,16 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/../../../bootstrap.php';
+$GLOBALS['solr'] = getSolrCredentials('LOCAL');
+
+// Respond to preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    // Stop script from executing further, return only headers and 200 OK status
+    http_response_code(200);
+    exit;
+}
+
 // Allow only DELETE requests
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405); // Method Not Allowed
@@ -9,15 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     exit;
 }
 
-// Load variables from api.env
-require_once __DIR__ . '/../../../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../../../api.env');
+$solr = $GLOBALS['solr'] ?? null;
+$authHeader = $GLOBALS['authHeader'] ?? null;
 
-// Get Solr connection details from .env
-$server   = getenv('LOCAL_SERVER') ?: ($_SERVER['LOCAL_SERVER'] ?? null);
-$username = getenv('SOLR_USER')    ?: ($_SERVER['SOLR_USER'] ?? null);
-$password = getenv('SOLR_PASS')    ?: ($_SERVER['SOLR_PASS'] ?? null);
+if (!$solr || !$authHeader) {
+    echo json_encode(["error" => "Solr credentials or auth header not set"]);
+    exit;
+}
 
+$server = $solr['server'];
+$username = $solr['username'];
+$password = $solr['password'];
+
+// If server is not set, stop execution
 if (!$server) {
     http_response_code(500);
     echo json_encode(["error" => "LOCAL_SERVER is not set in api.env"]);
