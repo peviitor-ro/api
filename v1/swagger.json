@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://peviitorqa.go.ro/api/v0"
+      "url": "http://zimbor.go.ro:8993/api/v0"
     }
   ],
   "paths": {
