@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['allowed_origins'] = ['*'];
+$GLOBALS['allowed_origins'] = ['https://admin.zira.ro', "https://api.peviitor.ro/"];
 
 // Load ENV helper & actual env variables
 require_once __DIR__ . '/../util/loadEnv.php';
