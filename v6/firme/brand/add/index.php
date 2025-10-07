@@ -3,11 +3,23 @@ require_once __DIR__ . '/../../../bootstrap.php';
 
 // Verificăm headerul Origin al cererii
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-if (in_array($origin, $GLOBALS['allowed_origins'])) {
+if (in_array($origin, $allowed_origins)) {
     header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
 } else {
-    http_response_code(403); // Forbidden
-    exit('Origin not allowed');
+    // poți loga aici, dar nu opri execuția pentru OPTIONS
+    // altfel preflight-ul pică
+    header("Access-Control-Allow-Origin: https://admin.zira.ro"); // fallback
+}
+
+// ✅ Header-ele CORS
+header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// ✅ Dacă e cerere preflight OPTIONS, răspunde doar cu OK
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit; // NU continua mai departe
 }
 
 header("Access-Control-Allow-Origin: *");
