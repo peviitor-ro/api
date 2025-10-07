@@ -3,15 +3,23 @@ require_once __DIR__ . '/../../../bootstrap.php';
 
 // Verificăm headerul Origin al cererii
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-if (in_array($origin, $GLOBALS['allowed_origins'])) {
+if (in_array($origin, $allowed_origins)) {
     header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
 } else {
-    http_response_code(403); // Forbidden
-    exit('Origin not allowed');
+    header("Access-Control-Allow-Origin: $allowed_origins"); // fallback
 }
 
-header("Access-Control-Allow-Methods: DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit; 
+}
+
+header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json; charset=utf-8');
 
 $GLOBALS['solr'] = getSolrCredentials('PROD');
 
