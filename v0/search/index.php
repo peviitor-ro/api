@@ -41,16 +41,8 @@ class SolrQueryBuilder
     public static function normalizeString($str)
     {
         $charMap = [
-            'ă' => 'a',
-            'î' => 'i',
-            'â' => 'a',
-            'ș' => 's',
-            'ț' => 't',
-            'Ă' => 'A',
-            'Î' => 'I',
-            'Â' => 'A',
-            'Ș' => 'S',
-            'Ț' => 'T'
+            'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
+            'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
         ];
         return strtr($str, $charMap);
     }
@@ -62,8 +54,7 @@ foreach ($_GET as $key => $value) {
 }
 
 // Define allowed fields
-$optionalFields = ['start', 'rows', 'sort', 'page', 'q'];
-
+$optionalFields = ['start', 'rows', 'sort', 'page', 'q', 'company', 'city', 'remote'];
 foreach ($_GET as $key => $value) {
     if (!in_array($key, $optionalFields)) {
         http_response_code(400);
@@ -111,21 +102,42 @@ try {
     $finalRows = 12; // default
 
     if (isset($_GET['start'])) {
-        if (!ctype_digit($_GET['start']) || ($_GET['start'] < 0 || $_GET['start'] >= $numFound)) {
+        $startParam = $_GET['start'];
+
+        if (!preg_match('/^\d+$/', $startParam)) {
             http_response_code(400);
-            echo json_encode(["error" => "Invalid input for the 'start' parameter. It must be a positive integer less than $numFound."]);
+            echo json_encode(["error" => "Invalid input for 'start'. Must be a non-negative integer."]);
             exit;
         }
-        $finalStart = intval($_GET['start']);
+
+        $startInt = (int) $startParam;
+        if ($numFound > 0 && $startInt >= $numFound) {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid input for 'start'. Must be less than total results ($numFound)."]);
+            exit;
+        }
+
+        $finalStart = $startInt;
     }
 
     if (isset($_GET['rows'])) {
-        if (!ctype_digit($_GET['rows']) || ($_GET['rows'] <= 0 || $_GET['rows'] > $numFound - $finalStart)) {
+        $rowsParam = $_GET['rows'];
+
+        if (!preg_match('/^[1-9]\d*$/', $rowsParam)) {
             http_response_code(400);
-            echo json_encode(["error" => "Invalid input for the 'rows' parameter. It must be a positive integer less than " . ($numFound - $finalStart) . "."]);
+            echo json_encode(["error" => "Invalid input for 'rows'. Must be a positive integer."]);
             exit;
         }
-        $finalRows = intval($_GET['rows']);
+
+        $rowsInt = (int)$rowsParam;
+
+        if ($numFound > 0 && $rowsInt > ($numFound - $finalStart)) {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid 'rows' value. It exceeds available results (" . ($numFound - $finalStart) . ")."]);
+            exit;
+        }
+
+        $finalRows = $rowsInt;
     }
 
     if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
@@ -140,6 +152,34 @@ try {
         }
     }
 
+    // Step 3: Handle 'sort' parameter safely
+    if (isset($_GET['sort'])) {
+        $sortValue = trim($_GET['sort']);
+
+        // Validate format: "field asc" or "field desc"
+        if (!preg_match('/^([a-zA-Z0-9_]+)\s+(asc|desc)$/i', $sortValue, $matches)) {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid 'sort' format. Expected 'field asc' or 'field desc'."]);
+            exit;
+        }
+
+        $field = strtolower($matches[1]);
+        $direction = strtolower($matches[2]);
+
+        // Whitelisted sortable fields
+        $allowedSortFields = ['id', 'title', 'company', 'city', 'date', 'salary'];
+        $allowedDirections = ['asc', 'desc'];
+
+        if (!in_array($field, $allowedSortFields) || !in_array($direction, $allowedDirections)) {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid 'sort' parameter. Field or direction not allowed."]);
+            exit;
+        }
+
+        // Append safe sort clause
+        $query .= '&sort=' . urlencode("$field $direction");
+    }
+
     // Append start & rows
     $query .= "&start=$finalStart&rows=$finalRows";
 
@@ -147,7 +187,6 @@ try {
     $url = $baseUrl . $query;
 
     $string = @file_get_contents($url, false, $context);
-
     if ($string == false) {
         http_response_code(503);
         echo json_encode(["error" => "SOLR server in DEV is down", "code" => 503]);
@@ -163,11 +202,11 @@ try {
     }
 
     echo json_encode($jobs);
+
 } catch (Exception $e) {
     // Fallback API in case Solr fails
     $backupUrl = $backup . '/mobile/';
     $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
-
     $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
     $citiesString = str_replace('~', '', $_GET['city'] ?? '');
     $fallbackQuery .= isset($_GET['city']) ? '&cities=' . $citiesString : '';
