@@ -1125,7 +1125,15 @@
                     "example": "on-site"
                   }
                 },
-                "required": ["job_link", "job_title", "company", "country", "city", "county", "remote"]
+                "required": [
+                  "job_link",
+                  "job_title",
+                  "company",
+                  "country",
+                  "city",
+                  "county",
+                  "remote"
+                ]
               }
             }
           }
@@ -1196,6 +1204,815 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/firme/brand/": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get companies by brand name",
+        "description": "Retrieves all companies from the 'firme' core that match the specified brand name.",
+        "parameters": [
+          {
+            "name": "brand",
+            "in": "query",
+            "required": true,
+            "description": "Brand name to search for in the 'brands' field of the firme core.",
+            "schema": {
+              "type": "string",
+              "example": "Pepsi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation. Returns a list of companies matching the given brand.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "denumire": {
+                        "type": "string",
+                        "description": "Company name"
+                      },
+                      "cui": {
+                        "type": "string",
+                        "description": "Company tax ID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing or invalid 'brand' parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing brand parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/brand/add": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Add brand(s) to a company document",
+        "description": "Adds one or more brands to the 'brands' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "brands": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of brands to add to the company.",
+                    "example": ["Pepsi", "Lay's"]
+                  }
+                },
+                "required": ["id", "brands"]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "brands": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": ["Pepsi", "Lay's"]
+                  }
+                },
+                "required": ["id", "brands"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Brand(s) successfully added to the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or brands parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or brands"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/brand/delete": {
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Remove brand(s) from a company document",
+        "description": "Removes one or more brands from the 'brands' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "brands": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of brand names to remove from the company.",
+                    "example": ["Pepsi", "Lay's"]
+                  }
+                },
+                "required": ["id", "brands"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Brand(s) successfully removed from the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or brands parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or brands"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/email": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get companies by email address",
+        "description": "Retrieves all companies from the 'firme' Solr core that match the specified email address.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "description": "Email address to search for in the 'email' field of the firme core.",
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "example": "contact@firma.ro"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation. Returns a list of companies matching the given email.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "denumire": {
+                        "type": "string",
+                        "description": "Company name"
+                      },
+                      "cui": {
+                        "type": "string",
+                        "description": "Company tax ID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing or invalid 'email' parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing email parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/email/add": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Add email(s) to a company document",
+        "description": "Adds one or more email addresses to the 'email' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "email": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "description": "List of email addresses to add to the company.",
+                    "example": ["contact@firma.ro", "office@firma.ro"]
+                  }
+                },
+                "required": ["id", "email"]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "email": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "example": ["contact@firma.ro", "office@firma.ro"]
+                  }
+                },
+                "required": ["id", "email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email(s) successfully added to the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or email parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or email"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/email/delete": {
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Delete an email from a company document in Solr",
+        "description": "Removes an email address (or multiple) from the 'email' field of a company document in the 'firme' Solr core.",
+        "operationId": "deleteCompanyEmail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id", "email"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "RO123456",
+                    "description": "Unique company ID in Solr."
+                  },
+                  "email": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "example": "contact@firma.ro"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "info@firma.ro"
+                        }
+                      }
+                    ],
+                    "description": "Email or list of emails to remove."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email removed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "example": {
+                        "status": 0,
+                        "QTime": 5
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing id or email parameter"
+          },
+          "405": {
+            "description": "Only DELETE method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/scraper": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get companies by scraper name",
+        "description": "Retrieves all companies from the 'firme' Solr core that were added or updated by a specific scraper.",
+        "operationId": "getCompaniesByScraper",
+        "parameters": [
+          {
+            "name": "scraper",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "bestjobs"
+            },
+            "description": "Name of the scraper used to collect company data."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of companies that match the scraper name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "denumire": {
+                        "type": "string",
+                        "example": "SC EXAMPLE SRL"
+                      },
+                      "cui": {
+                        "type": "string",
+                        "example": "RO12345678"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing scraper parameter"
+          },
+          "405": {
+            "description": "Only GET method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/scraper/add": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Add a scraper to a company",
+        "description": "Adds a scraper name to the 'scraper' field of a company in the 'firme' Solr core.",
+        "operationId": "addScraperToCompany",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "12345",
+                    "description": "Unique identifier of the company document in Solr."
+                  },
+                  "scraper": {
+                    "type": "string",
+                    "example": "bestjobs",
+                    "description": "Name of the scraper to add."
+                  }
+                },
+                "required": ["id", "scraper"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scraper successfully added to the company",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Missing id or scraper"
+          },
+          "405": {
+            "description": "Only POST method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/scraper/delete": {
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Delete a scraper from a company",
+        "description": "Removes a scraper name from the 'scraper' field of a company in the 'firme' Solr core.",
+        "operationId": "deleteScraperFromCompany",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "12345",
+                    "description": "Unique identifier of the company document in Solr."
+                  },
+                  "scraper": {
+                    "type": "string",
+                    "example": "bestjobs",
+                    "description": "Name of the scraper to remove."
+                  }
+                },
+                "required": ["id", "scraper"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scraper successfully removed from the company",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Missing id or scraper"
+          },
+          "405": {
+            "description": "Only DELETE method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/website": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Get company by website",
+        "description": "Searches the 'firme' Solr core for companies matching the given website.",
+        "operationId": "getCompanyByWebsite",
+        "parameters": [
+          {
+            "name": "website",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "www.example.com"
+            },
+            "description": "The website of the company to search for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company data successfully retrieved",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Missing website parameter"
+          },
+          "405": {
+            "description": "Only GET method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/website/add": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Add a website to a company",
+        "description": "Adds a website to the 'website' field of a company document in the 'firme' Solr core.",
+        "operationId": "addCompanyWebsite",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "12345",
+                    "description": "The ID of the company in Solr."
+                  },
+                  "website": {
+                    "type": "string",
+                    "example": "www.example.com",
+                    "description": "The website to add to the company."
+                  }
+                },
+                "required": ["id", "website"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Website successfully added",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Missing id or website parameter"
+          },
+          "405": {
+            "description": "Only POST method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/website/delete": {
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Remove a website from a company",
+        "description": "Removes a website from the 'website' field of a company document in the 'firme' Solr core.",
+        "operationId": "deleteCompanyWebsite",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "12345",
+                    "description": "The ID of the company in Solr."
+                  },
+                  "website": {
+                    "type": "string",
+                    "example": "www.example.com",
+                    "description": "The website to remove from the company."
+                  }
+                },
+                "required": ["id", "website"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Website successfully removed",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Missing id or website parameter"
+          },
+          "405": {
+            "description": "Only DELETE method is allowed"
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration"
           }
         }
       }
