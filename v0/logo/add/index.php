@@ -26,19 +26,17 @@ $authHeader = base64_encode("$username:$password");
 if (!$server) {
     die(json_encode(["error" => "LOCAL_SERVER is not set in api.env"]));
 }
- 
-$core  = 'logo';
+
+$core = 'logo';
 $command = '/update';
-
 $qs = '?indent=true&q.op=OR&q=*%3A*&useParams=';
-
 $url = 'http://' . $server . '/solr/' . $core . $command . $qs;
 
-// Fetch parameters from query string
+// Parse JSON input
 $input = json_decode(file_get_contents("php://input"), true);
 
 if (!is_array($input)) {
-    http_response_code(400); // Bad Request
+    http_response_code(400);
     echo json_encode(["error" => "Invalid JSON format."]);
     exit;
 }
@@ -46,19 +44,45 @@ if (!is_array($input)) {
 $id = isset($input['id']) ? trim($input['id']) : null;
 $logo = isset($input['logo']) ? trim(htmlspecialchars($input['logo'])) : null;
 
+// Basic presence validation
 if (!$id || !$logo) {
-    http_response_code(400); // Bad Request
+    http_response_code(400);
     echo json_encode(["error" => "Missing required parameters: id and logo."]);
     exit;
 }
 
+// ------------------- NEW VALIDATION -------------------
+$MAX_ID_LENGTH = 100;
+$MAX_LOGO_LENGTH = 2048;
+
+$errors = [];
+
+if (strlen($id) > $MAX_ID_LENGTH) {
+    $errors['id'] = "id exceeds maximum length of {$MAX_ID_LENGTH} characters";
+}
+
+if (strlen($logo) > $MAX_LOGO_LENGTH) {
+    $errors['logo'] = "logo exceeds maximum length of {$MAX_LOGO_LENGTH} characters";
+}
+
+if (!empty($errors)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Validation failed",
+        "details" => $errors
+    ]);
+    exit;
+}
+// ------------------------------------------------------
+
+// Validate logo format
 if (!preg_match('/^https?:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/', $logo)) {
     http_response_code(400);
     echo json_encode([
         "error" => "Invalid logo URL. It must start with http:// or https:// and be a valid domain.",
         "received" => $logo
     ]);
-    exit;   
+    exit;
 }
 
 // Step: Check if logo already exists with a different ID
@@ -83,7 +107,7 @@ if (!$checkResponse) {
 $checkData = json_decode($checkResponse, true);
 
 if (isset($checkData['response']['docs']) && count($checkData['response']['docs']) > 0) {
-    http_response_code(409); // Conflict
+    http_response_code(409);
     echo json_encode([
         "error" => "No updates to be made. The logo and ID combination already exists."
     ]);
@@ -93,7 +117,7 @@ if (isset($checkData['response']['docs']) && count($checkData['response']['docs'
 if (isset($checkData['response']['docs'])) {
     foreach ($checkData['response']['docs'] as $doc) {
         if (isset($doc['id']) && $doc['id'] !== $id) {
-            http_response_code(409); // Conflict
+            http_response_code(409);
             echo json_encode([
                 "error" => "This logo is already registered with another company."
             ]);
@@ -109,10 +133,8 @@ $item->logo = $logo;
 
 $data = json_encode([$item]);
 
-// Use curl to send the POST request to Solr
+// Send POST to Solr
 $ch = curl_init();
-
-// Set curl options
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
@@ -122,25 +144,21 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Authorization: Basic $authHeader"
 ]);
 
-// Execute the request and get the result
 $result = curl_exec($ch);
 
-// Check for curl errors
 if (curl_errno($ch)) {
-    http_response_code(500); // Internal Server Error
+    http_response_code(500);
     echo json_encode(["error" => "Failed to insert data into Solr: " . curl_error($ch)]);
     exit;
 }
 
-// Close curl session
 curl_close($ch);
 
-// Check if the request was successful
 if ($result === FALSE) {
-    http_response_code(500); // Internal Server Error
+    http_response_code(500);
     echo json_encode(["error" => "Failed to insert data into Solr"]);
     exit;
 }
 
-// Return success response
 echo json_encode(["success" => "Data successfully inserted into Solr"]);
+?>
