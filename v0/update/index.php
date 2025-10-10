@@ -19,6 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     exit;
 }
 
+// Validate Content-Type header
+$contentType = $_SERVER["CONTENT_TYPE"] ?? $_SERVER["HTTP_CONTENT_TYPE"] ?? '';
+if (stripos($contentType, 'application/json') === false) {
+    http_response_code(415); // Unsupported Media Type
+    echo json_encode([
+        "error" => "Content-Type must be application/json",
+        "code" => 415
+    ]);
+    exit;
+}
+
 function city_fix($in)
 {
     $output = $in;
