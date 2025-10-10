@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   deploy_to_QA:
-    runs-on: self-hosted
+    runs-on: [self-hosted, linux, ARM64]
 
     steps:
       - name: Update code on Raspberry Pi
