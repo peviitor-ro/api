@@ -48,7 +48,7 @@ $qs .= "indent=true";
 $qs .= "&q.op=OR";
 $qs .= "&q=";
 $qs .= urlencode('brands:"' . $brand . '"');
-$qs .= "&fl=denumire,cui";
+$qs .= "&fl=denumire,id";
 $qs .= "&wt=json";
 
 
@@ -84,7 +84,7 @@ $data = json_decode($response, true);
 if (isset($data['response']['docs'][0])) {
     $doc = $data['response']['docs'][0];
     echo json_encode([
-        "cui" => $doc['cui'][0] ?? null,
+        "cui" => $doc['id'][0] ?? null,
         "denumire" => $doc['denumire'][0] ?? null
     ]);
 } else {

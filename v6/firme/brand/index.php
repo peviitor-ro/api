@@ -65,7 +65,7 @@ $url = "http://{$server}/solr/{$core}/select"
      . "?indent=true"
      . "&q.op=OR"
      . "&q={$query}"
-     . "&fl=denumire,cui"
+     . "&fl=denumire,id"
      . "&wt=json";
 
 // Prepare HTTP context with Basic Auth
@@ -96,7 +96,7 @@ $data = json_decode($response, true);
 if (isset($data['response']['docs'][0])) {
     $doc = $data['response']['docs'][0];
     echo json_encode([
-        "cui" => $doc['cui'][0] ?? null,
+        "cui" => $doc['id'][0] ?? null,
         "denumire" => $doc['denumire'][0] ?? null
     ]);
 } else {
