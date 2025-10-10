@@ -41,6 +41,18 @@ if (!is_array($input)) {
     exit;
 }
 
+$allowedFields = ['id', 'logo'];
+$unexpectedFields = array_diff(array_keys($input), $allowedFields);
+
+if (!empty($unexpectedFields)) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => "Unexpected fields detected: " . implode(', ', $unexpectedFields),
+        "code" => 400
+    ]);
+    exit;
+}
+
 $id = isset($input['id']) ? trim($input['id']) : null;
 $logo = isset($input['logo']) ? trim(htmlspecialchars($input['logo'])) : null;
 
