@@ -93,19 +93,12 @@ if ($response === false) {
 $data = json_decode($response, true);
 
 // Return only docs if available
-if (isset($data['response']['docs'])) {
-$docs = $data['response']['docs'];
-
-    foreach ($docs as &$doc) {
-        if (isset($doc['denumire']) && is_array($doc['denumire'])) {
-            $doc['denumire'] = $doc['denumire'][0];
-        }
-        if (isset($doc['cui']) && is_array($doc['cui'])) {
-            $doc['cui'] = $doc['cui'][0];
-        }
-    }
-
-    echo json_encode($docs, JSON_UNESCAPED_UNICODE);
+if (isset($data['response']['docs'][0])) {
+    $doc = $data['response']['docs'][0];
+    echo json_encode([
+        "cui" => $doc['cui'][0] ?? null,
+        "denumire" => $doc['denumire'][0] ?? null
+    ]);
 } else {
     echo json_encode([]);
 }
