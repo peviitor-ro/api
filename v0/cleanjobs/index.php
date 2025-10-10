@@ -33,16 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
     $core = 'jobs';
 
-    // Step 1: Get the count of jobs for the given company
+    // Step 1: Check if company exists in Solr
     $countUrl = "http://$server/solr/$core/select?q=" . rawurlencode('hiringOrganization.name:"' . $company . '"') . "&wt=json&rows=0";
     $countResponse = fetchSolrData($countUrl);
-    if (!$countResponse)
+    if ($countResponse === false)
         exit;
 
     $jobCount = $countResponse['response']['numFound'] ?? 0;
 
+    // If company not found, return 404
     if ($jobCount === 0) {
-        echo json_encode(['message' => 'No jobs found for the specified company', 'jobCount' => 0]);
+        http_response_code(404);
+        echo json_encode([
+            'error' => 'Company not found',
+            'message' => "No jobs found for the specified company '$company'",
+            'code' => 404
+        ]);
         exit;
     }
 
@@ -50,10 +56,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     $deleteUrl = "http://$server/solr/$core/update?commit=true&wt=json";
     $deletePayload = json_encode(['delete' => ['query' => 'hiringOrganization.name:"' . $company . '"']]);
     $deleteResponse = fetchSolrData($deleteUrl, 'POST', $deletePayload);
-    if (!$deleteResponse)
+    if ($deleteResponse === false)
         exit;
 
-    echo json_encode(['message' => 'Jobs deleted successfully', 'jobCount' => $jobCount]);
+    // Success
+    http_response_code(200);
+    echo json_encode([
+        'message' => "Jobs for company '$company' deleted successfully",
+        'jobCount' => $jobCount
+    ]);
+
 } else {
     http_response_code(405);
     echo json_encode(['error' => 'Invalid request method', 'code' => 405]);
