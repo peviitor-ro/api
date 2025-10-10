@@ -41,28 +41,6 @@ jobs:
           username: ${{ secrets.QA_FTP_USER }}
           password: ${{ secrets.QA_FTP_PASSWD }}
           local-dir: ./
-          server-dir: /htdocs/api/
-
-  deploy_to_QA_ale:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: master
-      - name: Generate .env File
-        run: |
-          echo "LOCAL_SERVER=zimbor.go.ro:8993" >> api.env
-          echo "SOLR_USER=sebi" >> api.env
-          echo "SOLR_PASS=sebiisoneofthebest0102" >> api.env
-          
-      - name: Fast FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ftpupload.net
-          username: if0_40015777
-          password: WWNiwQBPxbDn
-          local-dir: ./
           server-dir: /htdocs/api/        
 
   deploy_to_PROD:
