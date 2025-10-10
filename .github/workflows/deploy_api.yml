@@ -1,41 +1,50 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy API to server
+
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the main branch
   push:
     branches: 
-      - master
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows manual trigger from Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
-jobs:     
+jobs:
+  deploy_to_QA:
+    runs-on: self-hosted
+
+    steps:
+      - name: Update code on Raspberry Pi
+        run: |
+          cd ~/peviitor/build/api
+          git pull origin main
+
   deploy_to_PROD:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: master
+          ref: main
+
       - name: Generate .env File
         run: |
           echo "PROD_SERVER=${{ secrets.PROD_SERVER }}" >> api.env
           echo "BACK_SERVER=${{ secrets.BACK_SERVER }}" >> api.env
           echo "SOLR_USER=${{ secrets.USERNAME_SOLR }}" >> api.env
           echo "SOLR_PASS=${{ secrets.PASSWORD_SOLR }}" >> api.env
-          
-      - name: Fast FTP
+
+      - name: Fast FTP deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
