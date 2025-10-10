@@ -20,31 +20,8 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
-jobs:
-  deploy_to_QA:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: master
-      - name: Generate .env File
-        run: |
-          echo "LOCAL_SERVER=${{ secrets.QA_SOLR }}" >> api.env
-          echo "SOLR_USER=${{ secrets.QA_USERNAME_SOLR }}" >> api.env
-          echo "SOLR_PASS=${{ secrets.QA_PASSWORD_SOLR }}" >> api.env
-          
-      - name: Fast FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.QA_FTP_HOST }}
-          username: ${{ secrets.QA_FTP_USER }}
-          password: ${{ secrets.QA_FTP_PASSWD }}
-          local-dir: ./
-          server-dir: /htdocs/api/        
-
+jobs:     
   deploy_to_PROD:
-    needs: deploy_to_QA
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
