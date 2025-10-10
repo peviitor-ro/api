@@ -1,10 +1,10 @@
 name: Deploy API to server
 
 on:
-  # Runs on pushes targeting the main branch
+  # Runs on pushes targeting the master branch
   push:
     branches: 
-      - main
+      - master
 
   # Allows manual trigger from Actions tab
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
       - name: Update code on Raspberry Pi
         run: |
           cd ~/peviitor/build/api
-          git pull origin main
+          git pull origin master
 
   deploy_to_PROD:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: master
 
       - name: Generate .env File
         run: |
