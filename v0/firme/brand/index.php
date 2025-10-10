@@ -84,7 +84,7 @@ $data = json_decode($response, true);
 if (isset($data['response']['docs'][0])) {
     $doc = $data['response']['docs'][0];
     echo json_encode([
-        "cui" => $doc['id'][0] ?? null,
+        "cui" => $doc['id'] ?? null,
         "denumire" => $doc['denumire'][0] ?? null
     ]);
 } else {
