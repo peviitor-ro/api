@@ -7,7 +7,13 @@
   },
   "servers": [
     {
+      "url": "http://localhost:8081/api/v0"
+    },
+    {
       "url": "http://zimbor.go.ro:8091/api/v0"
+    },
+    {
+      "url": "http://ale23yfm.go.ro/api/v0"
     }
   ],
   "paths": {
