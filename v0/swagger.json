@@ -1376,7 +1376,7 @@
         }
       }
     },
-    "/firme/brand/add": {
+    "/firme/brand/add/": {
       "post": {
         "tags": [
           "Companies' brands"
@@ -1496,7 +1496,7 @@
         }
       }
     },
-    "/firme/brand/delete": {
+    "/firme/brand/delete/": {
       "delete": {
         "tags": [
           "Companies' brands"
@@ -1591,7 +1591,7 @@
         }
       }
     },
-    "/firme/email": {
+    "/firme/email/": {
       "get": {
         "tags": [
           "Companies' emails"
@@ -1670,7 +1670,7 @@
         }
       }
     },
-    "/firme/email/add": {
+    "/firme/email/add/": {
       "post": {
         "tags": [
           "Companies' emails"
@@ -1792,7 +1792,7 @@
         }
       }
     },
-    "/firme/email/delete": {
+    "/firme/email/delete/": {
       "delete": {
         "tags": [
           "Companies' emails"
@@ -1869,7 +1869,7 @@
         }
       }
     },
-    "/firme/scraper": {
+    "/firme/scraper/": {
       "get": {
         "tags": [
           "Companies' scrapers"
@@ -1925,7 +1925,7 @@
         }
       }
     },
-    "/firme/scraper/add": {
+    "/firme/scraper/add/": {
       "post": {
         "tags": [
           "Companies' scrapers"
@@ -1978,7 +1978,7 @@
         }
       }
     },
-    "/firme/scraper/delete": {
+    "/firme/scraper/delete/": {
       "delete": {
         "tags": [
           "Companies' scrapers"
@@ -2031,7 +2031,7 @@
         }
       }
     },
-    "/firme/website": {
+    "/firme/website/": {
       "get": {
         "tags": [
           "Companies' websites"
@@ -2070,7 +2070,7 @@
         }
       }
     },
-    "/firme/website/add": {
+    "/firme/website/add/": {
       "post": {
         "tags": [
           "Companies' websites"
@@ -2123,7 +2123,7 @@
         }
       }
     },
-    "/firme/website/delete": {
+    "/firme/website/delete/": {
       "delete": {
         "tags": [
           "Companies' websites"
