@@ -1301,7 +1301,7 @@
     "/firme/brand/": {
       "get": {
         "tags": [
-          "Companies"
+          "Companies' brands"
         ],
         "summary": "Get companies by brand name",
         "description": "Retrieves all companies from the 'firme' core that match the specified brand name.",
@@ -1379,7 +1379,7 @@
     "/firme/brand/add": {
       "post": {
         "tags": [
-          "Companies"
+          "Companies' brands"
         ],
         "summary": "Add brand(s) to a company document",
         "description": "Adds one or more brands to the 'brands' field of a company in the 'firme' Solr core.",
@@ -1499,7 +1499,7 @@
     "/firme/brand/delete": {
       "delete": {
         "tags": [
-          "Companies"
+          "Companies' brands"
         ],
         "summary": "Remove brand(s) from a company document",
         "description": "Removes one or more brands from the 'brands' field of a company in the 'firme' Solr core.",
@@ -1594,7 +1594,7 @@
     "/firme/email": {
       "get": {
         "tags": [
-          "Companies"
+          "Companies' emails"
         ],
         "summary": "Get companies by email address",
         "description": "Retrieves all companies from the 'firme' Solr core that match the specified email address.",
@@ -1673,7 +1673,7 @@
     "/firme/email/add": {
       "post": {
         "tags": [
-          "Companies"
+          "Companies' emails"
         ],
         "summary": "Add email(s) to a company document",
         "description": "Adds one or more email addresses to the 'email' field of a company in the 'firme' Solr core.",
@@ -1795,7 +1795,7 @@
     "/firme/email/delete": {
       "delete": {
         "tags": [
-          "Companies"
+          "Companies' emails"
         ],
         "summary": "Delete an email from a company document in Solr",
         "description": "Removes an email address (or multiple) from the 'email' field of a company document in the 'firme' Solr core.",
@@ -1872,7 +1872,7 @@
     "/firme/scraper": {
       "get": {
         "tags": [
-          "Companies"
+          "Companies' scrapers"
         ],
         "summary": "Get companies by scraper name",
         "description": "Retrieves all companies from the 'firme' Solr core that were added or updated by a specific scraper.",
@@ -1928,7 +1928,7 @@
     "/firme/scraper/add": {
       "post": {
         "tags": [
-          "Companies"
+          "Companies' scrapers"
         ],
         "summary": "Add a scraper to a company",
         "description": "Adds a scraper name to the 'scraper' field of a company in the 'firme' Solr core.",
@@ -1981,7 +1981,7 @@
     "/firme/scraper/delete": {
       "delete": {
         "tags": [
-          "Companies"
+          "Companies' scrapers"
         ],
         "summary": "Delete a scraper from a company",
         "description": "Removes a scraper name from the 'scraper' field of a company in the 'firme' Solr core.",
@@ -2034,7 +2034,7 @@
     "/firme/website": {
       "get": {
         "tags": [
-          "Companies"
+          "Companies' websites"
         ],
         "summary": "Get company by website",
         "description": "Searches the 'firme' Solr core for companies matching the given website.",
@@ -2073,7 +2073,7 @@
     "/firme/website/add": {
       "post": {
         "tags": [
-          "Companies"
+          "Companies' websites"
         ],
         "summary": "Add a website to a company",
         "description": "Adds a website to the 'website' field of a company document in the 'firme' Solr core.",
@@ -2126,7 +2126,7 @@
     "/firme/website/delete": {
       "delete": {
         "tags": [
-          "Companies"
+          "Companies' websites"
         ],
         "summary": "Remove a website from a company",
         "description": "Removes a website from the 'website' field of a company document in the 'firme' Solr core.",

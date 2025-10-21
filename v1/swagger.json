@@ -19,7 +19,9 @@
   "paths": {
     "/random/": {
       "get": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Get random data",
         "responses": {
           "200": {
@@ -122,7 +124,9 @@
     },
     "/suggest/": {
       "get": {
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "summary": "Get job title suggestions",
         "description": "Retrieve suggestions for job titles based on a user's query.",
         "parameters": [
@@ -207,7 +211,9 @@
     },
     "/cleanjobs/": {
       "delete": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Delete jobs by company name",
         "description": "Deletes all job postings for a specified company.",
         "requestBody": {
@@ -216,7 +222,9 @@
             "application/x-www-form-urlencoded": {
               "schema": {
                 "type": "object",
-                "required": ["company"],
+                "required": [
+                  "company"
+                ],
                 "properties": {
                   "company": {
                     "type": "string",
@@ -293,7 +301,9 @@
     },
     "/companies/": {
       "get": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Get list of companies",
         "parameters": [
           {
@@ -348,7 +358,9 @@
     },
     "/getuser/": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Get a user by ID",
         "parameters": [
           {
@@ -371,24 +383,40 @@
                     {
                       "type": "object",
                       "properties": {
-                        "id": { "type": "string" },
-                        "url": { "type": "string" },
-                        "company": { "type": "string" },
-                        "apikey": { "type": "string" }
+                        "id": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "company": {
+                          "type": "string"
+                        },
+                        "apikey": {
+                          "type": "string"
+                        }
                       }
                     },
                     {
                       "type": "object",
                       "properties": {
-                        "id": { "type": "string" },
-                        "apikey": { "type": "string" }
+                        "id": {
+                          "type": "string"
+                        },
+                        "apikey": {
+                          "type": "string"
+                        }
                       }
                     },
                     {
                       "type": "object",
                       "properties": {
-                        "id": { "type": "string" },
-                        "logo": { "type": "string" }
+                        "id": {
+                          "type": "string"
+                        },
+                        "logo": {
+                          "type": "string"
+                        }
                       }
                     }
                   ]
@@ -407,8 +435,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": { "type": "string" },
-                    "code": { "type": "integer" }
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
                   }
                 }
               }
@@ -421,9 +453,15 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": { "type": "string" },
-                    "received": { "type": "string" },
-                    "message": { "type": "string" }
+                    "error": {
+                      "type": "string"
+                    },
+                    "received": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -434,7 +472,9 @@
     },
     "/jobs/": {
       "get": {
-        "tags": ["Machine Learning"],
+        "tags": [
+          "Machine Learning"
+        ],
         "summary": "Get jobs",
         "operationId": "getJobs",
         "parameters": [
@@ -544,7 +584,9 @@
     },
     "/logo/": {
       "get": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Get all logos",
         "responses": {
           "200": {
@@ -602,7 +644,9 @@
     },
     "/logo/add/": {
       "post": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Add a new logo",
         "description": "Logo data",
         "requestBody": {
@@ -621,7 +665,10 @@
                     "description": "Logo URL (optional)"
                   }
                 },
-                "required": ["id", "logo"]
+                "required": [
+                  "id",
+                  "logo"
+                ]
               }
             }
           }
@@ -674,7 +721,9 @@
     },
     "/logo/delete/": {
       "delete": {
-        "tags": ["Logo"],
+        "tags": [
+          "Logo"
+        ],
         "summary": "Remove a specific field from a document",
         "description": "Deletes the 'url' field from the document with the specified ID.",
         "parameters": [
@@ -745,7 +794,9 @@
     },
     "/search/": {
       "get": {
-        "tags": ["Search"],
+        "tags": [
+          "Search"
+        ],
         "summary": "Search jobs",
         "description": "Search for jobs using Solr",
         "parameters": [
@@ -848,7 +899,9 @@
     },
     "/total/": {
       "get": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Get total job count",
         "description": "Returns the total number of jobs and companies",
         "responses": {
@@ -869,10 +922,15 @@
                           "type": "string"
                         }
                       },
-                      "required": ["jobs", "companies"]
+                      "required": [
+                        "jobs",
+                        "companies"
+                      ]
                     }
                   },
-                  "required": ["total"]
+                  "required": [
+                    "total"
+                  ]
                 }
               }
             }
@@ -900,7 +958,9 @@
     },
     "/updateuser/": {
       "patch": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Update user",
         "description": "Update user details in Solr using PATCH",
         "requestBody": {
@@ -936,7 +996,9 @@
                     "example": "http://example.com"
                   }
                 },
-                "required": ["apikey"]
+                "required": [
+                  "apikey"
+                ]
               }
             }
           }
@@ -949,11 +1011,21 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": { "type": "string" },
-                    "url": { "type": "string" },
-                    "company": { "type": "string" },
-                    "logo": { "type": "string" },
-                    "apikey": { "type": "string" }
+                    "id": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "logo": {
+                      "type": "string"
+                    },
+                    "apikey": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -982,7 +1054,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": { "type": "string" }
+                    "error": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -995,7 +1069,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": { "type": "string" }
+                    "error": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -1008,8 +1084,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": { "type": "string" },
-                    "code": { "type": "integer" }
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
                   }
                 }
               }
@@ -1020,7 +1100,9 @@
     },
     "/empty/": {
       "delete": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Delete all jobs from jobs core",
         "responses": {
           "200": {
@@ -1085,7 +1167,9 @@
     },
     "/update/": {
       "put": {
-        "tags": ["Jobs"],
+        "tags": [
+          "Jobs"
+        ],
         "summary": "Update jobs",
         "description": "Update jobs using Solr",
         "requestBody": {
@@ -1216,7 +1300,9 @@
     },
     "/firme/brand/": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' brands"
+        ],
         "summary": "Get companies by brand name",
         "description": "Retrieves all companies from the 'firme' core that match the specified brand name.",
         "parameters": [
@@ -1292,7 +1378,9 @@
     },
     "/firme/brand/add": {
       "post": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' brands"
+        ],
         "summary": "Add brand(s) to a company document",
         "description": "Adds one or more brands to the 'brands' field of a company in the 'firme' Solr core.",
         "requestBody": {
@@ -1313,10 +1401,16 @@
                       "type": "string"
                     },
                     "description": "List of brands to add to the company.",
-                    "example": ["Pepsi", "Lay's"]
+                    "example": [
+                      "Pepsi",
+                      "Lay's"
+                    ]
                   }
                 },
-                "required": ["id", "brands"]
+                "required": [
+                  "id",
+                  "brands"
+                ]
               }
             },
             "application/json": {
@@ -1332,10 +1426,16 @@
                     "items": {
                       "type": "string"
                     },
-                    "example": ["Pepsi", "Lay's"]
+                    "example": [
+                      "Pepsi",
+                      "Lay's"
+                    ]
                   }
                 },
-                "required": ["id", "brands"]
+                "required": [
+                  "id",
+                  "brands"
+                ]
               }
             }
           }
@@ -1398,7 +1498,9 @@
     },
     "/firme/brand/delete": {
       "delete": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' brands"
+        ],
         "summary": "Remove brand(s) from a company document",
         "description": "Removes one or more brands from the 'brands' field of a company in the 'firme' Solr core.",
         "requestBody": {
@@ -1419,10 +1521,16 @@
                       "type": "string"
                     },
                     "description": "List of brand names to remove from the company.",
-                    "example": ["Pepsi", "Lay's"]
+                    "example": [
+                      "Pepsi",
+                      "Lay's"
+                    ]
                   }
                 },
-                "required": ["id", "brands"]
+                "required": [
+                  "id",
+                  "brands"
+                ]
               }
             }
           }
@@ -1485,7 +1593,9 @@
     },
     "/firme/email": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' emails"
+        ],
         "summary": "Get companies by email address",
         "description": "Retrieves all companies from the 'firme' Solr core that match the specified email address.",
         "parameters": [
@@ -1562,7 +1672,9 @@
     },
     "/firme/email/add": {
       "post": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' emails"
+        ],
         "summary": "Add email(s) to a company document",
         "description": "Adds one or more email addresses to the 'email' field of a company in the 'firme' Solr core.",
         "requestBody": {
@@ -1584,10 +1696,16 @@
                       "format": "email"
                     },
                     "description": "List of email addresses to add to the company.",
-                    "example": ["contact@firma.ro", "office@firma.ro"]
+                    "example": [
+                      "contact@firma.ro",
+                      "office@firma.ro"
+                    ]
                   }
                 },
-                "required": ["id", "email"]
+                "required": [
+                  "id",
+                  "email"
+                ]
               }
             },
             "application/json": {
@@ -1604,10 +1722,16 @@
                       "type": "string",
                       "format": "email"
                     },
-                    "example": ["contact@firma.ro", "office@firma.ro"]
+                    "example": [
+                      "contact@firma.ro",
+                      "office@firma.ro"
+                    ]
                   }
                 },
-                "required": ["id", "email"]
+                "required": [
+                  "id",
+                  "email"
+                ]
               }
             }
           }
@@ -1670,7 +1794,9 @@
     },
     "/firme/email/delete": {
       "delete": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' emails"
+        ],
         "summary": "Delete an email from a company document in Solr",
         "description": "Removes an email address (or multiple) from the 'email' field of a company document in the 'firme' Solr core.",
         "operationId": "deleteCompanyEmail",
@@ -1680,7 +1806,10 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["id", "email"],
+                "required": [
+                  "id",
+                  "email"
+                ],
                 "properties": {
                   "id": {
                     "type": "string",
@@ -1742,7 +1871,9 @@
     },
     "/firme/scraper": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' scrapers"
+        ],
         "summary": "Get companies by scraper name",
         "description": "Retrieves all companies from the 'firme' Solr core that were added or updated by a specific scraper.",
         "operationId": "getCompaniesByScraper",
@@ -1796,7 +1927,9 @@
     },
     "/firme/scraper/add": {
       "post": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' scrapers"
+        ],
         "summary": "Add a scraper to a company",
         "description": "Adds a scraper name to the 'scraper' field of a company in the 'firme' Solr core.",
         "operationId": "addScraperToCompany",
@@ -1818,7 +1951,10 @@
                     "description": "Name of the scraper to add."
                   }
                 },
-                "required": ["id", "scraper"]
+                "required": [
+                  "id",
+                  "scraper"
+                ]
               }
             }
           }
@@ -1844,7 +1980,9 @@
     },
     "/firme/scraper/delete": {
       "delete": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' scrapers"
+        ],
         "summary": "Delete a scraper from a company",
         "description": "Removes a scraper name from the 'scraper' field of a company in the 'firme' Solr core.",
         "operationId": "deleteScraperFromCompany",
@@ -1866,7 +2004,10 @@
                     "description": "Name of the scraper to remove."
                   }
                 },
-                "required": ["id", "scraper"]
+                "required": [
+                  "id",
+                  "scraper"
+                ]
               }
             }
           }
@@ -1892,7 +2033,9 @@
     },
     "/firme/website": {
       "get": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' websites"
+        ],
         "summary": "Get company by website",
         "description": "Searches the 'firme' Solr core for companies matching the given website.",
         "operationId": "getCompanyByWebsite",
@@ -1929,7 +2072,9 @@
     },
     "/firme/website/add": {
       "post": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' websites"
+        ],
         "summary": "Add a website to a company",
         "description": "Adds a website to the 'website' field of a company document in the 'firme' Solr core.",
         "operationId": "addCompanyWebsite",
@@ -1951,7 +2096,10 @@
                     "description": "The website to add to the company."
                   }
                 },
-                "required": ["id", "website"]
+                "required": [
+                  "id",
+                  "website"
+                ]
               }
             }
           }
@@ -1977,7 +2125,9 @@
     },
     "/firme/website/delete": {
       "delete": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies' websites"
+        ],
         "summary": "Remove a website from a company",
         "description": "Removes a website from the 'website' field of a company document in the 'firme' Solr core.",
         "operationId": "deleteCompanyWebsite",
@@ -1999,7 +2149,10 @@
                     "description": "The website to remove from the company."
                   }
                 },
-                "required": ["id", "website"]
+                "required": [
+                  "id",
+                  "website"
+                ]
               }
             }
           }
