@@ -19,9 +19,7 @@
   "paths": {
     "/random/": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Get random data",
         "responses": {
           "200": {
