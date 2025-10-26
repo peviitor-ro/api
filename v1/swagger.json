@@ -580,216 +580,6 @@
         }
       }
     },
-    "/logo/": {
-      "get": {
-        "tags": [
-          "Logo"
-        ],
-        "summary": "Get all logos",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of logos"
-                    },
-                    "companies": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "description": "Company ID"
-                          },
-                          "logo": {
-                            "type": "string",
-                            "description": "URL or identifier of the logo"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service unavailable. SOLR server is down or request failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/logo/add/": {
-      "post": {
-        "tags": [
-          "Logo"
-        ],
-        "summary": "Add a new logo",
-        "description": "Logo data",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "description": "User ID (optional)"
-                  },
-                  "logo": {
-                    "type": "string",
-                    "description": "Logo URL (optional)"
-                  }
-                },
-                "required": [
-                  "id",
-                  "logo"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Logo added successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Success message"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request. Invalid input parameter.",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
-            "content": {}
-          },
-          "503": {
-            "description": "Service unavailable. SOLR server is down or request failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/logo/delete/": {
-      "delete": {
-        "tags": [
-          "Logo"
-        ],
-        "summary": "Remove a specific field from a document",
-        "description": "Deletes the 'url' field from the document with the specified ID.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "The ID of the document to update.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully removed the field",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Service unavailable. SOLR server is down or request failed.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/search/": {
       "get": {
         "tags": [
@@ -1863,6 +1653,592 @@
           },
           "500": {
             "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/firme/logo/": {
+      "get": {
+        "tags": [
+          "Companies' logos"
+        ],
+        "summary": "Get companies by logo name",
+        "description": "Retrieves all companies from the 'firme' core that match the specified logo name.",
+        "parameters": [
+          {
+            "name": "logo",
+            "in": "query",
+            "required": true,
+            "description": "Logo name to search for in the 'logo' field of the firme core.",
+            "schema": {
+              "type": "string",
+              "example": "https://example.com/logo.png"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation. Returns a list of companies matching the given logo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "denumire": {
+                        "type": "string",
+                        "description": "Company name"
+                      },
+                      "cui": {
+                        "type": "string",
+                        "description": "Company tax ID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing or invalid 'logo' parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing logo parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/logo/add/": {
+      "post": {
+        "tags": [
+          "Companies' logos"
+        ],
+        "summary": "Add logo(s) to a company document",
+        "description": "Adds one or more logos to the 'logo' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "logo": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of logos to add to the company.",
+                    "example": [
+                      "https://example.com/logo.png",
+                      "http://example.com/logo.jpg"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "logo"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "logo": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "https://example.com/logo.png",
+                      "http://example.com/logo.jpg"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "logo"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logo(s) successfully added to the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or logo parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or logo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/logo/delete/": {
+      "delete": {
+        "tags": [
+          "Companies' logos"
+        ],
+        "summary": "Remove logo(s) from a company document",
+        "description": "Removes one or more logos from the 'logo' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "logo": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of logo names to remove from the company.",
+                    "example": [
+                      "https://example.com/logo.png",
+                      "http://example.com/logo.jpg"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "logo"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logo(s) successfully removed from the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or logo parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or logo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/phone/": {
+      "get": {
+        "tags": [
+          "Companies' phones"
+        ],
+        "summary": "Get companies by phone name",
+        "description": "Retrieves all companies from the 'firme' core that match the specified phone name.",
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "required": true,
+            "description": "Phone name to search for in the 'phone' field of the firme core.",
+            "schema": {
+              "type": "string",
+              "example": "0712345678"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation. Returns a list of companies matching the given phone.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "denumire": {
+                        "type": "string",
+                        "description": "Company name"
+                      },
+                      "cui": {
+                        "type": "string",
+                        "description": "Company tax ID"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing or invalid 'phone' parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing phone parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/phone/add/": {
+      "post": {
+        "tags": [
+          "Companies' phones"
+        ],
+        "summary": "Add phone(s) to a company document",
+        "description": "Adds one or more phones to the 'phone' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "phone": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of phone to add to the company.",
+                    "example": [
+                      "0712345678",
+                      "0798765432"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "phone"
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "123456"
+                  },
+                  "phone": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "0712345678",
+                      "0798765432"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "phone"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Phone(s) successfully added to the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or phone parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or phone"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/phone/delete/": {
+      "delete": {
+        "tags": [
+          "Companies' phones"
+        ],
+        "summary": "Remove phone(s) from a company document",
+        "description": "Removes one or more phones from the 'phone' field of a company in the 'firme' Solr core.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Solr document ID of the company.",
+                    "example": "123456"
+                  },
+                  "phone": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of phone names to remove from the company.",
+                    "example": [
+                      "0712345678",
+                      "0798765432"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "phone"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Phone(s) successfully removed from the company document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object",
+                      "description": "Solr response header"
+                    },
+                    "response": {
+                      "type": "object",
+                      "description": "Solr response details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Missing id or phone parameter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing id or phone"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. Solr request failed or configuration missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Solr request failed"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
