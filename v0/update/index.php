@@ -108,6 +108,7 @@ if (!$job_link || !$job_title || !$company) {
 
 // Create data for Solr
 $item = new stdClass();
+$item->id = md5($item->job_link)."";
 $item->job_link = trim($job_link);
 $item->job_title = trim($job_title);
 $item->company = trim($company);
