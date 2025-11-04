@@ -56,7 +56,8 @@ if (!isset($_GET['brand']) || $_GET['brand'] === '') {
     exit;
 }
 
-$brand = $_GET['brand'];
+$brand = strtolower($_GET['brand']);  // convert input to lowercase
+
 
 // Build Solr query URL
 $core = "firme";
