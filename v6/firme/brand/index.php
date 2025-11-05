@@ -56,12 +56,15 @@ if (!isset($_GET['brand']) || $_GET['brand'] === '') {
     exit;
 }
 
-$brand = strtolower($_GET['brand']);  // convert input to lowercase
-
+$brand = strtolower(urldecode($_GET['brand']));
 
 // Build Solr query URL
 $core = "firme";
-$query = urlencode('brands:"' . $brand . '"');
+//$query = urlencode('brands:"' . $brand . '"');
+
+$queryString = 'brands:"' . $brand . '" OR (-brands:[* TO *] AND denumire:"' . $brand . '")';
+$query = urlencode($queryString);
+
 $url = "http://{$server}/solr/{$core}/select"
      . "?indent=true"
      . "&q.op=OR"
