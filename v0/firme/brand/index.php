@@ -40,7 +40,7 @@ if (!isset($_GET['brand']) || $_GET['brand'] === '') {
 
 $brand = strtolower(urldecode($_GET['brand']));
 
-// Build Solr query URL
+// Build Solr query URL for brands
 $core = "firme";
 
 $qs = "?";
@@ -50,7 +50,6 @@ $qs .= "&q=";
 $qs .= urlencode('brands:"' . $brand . '"');
 $qs .= "&fl=denumire,id";
 $qs .= "&wt=json";
-
 
 $url = "http://" . $server . "/solr/" . $core . "/select" . $qs;
 
@@ -68,7 +67,7 @@ $options = [
 ];
 $context = stream_context_create($options);
 
-// Send request to Solr
+// Send request to Solr for brands
 $response = file_get_contents($url, false, $context);
 
 if ($response === false) {
@@ -80,7 +79,7 @@ if ($response === false) {
 // Decode the response to filter results
 $data = json_decode($response, true);
 
-// Return only docs if available
+// Return docs if available for brands
 if (isset($data['response']['docs'][0])) {
     $doc = $data['response']['docs'][0];
     echo json_encode([
@@ -88,5 +87,35 @@ if (isset($data['response']['docs'][0])) {
         "denumire" => $doc['denumire'][0] ?? null
     ]);
 } else {
-    echo json_encode([]);
+    // If no results for brands, try searching in denumire field
+    $qs2 = "?";
+    $qs2 .= "indent=true";
+    $qs2 .= "&q.op=OR";
+    $qs2 .= "&q=";
+    $qs2 .= urlencode('denumire:"' . $brand . '"');
+    $qs2 .= "&fl=denumire,id";
+    $qs2 .= "&wt=json";
+
+    $url2 = "http://" . $server . "/solr/" . $core . "/select" . $qs2;
+
+    // Send request to Solr for denumire
+    $response2 = file_get_contents($url2, false, $context);
+
+    if ($response2 === false) {
+        http_response_code(500);
+        echo json_encode(["error" => "Solr request failed"]);
+        exit;
+    }
+
+    $data2 = json_decode($response2, true);
+
+    if (isset($data2['response']['docs'][0])) {
+        $doc2 = $data2['response']['docs'][0];
+        echo json_encode([
+            "cui" => $doc2['id'] ?? null,
+            "denumire" => $doc2['denumire'][0] ?? null
+        ]);
+    } else {
+        echo json_encode([]);
+    }
 }
