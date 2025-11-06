@@ -38,7 +38,7 @@ if (!isset($_GET['brand']) || $_GET['brand'] === '') {
     exit;
 }
 
-$brand = $_GET['brand'];
+$brand = strtolower(urldecode($_GET['brand']));
 
 // Build Solr query URL
 $core = "firme";
