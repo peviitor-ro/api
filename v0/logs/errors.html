@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vizualizare loguri asincron cu dropdown</title>
+<style>
+  body{font-family:Arial,sans-serif;margin:2rem;background:#f9f9f9;color:#333}
+  label,select,button{font-size:1.1rem;vertical-align:middle}
+  select{width:320px;padding:.4rem .6rem;margin-right:1rem;border:1px solid #ccc;border-radius:4px;background:#fff;}
+  button{cursor:pointer;padding:.45rem .8rem;border:none;background:#0078d4;color:#fff;border-radius:4px;transition:background .3s}
+  button:hover{background:#005a9e}
+  #log-output{margin-top:2rem;white-space:pre-wrap;background:#272822;color:#f8f8f2;padding:1rem;border-radius:4px;max-height:600px;overflow-y:auto;font-family:monospace;box-shadow:inset 0 0 10px rgba(0,0,0,.7)}
+  .error{color:red;margin-top:1rem}
+</style>
+</head>
+<body>
+
+<h1>Vizualizare loguri API (asincron cu dropdown)</h1>
+
+<label for="path-select">Alege o cale relativă (q):</label>
+<select id="path-select" aria-label="Select API path">
+  <option value="">-- Selectează o cale --</option>
+</select>
+<button id="fetch-btn" type="button">Afișează loguri</button>
+
+<div id="error-message" class="error" role="alert" aria-live="assertive"></div>
+<pre id="log-output"></pre>
+
+<script>
+(() => {
+  const apiPaths = [
+    "v0/",
+    "v0/cleanjobs/",
+    "v0/companies/",
+    "v0/empty/",
+    "v0/firme/",
+    "v0/firme/brand/",
+    "v0/firme/brand/add/",
+    "v0/firme/brand/delete/",
+    "v0/firme/company/",
+    "v0/firme/email/",
+    "v0/firme/email/add/",
+    "v0/firme/email/delete/",
+    "v0/firme/logo/",
+    "v0/firme/logo/add/",
+    "v0/firme/logo/delete/",
+    "v0/firme/phone/",
+    "v0/firme/phone/add/",
+    "v0/firme/phone/delete/",
+    "v0/firme/scraper/",
+    "v0/firme/scraper/add/",
+    "v0/firme/scraper/delete/",
+    "v0/firme/website/",
+    "v0/firme/website/add/",
+    "v0/firme/website/delete/",
+    "v0/getuser/",
+    "v0/jobs/",
+    "v0/logs/",
+    "v0/random/",
+    "v0/search/",
+    "v0/suggest/",
+    "v0/total/",
+    "v0/update/",
+    "v0/updateuser/",
+    "v1/",
+    "v3/",
+    "v3/500/",
+    "v3/clean/",
+    "v3/companies/",
+    "v3/images/",
+    "v3/logo/",
+    "v3/logo/add/",
+    "v3/logo/delete/",
+    "v3/random/",
+    "v3/search/",
+    "v3/suggest/",
+    "v3/total/",
+    "v3/update/",
+    "v3/utils/",
+    "v4/",
+    "v4/clean/",
+    "v4/companies/",
+    "v4/delete/",
+    "v4/fetchai/",
+    "v4/jobs/",
+    "v4/random/",
+    "v4/search/",
+    "v4/total/",
+    "v4/update/",
+    "v5/",
+    "v5/add/",
+    "v5/delete/",
+    "v5/get_token/",
+    "v5/random/",
+    "v5/update/",
+    "v5/validator/",
+    "v6/",
+    "v6/firme/",
+    "v6/firme/brand/",
+    "v6/firme/brand/add/",
+    "v6/firme/brand/delete/",
+    "v6/firme/company/",
+    "v6/firme/email/",
+    "v6/firme/email/add/",
+    "v6/firme/email/delete/",
+    "v6/firme/logo/",
+    "v6/firme/logo/add/",
+    "v6/firme/logo/delete/",
+    "v6/firme/phone/",
+    "v6/firme/phone/add/",
+    "v6/firme/phone/delete/",
+    "v6/firme/qsearch/",
+    "v6/firme/scraper/",
+    "v6/firme/scraper/add/",
+    "v6/firme/scraper/delete/",
+    "v6/firme/search/",
+    "v6/firme/website/",
+    "v6/firme/website/add/",
+    "v6/firme/website/delete/"
+  ];
+
+  const select = document.getElementById('path-select');
+  const btn = document.getElementById('fetch-btn');
+  const output = document.getElementById('log-output');
+  const error = document.getElementById('error-message');
+  const baseUrl = 'https://api.peviitor.ro/v0/logs/?q=';
+
+  // Populate dropdown options
+  apiPaths.forEach(path => {
+    const option = document.createElement('option');
+    option.value = path;
+    option.textContent = path;
+    select.appendChild(option);
+  });
+
+  async function fetchLogs(path) {
+    error.textContent = '';
+    output.textContent = 'Se încarcă logurile...';
+    try {
+      const res = await fetch(baseUrl + encodeURIComponent(path));
+      if (!res.ok) throw new Error(`Eroare: ${res.status} ${res.statusText}`);
+      const text = await res.text();
+      output.textContent = text || '(fără conținut)';
+    } catch (e) {
+      output.textContent = '';
+      error.textContent = e.message;
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    const val = select.value.trim();
+    if (!val) {
+      error.textContent = 'Te rog să selectezi o cale validă.';
+      output.textContent = '';
+      return;
+    }
+    fetchLogs(val);
+  });
+
+  // Optional: Enter key triggers fetch when dropdown has focus
+  select.addEventListener('keydown', e => {
+    if (e.key === 'Enter') btn.click();
+  });
+})();
+</script>
+
+</body>
+</html>
