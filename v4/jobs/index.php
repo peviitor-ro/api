@@ -40,6 +40,6 @@ $url =  'https://' . $server . '/solr/' . $core . '/select' . $qs;
     ]);
 
     // Fetch data from Solr
-    $string = @file_get_contents($url, false, $context);
+    $json = @file_get_contents($url, false, $context);
 
 echo $json;
