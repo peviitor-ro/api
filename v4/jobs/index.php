@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-require_once '../util/loadEnv.php';
+require_once '../utils/env.php';
 
 loadEnv('../../api.env');
 
@@ -22,13 +22,24 @@ $qs .= 'rows=100';
 $qs .= '&';
 $qs .= 'omitHeader=true';
 
-$url =  'https://' . $server . '/solr/' . $core . '/select' . $qs;
+
 
 if (isset($_GET["start"])) {
     $start = $_GET["start"];
     $qs .= "&start=" . $start;
+    
 }
 
-$json = file_get_contents($url);
+$url =  'https://' . $server . '/solr/' . $core . '/select' . $qs;
+
+// Set up the HTTP context for the request
+    $context = stream_context_create([
+        'http' => [
+            'header' => "Authorization: Basic " . base64_encode("$username:$password")
+        ]
+    ]);
+
+    // Fetch data from Solr
+    $string = @file_get_contents($url, false, $context);
 
 echo $json;
