@@ -1,24 +1,17 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json; charset=utf-8');
 
-/**
- * @OA\Get(
- *     path="/v3/jobs/", tags={"machine learning"},
- *           @OA\Parameter(
- *                in="query", 
- *                 name="start",  
- *  @OA\Schema(
- *                   type="string"), 
- * example="100"
- * ),
- * 
- *     @OA\Response(response="200", description="Success")
- * )
- */
+require_once '../util/loadEnv.php';
+
+loadEnv('../../api.env');
+
+// Retrieve SOLR variables from environment
+$server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
+$username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
+$password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
 
 $method = 'GET';
-
-require_once '../config.php';
 
 $core  = 'jobs';
 
@@ -29,7 +22,7 @@ $qs .= 'rows=100';
 $qs .= '&';
 $qs .= 'omitHeader=true';
 
-$url =  'http://' . $server . '/solr/' . $core . '/select' . $qs;
+$url =  'https://' . $server . '/solr/' . $core . '/select' . $qs;
 
 if (isset($_GET["start"])) {
     $start = $_GET["start"];
