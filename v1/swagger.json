@@ -1088,7 +1088,7 @@
         }
       }
     },
-     "/firme/company/update/": {
+     "/firme/company/": {
       "post": {
         "tags": ["Companies"],
         "summary": "Update company name in Solr",

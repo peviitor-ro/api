@@ -81,8 +81,9 @@ if ($response === false) {
 $data = json_decode($response, true);
 
 // Return only docs if available
-if (isset($data['response']['docs'])) {
+if (isset($data['response']['docs']) && count($data['response']['docs']) > 0) {
     echo json_encode($data['response']['docs']);
 } else {
-    echo json_encode([]);
+    http_response_code(404);
+    echo json_encode(["error" => "No records found for this email"]);
 }
