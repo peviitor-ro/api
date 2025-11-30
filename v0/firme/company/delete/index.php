@@ -5,7 +5,7 @@ header('Content-Type: application/json; charset=utf-8');
 require_once __DIR__ . '/../../../bootstrap.php';
 $GLOBALS['solr'] = getSolrCredentials('LOCAL');
 
-// Allow only POST requests
+// Allow only DELETE requests
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405); // Method Not Allowed
     echo json_encode(["error" => "Only DELETE method is allowed"]);
