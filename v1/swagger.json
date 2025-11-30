@@ -324,11 +324,23 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "companies": {
-                      "type": "array"
-                    },
                     "total": {
                       "type": "integer"
+                    },
+                    "companies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "jobs": {
+                            "type": "integer",
+                            "nullable": true
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1088,9 +1100,11 @@
         }
       }
     },
-     "/firme/company/": {
+    "/firme/company/": {
       "post": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Update company name in Solr",
         "description": "Updates the 'denumire' (name) of a company document in the 'firme' Solr core using its ID.",
         "operationId": "updateCompanyName",
@@ -1112,7 +1126,10 @@
                     "description": "The new name for the company"
                   }
                 },
-                "required": ["id", "company"]
+                "required": [
+                  "id",
+                  "company"
+                ]
               }
             }
           }
@@ -1163,10 +1180,12 @@
           }
         }
       }
-     },
+    },
     "/firme/company/add/": {
       "put": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Add or update a company in Solr",
         "description": "Inserts or updates a company document in the 'firme' Solr core. Validates required fields, email, phone, and website formats.",
         "operationId": "addOrUpdateCompany",
@@ -1244,8 +1263,14 @@
                   }
                 },
                 "required": [
-                  "id", "denumire", "cod_inmatriculare", "euid", "localitate",
-                  "adresa_completa", "judet", "cod_stare"
+                  "id",
+                  "denumire",
+                  "cod_inmatriculare",
+                  "euid",
+                  "localitate",
+                  "adresa_completa",
+                  "judet",
+                  "cod_stare"
                 ]
               }
             }
@@ -1299,7 +1324,9 @@
     },
     "/firme/company/delete/": {
       "delete": {
-        "tags": ["Companies"],
+        "tags": [
+          "Companies"
+        ],
         "summary": "Delete a company from Solr",
         "description": "Removes a company document from the 'firme' Solr core using its ID.",
         "operationId": "deleteCompany",
@@ -1316,7 +1343,9 @@
                     "description": "The ID of the company to delete"
                   }
                 },
-                "required": ["id"]
+                "required": [
+                  "id"
+                ]
               }
             }
           }
