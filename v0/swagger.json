@@ -1088,6 +1088,286 @@
         }
       }
     },
+     "/firme/company/update/": {
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Update company name in Solr",
+        "description": "Updates the 'denumire' (name) of a company document in the 'firme' Solr core using its ID.",
+        "operationId": "updateCompanyName",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "4546578",
+                    "description": "The ID of the company in Solr"
+                  },
+                  "company": {
+                    "type": "string",
+                    "example": "Firma Test SRL",
+                    "description": "The new name for the company"
+                  }
+                },
+                "required": ["id", "company"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Company name successfully updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "responseHeader": {
+                    "status": 0,
+                    "QTime": 3
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing id or company parameter",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Missing id or company"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only POST method is allowed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Only POST method is allowed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Solr request failed"
+                }
+              }
+            }
+          }
+        }
+      }
+     },
+    "/firme/company/add/": {
+      "put": {
+        "tags": ["Companies"],
+        "summary": "Add or update a company in Solr",
+        "description": "Inserts or updates a company document in the 'firme' Solr core. Validates required fields, email, phone, and website formats.",
+        "operationId": "addOrUpdateCompany",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 4546578,
+                    "description": "Unique integer ID of the company"
+                  },
+                  "denumire": {
+                    "type": "string",
+                    "example": "Firma Test SRL",
+                    "description": "Company name"
+                  },
+                  "cod_inmatriculare": {
+                    "type": "string",
+                    "example": "J01/2024/999",
+                    "description": "Registration code"
+                  },
+                  "euid": {
+                    "type": "string",
+                    "example": "EUID-RO-12345",
+                    "description": "European unique identifier"
+                  },
+                  "localitate": {
+                    "type": "string",
+                    "example": "Cluj-Napoca",
+                    "description": "City"
+                  },
+                  "adresa_completa": {
+                    "type": "string",
+                    "example": "Str. Test 10",
+                    "description": "Full address"
+                  },
+                  "judet": {
+                    "type": "string",
+                    "example": "Bucharest",
+                    "description": "County"
+                  },
+                  "cod_stare": {
+                    "type": "integer",
+                    "example": 1234,
+                    "description": "Status code"
+                  },
+                  "brands": {
+                    "type": "string",
+                    "example": "Brand A, Brand B",
+                    "description": "Optional brands"
+                  },
+                  "scraper": {
+                    "type": "string",
+                    "example": "scraper_name",
+                    "description": "Optional scraper identifier"
+                  },
+                  "website": {
+                    "type": "string",
+                    "example": "https://www.example.com",
+                    "description": "Website URL"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "contact@example.com",
+                    "description": "Company email"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+40712345678",
+                    "description": "Phone number"
+                  }
+                },
+                "required": [
+                  "id", "denumire", "cod_inmatriculare", "euid", "localitate",
+                  "adresa_completa", "judet", "cod_stare"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Data successfully inserted into Solr",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": "Data successfully inserted into Solr"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error or missing required fields",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Fields 'id' and 'cod_stare' must be integers.",
+                  "code": 400
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only PUT method is allowed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Only PUT method is allowed"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Solr server in DEV is down",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "SOLR server in DEV is down",
+                  "code": 503
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/firme/company/delete/": {
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Delete a company from Solr",
+        "description": "Removes a company document from the 'firme' Solr core using its ID.",
+        "operationId": "deleteCompany",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "4546578",
+                    "description": "The ID of the company to delete"
+                  }
+                },
+                "required": ["id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Company successfully deleted",
+            "content": {
+              "application/json": {
+                "example": {
+                  "responseHeader": {
+                    "status": 0,
+                    "QTime": 3
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing ID",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Missing id"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only DELETE method is allowed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Only DELETE method is allowed"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Solr request failed or server misconfiguration",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Solr request failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/firme/brand/": {
       "get": {
         "tags": [
