@@ -73,7 +73,9 @@ try {
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
     $query = '?indent=true&q.op=OR&';
     
-    // Handle search query - don't wrap in quotes to allow multi-word searches
+    // Handle search query - don't wrap in quotes to enable OR-based matching of individual terms
+    // This allows multi-word searches like "manual software" to match jobs containing either term
+    // rawurlencode() escapes special characters to prevent Solr query injection
     if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
         $searchTerm = trim($_GET['q']);
         $query .= 'q=' . rawurlencode($searchTerm);
