@@ -72,9 +72,14 @@ try {
     $core = 'jobs';
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
     $query = '?indent=true&q.op=OR&';
-    $query .= isset($_GET['q']) && !empty(trim($_GET['q']))
-        ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
-        : 'q=*:*';
+    
+    // Handle search query - don't wrap in quotes to allow multi-word searches
+    if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
+        $searchTerm = trim($_GET['q']);
+        $query .= 'q=' . rawurlencode($searchTerm);
+    } else {
+        $query .= 'q=*:*';
+    }
     $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
