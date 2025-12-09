@@ -58,6 +58,21 @@ class SolrQueryBuilder
         ];
         return strtr($str, $charMap);
     }
+
+    /**
+     * Escape Solr special characters to prevent query injection and parsing errors.
+     * Special characters: + - && || ! ( ) { } [ ] ^ " ~ * ? : \ /
+     * 
+     * @param string $value The value to escape
+     * @return string The escaped value
+     */
+    public static function escapeSolrSpecialChars($value)
+    {
+        // Escape Solr special characters with backslash
+        // In character class, only need to escape: \ - ] and special regex chars
+        $pattern = '/([\+\-&|!(){}\[\]^"~*?:\\\\\/ ])/';
+        return preg_replace($pattern, '\\\\$1', $value);
+    }
 }
 
 try {
@@ -72,9 +87,33 @@ try {
     $core = 'jobs';
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
     $query = '?indent=true&q.op=OR&';
-    $query .= isset($_GET['q']) && !empty(trim($_GET['q']))
-        ? ('q=' . rawurlencode('"' . trim($_GET['q']) . '"'))
-        : 'q=*:*';
+    
+    // Handle search query with proper escaping and phrase search support
+    // - Multi-word searches (e.g. "manual software") use OR-based matching
+    // - Quoted searches (e.g. '"exact phrase"') perform phrase matching
+    // - Special characters are escaped to prevent Solr query injection
+    // Note: For improved multi-word handling, consider using defType=edismax with qf/mm/pf parameters
+    if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
+        $searchTerm = trim($_GET['q']);
+        $termLength = strlen($searchTerm);
+        
+        // Check if user provided an explicit phrase search (surrounded by quotes)
+        $isExplicitPhrase = ($termLength >= 2 && 
+                            $searchTerm[0] === '"' && 
+                            $searchTerm[$termLength - 1] === '"');
+        
+        if ($isExplicitPhrase) {
+            // Preserve user-intended phrase search
+            $query .= 'q=' . rawurlencode($searchTerm);
+        } else {
+            // Escape Solr special characters for multi-word search
+            // The backslash escaping is URL-encoded for transmission, then decoded by Solr
+            $escapedTerm = SolrQueryBuilder::escapeSolrSpecialChars($searchTerm);
+            $query .= 'q=' . rawurlencode($escapedTerm);
+        }
+    } else {
+        $query .= 'q=*:*';
+    }
     $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
     $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
     $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
