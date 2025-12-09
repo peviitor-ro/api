@@ -58,6 +58,20 @@ class SolrQueryBuilder
         ];
         return strtr($str, $charMap);
     }
+
+    /**
+     * Escape Solr special characters to prevent query injection and parsing errors.
+     * Special characters: + - && || ! ( ) { } [ ] ^ " ~ * ? : \ /
+     * 
+     * @param string $value The value to escape
+     * @return string The escaped value
+     */
+    public static function escapeSolrSpecialChars($value)
+    {
+        // Escape all Solr special characters with backslash
+        $pattern = '/([\+\-\&\|\!\(\)\{\}\[\]\^\"\~\*\?\:\\\\\\/])/';
+        return preg_replace($pattern, '\\\\$1', $value);
+    }
 }
 
 try {
@@ -73,12 +87,27 @@ try {
     $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
     $query = '?indent=true&q.op=OR&';
     
-    // Handle search query - don't wrap in quotes to enable OR-based matching of individual terms
-    // This allows multi-word searches like "manual software" to match jobs containing either term
-    // rawurlencode() escapes special characters to prevent Solr query injection
+    // Handle search query with proper escaping and phrase search support
+    // - Multi-word searches (e.g. "manual software") use OR-based matching
+    // - Quoted searches (e.g. '"exact phrase"') perform phrase matching
+    // - Special characters are escaped to prevent Solr query injection
+    // Note: For improved multi-word handling, consider using defType=edismax with qf/mm/pf parameters
     if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
         $searchTerm = trim($_GET['q']);
-        $query .= 'q=' . rawurlencode($searchTerm);
+        
+        // Check if user provided an explicit phrase search (surrounded by quotes)
+        $isExplicitPhrase = (strlen($searchTerm) >= 2 && 
+                            $searchTerm[0] === '"' && 
+                            $searchTerm[strlen($searchTerm) - 1] === '"');
+        
+        if ($isExplicitPhrase) {
+            // Preserve user-intended phrase search
+            $query .= 'q=' . rawurlencode($searchTerm);
+        } else {
+            // Escape Solr special characters for multi-word search
+            $escapedTerm = SolrQueryBuilder::escapeSolrSpecialChars($searchTerm);
+            $query .= 'q=' . rawurlencode($escapedTerm);
+        }
     } else {
         $query .= 'q=*:*';
     }
