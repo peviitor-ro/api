@@ -68,8 +68,9 @@ class SolrQueryBuilder
      */
     public static function escapeSolrSpecialChars($value)
     {
-        // Escape all Solr special characters with backslash
-        $pattern = '/([\+\-\&\|\!\(\)\{\}\[\]\^\"\~\*\?\:\\\\\\/])/';
+        // Escape Solr special characters with backslash
+        // In character class, only need to escape: \ - ] and special regex chars
+        $pattern = '/([\+\-&|!(){}\[\]^"~*?:\\\\\/ ])/';
         return preg_replace($pattern, '\\\\$1', $value);
     }
 }
@@ -94,17 +95,19 @@ try {
     // Note: For improved multi-word handling, consider using defType=edismax with qf/mm/pf parameters
     if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
         $searchTerm = trim($_GET['q']);
+        $termLength = strlen($searchTerm);
         
         // Check if user provided an explicit phrase search (surrounded by quotes)
-        $isExplicitPhrase = (strlen($searchTerm) >= 2 && 
+        $isExplicitPhrase = ($termLength >= 2 && 
                             $searchTerm[0] === '"' && 
-                            $searchTerm[strlen($searchTerm) - 1] === '"');
+                            $searchTerm[$termLength - 1] === '"');
         
         if ($isExplicitPhrase) {
             // Preserve user-intended phrase search
             $query .= 'q=' . rawurlencode($searchTerm);
         } else {
             // Escape Solr special characters for multi-word search
+            // The backslash escaping is URL-encoded for transmission, then decoded by Solr
             $escapedTerm = SolrQueryBuilder::escapeSolrSpecialChars($searchTerm);
             $query .= 'q=' . rawurlencode($escapedTerm);
         }
