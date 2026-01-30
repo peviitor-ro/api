@@ -1,219 +1,195 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json; charset=utf-8');
+header("Content-Type: application/json; charset=UTF-8");
 
 require_once '../utils/env.php';
-
 loadEnv('../../api.env');
 
-$server = getenv('PROD_SERVER') ?: ($_SERVER['PROD_SERVER'] ?? null);
-$username = getenv('SOLR_USER') ?: ($_SERVER['SOLR_USER'] ?? null);
-$password = getenv('SOLR_PASS') ?: ($_SERVER['SOLR_PASS'] ?? null);
-$backup = getenv('BACK_SERVER') ?: ($_SERVER['BACK_SERVER'] ?? null);
+// =========================
+// CONFIG
+// =========================
+$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$BACK_SERVER = trim(getenv('BACK_SERVER') ?: '');
+
+$SOLR_USER = trim(getenv('SOLR_USER') ?: '');
+$SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(["error" => "Only GET method is allowed"]);
+    http_response_code(405);
+    echo json_encode(["error" => "Only GET method allowed"]);
     exit;
 }
 
-// Fetch JSON and throw error if failed
-function fetchJson(string $url, $context = null): array
-{
-    $response = @file_get_contents($url, false, $context);
-    if ($response === false) {
-        throw new Exception("Failed to fetch URL: $url");
+// =========================
+// HELPERS
+// =========================
+function normalize(string $v): string {
+    $map = [
+        'ă'=>'a','â'=>'a','î'=>'i','ș'=>'s','ş'=>'s','ț'=>'t','ţ'=>'t',
+        'Ă'=>'a','Â'=>'a','Î'=>'i','Ș'=>'s','Ş'=>'s','Ț'=>'t','Ţ'=>'t'
+    ];
+    return strtr(mb_strtolower(trim($v), 'UTF-8'), $map);
+}
+
+function fetchJson(string $url, ?string $user = null, ?string $pass = null, int $timeout = 5): array {
+    $headers = [];
+
+    if ($user && $pass) {
+        $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
     }
 
-    $json = json_decode($response, true);
-    if ($json === null) {
-        throw new Exception("Invalid JSON from URL: $url");
+    $context = stream_context_create([
+        'http' => [
+            'method'  => 'GET',
+            'header'  => implode("\r\n", $headers),
+            'timeout' => $timeout
+        ]
+    ]);
+
+    $data = @file_get_contents($url, false, $context);
+
+    if ($data === false) {
+        $err = error_get_last()['message'] ?? 'Unknown error';
+        error_log("FETCH FAILED: $url | $err");
+        throw new Exception($err);
+    }
+
+    $json = json_decode($data, true);
+    if (!is_array($json)) {
+        throw new Exception("Invalid JSON response");
     }
 
     return $json;
 }
 
-class SolrQueryBuilder
-{
-    public static function replaceSpaces($string)
-    {
-        return str_replace([' ', '&', '$'], ['%20', '%26', '%24'], $string);
+function buildSolrQuery(array $params, int $start, int $rows): string {
+    $query = [
+        'indent=true',
+        'q.op=AND',
+        'defType=edismax',
+        'qf=' . rawurlencode('job_title company city county'),
+        'mm=100%'
+    ];
+
+    // Query
+    $query[] = !empty($params['q'])
+        ? 'q=' . rawurlencode($params['q'])
+        : 'q=*:*';
+
+    // Filters
+    $filters = [
+        'company' => 'company',
+        'city'    => 'city',
+        'remote'  => 'remote'
+    ];
+
+    foreach ($filters as $param => $field) {
+        if (!empty($params[$param])) {
+            $items = explode(',', $params[$param]);
+            $fq = array_map(
+                fn($i) => $field . ':"' . rawurlencode(trim($i)) . '"',
+                $items
+            );
+            $query[] = 'fq=' . implode('%20OR%20', $fq);
+        }
     }
 
-    public static function buildParamQuery($param, $queryName)
-    {
-        $arrayParams = explode(',', $param);
-        $queries = array_map(function ($item) use ($queryName) {
-            return $queryName . '%3A%22' . self::replaceSpaces($item) . '%22';
-        }, $arrayParams);
+    $query[] = "start=$start";
+    $query[] = "rows=$rows";
 
-        return '&fq=' . implode('%20OR%20', $queries);
-    }
-
-    public static function normalizeString($str)
-    {
-        $charMap = [
-            'ă' => 'a', 'î' => 'i', 'â' => 'a', 'ș' => 's', 'ț' => 't',
-            'Ă' => 'A', 'Î' => 'I', 'Â' => 'A', 'Ș' => 'S', 'Ț' => 'T'
-        ];
-        return strtr($str, $charMap);
-    }
-
-    /**
-     * Escape Solr special characters to prevent query injection and parsing errors.
-     * Special characters: + - && || ! ( ) { } [ ] ^ " ~ * ? : \ /
-     * 
-     * @param string $value The value to escape
-     * @return string The escaped value
-     */
-    public static function escapeSolrSpecialChars($value)
-    {
-        // Escape Solr special characters with backslash
-        // In character class, only need to escape: \ - ] and special regex chars
-        $pattern = '/([\+\-&|!(){}\[\]^"~*?:\\\\\/ ])/';
-        return preg_replace($pattern, '\\\\$1', $value);
-    }
+    return implode('&', $query);
 }
 
-try {
-    if (!$server) {
-        die(json_encode(["error" => "PROD_SERVER is not set in api.env"]));
-    }
+// =========================
+// PAGINATION
+// =========================
+$page  = max(1, (int)($_GET['page'] ?? 1));
+$rows  = max(1, (int)($_GET['rows'] ?? 12));
+$start = ($page - 1) * $rows;
 
-    foreach ($_GET as $key => $value) {
-        $_GET[$key] = SolrQueryBuilder::normalizeString($value);
+// Normalize GET
+$params = [];
+foreach ($_GET as $k => $v) {
+    $params[$k] = normalize($v);
+}
+
+// =========================
+// PRIMARY → SOLR
+// =========================
+try {
+    if (!$PROD_SERVER) {
+        throw new Exception("PROD_SERVER not set");
     }
 
     $core = 'jobs';
-    $baseUrl = 'http://' . $server . '/solr/' . $core . '/select';
-    $query = '?indent=true&q.op=OR&';
-    
-    // Handle search query with proper escaping and phrase search support
-    // - Multi-word searches (e.g. "manual software") use OR-based matching
-    // - Quoted searches (e.g. '"exact phrase"') perform phrase matching
-    // - Special characters are escaped to prevent Solr query injection
-    // Note: For improved multi-word handling, consider using defType=edismax with qf/mm/pf parameters
-    if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
-        $searchTerm = trim($_GET['q']);
-        $termLength = strlen($searchTerm);
-        
-        // Check if user provided an explicit phrase search (surrounded by quotes)
-        $isExplicitPhrase = ($termLength >= 2 && 
-                            $searchTerm[0] === '"' && 
-                            $searchTerm[$termLength - 1] === '"');
-        
-        if ($isExplicitPhrase) {
-            // Preserve user-intended phrase search
-            $query .= 'q=' . rawurlencode($searchTerm);
-        } else {
-            // Escape Solr special characters for multi-word search
-            // The backslash escaping is URL-encoded for transmission, then decoded by Solr
-            $escapedTerm = SolrQueryBuilder::escapeSolrSpecialChars($searchTerm);
-            $query .= 'q=' . rawurlencode($escapedTerm);
-        }
-    } else {
-        $query .= 'q=*:*';
-    }
-    $query .= isset($_GET['company']) ? SolrQueryBuilder::buildParamQuery($_GET['company'], 'company') : '';
-    $query .= isset($_GET['city']) ? SolrQueryBuilder::buildParamQuery($_GET['city'], 'city') : '';
-    $query .= isset($_GET['remote']) ? SolrQueryBuilder::buildParamQuery($_GET['remote'], 'remote') : '&q=remote%3A%22remote%22';
-    $query .= '&useParams=';
+    $base = "http://$PROD_SERVER/solr/$core/select";
+    $url  = $base . '?' . buildSolrQuery($params, $start, $rows);
 
-    $context = stream_context_create([
-        'http' => [
-            'header' => "Authorization: Basic " . base64_encode("$username:$password")
-        ]
-    ]);
-    
-    
+    error_log("SOLR URL: $url");
 
-    // Step 1: Get numFound
-    $countData = fetchJson($baseUrl . $query . "&rows=0", $context);
-    $numFound = $countData['response']['numFound'] ?? 0;
+    $solr = fetchJson($url, $SOLR_USER, $SOLR_PASS, 4);
 
-    // Step 2: Validate start and rows
-    $finalStart = 0;
-    $finalRows = 12;
-
-    if (isset($_GET['start'])) {
-        if (!ctype_digit($_GET['start']) || ($_GET['start'] < 0 || $_GET['start'] >= $numFound)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Invalid input for 'start'."]);
-            exit;
-        }
-        $finalStart = intval($_GET['start']);
-    }
-
-    if (isset($_GET['rows'])) {
-        if (!ctype_digit($_GET['rows']) || ($_GET['rows'] <= 0 || $_GET['rows'] > $numFound - $finalStart)) {
-            http_response_code(400);
-            echo json_encode(["error" => "Invalid input for 'rows'."]);
-            exit;
-        }
-        $finalRows = intval($_GET['rows']);
-    }
-
-    if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
-        $page = intval($_GET['page']);
-        if ($page > 0) {
-            $finalStart = ($page - 1) * $finalRows;
-            if ($finalStart >= $numFound) $finalStart = 0;
-        } else {
-            http_response_code(400);
-            echo json_encode(["error" => "Invalid input for 'page'."]);
-            exit;
-        }
-    }
-
-    $query .= "&start=$finalStart&rows=$finalRows";
-    $finalUrl = $baseUrl . $query;
-
-    $jobs = fetchJson($finalUrl, $context);
-
-    if (isset($jobs['response']['numFound']) && $jobs['response']['numFound'] == 0) {
+    $numFound = $solr['response']['numFound'] ?? 0;
+    if ($numFound === 0) {
         http_response_code(404);
-        echo json_encode(["error" => "No jobs found in the database", "code" => 404]);
+        echo json_encode(["error" => "No jobs found"]);
         exit;
     }
 
-    echo json_encode($jobs);
+    echo json_encode($solr, JSON_UNESCAPED_UNICODE);
+    exit;
+
 } catch (Exception $e) {
-    // Fallback to backup endpoint
-    $backupUrl = $backup . 'mobile/';
-    $fallbackQuery = isset($_GET['q']) ? '?search=' . SolrQueryBuilder::replaceSpaces($_GET['q']) : '?search=';
-    $fallbackQuery .= isset($_GET['page']) ? '&page=' . $_GET['page'] : '';
-    $citiesString = str_replace('~', '', $_GET['city'] ?? '');
-    $fallbackQuery .= isset($_GET['city']) ? '&cities=' . $citiesString : '';
-    $fallbackQuery .= isset($_GET['company']) ? '&companies=' . SolrQueryBuilder::replaceSpaces($_GET['company']) : '';
-    $fallbackQuery .= isset($_GET['remote']) ? '&remote=' . SolrQueryBuilder::replaceSpaces($_GET['remote']) : '';
+    error_log("PRIMARY FAILED: " . $e->getMessage());
+}
 
-    try {
-        $json = fetchJson($backupUrl . $fallbackQuery);
-        $newJobs = array_map(function ($job) {
-            return [
-                'job_title' => $job['job_title'],
-                'company' => $job['company_name'],
-                'city' => [$job['city']],
-                'county' => [$job['county']],
-                'remote' => $job['remote'],
-                'job_link' => $job['job_link'],
-                'id' => $job['id']
-            ];
-        }, $json['results'] ?? []);
-
-        $response = [
-            'response' => [
-                'docs' => $newJobs,
-                'numFound' => $json['count'] ?? 0
-            ]
-        ];
-
-        echo json_encode($response);
-    } catch (Exception $fallbackEx) {
-        http_response_code(500);
-        echo json_encode([
-            "error" => "Fallback endpoint failed as well.",
-            "details" => $fallbackEx->getMessage()
-        ]);
+// =========================
+// FALLBACK
+// =========================
+try {
+    if (!$BACK_SERVER) {
+        throw new Exception("BACK_SERVER not set");
     }
+
+    $fallback = rtrim($BACK_SERVER, '/') . '/mobile/?';
+    $fallback .= 'search=' . urlencode($_GET['q'] ?? '');
+    $fallback .= '&page=' . $page;
+
+    if (!empty($_GET['city'])) {
+        $fallback .= '&cities=' . urlencode($_GET['city']);
+    }
+    if (!empty($_GET['company'])) {
+        $fallback .= '&companies=' . urlencode($_GET['company']);
+    }
+    if (!empty($_GET['remote'])) {
+        $fallback .= '&remote=' . urlencode($_GET['remote']);
+    }
+
+    error_log("FALLBACK URL: $fallback");
+
+    $data = fetchJson($fallback, null, null, 3);
+
+    $docs = array_map(fn($j) => [
+        'job_title' => $j['job_title'] ?? null,
+        'company'   => $j['company_name'] ?? null,
+        'city'      => [$j['city'] ?? null],
+        'county'    => [$j['county'] ?? null],
+        'remote'    => $j['remote'] ?? null,
+        'job_link'  => $j['job_link'] ?? null,
+        'id'        => $j['id'] ?? null,
+    ], $data['results'] ?? []);
+
+    echo json_encode([
+        'response' => [
+            'docs' => $docs,
+            'numFound' => $data['count'] ?? count($docs)
+        ]
+    ], JSON_UNESCAPED_UNICODE);
+
+} catch (Exception $e) {
+    http_response_code(503);
+    echo json_encode([
+        'error' => 'Primary and fallback unavailable',
+        'details' => $e->getMessage()
+    ]);
 }
