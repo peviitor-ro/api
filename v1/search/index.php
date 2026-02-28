@@ -54,15 +54,14 @@ function fetchJson(string $url, ?string $user = null, ?string $pass = null, int 
 }
 
 function buildSolrQuery(array $params, int $start, int $rows): string {
-    $query = [
-        'indent' => 'true',
-        'q.op' => 'AND',
-        'defType' => 'edismax',
-        'qf' => rawurlencode('title company location'),
-        'mm' => '100%'
-    ];
+    $parts = [];
+    $parts[] = 'indent=true';
+    $parts[] = 'q.op=AND';
+    $parts[] = 'defType=edismax';
+    $parts[] = 'qf=' . rawurlencode('title company location');
+    $parts[] = 'mm=100%';
 
-    $query[] = !empty($params['q'])
+    $parts[] = !empty($params['q'])
         ? 'q=' . rawurlencode($params['q'])
         : 'q=*:*';
 
@@ -79,14 +78,14 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
                 fn($i) => $field . ':"' . rawurlencode(trim($i)) . '"',
                 $items
             );
-            $query[] = 'fq=' . implode('%20OR%20', $fq);
+            $parts[] = 'fq=' . implode('%20OR%20', $fq);
         }
     }
 
-    $query[] = "start=$start";
-    $query[] = "rows=$rows";
+    $parts[] = "start=$start";
+    $parts[] = "rows=$rows";
 
-    return implode('&', $query);
+    return implode('&', $parts);
 }
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
