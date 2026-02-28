@@ -125,7 +125,7 @@ try {
             'county' => $doc['location'] ?? [],
             'remote' => $doc['workmode'] ?? '',
             'job_link' => $doc['url'] ?? null,
-            'id' => md5($doc['url'] ?? '')
+            'id' => crc32($doc['url'] ?? '')
         ];
     }, $solr['response']['docs'] ?? []);
 
