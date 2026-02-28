@@ -44,42 +44,35 @@ try {
         throw new Exception("PROD_SERVER not set");
     }
 
-    $core = 'job';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $jobBase = "http://$PROD_SERVER/solr/job/select";
+    $companyBase = "http://$PROD_SERVER/solr/company/select";
 
-    $qs = http_build_query([
-        "facet.field" => "company_str",
-        "facet.limit" => "2000000",
-        "facet" => "true",
-        "fl" => "company",
-        "indent" => "true",
-        "q.op" => "OR",
+    $jobUrl = $jobBase . '?' . http_build_query([
         "q" => "*:*",
         "rows" => "0",
-        "start" => "0"
+        "start" => "0",
+        "indent" => "true"
     ]);
+    error_log("TOTAL JOBS URL: $jobUrl");
 
-    $url = "$base?$qs";
-    error_log("TOTAL URL: $url");
+    $jobSolr = fetchJson($jobUrl, $SOLR_USER, $SOLR_PASS, 4);
+    $jobsCount = $jobSolr['response']['numFound'] ?? 0;
 
-    $solr = fetchJson($url, $SOLR_USER, $SOLR_PASS, 4);
+    $companyUrl = $companyBase . '?' . http_build_query([
+        "q" => "*:*",
+        "rows" => "0",
+        "start" => "0",
+        "indent" => "true"
+    ]);
+    error_log("TOTAL COMPANIES URL: $companyUrl");
 
-    if (!isset($solr['facet_counts']['facet_fields']['company_str'])) {
-        throw new Exception("Invalid response from Solr");
-    }
-
-    $companies = $solr['facet_counts']['facet_fields']['company_str'] ?? [];
-    $companyCount = 0;
-    for ($i = 1; $i < count($companies); $i += 2) {
-        if ($companies[$i] > 0) {
-            $companyCount++;
-        }
-    }
+    $companySolr = fetchJson($companyUrl, $SOLR_USER, $SOLR_PASS, 4);
+    $companiesCount = $companySolr['response']['numFound'] ?? 0;
 
     echo json_encode([
         "total" => [
-            "jobs" => (int) ($solr['response']['numFound'] ?? 0),
-            "companies" => (int) $companyCount
+            "jobs" => (int) $jobsCount,
+            "companies" => (int) $companiesCount
         ]
     ], JSON_UNESCAPED_UNICODE);
 
