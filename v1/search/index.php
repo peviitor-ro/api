@@ -59,7 +59,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts[] = 'q.op=AND';
     $parts[] = 'defType=edismax';
     $parts[] = 'qf=' . rawurlencode('title company location');
-    $parts[] = 'mm=100%';
+    $parts[] = 'mm=100%25';
 
     $parts[] = !empty($params['q'])
         ? 'q=' . rawurlencode($params['q'])
