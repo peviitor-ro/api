@@ -43,8 +43,8 @@ try {
     if (!$PROD_SERVER) {
         throw new Exception("PROD_SERVER not set");
     }
-
-    $count = $_GET['count'] ?? '';
+    
+    $count = $_GET['count'] ?? 'false';
     if ($count !== 'true' && $count !== 'false') {
         http_response_code(400);
         echo json_encode(["error" => "Missing or wrong required field: count"]);
