@@ -122,7 +122,7 @@ try {
     }
 
     $core = 'jobs';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "https://$PROD_SERVER/solr/$core/select";
     $url  = $base . '?' . buildSolrQuery($params, $start, $rows);
 
     error_log("SOLR URL: $url");
