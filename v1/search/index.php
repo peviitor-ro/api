@@ -56,10 +56,9 @@ function fetchJson(string $url, ?string $user = null, ?string $pass = null, int 
 function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts = [];
     $parts[] = 'indent=true';
-    $parts[] = 'q.op=AND';
+    $parts[] = 'q.op=OR';
     $parts[] = 'defType=edismax';
     $parts[] = 'qf=' . rawurlencode('title company location');
-    $parts[] = 'mm=100%25';
 
     $parts[] = !empty($params['q'])
         ? 'q=' . rawurlencode($params['q'])
