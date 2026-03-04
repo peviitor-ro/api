@@ -68,7 +68,7 @@ try {
     $url_element = substr($url_element, 0, -4);
 
     $core = 'job';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
+    $url = "https://$PROD_SERVER/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
 
     $deleteOperations = [
         'delete' => [

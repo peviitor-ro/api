@@ -81,7 +81,7 @@ try {
     }
 
     $core = 'job';
-    $base = "http://$PROD_SERVER/solr/$core";
+    $base = "https://$PROD_SERVER/solr/$core";
 
     $countUrl = $base . "/select?q=" . rawurlencode('company:"' . $company . '"') . "&wt=json&rows=0";
     error_log("CLEANJOBS COUNT URL: $countUrl");

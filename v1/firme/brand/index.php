@@ -53,7 +53,7 @@ try {
     $brand = strtolower(urldecode($_GET['brand']));
 
     $core = 'company';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "https://$PROD_SERVER/solr/$core/select";
 
     $url = $base . '?' . http_build_query([
         "indent" => "true",

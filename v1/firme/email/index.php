@@ -53,7 +53,7 @@ try {
     $email = $_GET['email'];
 
     $core = 'company';
-    $url = "http://$PROD_SERVER/solr/$core/select?" . http_build_query([
+    $url = "https://$PROD_SERVER/solr/$core/select?" . http_build_query([
         "indent" => "true",
         "q.op" => "OR",
         "q" => 'email:"' . $email . '"',

@@ -56,7 +56,7 @@ try {
     $start = ($page - 1) * $rows;
 
     $core = 'company';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "https://$PROD_SERVER/solr/$core/select";
 
     $qs = http_build_query([
         "q" => "*:*",

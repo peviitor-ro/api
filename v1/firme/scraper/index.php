@@ -53,7 +53,7 @@ try {
     $scraper = $_GET['scraper'];
 
     $core = 'company';
-    $url = "http://$PROD_SERVER/solr/$core/select?" . http_build_query([
+    $url = "https://$PROD_SERVER/solr/$core/select?" . http_build_query([
         "indent" => "true",
         "q.op" => "OR",
         "q" => 'scraper:"' . $scraper . '"',
