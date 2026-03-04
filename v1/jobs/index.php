@@ -73,7 +73,7 @@ try {
     }
 
     $core = 'job';
-    $url = "http://$PROD_SERVER/solr/$core/select?" . http_build_query([
+    $url = "https://$PROD_SERVER/solr/$core/select?" . http_build_query([
         "facet" => "true",
         "indent" => "true",
         "q.op" => "OR",

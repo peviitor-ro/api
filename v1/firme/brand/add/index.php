@@ -56,7 +56,7 @@ try {
     $brands = $_POST['brands'];
 
     $core = 'company';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $url = "https://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
 
     $payload = json_encode([
         [
