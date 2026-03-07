@@ -1,4 +1,17 @@
 <?php
+/**
+ * BFF (Backend For Frontend) for https://api.peviitor.ro/v1/search.
+ *
+ * 1) This endpoint relies on the data definitions and conventions from
+ *    the repository https://github.com/peviitor-ro/peviitor_core.
+ *    It acts as a BFF/adapter over the Solr index defined there.
+ *
+ * 2) The Solr search engine is hosted at:
+ *      https://solr.peviitor.ro
+ *    Authentication uses the username and password from the environment
+ *    variables:
+ *      SOLR_USER and SOLR_PASS (loaded via api.env + loadEnv.php).
+ */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -122,7 +135,10 @@ try {
             'county' => $doc['location'] ?? [],
             'remote' => $doc['workmode'] ?? '',
             'job_link' => $doc['url'] ?? null,
-            'id' => md5($doc['url'] ?? '')
+            'id' => md5($doc['url'] ?? ''),
+            'salary' => $doc['salary'] ?? null,
+            'tags'   => $doc['tags'] ?? [],
+
         ];
     }, $solr['response']['docs'] ?? []);
 
