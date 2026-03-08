@@ -70,7 +70,6 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts = [];
     $parts[] = 'indent=true';
     $parts[] = 'q.op=OR';
-
     $parts[] = !empty($params['q'])
         ? 'q=' . rawurlencode($params['q'])
         : 'q=*:*';
@@ -85,11 +84,17 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
         if (!empty($params[$param])) {
             $items = explode(',', $params[$param]);
             $fq = array_map(
-                fn($i) => $field . ':"' . rawurlencode(trim($i)) . '"',
+                fn($i) => $field . ':\"' . rawurlencode(trim($i)) . '\"',
                 $items
             );
             $parts[] = 'fq=' . implode('%20OR%20', $fq);
         }
+    }
+
+    // sort=vdate+desc  =>  sort=vdate desc
+    if (!empty($params['sort'])) {
+        // deja vine normalizat, dar îl folosim direct
+        $parts[] = 'sort=' . rawurlencode($params['sort']);
     }
 
     $parts[] = "start=$start";
@@ -97,6 +102,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
     return implode('&', $parts);
 }
+
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
 $rows  = max(1, (int)($_GET['rows'] ?? 12));
