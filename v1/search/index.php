@@ -136,15 +136,23 @@ try {
     $docs = array_map(function($doc) {
         return [
             'job_title' => $doc['title'] ?? null,
+            'title' => $doc['title'] ?? null,            
             'company' => $doc['company'] ?? null,
             'city' => $doc['location'] ?? [],
+            'location' => $doc['location'] ?? [],
             'county' => $doc['location'] ?? [],
             'remote' => $doc['workmode'] ?? '',
+            'workmode' => $doc['workmode'] ?? '',
             'job_link' => $doc['url'] ?? null,
+            'url' => $doc['url'] ?? '',
             'id' => md5($doc['url'] ?? ''),
             'salary' => $doc['salary'] ?? null,
             'tags'   => $doc['tags'] ?? [],
-
+            'cif'   => $doc['cif'] ?? '',
+            'date'   => $doc['date'] ?? null,
+            'vdate'   => $doc['vdate'] ?? null,
+            'expirationdate'   => $doc['expirationdate'] ?? null,
+            'status'   => $doc['status'] ?? null,
         ];
     }, $solr['response']['docs'] ?? []);
 
