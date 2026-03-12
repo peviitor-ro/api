@@ -1,4 +1,17 @@
 <?php
+/**
+ * BFF (Backend For Frontend) for https://api.peviitor.ro/v1/search.
+ *
+ * 1) This endpoint relies on the data definitions and conventions from
+ *    the repository https://github.com/peviitor-ro/peviitor_core.
+ *    It acts as a BFF/adapter over the Solr index defined there.
+ *
+ * 2) The Solr search engine is hosted at:
+ *      https://solr.peviitor.ro
+ *    Authentication uses the username and password from the environment
+ *    variables:
+ *      SOLR_USER and SOLR_PASS (loaded via api.env + loadEnv.php).
+ */
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
@@ -57,10 +70,19 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts = [];
     $parts[] = 'indent=true';
     $parts[] = 'q.op=OR';
+    $parts[] = 'defType=edismax';
+    $parts[] = 'tie=1.0';
 
     $parts[] = !empty($params['q'])
         ? 'q=' . rawurlencode($params['q'])
         : 'q=*:*';
+
+    $parts[] = 'bq=salary:[*+TO+*]^10000';
+    $parts[] = 'bq=tags:[*+TO+*]^5000';
+    $parts[] = 'bq=cif:[*+TO+*]^2000';
+    $parts[] = 'bq=company:[*+TO+*]^500';
+    $parts[] = 'bq=title:[*+TO+*]^100';
+    $parts[] = 'bq=location:[*+TO+*]^50';
 
     $filters = [
         'company'  => 'company',
@@ -72,11 +94,17 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
         if (!empty($params[$param])) {
             $items = explode(',', $params[$param]);
             $fq = array_map(
-                fn($i) => $field . ':"' . rawurlencode(trim($i)) . '"',
+                fn($i) => $field . ':\"' . rawurlencode(trim($i)) . '\"',
                 $items
             );
             $parts[] = 'fq=' . implode('%20OR%20', $fq);
         }
+    }
+
+    // sort=vdate+desc  =>  sort=vdate desc
+    if (!empty($params['sort'])) {
+        // deja vine normalizat, dar îl folosim direct
+        $parts[] = 'sort=' . rawurlencode($params['sort']);
     }
 
     $parts[] = "start=$start";
@@ -84,6 +112,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
     return implode('&', $parts);
 }
+
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
 $rows  = max(1, (int)($_GET['rows'] ?? 12));
@@ -117,12 +146,23 @@ try {
     $docs = array_map(function($doc) {
         return [
             'job_title' => $doc['title'] ?? null,
+            'title' => $doc['title'] ?? null,            
             'company' => $doc['company'] ?? null,
             'city' => $doc['location'] ?? [],
+            'location' => $doc['location'] ?? [],
             'county' => $doc['location'] ?? [],
             'remote' => $doc['workmode'] ?? '',
+            'workmode' => $doc['workmode'] ?? '',
             'job_link' => $doc['url'] ?? null,
-            'id' => md5($doc['url'] ?? '')
+            'url' => $doc['url'] ?? '',
+            'id' => md5($doc['url'] ?? ''),
+            'salary' => $doc['salary'] ?? null,
+            'tags'   => $doc['tags'] ?? [],
+            'cif'   => $doc['cif'] ?? '',
+            'date'   => $doc['date'] ?? null,
+            'vdate'   => $doc['vdate'] ?? null,
+            'expirationdate'   => $doc['expirationdate'] ?? null,
+            'status'   => $doc['status'] ?? null,
         ];
     }, $solr['response']['docs'] ?? []);
 
