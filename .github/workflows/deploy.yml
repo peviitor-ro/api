@@ -19,5 +19,6 @@ jobs:
       - name: Deploy to Pi4
         run: |
           cd /home/sebi/peviitor-api
+          git stash
           git pull origin master
           docker exec peviitor-api apache2ctl graceful 2>/dev/null || docker restart peviitor-api
