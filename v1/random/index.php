@@ -45,7 +45,7 @@ try {
     }
 
     $core = 'job';
-    $base = "https://$PROD_SERVER/solr/$core/select";
+    $base = "http://$PROD_SERVER/solr/$core/select";
 
     $countUrl = $base . '?q=*:*&rows=0';
     error_log("RANDOM COUNT URL: $countUrl");

@@ -44,8 +44,8 @@ try {
         throw new Exception("PROD_SERVER not set");
     }
 
-    $jobBase = "https://$PROD_SERVER/solr/job/select";
-    $companyBase = "https://$PROD_SERVER/solr/company/select";
+    $jobBase = "http://$PROD_SERVER/solr/job/select";
+    $companyBase = "http://$PROD_SERVER/solr/company/select";
 
     $jobUrl = $jobBase . '?' . http_build_query([
         "q" => "*:*",

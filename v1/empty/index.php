@@ -71,7 +71,7 @@ try {
     }
 
     $core = 'job';
-    $base = "https://$PROD_SERVER/solr/$core";
+    $base = "http://$PROD_SERVER/solr/$core";
 
     $countUrl = $base . "/select?q=*:*&wt=json&rows=0";
     error_log("EMPTY COUNT URL: $countUrl");
@@ -81,7 +81,7 @@ try {
 
     $companyCount = 0;
     $companyCore = 'company';
-    $companyBase = "https://$PROD_SERVER/solr/$companyCore";
+    $companyBase = "http://$PROD_SERVER/solr/$companyCore";
     $companyUrl = $companyBase . "/select?q=*:*&wt=json&rows=0";
     error_log("EMPTY COMPANY COUNT URL: $companyUrl");
 

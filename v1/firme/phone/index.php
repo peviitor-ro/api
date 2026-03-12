@@ -53,7 +53,7 @@ try {
     $phone = $_GET['phone'];
 
     $core = 'company';
-    $url = "https://$PROD_SERVER/solr/$core/select?" . http_build_query([
+    $url = "http://$PROD_SERVER/solr/$core/select?" . http_build_query([
         "indent" => "true",
         "q.op" => "OR",
         "q" => 'phone:"' . $phone . '"',

@@ -132,7 +132,7 @@ try {
     $item->cod_stare = trim($cod_stare);
 
     $core = 'company';
-    $url = "https://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
     $payload = json_encode([$item]);
 
     error_log("FIRME COMPANY ADD URL: $url");
