@@ -85,9 +85,9 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts[] = 'bq=location:[*+TO+*]^50';
 
     $filters = [
-        'company' => 'company',
-        'city'    => 'location',
-        'remote'  => 'workmode'
+        'company'  => 'company',
+        'city'     => 'location',
+        'workmode' => 'workmode'
     ];
 
     foreach ($filters as $param => $field) {
