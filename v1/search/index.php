@@ -70,9 +70,19 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts = [];
     $parts[] = 'indent=true';
     $parts[] = 'q.op=OR';
+    $parts[] = 'defType=edismax';
+    $parts[] = 'tie=1.0';
+
     $parts[] = !empty($params['q'])
         ? 'q=' . rawurlencode($params['q'])
         : 'q=*:*';
+
+    $parts[] = 'bq=salary:[*+TO+*]^10000';
+    $parts[] = 'bq=tags:[*+TO+*]^5000';
+    $parts[] = 'bq=cif:[*+TO+*]^2000';
+    $parts[] = 'bq=company:[*+TO+*]^500';
+    $parts[] = 'bq=title:[*+TO+*]^100';
+    $parts[] = 'bq=location:[*+TO+*]^50';
 
     $filters = [
         'company' => 'company',
