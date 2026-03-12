@@ -1,0 +1,24 @@
+name: Deploy API to Pi4
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: pi4
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Deploy to Pi4
+        run: |
+          cd /home/sebi/peviitor-api
+          git stash
+          git pull origin master
+          docker exec peviitor-api apache2ctl graceful 2>/dev/null || docker restart peviitor-api
