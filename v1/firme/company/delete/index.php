@@ -58,7 +58,7 @@ try {
     }
 
     $core = 'company';
-    $url = "https://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
 
     $payload = json_encode([
         "delete" => ["id" => $id]

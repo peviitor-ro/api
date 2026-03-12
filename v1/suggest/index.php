@@ -51,7 +51,7 @@ try {
     $query = trim($_GET['q']);
 
     $core = 'job';
-    $url = "https://$PROD_SERVER/solr/$core/suggest"
+    $url = "http://$PROD_SERVER/solr/$core/suggest"
          . "?suggest=true"
          . "&suggest.build=true"
          . "&suggest.dictionary=jobTitleSuggester"
