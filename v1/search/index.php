@@ -95,7 +95,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
         if (!empty($params[$param])) {
             $items = explode(',', $params[$param]);
             $fq = array_map(
-                fn($i) => $field . ':\"' . rawurlencode(trim($i)) . '\"',
+                fn($i) => $field . ':%22' . trim($i) . '%22',
                 $items
             );
             $parts[] = 'fq=' . implode('%20OR%20', $fq);
@@ -132,8 +132,6 @@ try {
     $core = 'job';
     $base = "http://$LOCAL_SERVER/solr/$core/select";
     $url  = $base . '?' . buildSolrQuery($params, $start, $rows);
-
-    error_log("JOB CORE URL: $url");
 
     $solr = fetchJson($url, $SOLR_USER, $SOLR_PASS, 4);
 
