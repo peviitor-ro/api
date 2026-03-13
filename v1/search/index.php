@@ -22,6 +22,7 @@ loadEnv(__DIR__ . '/../../api.env');
 // CONFIG
 // =========================
 $PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$LOCAL_SERVER = trim(getenv('LOCAL_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -120,16 +121,16 @@ $start = ($page - 1) * $rows;
 
 $params = [];
 foreach ($_GET as $k => $v) {
-    $params[$k] = normalize($v);
+    $params[$k] = ($k === 'workmode') ? $v : normalize($v);
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$LOCAL_SERVER) {
+        throw new Exception("LOCAL_SERVER not set");
     }
 
     $core = 'job';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "http://$LOCAL_SERVER/solr/$core/select";
     $url  = $base . '?' . buildSolrQuery($params, $start, $rows);
 
     error_log("JOB CORE URL: $url");
