@@ -74,6 +74,13 @@ try {
 
     $doc = $solr['response']['docs'][0] ?? [];
 
+    $doc = array_map(function($value) {
+        if ($value === '-' || $value === '' || $value === null) {
+            return '';
+        }
+        return $value;
+    }, $doc);
+
     echo json_encode([
         'company' => $doc
     ], JSON_UNESCAPED_UNICODE);
