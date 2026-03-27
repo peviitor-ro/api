@@ -78,12 +78,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
         ? 'q=' . rawurlencode($params['q'])
         : 'q=*:*';
 
-    $parts[] = 'bq=salary:[*+TO+*]^10000';
-    $parts[] = 'bq=tags:[*+TO+*]^5000';
-    $parts[] = 'bq=cif:[*+TO+*]^2000';
-    $parts[] = 'bq=company:[*+TO+*]^500';
-    $parts[] = 'bq=title:[*+TO+*]^100';
-    $parts[] = 'bq=location:[*+TO+*]^50';
+    // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
 
     $filters = [
         'company'  => 'company',
@@ -95,11 +90,22 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
         if (!empty($params[$param])) {
             $items = explode(',', $params[$param]);
             $fq = array_map(
-                fn($i) => $field . ':%22' . trim($i) . '%22',
+                fn($i) => $field . ':%22' . rawurlencode(trim($i)) . '%22',
                 $items
             );
             $parts[] = 'fq=' . implode('%20OR%20', $fq);
         }
+    }
+
+
+    // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
+    if (empty($params["company"])) {
+        $parts[] = "bq=salary:*^10000";
+        $parts[] = "bq=tags:*^5000";
+        $parts[] = "bq=cif:*^2000";
+        $parts[] = "bq=company:*^500";
+        $parts[] = "bq=title:*^100";
+        $parts[] = "bq=location:*^50";
     }
 
     // sort=vdate+desc  =>  sort=vdate desc
@@ -121,7 +127,7 @@ $start = ($page - 1) * $rows;
 
 $params = [];
 foreach ($_GET as $k => $v) {
-    $params[$k] = ($k === 'workmode') ? $v : normalize($v);
+    $params[$k] = in_array($k, ['workmode', 'company', 'city']) ? $v : normalize($v);
 }
 
 try {
