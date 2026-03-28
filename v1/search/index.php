@@ -40,7 +40,9 @@ function normalize(string $v): string {
         'ă'=>'a','â'=>'a','î'=>'i','ș'=>'s','ş'=>'s','ț'=>'t','ţ'=>'t',
         'Ă'=>'a','Â'=>'a','Î'=>'i','Ș'=>'s','Ş'=>'s','Ț'=>'t','Ţ'=>'t'
     ];
-    return strtr(mb_strtolower(trim($v), 'UTF-8'), $map);
+    $v = strtr(mb_strtolower(trim($v), 'UTF-8'), $map);
+    $v = preg_replace('/[.,;:]/', '', $v);
+    return $v;
 }
 
 function fetchJson(string $url, ?string $user = null, ?string $pass = null, int $timeout = 5): array {
