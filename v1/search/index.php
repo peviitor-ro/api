@@ -76,23 +76,8 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts[] = 'defType=edismax';
     $parts[] = 'tie=1.0';
 
-    // Handle company search specially - use edismax for partial matching
-    $companyFilter = '';
-    if (!empty($params['company'])) {
-        $companyFilter = normalize($params['company']);
-        // Remove dots, commas for matching (S.R.L. -> SRL)
-        $companyFilter = preg_replace('/[.,;:]/', '', $companyFilter);
-    }
-
-    $q = !empty($params['q']) ? $params['q'] : '';
-    if (!empty($companyFilter)) {
-        $q = trim($q . ' company:' . $companyFilter);
-    }
-    $parts[] = !empty($q) ? 'q=' . rawurlencode($q) : 'q=*:*';
-
-    // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
-
     $filters = [
+        'company'  => 'company',
         'city'     => 'location',
         'workmode' => 'workmode'
     ];
@@ -101,16 +86,26 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
         if (!empty($params[$param])) {
             $items = explode(',', $params[$param]);
             $fq = array_map(
-                fn($i) => $field . ':%22' . rawurlencode(trim($i)) . '%22',
+                function($i) use ($param, $field) {
+                    $val = trim($i);
+                    if ($param === 'company') {
+                        $normalized = preg_replace('/[.,;:]/', '', $val);
+                        return '(' . $field . ':%22' . rawurlencode($val) . '%22 OR ' . $field . ':%22' . rawurlencode($normalized) . '%22)';
+                    }
+                    return $field . ':%22' . rawurlencode($val) . '%22';
+                },
                 $items
             );
             $parts[] = 'fq=' . implode('%20OR%20', $fq);
         }
     }
 
+    $q = !empty($params['q']) ? $params['q'] : '*';
+    $parts[] = !empty($q) ? 'q=' . rawurlencode($q) : 'q=*:*';
+
 
     // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
-    if (empty($companyFilter)) {
+    if (empty($params['company'])) {
         $parts[] = "bq=salary:*^10000";
         $parts[] = "bq=tags:*^5000";
         $parts[] = "bq=cif:*^2000";
