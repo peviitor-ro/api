@@ -76,14 +76,23 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts[] = 'defType=edismax';
     $parts[] = 'tie=1.0';
 
-    $parts[] = !empty($params['q'])
-        ? 'q=' . rawurlencode($params['q'])
-        : 'q=*:*';
+    // Handle company search specially - use edismax for partial matching
+    $companyFilter = '';
+    if (!empty($params['company'])) {
+        $companyFilter = normalize($params['company']);
+        // Remove dots, commas for matching (S.R.L. -> SRL)
+        $companyFilter = preg_replace('/[.,;:]/', '', $companyFilter);
+    }
+
+    $q = !empty($params['q']) ? $params['q'] : '';
+    if (!empty($companyFilter)) {
+        $q = trim($q . ' company:' . $companyFilter);
+    }
+    $parts[] = !empty($q) ? 'q=' . rawurlencode($q) : 'q=*:*';
 
     // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
 
     $filters = [
-        'company'  => 'company',
         'city'     => 'location',
         'workmode' => 'workmode'
     ];
@@ -101,7 +110,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
 
     // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
-    if (empty($params["company"])) {
+    if (empty($companyFilter)) {
         $parts[] = "bq=salary:*^10000";
         $parts[] = "bq=tags:*^5000";
         $parts[] = "bq=cif:*^2000";
