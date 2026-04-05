@@ -45,20 +45,30 @@ try {
     }
 
     $cif = $_GET['cif'] ?? '';
-    if (empty($cif)) {
+    $name = $_GET['name'] ?? '';
+
+    if (empty($cif) && empty($name)) {
         http_response_code(400);
-        echo json_encode(["error" => "Missing required field: cif"]);
+        echo json_encode(["error" => "Missing required field: cif or name"]);
         exit;
     }
 
     $core = 'company';
     $base = "http://$PROD_SERVER/solr/$core/select";
 
-    $qs = http_build_query([
-        "q" => "id:" . rawurlencode($cif),
-        "rows" => 1,
-        "indent" => "true"
-    ]);
+    if (!empty($name)) {
+        $qs = http_build_query([
+            "q" => "name:*" . rawurlencode($name) . "*",
+            "rows" => 100,
+            "indent" => "true"
+        ]);
+    } else {
+        $qs = http_build_query([
+            "q" => "id:" . rawurlencode($cif),
+            "rows" => 1,
+            "indent" => "true"
+        ]);
+    }
 
     $url = "$base?$qs";
     error_log("COMPANY URL: $url");
