@@ -90,7 +90,16 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
                     $val = trim($i);
                     if ($param === 'company') {
                         $normalized = preg_replace('/[.,;:]/', '', $val);
-                        return '(' . $field . ':%22' . rawurlencode($val) . '%22 OR ' . $field . ':%22' . rawurlencode($normalized) . '%22)';
+                        $withoutDots = preg_replace('/\./', '', $val);
+                        $seen = [];
+                        $queries = [];
+                        foreach ([$val, $normalized, $withoutDots] as $v) {
+                            if (!empty($v) && !isset($seen[$v])) {
+                                $seen[$v] = true;
+                                $queries[] = $field . ':%22' . rawurlencode($v) . '%22';
+                            }
+                        }
+                        return '(' . implode('%20OR%20', $queries) . ')';
                     }
                     return $field . ':%22' . rawurlencode($val) . '%22';
                 },
