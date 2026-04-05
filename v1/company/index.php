@@ -45,20 +45,33 @@ try {
     }
 
     $cif = $_GET['cif'] ?? '';
-    if (empty($cif)) {
+    $name = $_GET['name'] ?? '';
+    $page = isset($_GET['page']) ? max(0, (int)$_GET['page']) : 0;
+    $rows = isset($_GET['rows']) ? min(100, max(1, (int)$_GET['rows'])) : 100;
+
+    if (empty($cif) && empty($name)) {
         http_response_code(400);
-        echo json_encode(["error" => "Missing required field: cif"]);
+        echo json_encode(["error" => "Missing required field: cif or name"]);
         exit;
     }
 
     $core = 'company';
     $base = "http://$PROD_SERVER/solr/$core/select";
 
-    $qs = http_build_query([
-        "q" => "id:" . rawurlencode($cif),
-        "rows" => 1,
-        "indent" => "true"
-    ]);
+    if (!empty($name)) {
+        $qs = http_build_query([
+            "q" => "name:*" . rawurlencode($name) . "*",
+            "start" => $page * $rows,
+            "rows" => $rows,
+            "indent" => "true"
+        ]);
+    } else {
+        $qs = http_build_query([
+            "q" => "id:" . rawurlencode($cif),
+            "rows" => 1,
+            "indent" => "true"
+        ]);
+    }
 
     $url = "$base?$qs";
     error_log("COMPANY URL: $url");
@@ -72,18 +85,36 @@ try {
         exit;
     }
 
-    $doc = $solr['response']['docs'][0] ?? [];
+    if (!empty($name)) {
+        $docs = $solr['response']['docs'] ?? [];
+        $docs = array_map(function($doc) {
+            return array_map(function($value) {
+                if ($value === '-' || $value === '' || $value === null) {
+                    return '';
+                }
+                return $value;
+            }, $doc);
+        }, $docs);
 
-    $doc = array_map(function($value) {
-        if ($value === '-' || $value === '' || $value === null) {
-            return '';
-        }
-        return $value;
-    }, $doc);
+        echo json_encode([
+            'total' => $numFound,
+            'page' => $page,
+            'rows' => $rows,
+            'companies' => $docs
+        ], JSON_UNESCAPED_UNICODE);
+    } else {
+        $doc = $solr['response']['docs'][0] ?? [];
+        $doc = array_map(function($value) {
+            if ($value === '-' || $value === '' || $value === null) {
+                return '';
+            }
+            return $value;
+        }, $doc);
 
-    echo json_encode([
-        'company' => $doc
-    ], JSON_UNESCAPED_UNICODE);
+        echo json_encode([
+            'company' => $doc
+        ], JSON_UNESCAPED_UNICODE);
+    }
 
 } catch (Exception $e) {
     error_log("COMPANY FAILED: " . $e->getMessage());
