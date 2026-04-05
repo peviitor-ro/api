@@ -60,7 +60,7 @@ try {
 
     if (!empty($name)) {
         $qs = http_build_query([
-            "q" => "name:*" . rawurlencode($name) . "*",
+            "q" => "company:*" . rawurlencode($name) . "*",
             "start" => $page * $rows,
             "rows" => $rows,
             "indent" => "true"
