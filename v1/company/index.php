@@ -76,10 +76,7 @@ function fetchFromDemoAnaf(string $cif): array {
 function mapDemoAnafToCompany(array $anafData): array {
     $company = [
         'id' => $anafData['cui'] ?? '',
-        'company' => $anafData['name'] ?? '',
-        'registrationNumber' => $anafData['registrationNumber'] ?? '',
-        'registrationDate' => $anafData['registrationDate'] ?? '',
-        'legalForm' => $anafData['legalForm'] ?? ''
+        'company' => $anafData['name'] ?? ''
     ];
 
     $address = $anafData['address'] ?? '';
@@ -94,23 +91,12 @@ function mapDemoAnafToCompany(array $anafData): array {
         $address = implode(', ', $parts);
     }
     if (!empty($address)) {
-        $company['address'] = $address;
+        $company['location'] = [$address];
     }
 
-    $onrcStatus = $anafData['onrcStatus'] ?? null;
     $onrcStatusLabel = $anafData['onrcStatusLabel'] ?? '';
     if (!empty($onrcStatusLabel)) {
         $company['status'] = strtolower($onrcStatusLabel) === 'funcțiune' ? 'activ' : 'inactiv';
-    }
-
-    $website = $anafData['website'] ?? [];
-    if (!empty($website)) {
-        $company['website'] = is_array($website) ? $website : [$website];
-    }
-
-    $caenCodes = $anafData['authorizedCaenCodes'] ?? [];
-    if (!empty($caenCodes)) {
-        $company['caen'] = is_array($caenCodes) ? $caenCodes : [$caenCodes];
     }
 
     return $company;
