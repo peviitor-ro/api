@@ -21,14 +21,22 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
         $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
     }
     $headers[] = "Content-Type: application/json";
-    $context = stream_context_create([
-        'http' => [
+    $scheme = parse_url($url, PHP_URL_SCHEME) ?: 'http';
+    $options = [
+        $scheme => [
             'method'  => 'POST',
             'header'  => implode("\r\n", $headers),
             'content' => $payload,
             'timeout' => 10
         ]
-    ]);
+    ];
+    if ($scheme === 'https') {
+        $options['ssl'] = [
+            'verify_peer'       => true,
+            'verify_peer_name'  => true,
+        ];
+    }
+    $context = stream_context_create($options);
     $data = @file_get_contents($url, false, $context);
     if ($data === false) {
         $err = error_get_last()['message'] ?? 'Unknown error';
@@ -68,11 +76,13 @@ try {
     $url_element = substr($url_element, 0, -4);
 
     $core = 'job';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
+    $scheme = parse_url($PROD_SERVER, PHP_URL_SCHEME) ?: 'http';
+    $host = parse_url($PROD_SERVER, PHP_URL_HOST) ?: $PROD_SERVER;
+    $url = "$scheme://$host/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
 
     $deleteOperations = [
         'delete' => [
-            'query' => 'job_link:(' . $url_element . ')'
+            'query' => 'url:(' . $url_element . ')'
         ]
     ];
 
