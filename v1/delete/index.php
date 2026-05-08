@@ -21,16 +21,15 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
         $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
     }
     $headers[] = "Content-Type: application/json";
-    $scheme = parse_url($url, PHP_URL_SCHEME) ?: 'http';
     $options = [
-        $scheme => [
+        'http' => [
             'method'  => 'POST',
             'header'  => implode("\r\n", $headers),
             'content' => $payload,
             'timeout' => 10
         ]
     ];
-    if ($scheme === 'https') {
+    if ((parse_url($url, PHP_URL_SCHEME) ?: 'http') === 'https') {
         $options['ssl'] = [
             'verify_peer'       => true,
             'verify_peer_name'  => true,
@@ -47,6 +46,14 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
         throw new Exception("Invalid JSON response");
     }
     return $json;
+}
+
+function buildSolrUpdateUrl(string $server, string $core): string {
+    $server = rtrim($server, '/');
+    if (preg_match('#^https?://#i', $server)) {
+        return $server . "/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
+    }
+    return "http://$server/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
 }
 
 try {
@@ -76,9 +83,7 @@ try {
     $url_element = substr($url_element, 0, -4);
 
     $core = 'job';
-    $scheme = parse_url($PROD_SERVER, PHP_URL_SCHEME) ?: 'http';
-    $host = parse_url($PROD_SERVER, PHP_URL_HOST) ?: $PROD_SERVER;
-    $url = "$scheme://$host/solr/$core/update?commitWithin=100&overwrite=true&wt=json";
+    $url = buildSolrUpdateUrl($PROD_SERVER, $core);
 
     $deleteOperations = [
         'delete' => [
