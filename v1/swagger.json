@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://test.peviitor.ro/api/v1"
+      "url": "https://test.peviitor.ro/api/v1"
     }
   ],
   "paths": {
