@@ -71,13 +71,16 @@ try {
     }
 
     echo json_encode([
-        'job_title' => $job['title'] ?? null,
+        'title' => $job['title'] ?? null,
         'company' => $job['company'] ?? null,
-        'city' => $job['location'] ?? [],
-        'county' => $job['location'] ?? [],
-        'remote' => $job['workmode'] ?? '',
-        'job_link' => $job['url'] ?? null,
-        'id' => md5($job['url'] ?? '')
+        'location' => $job['location'] ?? [],
+        'workmode' => $job['workmode'] ?? '',
+        'url' => $job['url'] ?? null,
+        'salary' => $job['salary'] ?? null,
+        'tags' => $job['tags'] ?? [],
+        'cif' => $job['cif'] ?? '',
+        'date' => $job['date'] ?? null,
+        'status' => $job['status'] ?? null,
     ], JSON_UNESCAPED_UNICODE);
 
 } catch (Exception $e) {
