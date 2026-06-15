@@ -165,7 +165,7 @@ try {
 
     $docs = array_map(function($doc) {
         return [
-            'job_title' => $doc['title'] ?? null,
+           
             'title' => $doc['title'] ?? null,            
             'company' => $doc['company'] ?? null,
             'city' => $doc['location'] ?? [],
