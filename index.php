@@ -20,7 +20,8 @@
   /* Header */
   header {
     text-align: center;
-    padding: 3rem 0 2rem;
+    padding: 2rem 0 2rem;
+    position: relative;
   }
   header h1 {
     font-size: 2rem;
@@ -44,6 +45,33 @@
     color: #5a4a3a;
   }
 
+  /* Lang toggle */
+  .lang-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    background: #e8d5c4;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .lang-toggle button {
+    border: none;
+    background: transparent;
+    padding: 0.35rem 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #7d6b5a;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-toggle button.active {
+    background: #c44536;
+    color: #fff;
+  }
+  .lang-toggle button:not(.active):hover { color: #5a4a3a; }
+
   /* Card */
   .card {
     background: #fffcf9;
@@ -63,7 +91,6 @@
     gap: 0.5rem;
   }
   .card-body { padding: 1.5rem; }
-  .card-body:empty { display: none; }
 
   /* Endpoint row */
   .endpoint-row {
@@ -133,16 +160,6 @@
     border-radius: 4px;
     background: #f0e4d8;
     color: #7d6b5a;
-  }
-  .required-tag {
-    display: inline-block;
-    font-size: 0.68rem;
-    font-weight: 600;
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    background: #ffcdd2;
-    color: #b71c1c;
-    margin-left: 0.3rem;
   }
 
   /* Status codes */
@@ -224,14 +241,25 @@
   }
   footer a { color: #c44536; text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .lang-toggle { position: static; margin-bottom: 1rem; }
+    header { display: flex; flex-direction: column; align-items: center; }
+    .endpoint-desc { display: none; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
 
   <header>
-    <h1>peviitor API</h1>
-    <p>Job discovery platform — public API documentation</p>
+    <div class="lang-toggle">
+      <button onclick="setLang('en')" id="lang-en" class="active">EN</button>
+      <button onclick="setLang('ro')" id="lang-ro">RO</button>
+    </div>
+    <h1 data-i18n="brand">peviitor API</h1>
+    <p data-i18n="subtitle">Job discovery platform — public API documentation</p>
     <div class="base-url">https://api.peviitor.ro</div>
   </header>
 
@@ -240,25 +268,24 @@
     <div class="endpoint-row">
       <span class="method-badge">GET</span>
       <span class="endpoint-path">/v1/random/</span>
-      <span class="endpoint-desc">Get a random job listing</span>
+      <span class="endpoint-desc" data-i18n="endpointTag">Get a random job listing</span>
     </div>
 
     <div class="card-body">
-      <p style="margin-bottom:1rem;color:#5a4a3a;">
+      <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="endpointDesc">
         Returns a single random job from the Solr job index. Useful for discovery widgets,
         "job of the day" features, or testing integrations.
       </p>
 
-      <div class="section-title">How it works</div>
+      <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
       <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
-        <li>Queries Solr for the total number of indexed jobs</li>
-        <li>Picks a random offset between 0 and total count</li>
-        <li>Fetches exactly one document at that offset</li>
-        <li>Returns the job mapped to the peviitor Job Model Schema</li>
+        <li data-i18n="how1">Queries Solr for the total number of indexed jobs</li>
+        <li data-i18n="how2">Picks a random offset between 0 and total count</li>
+        <li data-i18n="how3">Fetches exactly one document at that offset</li>
+        <li data-i18n="how4">Returns the job mapped to the peviitor Job Model Schema</li>
       </ol>
 
-      <!-- cURL example -->
-      <div class="section-title">Try it</div>
+      <div class="section-title" data-i18n="tryItTitle">Try it</div>
       <div class="curl-box">
         <div class="curl-label">curl</div>
         <pre>curl -X GET "https://api.peviitor.ro/v1/random/" \
@@ -269,23 +296,23 @@
 
   <!-- Response fields -->
   <div class="card">
-    <div class="card-header">Response fields</div>
+    <div class="card-header" data-i18n="respFieldsTitle">Response fields</div>
     <div class="card-body">
       <table class="prop-table">
         <thead><tr>
-          <th>Field</th><th>Type</th><th>Description</th>
+          <th>Field</th><th>Type</th><th data-i18n="description">Description</th>
         </tr></thead>
         <tbody>
-          <tr><td>title</td><td><span class="type-tag">string</span></td><td>Exact job position title</td></tr>
-          <tr><td>company</td><td><span class="type-tag">string</span></td><td>Hiring company name (uppercase)</td></tr>
-          <tr><td>location</td><td><span class="type-tag">string[]</span></td><td>Array of cities or addresses</td></tr>
-          <tr><td>workmode</td><td><span class="type-tag">string</span></td><td><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
-          <tr><td>url</td><td><span class="type-tag">string</span></td><td>Full URL to the job detail page (unique key)</td></tr>
-          <tr><td>salary</td><td><span class="type-tag">string</span></td><td>Salary interval with currency, e.g. <code>5000-8000 RON</code></td></tr>
-          <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td>Skill tags (lowercase, max 20)</td></tr>
-          <tr><td>cif</td><td><span class="type-tag">string</span></td><td>CIF/CUI of the company</td></tr>
-          <tr><td>date</td><td><span class="type-tag">string</span></td><td>ISO8601 UTC timestamp of indexing</td></tr>
-          <tr><td>status</td><td><span class="type-tag">string</span></td><td><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
+          <tr><td>title</td><td><span class="type-tag">string</span></td><td data-i18n="descTitle">Exact job position title</td></tr>
+          <tr><td>company</td><td><span class="type-tag">string</span></td><td data-i18n="descCompany">Hiring company name (uppercase)</td></tr>
+          <tr><td>location</td><td><span class="type-tag">string[]</span></td><td data-i18n="descLocation">Array of cities or addresses</td></tr>
+          <tr><td>workmode</td><td><span class="type-tag">string</span></td><td data-i18n="descWorkmode"><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
+          <tr><td>url</td><td><span class="type-tag">string</span></td><td data-i18n="descUrl">Full URL to the job detail page (unique key)</td></tr>
+          <tr><td>salary</td><td><span class="type-tag">string</span></td><td data-i18n="descSalary">Salary interval with currency, e.g. <code>5000-8000 RON</code></td></tr>
+          <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td data-i18n="descTags">Skill tags (lowercase, max 20)</td></tr>
+          <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="descCif">CIF/CUI of the company</td></tr>
+          <tr><td>date</td><td><span class="type-tag">string</span></td><td data-i18n="descDate">ISO8601 UTC timestamp of indexing</td></tr>
+          <tr><td>status</td><td><span class="type-tag">string</span></td><td data-i18n="descStatus"><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -293,7 +320,7 @@
 
   <!-- Response example -->
   <div class="card">
-    <div class="card-header">200 — Success</div>
+    <div class="card-header" data-i18n="successTitle">200 — Success</div>
     <div class="card-body">
       <pre>{
   <span class="json-key">"title"</span>: <span class="json-string">"Inginer IT"</span>,
@@ -312,7 +339,7 @@
 
   <!-- Error 404 -->
   <div class="card">
-    <div class="card-header">404 — No Jobs Found</div>
+    <div class="card-header">404 — <span data-i18n="notFoundTitle">No Jobs Found</span></div>
     <div class="card-body">
       <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"No jobs found"</span>
@@ -322,7 +349,7 @@
 
   <!-- Error 503 -->
   <div class="card">
-    <div class="card-header">503 — Service Unavailable</div>
+    <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
     <div class="card-body">
       <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
@@ -333,20 +360,20 @@
 
   <!-- Status codes -->
   <div class="card">
-    <div class="card-header">Status codes</div>
+    <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
     <div class="card-body">
       <ul class="status-list">
         <li>
           <span class="status-code sc-200">200</span>
-          A random job was found and returned successfully
+          <span data-i18n="status200">A random job was found and returned successfully</span>
         </li>
         <li>
           <span class="status-code sc-404">404</span>
-          No jobs are currently indexed in the Solr core
+          <span data-i18n="status404">No jobs are currently indexed in the Solr core</span>
         </li>
         <li>
           <span class="status-code sc-503">503</span>
-          Solr core is unavailable or environment not configured
+          <span data-i18n="status503">Solr core is unavailable or environment not configured</span>
         </li>
       </ul>
     </div>
@@ -354,15 +381,15 @@
 
   <!-- Requirements -->
   <div class="card">
-    <div class="card-header">Requirements</div>
+    <div class="card-header" data-i18n="requirementsTitle">Requirements</div>
     <div class="card-body">
       <table class="prop-table">
-        <thead><tr><th style="width:100px">Item</th><th>Details</th></tr></thead>
+        <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
         <tbody>
-          <tr><td>Method</td><td><code>GET</code> only</td></tr>
-          <tr><td>Auth</td><td>None (public endpoint)</td></tr>
-          <tr><td>Params</td><td>None</td></tr>
-          <tr><td>Content-Type</td><td><code>application/json</code></td></tr>
+          <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+          <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
+          <tr><td data-i18n="params">Params</td><td data-i18n="paramsVal">None</td></tr>
+          <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -374,5 +401,106 @@
   </footer>
 
 </div>
+
+<script>
+const i18n = {
+  en: {
+    brand: "peviitor API",
+    subtitle: "Job discovery platform \u2014 public API documentation",
+    endpointTag: "Get a random job listing",
+    endpointDesc: "Returns a single random job from the Solr job index. Useful for discovery widgets, \u201Cjob of the day\u201D features, or testing integrations.",
+    howItWorksTitle: "How it works",
+    how1: "Queries Solr for the total number of indexed jobs",
+    how2: "Picks a random offset between 0 and total count",
+    how3: "Fetches exactly one document at that offset",
+    how4: "Returns the job mapped to the peviitor Job Model Schema",
+    tryItTitle: "Try it",
+    respFieldsTitle: "Response fields",
+    description: "Description",
+    descTitle: "Exact job position title",
+    descCompany: "Hiring company name (uppercase)",
+    descLocation: "Array of cities or addresses",
+    descWorkmode: "<code>remote</code>, <code>on-site</code>, or <code>hybrid</code>",
+    descUrl: "Full URL to the job detail page (unique key)",
+    descSalary: "Salary interval with currency, e.g. <code>5000-8000 RON</code>",
+    descTags: "Skill tags (lowercase, max 20)",
+    descCif: "CIF/CUI of the company",
+    descDate: "ISO8601 UTC timestamp of indexing",
+    descStatus: "<code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code>",
+    successTitle: "200 \u2014 Success",
+    notFoundTitle: "No Jobs Found",
+    unavailTitle: "Service Unavailable",
+    statusCodesTitle: "Status codes",
+    status200: "A random job was found and returned successfully",
+    status404: "No jobs are currently indexed in the Solr core",
+    status503: "Solr core is unavailable or environment not configured",
+    requirementsTitle: "Requirements",
+    item: "Item",
+    details: "Details",
+    method: "Method",
+    auth: "Auth",
+    authVal: "None (public endpoint)",
+    params: "Params",
+    paramsVal: "None",
+    contentType: "Content-Type",
+  },
+  ro: {
+    brand: "peviitor API",
+    subtitle: "Platform\u0103 de descoperire a joburilor \u2014 documenta\u021bie API public\u0103",
+    endpointTag: "Ob\u021Bine un job aleator",
+    endpointDesc: "Returneaz\u0103 un singur job aleator din indexul Solr. Util pentru widget-uri de descoperire, func\u021Bii de \u201Cjobul zilei\u201D sau testarea integr\u0103rilor.",
+    howItWorksTitle: "Cum func\u021Bioneaz\u0103",
+    how1: "Interogheaz\u0103 Solr pentru num\u0103rul total de jobs indexate",
+    how2: "Alege un offset aleator \u00Eentre 0 \u0219i num\u0103rul total",
+    how3: "Preia exact un document la acel offset",
+    how4: "Returneaz\u0103 jobul mapat conform Job Model Schema peviitor",
+    tryItTitle: "\u00CEncearc\u0103",
+    respFieldsTitle: "C\u00E2mpurile r\u0103spunsului",
+    description: "Descriere",
+    descTitle: "Titlul exact al pozi\u021Biei",
+    descCompany: "Numele companiei angajatoare (majuscule)",
+    descLocation: "List\u0103 de ora\u0219e sau adrese",
+    descWorkmode: "<code>remote</code>, <code>on-site</code> sau <code>hybrid</code>",
+    descUrl: "URL complet c\u0103tre pagina jobului (cheie unic\u0103)",
+    descSalary: "Interval salarial cu moned\u0103, ex. <code>5000-8000 RON</code>",
+    descTags: "Tag-uri de skills (lowercase, max 20)",
+    descCif: "CIF/CUI al companiei",
+    descDate: "Timestamp ISO8601 UTC al index\u0103rii",
+    descStatus: "<code>scraped</code>, <code>tested</code>, <code>published</code> sau <code>verified</code>",
+    successTitle: "200 \u2014 Succes",
+    notFoundTitle: "Niciun job g\u0103sit",
+    unavailTitle: "Serviciu indisponibil",
+    statusCodesTitle: "Coduri de stare",
+    status200: "Un job aleator a fost g\u0103sit \u0219i returnat cu succes",
+    status404: "Nu exist\u0103 joburi indexate \u00EEn core-ul Solr",
+    status503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+    requirementsTitle: "Cerin\u021Be",
+    item: "Element",
+    details: "Detalii",
+    method: "Metod\u0103",
+    auth: "Autentificare",
+    authVal: "Niciuna (endpoint public)",
+    params: "Parametri",
+    paramsVal: "Niciunul",
+    contentType: "Content-Type",
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key] !== undefined) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+  document.querySelectorAll('.lang-toggle button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('lang-' + lang).classList.add('active');
+  document.documentElement.lang = lang;
+  localStorage.setItem('peviitor-lang', lang);
+}
+
+const saved = localStorage.getItem('peviitor-lang');
+if (saved === 'ro') setLang('ro');
+</script>
 </body>
 </html>
