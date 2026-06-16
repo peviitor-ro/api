@@ -23,31 +23,40 @@
     padding: 2rem 0 2rem;
     position: relative;
   }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .header-left { display: flex; align-items: center; gap: 1rem; }
   .logo-link {
-    display: inline-block;
-    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
     line-height: 0;
+    flex-shrink: 0;
   }
   .logo-img {
-    height: 52px;
+    height: 32px;
     width: auto;
     transition: opacity 0.2s;
   }
   .logo-img:hover { opacity: 0.8; }
   header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #c44536;
     letter-spacing: -0.02em;
+    margin: 0;
   }
   header p {
     color: #7d6b5a;
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-top: 0.4rem;
   }
   header .base-url {
     display: inline-block;
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
     padding: 0.4rem 1rem;
     background: #e8d5c4;
     border-radius: 8px;
@@ -308,7 +317,7 @@
       <button onclick="setLang('ro')" id="lang-ro">RO</button>
     </div>
     <a href="https://peviitor.ro" target="_blank" class="logo-link">
-      <img src="https://peviitor.ro/logo192.png" alt="peviitor" class="logo-img">
+      <img src="https://peviitor.ro/assets/logo-DV2JQkir.svg" alt="peviitor" class="logo-img">
     </a>
     <h1 data-i18n="brand">peviitor API</h1>
     <p data-i18n="subtitle">Job discovery platform — public API documentation</p>
