@@ -23,18 +23,9 @@
     padding: 2rem 0 2rem;
     position: relative;
   }
-  .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-  .header-left { display: flex; align-items: center; gap: 1rem; }
   .logo-link {
-    display: flex;
-    align-items: center;
+    display: inline-block;
     line-height: 0;
-    flex-shrink: 0;
   }
   .logo-img {
     height: 32px;
