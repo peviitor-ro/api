@@ -304,14 +304,14 @@
 
   <header>
     <div class="lang-toggle">
-      <button onclick="setLang('en')" id="lang-en" class="active">EN</button>
-      <button onclick="setLang('ro')" id="lang-ro">RO</button>
+      <button onclick="setLang('en')" id="lang-en">EN</button>
+      <button onclick="setLang('ro')" id="lang-ro" class="active">RO</button>
     </div>
     <a href="https://peviitor.ro" target="_blank" class="logo-link">
       <img src="https://peviitor.ro/assets/logo-DV2JQkir.svg" alt="peviitor" class="logo-img">
     </a>
     <h1 data-i18n="brand">peviitor API</h1>
-    <p data-i18n="subtitle">Job discovery platform — public API documentation</p>
+    <p data-i18n="subtitle">Platformă de descoperire a joburilor — documentație API publică</p>
     <div class="base-url">https://api.peviitor.ro</div>
   </header>
 
@@ -738,7 +738,8 @@ function toggleEndpoint(name) {
 }
 
 const saved = localStorage.getItem('peviitor-lang');
-if (saved === 'ro') setLang('ro');
+if (saved === 'en') setLang('en');
+else setLang('ro');
 </script>
 </body>
 </html>
