@@ -100,7 +100,19 @@
     padding: 1.25rem 1.5rem;
     background: linear-gradient(135deg, #f0faf3, #e8f5ec);
     border-bottom: 1px solid #d4e8db;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
   }
+  .endpoint-row:hover { opacity: 0.92; }
+  .toggle-arrow {
+    font-size: 0.75rem;
+    color: #7d6b5a;
+    transition: transform 0.25s ease;
+    margin-left: auto;
+  }
+  .toggle-arrow.open { transform: rotate(90deg); }
+  .endpoint-content { overflow: hidden; }
   .method-badge {
     display: inline-flex;
     align-items: center;
@@ -124,7 +136,6 @@
     color: #1b5e20;
   }
   .endpoint-desc {
-    margin-left: auto;
     font-size: 0.85rem;
     color: #4a7c5a;
   }
@@ -137,7 +148,10 @@
   .endpoint-row-delete {
     background: linear-gradient(135deg, #fef0f0, #fce4e4);
     border-bottom: 1px solid #f5cdcd;
+    cursor: pointer;
+    user-select: none;
   }
+  .endpoint-row-delete:hover { opacity: 0.92; }
   .endpoint-row-delete .endpoint-path { color: #b71c1c; }
   .endpoint-row-delete .endpoint-desc { color: #b55a5a; }
 
@@ -291,68 +305,72 @@
   <!-- RANDOM ENDPOINT -->
   <!-- ============================================= -->
 
+  <!-- RANDOM ENDPOINT -->
   <div class="card">
-    <div class="endpoint-row">
+    <div class="endpoint-row" onclick="toggleEndpoint('random')">
       <span class="method-badge">GET</span>
       <span class="endpoint-path">/v1/random/</span>
       <span class="endpoint-desc" data-i18n="endpointTag">Get a random job listing</span>
+      <span class="toggle-arrow" id="arrow-random">&#9654;</span>
     </div>
+  </div>
 
-    <div class="card-body">
-      <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="endpointDesc">
-        Returns a single random job from the Solr job index. Useful for discovery widgets,
-        "job of the day" features, or testing integrations.
-      </p>
+  <div id="random-content" class="endpoint-content" style="display:none">
 
-      <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
-      <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
-        <li data-i18n="how1">Queries Solr for the total number of indexed jobs</li>
-        <li data-i18n="how2">Picks a random offset between 0 and total count</li>
-        <li data-i18n="how3">Fetches exactly one document at that offset</li>
-        <li data-i18n="how4">Returns the job mapped to the peviitor Job Model Schema</li>
-      </ol>
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="endpointDesc">
+          Returns a single random job from the Solr job index. Useful for discovery widgets,
+          "job of the day" features, or testing integrations.
+        </p>
 
-      <div class="section-title" data-i18n="tryItTitle">Try it</div>
-      <div class="curl-box">
-        <div class="curl-label">curl</div>
-        <pre>curl -X GET "https://api.peviitor.ro/v1/random/" \
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="how1">Queries Solr for the total number of indexed jobs</li>
+          <li data-i18n="how2">Picks a random offset between 0 and total count</li>
+          <li data-i18n="how3">Fetches exactly one document at that offset</li>
+          <li data-i18n="how4">Returns the job mapped to the peviitor Job Model Schema</li>
+        </ol>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X GET "https://api.peviitor.ro/v1/random/" \
   -H "Accept: application/json"</pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Random: Response fields -->
-  <div class="card">
-    <div class="card-header" data-i18n="respFieldsTitle">Response fields</div>
-    <div class="card-body">
-      <table class="prop-table">
-        <thead><tr>
-          <th>Field</th><th>Type</th><th data-i18n="description">Description</th>
-        </tr></thead>
-        <tbody>
-          <tr><td>title</td><td><span class="type-tag">string</span></td><td data-i18n="descTitle">Exact job position title</td></tr>
-          <tr><td>company</td><td><span class="type-tag">string</span></td><td data-i18n="descCompany">Hiring company name (uppercase)</td></tr>
-          <tr><td>location</td><td><span class="type-tag">string[]</span></td><td data-i18n="descLocation">Array of cities or addresses</td></tr>
-          <tr><td>workmode</td><td><span class="type-tag">string</span></td><td data-i18n="descWorkmode"><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
-          <tr><td>url</td><td><span class="type-tag">string</span></td><td data-i18n="descUrl">Full URL to the job detail page (unique key)</td></tr>
-          <tr><td>salary</td><td><span class="type-tag">string</span></td><td data-i18n="descSalary">Salary interval with currency, e.g. <code>5000-8000 RON</code></td></tr>
-          <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td data-i18n="descTags">Skill tags (lowercase, max 20)</td></tr>
-          <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="descCif">CIF/CUI of the company</td></tr>
-          <tr><td>date</td><td><span class="type-tag">string</span></td><td data-i18n="descDate">ISO8601 UTC timestamp of indexing</td></tr>
-          <tr><td>status</td><td><span class="type-tag">string</span></td><td data-i18n="descStatus"><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <div class="card-header" data-i18n="respFieldsTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr>
+            <th>Field</th><th>Type</th><th data-i18n="description">Description</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>title</td><td><span class="type-tag">string</span></td><td data-i18n="descTitle">Exact job position title</td></tr>
+            <tr><td>company</td><td><span class="type-tag">string</span></td><td data-i18n="descCompany">Hiring company name (uppercase)</td></tr>
+            <tr><td>location</td><td><span class="type-tag">string[]</span></td><td data-i18n="descLocation">Array of cities or addresses</td></tr>
+            <tr><td>workmode</td><td><span class="type-tag">string</span></td><td data-i18n="descWorkmode"><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
+            <tr><td>url</td><td><span class="type-tag">string</span></td><td data-i18n="descUrl">Full URL to the job detail page (unique key)</td></tr>
+            <tr><td>salary</td><td><span class="type-tag">string</span></td><td data-i18n="descSalary">Salary interval with currency, e.g. <code>5000-8000 RON</code></td></tr>
+            <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td data-i18n="descTags">Skill tags (lowercase, max 20)</td></tr>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="descCif">CIF/CUI of the company</td></tr>
+            <tr><td>date</td><td><span class="type-tag">string</span></td><td data-i18n="descDate">ISO8601 UTC timestamp of indexing</td></tr>
+            <tr><td>status</td><td><span class="type-tag">string</span></td><td data-i18n="descStatus"><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <!-- Random: 200 Success -->
-  <div class="card">
-    <div class="card-header" data-i18n="successTitle">200 — Success</div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"title"</span>: <span class="json-string">"Inginer IT"</span>,
   <span class="json-key">"company"</span>: <span class="json-string">"COMPANY SRL"</span>,
-  <span class="json-key">"location"</span>: [<span class="json-string">"București"</span>, <span class="json-string">"Cluj-Napoca"</span>],
+  <span class="json-key">"location"</span>: [<span class="json-string">"Bucure\u0219ti"</span>, <span class="json-string">"Cluj-Napoca"</span>],
   <span class="json-key">"workmode"</span>: <span class="json-string">"remote"</span>,
   <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/123"</span>,
   <span class="json-key">"salary"</span>: <span class="json-string">"5000-8000 RON"</span>,
@@ -361,213 +379,188 @@
   <span class="json-key">"date"</span>: <span class="json-string">"2026-06-15T10:00:00Z"</span>,
   <span class="json-key">"status"</span>: <span class="json-string">"published"</span>
 }</pre>
+      </div>
     </div>
-  </div>
 
-  <!-- Random: Error 404 -->
-  <div class="card">
-    <div class="card-header">404 — <span data-i18n="notFoundTitle">No Jobs Found</span></div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header">404 — <span data-i18n="notFoundTitle">No Jobs Found</span></div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"No jobs found"</span>
 }</pre>
+      </div>
     </div>
-  </div>
 
-  <!-- Random: Error 503 -->
-  <div class="card">
-    <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
   <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
 }</pre>
+      </div>
     </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="randomEndpoint">Random</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="paramsVal">None</td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="status200">A random job was found and returned successfully</span></li>
+          <li><span class="status-code sc-404">404</span><span data-i18n="status404">No jobs are currently indexed in the Solr core</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="status503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Random: Requirements -->
-  <div class="card">
-    <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="randomEndpoint">Random</span></div>
-    <div class="card-body">
-      <table class="prop-table">
-        <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
-          <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
-          <tr><td data-i18n="params">Params</td><td data-i18n="paramsVal">None</td></tr>
-          <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Random: Status codes -->
-  <div class="card">
-    <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
-    <div class="card-body">
-      <ul class="status-list">
-        <li>
-          <span class="status-code sc-200">200</span>
-          <span data-i18n="status200">A random job was found and returned successfully</span>
-        </li>
-        <li>
-          <span class="status-code sc-404">404</span>
-          <span data-i18n="status404">No jobs are currently indexed in the Solr core</span>
-        </li>
-        <li>
-          <span class="status-code sc-503">503</span>
-          <span data-i18n="status503">Solr core is unavailable or environment not configured</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ============================================= -->
   <!-- EMPTY ENDPOINT -->
-  <!-- ============================================= -->
-
   <div class="card">
-    <div class="endpoint-row endpoint-row-delete">
+    <div class="endpoint-row endpoint-row-delete" onclick="toggleEndpoint('empty')">
       <span class="method-badge method-badge-delete">DELETE</span>
       <span class="endpoint-path">/v1/empty/</span>
       <span class="endpoint-desc" data-i18n="emptyTag">Delete all job records</span>
+      <span class="toggle-arrow" id="arrow-empty">&#9654;</span>
     </div>
+  </div>
 
-    <div class="card-body">
-      <div class="warning-banner" data-i18n="emptyWarning">
-        <strong>Warning:</strong> This action permanently deletes ALL job records from the Solr database.
-        This cannot be undone.
-      </div>
+  <div id="empty-content" class="endpoint-content" style="display:none">
 
-      <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="emptyDesc">
-        Permanently deletes every job document from the <code>job</code> Solr core.
-        In production, requires valid API credentials.
-      </p>
+    <div class="card">
+      <div class="card-body">
+        <div class="warning-banner" data-i18n="emptyWarning">
+          <strong>Warning:</strong> This action permanently deletes ALL job records from the Solr database.
+          This cannot be undone.
+        </div>
 
-      <div class="section-title" data-i18n="authTitle">Authentication</div>
-      <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="emptyAuthDesc">
-        In <strong>production</strong> mode (<code>NODE_ENV=production</code>), you must provide
-        <code>X-API-Key</code> and <code>X-Cleanup-Secret</code> headers matching
-        <code>api.env</code>. In any other environment (<strong>test</strong>, <strong>dev</strong>,
-        <strong>staging</strong>, etc.), these headers are <em>not checked</em> and any value is
-        accepted.
-      </p>
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="emptyDesc">
+          Permanently deletes every job document from the <code>job</code> Solr core.
+          In production, requires valid API credentials.
+        </p>
 
-      <div class="section-title" data-i18n="requestHeadersTitle">Request headers</div>
-      <table class="prop-table" style="margin-bottom:1.5rem;">
-        <thead><tr><th>Header</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
-        <tbody>
-          <tr><td>X-API-Key</td><td data-i18n="emptyApiKeyReq">Production only</td><td data-i18n="emptyApiKeyDesc">API key from <code>CLEANUP_API_KEY</code> in api.env</td></tr>
-          <tr><td>X-Cleanup-Secret</td><td data-i18n="emptySecretReq">Production only</td><td data-i18n="emptySecretDesc">Secret from <code>CLEANUP_SECRET</code> in api.env</td></tr>
-          <tr><td>Content-Type</td><td data-i18n="yes">Yes</td><td><code>application/json</code></td></tr>
-        </tbody>
-      </table>
+        <div class="section-title" data-i18n="authTitle">Authentication</div>
+        <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="emptyAuthDesc">
+          In <strong>production</strong> mode (<code>NODE_ENV=production</code>), you must provide
+          <code>X-API-Key</code> and <code>X-Cleanup-Secret</code> headers matching
+          <code>api.env</code>. In any other environment (<strong>test</strong>, <strong>dev</strong>,
+          <strong>staging</strong>, etc.), these headers are <em>not checked</em> and any value is
+          accepted.
+        </p>
 
-      <div class="section-title" data-i18n="requestBodyTitle">Request body</div>
-      <pre>{
+        <div class="section-title" data-i18n="requestHeadersTitle">Request headers</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Header</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>X-API-Key</td><td data-i18n="emptyApiKeyReq">Production only</td><td data-i18n="emptyApiKeyDesc">API key from <code>CLEANUP_API_KEY</code> in api.env</td></tr>
+            <tr><td>X-Cleanup-Secret</td><td data-i18n="emptySecretReq">Production only</td><td data-i18n="emptySecretDesc">Secret from <code>CLEANUP_SECRET</code> in api.env</td></tr>
+            <tr><td>Content-Type</td><td data-i18n="yes">Yes</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="requestBodyTitle">Request body</div>
+        <pre>{
   <span class="json-key">"confirmation"</span>: <span class="json-string">"DELETE_ALL_DATA"</span>
 }</pre>
 
-      <div class="section-title" data-i18n="tryItTitle">Try it</div>
-      <div class="curl-box" style="margin-bottom:0.75rem;">
-        <div class="curl-label">curl — production</div>
-        <pre>curl -X DELETE "https://api.peviitor.ro/v1/empty/" \
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box" style="margin-bottom:0.75rem;">
+          <div class="curl-label">curl — production</div>
+          <pre>curl -X DELETE "https://api.peviitor.ro/v1/empty/" \
   -H "X-API-Key: abc123xyz789" \
   -H "X-Cleanup-Secret: secret456def012" \
   -H "Content-Type: application/json" \
   -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
-      </div>
-      <div class="curl-box">
-        <div class="curl-label">curl — test / dev</div>
-        <pre>curl -X DELETE "https://test.peviitor.ro/api/v1/empty/" \
+        </div>
+        <div class="curl-box">
+          <div class="curl-label">curl — test / dev</div>
+          <pre>curl -X DELETE "https://test.peviitor.ro/api/v1/empty/" \
   -H "Content-Type: application/json" \
   -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Empty: 200 Jobs Deleted -->
-  <div class="card">
-    <div class="card-header" data-i18n="emptySuccessTitle">200 — Jobs Deleted</div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header" data-i18n="emptySuccessTitle">200 — Jobs Deleted</div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"message"</span>: <span class="json-string">"Jobs deleted successfully"</span>,
   <span class="json-key">"jobsDeleted"</span>: <span class="json-number">42</span>,
   <span class="json-key">"companiesDeleted"</span>: <span class="json-number">10</span>
 }</pre>
+      </div>
     </div>
-  </div>
 
-  <!-- Empty: Error 401 -->
-  <div class="card">
-    <div class="card-header">401 — <span data-i18n="emptyUnauthTitle">Unauthorized</span></div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header">401 — <span data-i18n="emptyUnauthTitle">Unauthorized</span></div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Unauthorized - invalid credentials"</span>
 }</pre>
+      </div>
     </div>
-  </div>
 
-  <!-- Empty: Error 405 -->
-  <div class="card">
-    <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Only DELETE method allowed"</span>
 }</pre>
+      </div>
     </div>
-  </div>
 
-  <!-- Empty: Error 503 -->
-  <div class="card">
-    <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
-    <div class="card-body">
-      <pre>{
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
   <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
 }</pre>
+      </div>
     </div>
-  </div>
 
-  <!-- Empty: Requirements -->
-  <div class="card">
-    <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="emptyEndpoint">Empty</span></div>
-    <div class="card-body">
-      <table class="prop-table">
-        <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="method">Method</td><td><code>DELETE</code> only</td></tr>
-          <tr><td data-i18n="auth">Auth</td><td data-i18n="emptyAuthReq"><code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)</td></tr>
-          <tr><td data-i18n="params">Params</td><td data-i18n="emptyParamsVal">Body: <code>{"confirmation": "DELETE_ALL_DATA"}</code></td></tr>
-          <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="emptyEndpoint">Empty</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>DELETE</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="emptyAuthReq"><code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="emptyParamsVal">Body: <code>{"confirmation": "DELETE_ALL_DATA"}</code></td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <!-- Empty: Status codes -->
-  <div class="card">
-    <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
-    <div class="card-body">
-      <ul class="status-list">
-        <li>
-          <span class="status-code sc-200">200</span>
-          <span data-i18n="emptyStatus200">All jobs were deleted successfully</span>
-        </li>
-        <li>
-          <span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span>
-          <span data-i18n="emptyStatus401">Invalid or missing credentials (production only)</span>
-        </li>
-        <li>
-          <span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span>
-          <span data-i18n="emptyStatus405">Only DELETE method is allowed</span>
-        </li>
-        <li>
-          <span class="status-code sc-503">503</span>
-          <span data-i18n="emptyStatus503">Solr core is unavailable or environment not configured</span>
-        </li>
-      </ul>
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="emptyStatus200">All jobs were deleted successfully</span></li>
+          <li><span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span><span data-i18n="emptyStatus401">Invalid or missing credentials (production only)</span></li>
+          <li><span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span><span data-i18n="emptyStatus405">Only DELETE method is allowed</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="emptyStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
     </div>
+
   </div>
 
   <footer>
@@ -720,6 +713,14 @@ function setLang(lang) {
   document.getElementById('lang-' + lang).classList.add('active');
   document.documentElement.lang = lang;
   localStorage.setItem('peviitor-lang', lang);
+}
+
+function toggleEndpoint(name) {
+  const content = document.getElementById(name + '-content');
+  const arrow = document.getElementById('arrow-' + name);
+  const isOpen = content.style.display !== 'none';
+  content.style.display = isOpen ? 'none' : 'block';
+  if (arrow) arrow.classList.toggle('open', !isOpen);
 }
 
 const saved = localStorage.getItem('peviitor-lang');
