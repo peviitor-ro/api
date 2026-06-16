@@ -341,17 +341,19 @@
 
       <div class="section-title" data-i18n="authTitle">Authentication</div>
       <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="emptyAuthDesc">
-        In <strong>production</strong> mode, you must provide <code>X-API-Key</code> and
-        <code>X-Cleanup-Secret</code> headers matching <code>api.env</code>. In non-production
-        environments, any credentials are accepted.
+        In <strong>production</strong> mode (<code>NODE_ENV=production</code>), you must provide
+        <code>X-API-Key</code> and <code>X-Cleanup-Secret</code> headers matching
+        <code>api.env</code>. In any other environment (<strong>test</strong>, <strong>dev</strong>,
+        <strong>staging</strong>, etc.), these headers are <em>not checked</em> and any value is
+        accepted.
       </p>
 
       <div class="section-title" data-i18n="requestHeadersTitle">Request headers</div>
       <table class="prop-table" style="margin-bottom:1.5rem;">
         <thead><tr><th>Header</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
         <tbody>
-          <tr><td>X-API-Key</td><td data-i18n="emptyApiKeyReq">Yes (production)</td><td data-i18n="emptyApiKeyDesc">API key from <code>CLEANUP_API_KEY</code> in api.env</td></tr>
-          <tr><td>X-Cleanup-Secret</td><td data-i18n="emptySecretReq">Yes (production)</td><td data-i18n="emptySecretDesc">Secret from <code>CLEANUP_SECRET</code> in api.env</td></tr>
+          <tr><td>X-API-Key</td><td data-i18n="emptyApiKeyReq">Production only</td><td data-i18n="emptyApiKeyDesc">API key from <code>CLEANUP_API_KEY</code> in api.env</td></tr>
+          <tr><td>X-Cleanup-Secret</td><td data-i18n="emptySecretReq">Production only</td><td data-i18n="emptySecretDesc">Secret from <code>CLEANUP_SECRET</code> in api.env</td></tr>
           <tr><td>Content-Type</td><td data-i18n="yes">Yes</td><td><code>application/json</code></td></tr>
         </tbody>
       </table>
@@ -362,11 +364,17 @@
 }</pre>
 
       <div class="section-title" data-i18n="tryItTitle">Try it</div>
-      <div class="curl-box">
-        <div class="curl-label">curl</div>
+      <div class="curl-box" style="margin-bottom:0.75rem;">
+        <div class="curl-label">curl — production</div>
         <pre>curl -X DELETE "https://api.peviitor.ro/v1/empty/" \
   -H "X-API-Key: abc123xyz789" \
   -H "X-Cleanup-Secret: secret456def012" \
+  -H "Content-Type: application/json" \
+  -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
+      </div>
+      <div class="curl-box">
+        <div class="curl-label">curl — test / dev</div>
+        <pre>curl -X DELETE "https://test.peviitor.ro/api/v1/empty/" \
   -H "Content-Type: application/json" \
   -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
       </div>
@@ -497,7 +505,7 @@
         </li>
         <li>
           <span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span>
-          <span data-i18n="emptyStatus401">Invalid or missing credentials in production mode</span>
+          <span data-i18n="emptyStatus401">Invalid or missing credentials (production only)</span>
         </li>
         <li>
           <span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span>
@@ -575,6 +583,28 @@ const i18n = {
     params: "Params",
     paramsVal: "None",
     contentType: "Content-Type",
+
+    emptyTag: "Delete all job records",
+    emptyWarning: "<strong>Warning:</strong> This action permanently deletes ALL job records from the Solr database. This cannot be undone.",
+    emptyDesc: "Permanently deletes every job document from the <code>job</code> Solr core. In production, requires valid API credentials.",
+    authTitle: "Authentication",
+    emptyAuthDesc: "In <strong>production</strong> mode (<code>NODE_ENV=production</code>), you must provide <code>X-API-Key</code> and <code>X-Cleanup-Secret</code> headers matching <code>api.env</code>. In any other environment (<strong>test</strong>, <strong>dev</strong>, <strong>staging</strong>, etc.), these headers are <em>not checked</em> and any value is accepted.",
+    requestHeadersTitle: "Request headers",
+    emptyApiKeyReq: "Production only",
+    emptySecretReq: "Production only",
+    emptyApiKeyDesc: "API key from <code>CLEANUP_API_KEY</code> in api.env",
+    emptySecretDesc: "Secret from <code>CLEANUP_SECRET</code> in api.env",
+    yes: "Yes",
+    requestBodyTitle: "Request body",
+    emptySuccessTitle: "200 \u2014 Jobs Deleted",
+    emptyUnauthTitle: "Unauthorized",
+    methodNotAllowedTitle: "Method Not Allowed",
+    emptyEndpoint: "Empty endpoint",
+    emptyStatus200: "All jobs were deleted successfully",
+    emptyStatus401: "Invalid or missing credentials (production only)",
+    emptyStatus405: "Only DELETE method is allowed",
+    emptyStatus503: "Solr core is unavailable or environment not configured",
+    randomEndpoint: "Random endpoint",
   },
   ro: {
     brand: "peviitor API",
@@ -615,6 +645,28 @@ const i18n = {
     params: "Parametri",
     paramsVal: "Niciunul",
     contentType: "Content-Type",
+
+    emptyTag: "\u0218terge toate \u00EEnregistr\u0103rile de joburi",
+    emptyWarning: "<strong>Aten\u021Bie:</strong> Aceast\u0103 ac\u021Biune \u0219terge PERMANENT toate joburile din baza de date Solr. Nu poate fi anulat\u0103.",
+    emptyDesc: "\u0218terge permanent toate documentele din core-ul Solr <code>job</code>. \u00CEnv production necesit\u0103 credentiale API valide.",
+    authTitle: "Autentificare",
+    emptyAuthDesc: "\u00CEn modul <strong>production</strong> (<code>NODE_ENV=production</code>), trebuie s\u0103 furnizezi headerele <code>X-API-Key</code> \u0219i <code>X-Cleanup-Secret</code> care s\u0103 corespund\u0103 cu <code>api.env</code>. \u00CEn orice alt mediu (<strong>test</strong>, <strong>dev</strong>, <strong>staging</strong>, etc.), aceste headere <em>nu sunt verificate</em> \u0219i orice valoare este acceptat\u0103.",
+    requestHeadersTitle: "Headere request",
+    emptyApiKeyReq: "Doar production",
+    emptySecretReq: "Doar production",
+    emptyApiKeyDesc: "Cheia API din <code>CLEANUP_API_KEY</code> din api.env",
+    emptySecretDesc: "Secretul din <code>CLEANUP_SECRET</code> din api.env",
+    yes: "Da",
+    requestBodyTitle: "Corpul requestului",
+    emptySuccessTitle: "200 \u2014 Joburi \u0218terse",
+    emptyUnauthTitle: "Neautorizat",
+    methodNotAllowedTitle: "Metod\u0103 nepermis\u0103",
+    emptyEndpoint: "Endpoint golire",
+    emptyStatus200: "Toate joburile au fost \u0219terse cu succes",
+    emptyStatus401: "Credentiale invalide sau lips\u0103 (doar production)",
+    emptyStatus405: "Doar metoda DELETE este permis\u0103",
+    emptyStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+    randomEndpoint: "Endpoint aleator",
   }
 };
 
