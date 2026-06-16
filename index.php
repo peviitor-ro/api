@@ -23,6 +23,17 @@
     padding: 2rem 0 2rem;
     position: relative;
   }
+  .logo-link {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    line-height: 0;
+  }
+  .logo-img {
+    height: 52px;
+    width: auto;
+    transition: opacity 0.2s;
+  }
+  .logo-img:hover { opacity: 0.8; }
   header h1 {
     font-size: 2rem;
     font-weight: 700;
@@ -296,6 +307,9 @@
       <button onclick="setLang('en')" id="lang-en" class="active">EN</button>
       <button onclick="setLang('ro')" id="lang-ro">RO</button>
     </div>
+    <a href="https://peviitor.ro" target="_blank" class="logo-link">
+      <img src="https://peviitor.ro/logo192.png" alt="peviitor" class="logo-img">
+    </a>
     <h1 data-i18n="brand">peviitor API</h1>
     <p data-i18n="subtitle">Job discovery platform — public API documentation</p>
     <div class="base-url">https://api.peviitor.ro</div>
