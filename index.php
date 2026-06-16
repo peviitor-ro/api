@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>peviitor API — Random Job Endpoint</title>
+<title>peviitor API — Documentation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -128,6 +128,30 @@
     font-size: 0.85rem;
     color: #4a7c5a;
   }
+
+  /* DELETE badge variant */
+  .method-badge-delete {
+    background: #c62828;
+    box-shadow: 0 2px 6px rgba(198, 40, 40, 0.3);
+  }
+  .endpoint-row-delete {
+    background: linear-gradient(135deg, #fef0f0, #fce4e4);
+    border-bottom: 1px solid #f5cdcd;
+  }
+  .endpoint-row-delete .endpoint-path { color: #b71c1c; }
+  .endpoint-row-delete .endpoint-desc { color: #b55a5a; }
+
+  /* Warning banner */
+  .warning-banner {
+    background: #fff3e0;
+    border-left: 4px solid #e65100;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: #bf360c;
+  }
+  .warning-banner strong { font-weight: 700; }
 
   /* Properties table */
   .prop-table { width: 100%; border-collapse: collapse; }
@@ -294,6 +318,93 @@
     </div>
   </div>
 
+  <!-- ============================================= -->
+  <!-- Empty Endpoint -->
+  <!-- ============================================= -->
+  <div class="card">
+    <div class="endpoint-row endpoint-row-delete">
+      <span class="method-badge method-badge-delete">DELETE</span>
+      <span class="endpoint-path">/v1/empty/</span>
+      <span class="endpoint-desc" data-i18n="emptyTag">Delete all job records</span>
+    </div>
+
+    <div class="card-body">
+      <div class="warning-banner" data-i18n="emptyWarning">
+        <strong>Warning:</strong> This action permanently deletes ALL job records from the Solr database.
+        This cannot be undone.
+      </div>
+
+      <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="emptyDesc">
+        Permanently deletes every job document from the <code>job</code> Solr core.
+        In production, requires valid API credentials.
+      </p>
+
+      <div class="section-title" data-i18n="authTitle">Authentication</div>
+      <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="emptyAuthDesc">
+        In <strong>production</strong> mode, you must provide <code>X-API-Key</code> and
+        <code>X-Cleanup-Secret</code> headers matching <code>api.env</code>. In non-production
+        environments, any credentials are accepted.
+      </p>
+
+      <div class="section-title" data-i18n="requestHeadersTitle">Request headers</div>
+      <table class="prop-table" style="margin-bottom:1.5rem;">
+        <thead><tr><th>Header</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+        <tbody>
+          <tr><td>X-API-Key</td><td data-i18n="emptyApiKeyReq">Yes (production)</td><td data-i18n="emptyApiKeyDesc">API key from <code>CLEANUP_API_KEY</code> in api.env</td></tr>
+          <tr><td>X-Cleanup-Secret</td><td data-i18n="emptySecretReq">Yes (production)</td><td data-i18n="emptySecretDesc">Secret from <code>CLEANUP_SECRET</code> in api.env</td></tr>
+          <tr><td>Content-Type</td><td data-i18n="yes">Yes</td><td><code>application/json</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title" data-i18n="requestBodyTitle">Request body</div>
+      <pre>{
+  <span class="json-key">"confirmation"</span>: <span class="json-string">"DELETE_ALL_DATA"</span>
+}</pre>
+
+      <div class="section-title" data-i18n="tryItTitle">Try it</div>
+      <div class="curl-box">
+        <div class="curl-label">curl</div>
+        <pre>curl -X DELETE "https://api.peviitor.ro/v1/empty/" \
+  -H "X-API-Key: abc123xyz789" \
+  -H "X-Cleanup-Secret: secret456def012" \
+  -H "Content-Type: application/json" \
+  -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty: Response example -->
+  <div class="card">
+    <div class="card-header" data-i18n="emptySuccessTitle">200 — Jobs Deleted</div>
+    <div class="card-body">
+      <pre>{
+  <span class="json-key">"message"</span>: <span class="json-string">"Jobs deleted successfully"</span>,
+  <span class="json-key">"jobsDeleted"</span>: <span class="json-number">42</span>,
+  <span class="json-key">"companiesDeleted"</span>: <span class="json-number">10</span>
+}</pre>
+    </div>
+  </div>
+
+  <!-- Empty: Error 401 -->
+  <div class="card">
+    <div class="card-header">401 — <span data-i18n="emptyUnauthTitle">Unauthorized</span></div>
+    <div class="card-body">
+      <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Unauthorized - invalid credentials"</span>
+}</pre>
+    </div>
+  </div>
+
+  <!-- Empty: Error 405 -->
+  <div class="card">
+    <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+    <div class="card-body">
+      <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only DELETE method allowed"</span>
+}</pre>
+    </div>
+  </div>
+
   <!-- Response fields -->
   <div class="card">
     <div class="card-header" data-i18n="respFieldsTitle">Response fields</div>
@@ -362,7 +473,8 @@
   <div class="card">
     <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
     <div class="card-body">
-      <ul class="status-list">
+      <div style="font-size:0.8rem;font-weight:600;color:#5a4a3a;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="randomEndpoint">Random endpoint</div>
+      <ul class="status-list" style="margin-bottom:1rem;">
         <li>
           <span class="status-code sc-200">200</span>
           <span data-i18n="status200">A random job was found and returned successfully</span>
@@ -376,12 +488,32 @@
           <span data-i18n="status503">Solr core is unavailable or environment not configured</span>
         </li>
       </ul>
+
+      <div style="font-size:0.8rem;font-weight:600;color:#5a4a3a;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="emptyEndpoint">Empty endpoint</div>
+      <ul class="status-list">
+        <li>
+          <span class="status-code sc-200">200</span>
+          <span data-i18n="emptyStatus200">All jobs were deleted successfully</span>
+        </li>
+        <li>
+          <span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span>
+          <span data-i18n="emptyStatus401">Invalid or missing credentials in production mode</span>
+        </li>
+        <li>
+          <span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span>
+          <span data-i18n="emptyStatus405">Only DELETE method is allowed</span>
+        </li>
+        <li>
+          <span class="status-code sc-503">503</span>
+          <span data-i18n="emptyStatus503">Solr core is unavailable or environment not configured</span>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <!-- Requirements -->
+  <!-- Requirements - Random -->
   <div class="card">
-    <div class="card-header" data-i18n="requirementsTitle">Requirements</div>
+    <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="randomEndpoint">Random</span></div>
     <div class="card-body">
       <table class="prop-table">
         <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
