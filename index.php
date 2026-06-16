@@ -287,7 +287,10 @@
     <div class="base-url">https://api.peviitor.ro</div>
   </header>
 
-  <!-- Endpoint -->
+  <!-- ============================================= -->
+  <!-- RANDOM ENDPOINT -->
+  <!-- ============================================= -->
+
   <div class="card">
     <div class="endpoint-row">
       <span class="method-badge">GET</span>
@@ -318,9 +321,111 @@
     </div>
   </div>
 
+  <!-- Random: Response fields -->
+  <div class="card">
+    <div class="card-header" data-i18n="respFieldsTitle">Response fields</div>
+    <div class="card-body">
+      <table class="prop-table">
+        <thead><tr>
+          <th>Field</th><th>Type</th><th data-i18n="description">Description</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>title</td><td><span class="type-tag">string</span></td><td data-i18n="descTitle">Exact job position title</td></tr>
+          <tr><td>company</td><td><span class="type-tag">string</span></td><td data-i18n="descCompany">Hiring company name (uppercase)</td></tr>
+          <tr><td>location</td><td><span class="type-tag">string[]</span></td><td data-i18n="descLocation">Array of cities or addresses</td></tr>
+          <tr><td>workmode</td><td><span class="type-tag">string</span></td><td data-i18n="descWorkmode"><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
+          <tr><td>url</td><td><span class="type-tag">string</span></td><td data-i18n="descUrl">Full URL to the job detail page (unique key)</td></tr>
+          <tr><td>salary</td><td><span class="type-tag">string</span></td><td data-i18n="descSalary">Salary interval with currency, e.g. <code>5000-8000 RON</code></td></tr>
+          <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td data-i18n="descTags">Skill tags (lowercase, max 20)</td></tr>
+          <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="descCif">CIF/CUI of the company</td></tr>
+          <tr><td>date</td><td><span class="type-tag">string</span></td><td data-i18n="descDate">ISO8601 UTC timestamp of indexing</td></tr>
+          <tr><td>status</td><td><span class="type-tag">string</span></td><td data-i18n="descStatus"><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Random: 200 Success -->
+  <div class="card">
+    <div class="card-header" data-i18n="successTitle">200 — Success</div>
+    <div class="card-body">
+      <pre>{
+  <span class="json-key">"title"</span>: <span class="json-string">"Inginer IT"</span>,
+  <span class="json-key">"company"</span>: <span class="json-string">"COMPANY SRL"</span>,
+  <span class="json-key">"location"</span>: [<span class="json-string">"București"</span>, <span class="json-string">"Cluj-Napoca"</span>],
+  <span class="json-key">"workmode"</span>: <span class="json-string">"remote"</span>,
+  <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/123"</span>,
+  <span class="json-key">"salary"</span>: <span class="json-string">"5000-8000 RON"</span>,
+  <span class="json-key">"tags"</span>: [<span class="json-string">"python"</span>, <span class="json-string">"java"</span>],
+  <span class="json-key">"cif"</span>: <span class="json-string">"12345678"</span>,
+  <span class="json-key">"date"</span>: <span class="json-string">"2026-06-15T10:00:00Z"</span>,
+  <span class="json-key">"status"</span>: <span class="json-string">"published"</span>
+}</pre>
+    </div>
+  </div>
+
+  <!-- Random: Error 404 -->
+  <div class="card">
+    <div class="card-header">404 — <span data-i18n="notFoundTitle">No Jobs Found</span></div>
+    <div class="card-body">
+      <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"No jobs found"</span>
+}</pre>
+    </div>
+  </div>
+
+  <!-- Random: Error 503 -->
+  <div class="card">
+    <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+    <div class="card-body">
+      <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+}</pre>
+    </div>
+  </div>
+
+  <!-- Random: Requirements -->
+  <div class="card">
+    <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="randomEndpoint">Random</span></div>
+    <div class="card-body">
+      <table class="prop-table">
+        <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+          <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
+          <tr><td data-i18n="params">Params</td><td data-i18n="paramsVal">None</td></tr>
+          <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Random: Status codes -->
+  <div class="card">
+    <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+    <div class="card-body">
+      <ul class="status-list">
+        <li>
+          <span class="status-code sc-200">200</span>
+          <span data-i18n="status200">A random job was found and returned successfully</span>
+        </li>
+        <li>
+          <span class="status-code sc-404">404</span>
+          <span data-i18n="status404">No jobs are currently indexed in the Solr core</span>
+        </li>
+        <li>
+          <span class="status-code sc-503">503</span>
+          <span data-i18n="status503">Solr core is unavailable or environment not configured</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <!-- ============================================= -->
-  <!-- Empty Endpoint -->
+  <!-- EMPTY ENDPOINT -->
   <!-- ============================================= -->
+
   <div class="card">
     <div class="endpoint-row endpoint-row-delete">
       <span class="method-badge method-badge-delete">DELETE</span>
@@ -381,7 +486,7 @@
     </div>
   </div>
 
-  <!-- Empty: Response example -->
+  <!-- Empty: 200 Jobs Deleted -->
   <div class="card">
     <div class="card-header" data-i18n="emptySuccessTitle">200 — Jobs Deleted</div>
     <div class="card-body">
@@ -413,60 +518,7 @@
     </div>
   </div>
 
-  <!-- Response fields -->
-  <div class="card">
-    <div class="card-header" data-i18n="respFieldsTitle">Response fields</div>
-    <div class="card-body">
-      <table class="prop-table">
-        <thead><tr>
-          <th>Field</th><th>Type</th><th data-i18n="description">Description</th>
-        </tr></thead>
-        <tbody>
-          <tr><td>title</td><td><span class="type-tag">string</span></td><td data-i18n="descTitle">Exact job position title</td></tr>
-          <tr><td>company</td><td><span class="type-tag">string</span></td><td data-i18n="descCompany">Hiring company name (uppercase)</td></tr>
-          <tr><td>location</td><td><span class="type-tag">string[]</span></td><td data-i18n="descLocation">Array of cities or addresses</td></tr>
-          <tr><td>workmode</td><td><span class="type-tag">string</span></td><td data-i18n="descWorkmode"><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
-          <tr><td>url</td><td><span class="type-tag">string</span></td><td data-i18n="descUrl">Full URL to the job detail page (unique key)</td></tr>
-          <tr><td>salary</td><td><span class="type-tag">string</span></td><td data-i18n="descSalary">Salary interval with currency, e.g. <code>5000-8000 RON</code></td></tr>
-          <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td data-i18n="descTags">Skill tags (lowercase, max 20)</td></tr>
-          <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="descCif">CIF/CUI of the company</td></tr>
-          <tr><td>date</td><td><span class="type-tag">string</span></td><td data-i18n="descDate">ISO8601 UTC timestamp of indexing</td></tr>
-          <tr><td>status</td><td><span class="type-tag">string</span></td><td data-i18n="descStatus"><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Response example -->
-  <div class="card">
-    <div class="card-header" data-i18n="successTitle">200 — Success</div>
-    <div class="card-body">
-      <pre>{
-  <span class="json-key">"title"</span>: <span class="json-string">"Inginer IT"</span>,
-  <span class="json-key">"company"</span>: <span class="json-string">"COMPANY SRL"</span>,
-  <span class="json-key">"location"</span>: [<span class="json-string">"București"</span>, <span class="json-string">"Cluj-Napoca"</span>],
-  <span class="json-key">"workmode"</span>: <span class="json-string">"remote"</span>,
-  <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/123"</span>,
-  <span class="json-key">"salary"</span>: <span class="json-string">"5000-8000 RON"</span>,
-  <span class="json-key">"tags"</span>: [<span class="json-string">"python"</span>, <span class="json-string">"java"</span>],
-  <span class="json-key">"cif"</span>: <span class="json-string">"12345678"</span>,
-  <span class="json-key">"date"</span>: <span class="json-string">"2026-06-15T10:00:00Z"</span>,
-  <span class="json-key">"status"</span>: <span class="json-string">"published"</span>
-}</pre>
-    </div>
-  </div>
-
-  <!-- Error 404 -->
-  <div class="card">
-    <div class="card-header">404 — <span data-i18n="notFoundTitle">No Jobs Found</span></div>
-    <div class="card-body">
-      <pre>{
-  <span class="json-key">"error"</span>: <span class="json-string">"No jobs found"</span>
-}</pre>
-    </div>
-  </div>
-
-  <!-- Error 503 -->
+  <!-- Empty: Error 503 -->
   <div class="card">
     <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
     <div class="card-body">
@@ -477,27 +529,26 @@
     </div>
   </div>
 
-  <!-- Status codes -->
+  <!-- Empty: Requirements -->
+  <div class="card">
+    <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="emptyEndpoint">Empty</span></div>
+    <div class="card-body">
+      <table class="prop-table">
+        <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="method">Method</td><td><code>DELETE</code> only</td></tr>
+          <tr><td data-i18n="auth">Auth</td><td data-i18n="emptyAuthReq"><code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)</td></tr>
+          <tr><td data-i18n="params">Params</td><td data-i18n="emptyParamsVal">Body: <code>{"confirmation": "DELETE_ALL_DATA"}</code></td></tr>
+          <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Empty: Status codes -->
   <div class="card">
     <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
     <div class="card-body">
-      <div style="font-size:0.8rem;font-weight:600;color:#5a4a3a;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="randomEndpoint">Random endpoint</div>
-      <ul class="status-list" style="margin-bottom:1rem;">
-        <li>
-          <span class="status-code sc-200">200</span>
-          <span data-i18n="status200">A random job was found and returned successfully</span>
-        </li>
-        <li>
-          <span class="status-code sc-404">404</span>
-          <span data-i18n="status404">No jobs are currently indexed in the Solr core</span>
-        </li>
-        <li>
-          <span class="status-code sc-503">503</span>
-          <span data-i18n="status503">Solr core is unavailable or environment not configured</span>
-        </li>
-      </ul>
-
-      <div style="font-size:0.8rem;font-weight:600;color:#5a4a3a;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="emptyEndpoint">Empty endpoint</div>
       <ul class="status-list">
         <li>
           <span class="status-code sc-200">200</span>
@@ -516,22 +567,6 @@
           <span data-i18n="emptyStatus503">Solr core is unavailable or environment not configured</span>
         </li>
       </ul>
-    </div>
-  </div>
-
-  <!-- Requirements - Random -->
-  <div class="card">
-    <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="randomEndpoint">Random</span></div>
-    <div class="card-body">
-      <table class="prop-table">
-        <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
-          <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
-          <tr><td data-i18n="params">Params</td><td data-i18n="paramsVal">None</td></tr>
-          <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
-        </tbody>
-      </table>
     </div>
   </div>
 
@@ -605,6 +640,8 @@ const i18n = {
     emptyStatus405: "Only DELETE method is allowed",
     emptyStatus503: "Solr core is unavailable or environment not configured",
     randomEndpoint: "Random endpoint",
+    emptyAuthReq: "<code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)",
+    emptyParamsVal: "Body: <code>{\"confirmation\": \"DELETE_ALL_DATA\"}</code>",
   },
   ro: {
     brand: "peviitor API",
@@ -667,6 +704,8 @@ const i18n = {
     emptyStatus405: "Doar metoda DELETE este permis\u0103",
     emptyStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
     randomEndpoint: "Endpoint aleator",
+    emptyAuthReq: "<code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (doar production)",
+    emptyParamsVal: "Body: <code>{\"confirmation\": \"DELETE_ALL_DATA\"}</code>",
   }
 };
 
