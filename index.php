@@ -281,6 +281,51 @@
     margin-bottom: 0.75rem;
   }
 
+  /* New sections */
+  .context-box {
+    background: #fffcf9;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 24px rgba(90, 60, 40, 0.10);
+    font-size: 0.95rem;
+    color: #5a4a3a;
+    line-height: 1.7;
+  }
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #c44536;
+    margin: 2rem 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  h2:first-of-type { margin-top: 2rem; }
+  .section-desc {
+    color: #5a4a3a;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+  .future-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+  }
+  .future-list li {
+    padding: 0.4rem 0 0.4rem 1.25rem;
+    position: relative;
+    color: #5a4a3a;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .future-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #c44536;
+    font-weight: 600;
+  }
+
   /* Footer */
   footer {
     text-align: center;
@@ -314,6 +359,20 @@
     <p data-i18n="subtitle">Platformă de descoperire a joburilor — documentație API publică</p>
     <div class="base-url">https://api.peviitor.ro</div>
   </header>
+
+  <div class="context-box">
+    <p data-i18n="contextParagraph">
+      Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor.
+      Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.
+    </p>
+  </div>
+
+  <h2 data-i18n="availableEndpointsTitle">Endpoint-uri disponibile în prezent</h2>
+  <p class="section-desc" data-i18n="availableEndpointsDesc">
+    Endpoint-urile de mai jos sunt disponibile în acest moment și pot fi folosite pentru testare și explorare.
+    API-ul este în curs de standardizare, iar pentru fiecare funcționalitate vom publica treptat endpoint-uri noi,
+    împreună cu o documentație mai detaliată.
+  </p>
 
   <!-- ============================================= -->
   <!-- RANDOM ENDPOINT -->
@@ -577,6 +636,27 @@
 
   </div>
 
+  <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
+  <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
+  <ul class="future-list">
+    <li data-i18n="statusItem1">documentarea completă a API-ului pe baza unei specificații publice (de tip OpenAPI/Swagger)</li>
+    <li data-i18n="statusItem2">introducerea unui mecanism de validare a domeniilor (prin înregistrări DNS TXT) pentru a lega cheile API de website-ul companiei</li>
+    <li data-i18n="statusItem3">definirea unor endpoint-uri dedicate pentru gestionarea joburilor (creare, actualizare, închidere) într-un mod standardizat</li>
+  </ul>
+  <p class="section-desc" data-i18n="statusFooter">Pe măsură ce noile endpoint-uri vor deveni disponibile, le vom publica aici împreună cu exemple de request/response și recomandări de integrare.</p>
+
+  <h2 data-i18n="integrationTitle">Cum vei putea integra website-ul tău (în curând)</h2>
+  <p class="section-desc" data-i18n="integrationDesc">
+    Obiectivul nostru este să oferim un mod simplu și automat prin care website-urile de companii să trimită joburi către peviitor.ro prin API.
+    Designul urmărit este:
+  </p>
+  <ul class="future-list">
+    <li data-i18n="integrationItem1">cheile de API vor fi asociate unui domeniu de website (de exemplu, <code>exemplu.com</code>)</li>
+    <li data-i18n="integrationItem2">domeniul va putea fi dovedit printr-o înregistrare DNS TXT, astfel încât doar proprietarul domeniului să poată publica joburi în numele acelei companii</li>
+    <li data-i18n="integrationItem3">endpoint-uri dedicate pentru creare, actualizare și închidere joburi vor fi documentate public, cu exemple clare de integrare</li>
+  </ul>
+  <p class="section-desc" data-i18n="integrationFooter">Pe măsură ce aceste componente vor fi gata, le vom documenta pe această pagină.</p>
+
   <footer>
     Powered by <a href="https://peviitor.ro" target="_blank">peviitor.ro</a> &middot;
     <a href="https://github.com/peviitor-ro/api" target="_blank">GitHub</a>
@@ -649,6 +729,22 @@ const i18n = {
     randomEndpoint: "Random endpoint",
     emptyAuthReq: "<code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)",
     emptyParamsVal: "Body: <code>{\"confirmation\": \"DELETE_ALL_DATA\"}</code>",
+
+    contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
+    availableEndpointsTitle: "Currently available endpoints",
+    availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
+    statusTitle: "Current API Status",
+    statusDesc: "We are working on:",
+    statusItem1: "full API documentation based on a public specification (OpenAPI/Swagger)",
+    statusItem2: "introducing a domain validation mechanism (via DNS TXT records) to link API keys to company websites",
+    statusItem3: "defining dedicated endpoints for job management (create, update, close) in a standardized way",
+    statusFooter: "As new endpoints become available, we will publish them here along with request/response examples and integration recommendations.",
+    integrationTitle: "How you will be able to integrate your website (coming soon)",
+    integrationDesc: "Our goal is to provide a simple, automated way for company websites to submit jobs to peviitor.ro via API. The intended design is:",
+    integrationItem1: "API keys will be associated with a website domain (e.g. <code>example.com</code>)",
+    integrationItem2: "the domain can be proven via a DNS TXT record, so only the domain owner can publish jobs on behalf of that company",
+    integrationItem3: "dedicated endpoints for creating, updating, and closing jobs will be publicly documented with clear integration examples",
+    integrationFooter: "As these components are ready, we will document them on this page.",
   },
   ro: {
     brand: "peviitor API",
@@ -713,6 +809,22 @@ const i18n = {
     randomEndpoint: "Endpoint aleator",
     emptyAuthReq: "<code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (doar production)",
     emptyParamsVal: "Body: <code>{\"confirmation\": \"DELETE_ALL_DATA\"}</code>",
+
+    contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
+    availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
+    availableEndpointsDesc: "Endpoint-urile de mai jos sunt disponibile în acest moment și pot fi folosite pentru testare și explorare. API-ul este în curs de standardizare, iar pentru fiecare funcționalitate vom publica treptat endpoint-uri noi, împreună cu o documentație mai detaliată.",
+    statusTitle: "Stare curentă a API-ului",
+    statusDesc: "Lucrăm la:",
+    statusItem1: "documentarea completă a API-ului pe baza unei specificații publice (de tip OpenAPI/Swagger)",
+    statusItem2: "introducerea unui mecanism de validare a domeniilor (prin înregistrări DNS TXT) pentru a lega cheile API de website-ul companiei",
+    statusItem3: "definirea unor endpoint-uri dedicate pentru gestionarea joburilor (creare, actualizare, închidere) într-un mod standardizat",
+    statusFooter: "Pe măsură ce noile endpoint-uri vor deveni disponibile, le vom publica aici împreună cu exemple de request/response și recomandări de integrare.",
+    integrationTitle: "Cum vei putea integra website-ul tău (în curând)",
+    integrationDesc: "Obiectivul nostru este să oferim un mod simplu și automat prin care website-urile de companii să trimită joburi către peviitor.ro prin API. Designul urmărit este:",
+    integrationItem1: "cheile de API vor fi asociate unui domeniu de website (de exemplu, <code>exemplu.com</code>)",
+    integrationItem2: "domeniul va putea fi dovedit printr-o înregistrare DNS TXT, astfel încât doar proprietarul domeniului să poată publica joburi în numele acelei companii",
+    integrationItem3: "endpoint-uri dedicate pentru creare, actualizare și închidere joburi vor fi documentate public, cu exemple clare de integrare",
+    integrationFooter: "Pe măsură ce aceste componente vor fi gata, le vom documenta pe această pagină.",
   }
 };
 
