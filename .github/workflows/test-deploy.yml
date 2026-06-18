@@ -1,0 +1,51 @@
+name: Test Suite after Deploy
+
+on:
+  workflow_run:
+    workflows: ['Deploy API to server']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-report:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, json
+
+      - name: Run all tests (unit + integration + E2E)
+        run: bash tests/run.sh
+        env:
+          E2E: 1
+          E2E_API_BASE: https://api.peviitor.ro
+
+      - name: Upload test report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-deploy
+          path: tests/report/
+          retention-days: 90
+
+      - name: FTP deploy test report to api.peviitor.ro
+        if: always()
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWD }}
+          local-dir: tests/report/
+          server-dir: /api.peviitor.ro/tests/

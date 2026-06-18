@@ -83,6 +83,25 @@
   }
   .lang-toggle button:not(.active):hover { color: #5a4a3a; }
 
+  .test-badge-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    text-decoration: none;
+  }
+  .test-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+    background: #2d2a24;
+    color: #f4e9d8;
+    transition: opacity 0.2s;
+  }
+  .test-badge:hover { opacity: 0.8; }
+
   /* Card */
   .card {
     background: #fffcf9;
@@ -357,7 +376,10 @@
     </a>
     <h1 data-i18n="brand">peviitor API</h1>
     <p data-i18n="subtitle">Platformă de descoperire a joburilor — documentație API publică</p>
-    <div class="base-url">https://api.peviitor.ro</div>
+     <div class="base-url">https://api.peviitor.ro</div>
+    <a href="/tests/report.html" target="_blank" class="test-badge-link">
+      <span class="test-badge">🧪 Test Report</span>
+    </a>
   </header>
 
   <div class="context-box">
