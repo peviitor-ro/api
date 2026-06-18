@@ -636,6 +636,180 @@
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- CLEANJOBS ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row endpoint-row-delete" onclick="toggleEndpoint('cleanjobs')">
+      <span class="method-badge method-badge-delete">DELETE</span>
+      <span class="endpoint-path">/v1/cleanjobs/</span>
+      <span class="endpoint-desc" data-i18n="cleanjobsTag">Delete job records for a company</span>
+      <span class="toggle-arrow" id="arrow-cleanjobs">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="cleanjobs-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <div class="warning-banner" data-i18n="cleanjobsWarning">
+          <strong>Warning:</strong> This action permanently deletes ALL job records for the specified company from the Solr database. This cannot be undone.
+        </div>
+
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="cleanjobsDesc">
+          Permanently deletes every job document matching the given company from the <code>job</code> Solr core.
+          Designed for company website owners who want to remove their listings from the peviitor platform.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="cleanjobsHow1">Identify the company by <code>company</code> name, <code>cif</code>, or <code>brand</code></li>
+          <li data-i18n="cleanjobsHow2">Compute <code>X-Api-Key</code> as MD5 hash based on the provided identifiers</li>
+          <li data-i18n="cleanjobsHow3">Send a DELETE request with confirmation body</li>
+          <li data-i18n="cleanjobsHow4">All matching jobs are permanently removed from the index</li>
+        </ol>
+
+        <div class="section-title" data-i18n="authTitle">Authentication</div>
+        <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="cleanjobsAuthDesc">
+          You must provide an <code>X-Api-Key</code> header computed as <code>md5()</code> of the identifiers you send.
+          The key is generated from the same fields in the request body:
+        </p>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Body fields</th><th>X-Api-Key formula</th></tr></thead>
+          <tbody>
+            <tr><td><code>company</code> + <code>cif</code></td><td><code>md5(company + cif)</code> <span style="color:#4a7c5a;font-size:0.8rem;">(recommended)</span></td></tr>
+            <tr><td><code>company</code> only</td><td><code>md5(company)</code></td></tr>
+            <tr><td><code>brand</code> only</td><td><code>md5(brand)</code></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="cleanjobsBodyTitle">Request body</div>
+        <pre>{
+  <span class="json-key">"company"</span>: <span class="json-string">"NUME SRL"</span>,
+  <span class="json-key">"cif"</span>: <span class="json-string">"12345678"</span>,
+  <span class="json-key">"confirmation"</span>: <span class="json-string">"CLEAN_COMPANY_JOBS"</span>
+}</pre>
+        <p style="margin:0.5rem 0 0;color:#7d6b5a;font-size:0.85rem;" data-i18n="cleanjobsBodyNote">
+          At least one of <code>company</code>, <code>cif</code>, or <code>brand</code> is required.
+          The <code>confirmation</code> field must be exactly <code>"CLEAN_COMPANY_JOBS"</code>.
+        </p>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>COMPANY="NUME SRL"
+CIF="12345678"
+KEY=$(echo -n "${COMPANY}${CIF}" | md5sum | cut -d' ' -f1)
+
+curl -X DELETE "https://api.peviitor.ro/v1/cleanjobs/" \
+  -H "X-Api-Key: $KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "company": "'"$COMPANY"'",
+    "cif": "'"$CIF"'",
+    "confirmation": "CLEAN_COMPANY_JOBS"
+  }'</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="cleanjobsRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>message</td><td><span class="type-tag">string</span></td><td data-i18n="cleanjobsRespMessage">Success confirmation message</td></tr>
+            <tr><td>jobCount</td><td><span class="type-tag">number</span></td><td data-i18n="cleanjobsRespJobCount">Number of jobs deleted</td></tr>
+            <tr><td>company</td><td><span class="type-tag">string</span></td><td data-i18n="cleanjobsRespCompany">Company name (if provided)</td></tr>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="cleanjobsRespCif">Company CIF (if provided)</td></tr>
+            <tr><td>brand</td><td><span class="type-tag">string</span></td><td data-i18n="cleanjobsRespBrand">Company brand (if provided)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"message"</span>: <span class="json-string">"Jobs deleted successfully"</span>,
+  <span class="json-key">"jobCount"</span>: <span class="json-number">42</span>,
+  <span class="json-key">"company"</span>: <span class="json-string">"NUME SRL"</span>,
+  <span class="json-key">"cif"</span>: <span class="json-string">"12345678"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">401 — <span data-i18n="unauthTitle">Unauthorized</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Unauthorized - invalid X-Api-Key"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">404 — <span data-i18n="cleanjobsNotFoundTitle">No Jobs Found</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"No jobs found"</span>,
+  <span class="json-key">"message"</span>: <span class="json-string">"No jobs found matching the given criteria"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only DELETE method allowed"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="cleanjobsEndpoint">Cleanjobs</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:120px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>DELETE</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td><code>X-Api-Key: md5(company + cif)</code> (or <code>md5(company)</code> / <code>md5(brand)</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="cleanjobsParamsVal">Body: <code>{"company"?: "...", "cif"?: "...", "brand"?: "...", "confirmation": "CLEAN_COMPANY_JOBS"}</code></td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="cleanjobsStatus200">Jobs were deleted successfully</span></li>
+          <li><span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span><span data-i18n="cleanjobsStatus401">Invalid or missing X-Api-Key header</span></li>
+          <li><span class="status-code sc-404">404</span><span data-i18n="cleanjobsStatus404">No jobs found matching the given criteria</span></li>
+          <li><span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span><span data-i18n="cleanjobsStatus405">Only DELETE method is allowed</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="cleanjobsStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -730,6 +904,31 @@ const i18n = {
     emptyAuthReq: "<code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)",
     emptyParamsVal: "Body: <code>{\"confirmation\": \"DELETE_ALL_DATA\"}</code>",
 
+    cleanjobsTag: "Delete job records for a company",
+    cleanjobsWarning: "<strong>Warning:</strong> This action permanently deletes ALL job records for the specified company from the Solr database. This cannot be undone.",
+    cleanjobsDesc: "Permanently deletes every job document matching the given company from the <code>job</code> Solr core. Designed for company website owners who want to remove their listings from the peviitor platform.",
+    cleanjobsHow1: "Identify the company by <code>company</code> name, <code>cif</code>, or <code>brand</code>",
+    cleanjobsHow2: "Compute <code>X-Api-Key</code> as MD5 hash based on the provided identifiers",
+    cleanjobsHow3: "Send a DELETE request with confirmation body",
+    cleanjobsHow4: "All matching jobs are permanently removed from the index",
+    cleanjobsAuthDesc: "You must provide an <code>X-Api-Key</code> header computed as <code>md5()</code> of the identifiers you send. The key is generated from the same fields in the request body:",
+    cleanjobsBodyTitle: "Request body",
+    cleanjobsBodyNote: "At least one of <code>company</code>, <code>cif</code>, or <code>brand</code> is required. The <code>confirmation</code> field must be exactly <code>\"CLEAN_COMPANY_JOBS\"</code>.",
+    cleanjobsRespTitle: "Response fields",
+    cleanjobsRespMessage: "Success confirmation message",
+    cleanjobsRespJobCount: "Number of jobs deleted",
+    cleanjobsRespCompany: "Company name (if provided)",
+    cleanjobsRespCif: "Company CIF (if provided)",
+    cleanjobsRespBrand: "Company brand (if provided)",
+    cleanjobsNotFoundTitle: "No Jobs Found",
+    cleanjobsEndpoint: "Cleanjobs",
+    cleanjobsParamsVal: "Body: <code>{\"company\"?: \"...\", \"cif\"?: \"...\", \"brand\"?: \"...\", \"confirmation\": \"CLEAN_COMPANY_JOBS\"}</code>",
+    cleanjobsStatus200: "Jobs were deleted successfully",
+    cleanjobsStatus401: "Invalid or missing X-Api-Key header",
+    cleanjobsStatus404: "No jobs found matching the given criteria",
+    cleanjobsStatus405: "Only DELETE method is allowed",
+    cleanjobsStatus503: "Solr core is unavailable or environment not configured",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -809,6 +1008,31 @@ const i18n = {
     randomEndpoint: "Endpoint aleator",
     emptyAuthReq: "<code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (doar production)",
     emptyParamsVal: "Body: <code>{\"confirmation\": \"DELETE_ALL_DATA\"}</code>",
+
+    cleanjobsTag: "\u0218terge \u00EEnregistr\u0103rile de joburi pentru o companie",
+    cleanjobsWarning: "<strong>Aten\u021Bie:</strong> Aceast\u0103 ac\u021Biune \u0219terge PERMANENT toate joburile pentru compania specificat\u0103 din baza de date Solr. Nu poate fi anulat\u0103.",
+    cleanjobsDesc: "\u0218terge permanent toate documentele de job care corespund companiei date din core-ul Solr <code>job</code>. Conceput pentru proprietarii de website-uri de companii care doresc s\u0103 \u00EE\u0219i elimine list\u0103rile de pe platforma peviitor.",
+    cleanjobsHow1: "Identific\u0103 compania dup\u0103 numele <code>company</code>, <code>cif</code> sau <code>brand</code>",
+    cleanjobsHow2: "Calculeaz\u0103 <code>X-Api-Key</code> ca hash MD5 pe baza identificatorilor furniza\u021Bi",
+    cleanjobsHow3: "Trimite un request DELETE cu corpul de confirmare",
+    cleanjobsHow4: "Toate joburile corespunz\u0103toare sunt eliminate permanent din index",
+    cleanjobsAuthDesc: "Trebuie s\u0103 furnizezi un header <code>X-Api-Key</code> calculat ca <code>md5()</code> al identificatorilor trimi\u0219i. Cheia se genereaz\u0103 din acelea\u0219i c\u00E2mpuri din corpul requestului:",
+    cleanjobsBodyTitle: "Corpul requestului",
+    cleanjobsBodyNote: "Cel pu\u021Bin unul dintre <code>company</code>, <code>cif</code> sau <code>brand</code> este obligatoriu. C\u00E2mpul <code>confirmation</code> trebuie s\u0103 fie exact <code>\"CLEAN_COMPANY_JOBS\"</code>.",
+    cleanjobsRespTitle: "C\u00E2mpurile r\u0103spunsului",
+    cleanjobsRespMessage: "Mesaj de confirmare a succesului",
+    cleanjobsRespJobCount: "Num\u0103rul de joburi \u0219terse",
+    cleanjobsRespCompany: "Numele companiei (dac\u0103 a fost furnizat)",
+    cleanjobsRespCif: "CIF-ul companiei (dac\u0103 a fost furnizat)",
+    cleanjobsRespBrand: "Brandul companiei (dac\u0103 a fost furnizat)",
+    cleanjobsNotFoundTitle: "Niciun job g\u0103sit",
+    cleanjobsEndpoint: "Endpoint cur\u0103\u021Bare joburi",
+    cleanjobsParamsVal: "Body: <code>{\"company\"?: \"...\", \"cif\"?: \"...\", \"brand\"?: \"...\", \"confirmation\": \"CLEAN_COMPANY_JOBS\"}</code>",
+    cleanjobsStatus200: "Joburile au fost \u0219terse cu succes",
+    cleanjobsStatus401: "Header X-Api-Key invalid sau lips\u0103",
+    cleanjobsStatus404: "Nu s-au g\u0103sit joburi care s\u0103 corespund\u0103 criteriilor date",
+    cleanjobsStatus405: "Doar metoda DELETE este permis\u0103",
+    cleanjobsStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",

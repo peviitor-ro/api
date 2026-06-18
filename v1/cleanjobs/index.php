@@ -65,51 +65,185 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
     return $json;
 }
 
+function solrEscape(string $value): string {
+    $special = ['+', '-', '&', '|', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'];
+    $result = '';
+    for ($i = 0; $i < strlen($value); $i++) {
+        $char = $value[$i];
+        if (in_array($char, $special, true)) {
+            $result .= '\\' . $char;
+        } else {
+            $result .= $char;
+        }
+    }
+    return $result;
+}
+
 try {
     if (!$PROD_SERVER) {
         throw new Exception("PROD_SERVER not set");
     }
 
-    parse_str(file_get_contents('php://input'), $deleteData);
-    $company = $_GET['company'] ?? $deleteData['company'] ?? null;
-    $company = $company !== null ? trim($company) : null;
+    // Parse body - support JSON and form-encoded
+    $rawBody = file_get_contents('php://input');
+    $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
 
-    if (empty($company)) {
+    if (strpos($contentType, 'application/json') !== false) {
+        $body = json_decode($rawBody, true);
+        if (!is_array($body)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Invalid JSON body']);
+            exit;
+        }
+    } else {
+        parse_str($rawBody, $body);
+    }
+
+    // Extract fields from body
+    $company     = isset($body['company']) ? trim($body['company']) : null;
+    $cif         = isset($body['cif']) ? trim($body['cif']) : null;
+    $brand       = isset($body['brand']) ? trim($body['brand']) : null;
+    $confirmation = isset($body['confirmation']) ? trim($body['confirmation']) : null;
+
+    // Validate: at least one identifier required
+    if (!$company && !$cif && !$brand) {
         http_response_code(400);
-        echo json_encode(['error' => 'Company name is required', 'code' => 400]);
+        echo json_encode(['error' => 'At least one of company, cif, or brand is required']);
         exit;
     }
 
+    // Validate confirmation
+    if ($confirmation !== 'CLEAN_COMPANY_JOBS') {
+        http_response_code(400);
+        echo json_encode(['error' => 'Confirmation must be "CLEAN_COMPANY_JOBS"']);
+        exit;
+    }
+
+    // Validate input length
+    if ($company && strlen($company) > 200) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Company name too long (max 200 characters)']);
+        exit;
+    }
+    if ($cif && strlen($cif) > 20) {
+        http_response_code(400);
+        echo json_encode(['error' => 'CIF too long']);
+        exit;
+    }
+    if ($brand && strlen($brand) > 200) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Brand name too long (max 200 characters)']);
+        exit;
+    }
+
+    // Auth: validate X-Api-Key header
+    $apiKey = trim($_SERVER['HTTP_X_API_KEY'] ?? '');
+    if (empty($apiKey)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized - missing X-Api-Key header']);
+        exit;
+    }
+
+    // Determine expected key based on provided fields
+    if ($company && $cif) {
+        $expectedKey = md5($company . $cif);
+        if (!hash_equals($expectedKey, $apiKey)) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized - invalid X-Api-Key']);
+            exit;
+        }
+    } elseif ($company) {
+        $expectedKey = md5($company);
+        if (!hash_equals($expectedKey, $apiKey)) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized - invalid X-Api-Key']);
+            exit;
+        }
+        error_log("CLEANJOBS WARNING: auth by company name only (no CIF) for '$company'");
+    } elseif ($brand) {
+        $expectedKey = md5($brand);
+        if (!hash_equals($expectedKey, $apiKey)) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized - invalid X-Api-Key']);
+            exit;
+        }
+        error_log("CLEANJOBS WARNING: auth by brand only for '$brand'");
+    }
+
+    // Build Solr query
     $core = 'job';
     $base = "http://$PROD_SERVER/solr/$core";
 
-    $countUrl = $base . "/select?q=" . rawurlencode('company:"' . $company . '"') . "&wt=json&rows=0";
-    error_log("CLEANJOBS COUNT URL: $countUrl");
+    $queryParts = [];
 
+    if ($cif) {
+        $queryParts[] = 'cif:' . solrEscape($cif);
+    }
+
+    if ($company) {
+        $queryParts[] = 'company:"' . solrEscape($company) . '"';
+    }
+
+    if ($brand) {
+        $companyCore = "http://$PROD_SERVER/solr/company";
+        $brandUrl = $companyCore . "/select?q=" . rawurlencode('brand:"' . solrEscape($brand) . '"') . "&wt=json&rows=100&fl=id,company";
+
+        $brandResponse = fetchJson($brandUrl, $SOLR_USER, $SOLR_PASS, 4);
+        $brandDocs = $brandResponse['response']['docs'] ?? [];
+
+        if (empty($brandDocs)) {
+            http_response_code(404);
+            echo json_encode(['error' => "No companies found for brand '$brand'"]);
+            exit;
+        }
+
+        $cifList = [];
+        foreach ($brandDocs as $doc) {
+            $cifList[] = 'cif:' . solrEscape($doc['id']);
+        }
+
+        if (!empty($queryParts)) {
+            $queryParts[] = '(' . implode(' OR ', $cifList) . ')';
+        } else {
+            $queryParts = [implode(' OR ', $cifList)];
+        }
+    }
+
+    $query = implode(' AND ', $queryParts);
+
+    // Count matching jobs
+    $countUrl = $base . "/select?q=" . rawurlencode($query) . "&wt=json&rows=0";
     $countResponse = fetchJson($countUrl, $SOLR_USER, $SOLR_PASS, 4);
     $jobCount = $countResponse['response']['numFound'] ?? 0;
 
     if ($jobCount === 0) {
         http_response_code(404);
         echo json_encode([
-            'error' => 'Company not found',
-            'message' => "No jobs found for the specified company '$company'",
-            'code' => 404
+            'error' => 'No jobs found',
+            'message' => 'No jobs found matching the given criteria'
         ]);
         exit;
     }
 
+    // Execute delete
     $deleteUrl = $base . "/update?commit=true&wt=json";
-    $deletePayload = json_encode(['delete' => ['query' => 'company:"' . $company . '"']]);
-    error_log("CLEANJOBS DELETE URL: $deleteUrl");
+    $deletePayload = json_encode(['delete' => ['query' => $query]]);
 
-    $deleteResponse = postJson($deleteUrl, $deletePayload, $SOLR_USER, $SOLR_PASS);
+    postJson($deleteUrl, $deletePayload, $SOLR_USER, $SOLR_PASS);
+
+    // Build response
+    $response = [
+        'message' => 'Jobs deleted successfully',
+        'jobCount' => $jobCount
+    ];
+    if ($company) $response['company'] = $company;
+    if ($cif) $response['cif'] = $cif;
+    if ($brand) $response['brand'] = $brand;
+
+    error_log("CLEANJOBS SUCCESS: company=$company cif=$cif brand=$brand jobsDeleted=$jobCount");
 
     http_response_code(200);
-    echo json_encode([
-        'message' => "Jobs for company '$company' deleted successfully",
-        'jobCount' => $jobCount
-    ]);
+    echo json_encode($response);
 
 } catch (Exception $e) {
     error_log("CLEANJOBS FAILED: " . $e->getMessage());
