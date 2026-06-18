@@ -1,4 +1,85 @@
 <?php
+
+/**
+ * ============================================================================
+ * DELETE /v1/cleanjobs/ - Company Job Cleanup Endpoint
+ * ============================================================================
+ *
+ * DESCRIPTION:
+ *   This endpoint permanently deletes ALL job records for a specific company
+ *   from the Solr database. Designed for company website owners who want to
+ *   remove their job listings from the peviitor platform.
+ *   WARNING: This action cannot be undone. No recovery possible without backups.
+ *
+ * DEPENDENCIES:
+ *   - Apache Solr server (required, configured via PROD_SERVER in api.env)
+ *   - Solr Basic Authentication (SOLR_USER and SOLR_PASS from api.env)
+ *     All Solr requests use: Authorization: Basic base64(SOLR_USER:SOLR_PASS)
+ *   - 'job' core in Solr (job records deleted from this core)
+ *   - 'company' core in Solr (used for brand lookup only)
+ *
+ * AUTHENTICATION:
+ *   X-Api-Key header computed as md5() of the provided identifiers:
+ *     - company + cif  →  md5(company . cif)  (recommended)
+ *     - company only   →  md5(company)
+ *     - brand only     →  md5(brand)
+ *
+ * REQUIRED HTTP METHOD:
+ *   DELETE (only this method is allowed)
+ *
+ * REQUIRED HEADERS:
+ *   X-Api-Key: <md5 hash of identifiers>
+ *   Content-Type: application/json
+ *
+ * REQUIRED REQUEST BODY:
+ *   {
+ *     "company"?: "NUME SRL",       // company name (optional if cif or brand given)
+ *     "cif"?: "12345678",           // CIF/CUI (optional if company or brand given)
+ *     "brand"?: "ORANGE",           // brand name (optional if company or cif given)
+ *     "confirmation": "CLEAN_COMPANY_JOBS"  // must be exactly this string
+ *   }
+ *   At least one of company, cif, or brand is required.
+ *
+ * IDENTIFICATION LOGIC:
+ *   - cif present: delete jobs where cif matches (precise, unique)
+ *   - company present: delete jobs where company name matches
+ *   - brand present: lookup company core by brand, extract CIFs, then delete jobs by CIF
+ *   - Multiple identifiers can be combined for precision (AND logic)
+ *
+ * SUCCESS RESPONSE (200 OK):
+ *   {
+ *     "message": "Jobs deleted successfully",
+ *     "jobCount": <number>,
+ *     "company"?: "NUME SRL",
+ *     "cif"?: "12345678",
+ *     "brand"?: "ORANGE"
+ *   }
+ *
+ * ERROR RESPONSES:
+ *   400: Bad request (missing fields, invalid confirmation, etc.)
+ *   401: Unauthorized (invalid or missing X-Api-Key)
+ *   404: No jobs found for the given criteria
+ *   405: Method not allowed (only DELETE is allowed)
+ *   503: Service unavailable (Solr server down or misconfiguration)
+ *
+ * EXAMPLE CURL:
+ *   COMPANY="NUME SRL"
+ *   CIF="12345678"
+ *   KEY=$(echo -n "${COMPANY}${CIF}" | md5sum | cut -d' ' -f1)
+ *
+ *   curl -X DELETE \
+ *     -H "X-Api-Key: $KEY" \
+ *     -H "Content-Type: application/json" \
+ *     -d '{
+ *       "company": "'"$COMPANY"'",
+ *       "cif": "'"$CIF"'",
+ *       "confirmation": "CLEAN_COMPANY_JOBS"
+ *     }' \
+ *     https://api.peviitor.ro/v1/cleanjobs/
+ *
+ * ============================================================================
+ */
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 

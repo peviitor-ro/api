@@ -928,6 +928,7 @@ const i18n = {
     cleanjobsStatus404: "No jobs found matching the given criteria",
     cleanjobsStatus405: "Only DELETE method is allowed",
     cleanjobsStatus503: "Solr core is unavailable or environment not configured",
+    unauthTitle: "Unauthorized",
 
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
@@ -1033,6 +1034,7 @@ const i18n = {
     cleanjobsStatus404: "Nu s-au g\u0103sit joburi care s\u0103 corespund\u0103 criteriilor date",
     cleanjobsStatus405: "Doar metoda DELETE este permis\u0103",
     cleanjobsStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+    unauthTitle: "Neautorizat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
