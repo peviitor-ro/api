@@ -13,7 +13,7 @@ This is the source code for **api.peviitor.ro**, a REST API for a Romanian job b
 ```
 api/
 ├── v0/          # Jobs & Companies API (TEST environment)
-├── v1/          # (empty - to be developed for PROD)
+├── v1/          # PROD endpoints (random, empty, + altele în lucru)
 ├── v3/          # Extended version with logo/images
 ├── v4/          # Download-focused version
 ├── v5/          # Simplified jobs API
@@ -50,7 +50,10 @@ api/
 - `/firme/website/` - GET, POST (add), DELETE
 - `/firme/scraper/` - GET, POST (add), DELETE
 
-### v1 (PROD - empty, to be developed)
+### v1 (PROD - in development)
+Endpoints: `/random/`, `/empty/`, `/total/`, `/companies/`, `/search/`, `/suggest/`, `/jobs/`, `/add/`, `/update/`, `/delete/`, `/logo/`, `/images/`, `/firme/`, `/health/`
+- `random` și `empty` — revizuite și documentate pe api.peviitor.ro
+- Celelalte în dezvoltare
 
 ### v3
 Similar to v0 plus:
