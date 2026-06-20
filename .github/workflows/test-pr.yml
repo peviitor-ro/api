@@ -1,0 +1,35 @@
+name: Tests on PR
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, json
+
+      - name: Run tests (unit + integration)
+        run: bash tests/run.sh
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-pr
+          path: tests/report/
+          retention-days: 30
