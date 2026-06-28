@@ -253,7 +253,9 @@
     min-width: 40px;
   }
   .sc-200 { background: #e8f5e9; color: #2e7d32; }
+  .sc-401 { background:#ffebee;color:#c62828; }
   .sc-404 { background: #fff3e0; color: #e65100; }
+  .sc-405 { background:#e8eaf6;color:#283593; }
   .sc-503 { background: #ffebee; color: #c62828; }
 
   /* Code blocks */
@@ -524,88 +526,68 @@
 
   </div>
 
-  <!-- EMPTY ENDPOINT -->
+  <!-- ============================================= -->
+  <!-- TOTAL ENDPOINT -->
+  <!-- ============================================= -->
+
   <div class="card">
-    <div class="endpoint-row endpoint-row-delete" onclick="toggleEndpoint('empty')">
-      <span class="method-badge method-badge-delete">DELETE</span>
-      <span class="endpoint-path">/v1/empty/</span>
-      <span class="endpoint-desc" data-i18n="emptyTag">Delete all job records</span>
-      <span class="toggle-arrow" id="arrow-empty">&#9654;</span>
+    <div class="endpoint-row" onclick="toggleEndpoint('total')">
+      <span class="method-badge">GET</span>
+      <span class="endpoint-path">/v1/total/</span>
+      <span class="endpoint-desc" data-i18n="totalTag">Get total jobs and companies count</span>
+      <span class="toggle-arrow" id="arrow-total">&#9654;</span>
     </div>
   </div>
 
-  <div id="empty-content" class="endpoint-content" style="display:none">
+  <div id="total-content" class="endpoint-content" style="display:none">
 
     <div class="card">
       <div class="card-body">
-        <div class="warning-banner" data-i18n="emptyWarning">
-          <strong>Warning:</strong> This action permanently deletes ALL job records from the Solr database.
-          This cannot be undone.
-        </div>
-
-        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="emptyDesc">
-          Permanently deletes every job document from the <code>job</code> Solr core.
-          In production, requires valid API credentials.
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="totalDesc">
+          Returns the total number of job listings and companies currently indexed in the Solr cores.
+          Useful for dashboard counters, statistics widgets, or monitoring integrations.
         </p>
 
-        <div class="section-title" data-i18n="authTitle">Authentication</div>
-        <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="emptyAuthDesc">
-          In <strong>production</strong> mode (<code>NODE_ENV=production</code>), you must provide
-          <code>X-API-Key</code> and <code>X-Cleanup-Secret</code> headers matching
-          <code>api.env</code>. In any other environment (<strong>test</strong>, <strong>dev</strong>,
-          <strong>staging</strong>, etc.), these headers are <em>not checked</em> and any value is
-          accepted.
-        </p>
-
-        <div class="section-title" data-i18n="requestHeadersTitle">Request headers</div>
-        <table class="prop-table" style="margin-bottom:1.5rem;">
-          <thead><tr><th>Header</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
-          <tbody>
-            <tr><td>X-API-Key</td><td data-i18n="emptyApiKeyReq">Production only</td><td data-i18n="emptyApiKeyDesc">API key from <code>CLEANUP_API_KEY</code> in api.env</td></tr>
-            <tr><td>X-Cleanup-Secret</td><td data-i18n="emptySecretReq">Production only</td><td data-i18n="emptySecretDesc">Secret from <code>CLEANUP_SECRET</code> in api.env</td></tr>
-            <tr><td>Content-Type</td><td data-i18n="yes">Yes</td><td><code>application/json</code></td></tr>
-          </tbody>
-        </table>
-
-        <div class="section-title" data-i18n="requestBodyTitle">Request body</div>
-        <pre>{
-  <span class="json-key">"confirmation"</span>: <span class="json-string">"DELETE_ALL_DATA"</span>
-}</pre>
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="totalHow1">Queries the <code>job</code> Solr core for the total number of indexed jobs</li>
+          <li data-i18n="totalHow2">Queries the <code>company</code> Solr core for the total number of indexed companies</li>
+          <li data-i18n="totalHow3">Returns both counts in a single response object</li>
+        </ol>
 
         <div class="section-title" data-i18n="tryItTitle">Try it</div>
-        <div class="curl-box" style="margin-bottom:0.75rem;">
-          <div class="curl-label">curl — production</div>
-          <pre>curl -X DELETE "https://api.peviitor.ro/v1/empty/" \
-  -H "X-API-Key: abc123xyz789" \
-  -H "X-Cleanup-Secret: secret456def012" \
-  -H "Content-Type: application/json" \
-  -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
-        </div>
         <div class="curl-box">
-          <div class="curl-label">curl — test / dev</div>
-          <pre>curl -X DELETE "https://test.peviitor.ro/api/v1/empty/" \
-  -H "Content-Type: application/json" \
-  -d '{"confirmation": "DELETE_ALL_DATA"}'</pre>
+          <div class="curl-label">curl</div>
+          <pre>curl -X GET "https://api.peviitor.ro/v1/total/" \
+  -H "Accept: application/json"</pre>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header" data-i18n="emptySuccessTitle">200 — Jobs Deleted</div>
+      <div class="card-header" data-i18n="totalRespFieldsTitle">Response fields</div>
       <div class="card-body">
-        <pre>{
-  <span class="json-key">"message"</span>: <span class="json-string">"Jobs deleted successfully"</span>,
-  <span class="json-key">"jobsDeleted"</span>: <span class="json-number">42</span>,
-  <span class="json-key">"companiesDeleted"</span>: <span class="json-number">10</span>
-}</pre>
+        <table class="prop-table">
+          <thead><tr>
+            <th>Field</th><th>Type</th><th data-i18n="description">Description</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>total</td><td><span class="type-tag">object</span></td><td data-i18n="totalDescTotal">Container object with count fields</td></tr>
+            <tr><td>total.jobs</td><td><span class="type-tag">number</span></td><td data-i18n="totalDescJobs">Total number of job listings currently indexed</td></tr>
+            <tr><td>total.companies</td><td><span class="type-tag">number</span></td><td data-i18n="totalDescCompanies">Total number of companies currently indexed</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header">401 — <span data-i18n="emptyUnauthTitle">Unauthorized</span></div>
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
       <div class="card-body">
         <pre>{
-  <span class="json-key">"error"</span>: <span class="json-string">"Unauthorized - invalid credentials"</span>
+  <span class="json-key">"total"</span>: {
+    <span class="json-key">"jobs"</span>: <span class="json-number">18452</span>,
+    <span class="json-key">"companies"</span>: <span class="json-number">934</span>
+  }
 }</pre>
       </div>
     </div>
@@ -614,7 +596,7 @@
       <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
       <div class="card-body">
         <pre>{
-  <span class="json-key">"error"</span>: <span class="json-string">"Only DELETE method allowed"</span>
+  <span class="json-key">"error"</span>: <span class="json-string">"Only GET method allowed"</span>
 }</pre>
       </div>
     </div>
@@ -622,22 +604,34 @@
     <div class="card">
       <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
       <div class="card-body">
+        <p style="margin-bottom:0.75rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="totalErrorDesc">
+          Triggered when Solr is unreachable, returns an invalid response, or the environment is not configured.
+          The <code>details</code> field contains the underlying error message for debugging.
+        </p>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"FETCH FAILED: http://... | Connection timed out"</span>
+}</pre>
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"Invalid JSON response"</span>
 }</pre>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="emptyEndpoint">Empty</span></div>
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="totalEndpoint">Total</span></div>
       <div class="card-body">
         <table class="prop-table">
           <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
           <tbody>
-            <tr><td data-i18n="method">Method</td><td><code>DELETE</code> only</td></tr>
-            <tr><td data-i18n="auth">Auth</td><td data-i18n="emptyAuthReq"><code>X-API-Key</code> + <code>X-Cleanup-Secret</code> (production only)</td></tr>
-            <tr><td data-i18n="params">Params</td><td data-i18n="emptyParamsVal">Body: <code>{"confirmation": "DELETE_ALL_DATA"}</code></td></tr>
+            <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="paramsVal">None</td></tr>
             <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
           </tbody>
         </table>
@@ -648,10 +642,9 @@
       <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
       <div class="card-body">
         <ul class="status-list">
-          <li><span class="status-code sc-200">200</span><span data-i18n="emptyStatus200">All jobs were deleted successfully</span></li>
-          <li><span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span><span data-i18n="emptyStatus401">Invalid or missing credentials (production only)</span></li>
-          <li><span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span><span data-i18n="emptyStatus405">Only DELETE method is allowed</span></li>
-          <li><span class="status-code sc-503">503</span><span data-i18n="emptyStatus503">Solr core is unavailable or environment not configured</span></li>
+          <li><span class="status-code sc-200">200</span><span data-i18n="totalStatus200">Counts for jobs and companies returned successfully</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="totalStatus405">Request method is not GET</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="totalStatus503">Solr core is unreachable, returned invalid JSON, or environment is not configured</span></li>
         </ul>
       </div>
     </div>
@@ -822,9 +815,9 @@ curl -X DELETE "https://api.peviitor.ro/v1/cleanjobs/" \
       <div class="card-body">
         <ul class="status-list">
           <li><span class="status-code sc-200">200</span><span data-i18n="cleanjobsStatus200">Jobs were deleted successfully</span></li>
-          <li><span class="status-code sc-401" style="background:#ffebee;color:#c62828;">401</span><span data-i18n="cleanjobsStatus401">Invalid or missing X-Api-Key header</span></li>
+          <li><span class="status-code sc-401">401</span><span data-i18n="cleanjobsStatus401">Invalid or missing X-Api-Key header</span></li>
           <li><span class="status-code sc-404">404</span><span data-i18n="cleanjobsStatus404">No jobs found matching the given criteria</span></li>
-          <li><span class="status-code sc-405" style="background:#e8eaf6;color:#283593;">405</span><span data-i18n="cleanjobsStatus405">Only DELETE method is allowed</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="cleanjobsStatus405">Only DELETE method is allowed</span></li>
           <li><span class="status-code sc-503">503</span><span data-i18n="cleanjobsStatus503">Solr core is unavailable or environment not configured</span></li>
         </ul>
       </div>
