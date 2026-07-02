@@ -168,17 +168,6 @@ try {
     // Parse body - support JSON and form-encoded
     $rawBody = file_get_contents('php://input');
     $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
-    
-    error_log(
-        "CLEANJOBS REQUEST | IP=" .
-        ($_SERVER['REMOTE_ADDR'] ?? '-') .
-        " | METHOD=" .
-        ($_SERVER['REQUEST_METHOD'] ?? '-') .
-        " | URI=" .
-        ($_SERVER['REQUEST_URI'] ?? '-') .
-        " | BODY=" .
-        $rawBody
-    );
 
     if (strpos($contentType, 'application/json') !== false) {
         $body = json_decode($rawBody, true);
@@ -307,10 +296,6 @@ try {
     $countUrl = $base . "/select?q=" . rawurlencode($query) . "&wt=json&rows=0";
     $countResponse = fetchJson($countUrl, $SOLR_USER, $SOLR_PASS, 4);
     $jobCount = $countResponse['response']['numFound'] ?? 0;
-
-    error_log(
-        "CLEANJOBS DELETE | QUERY=$query | JOBS=$jobCount"
-    );
 
     if ($jobCount === 0) {
         http_response_code(404);
