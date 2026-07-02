@@ -90,6 +90,24 @@ $PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
+// ----------------------------------------------------------------------
+// AUDIT LOG: capture every hit to this endpoint, before any early exits,
+// so failed/unauthorized attempts are visible too, not just successes.
+// ----------------------------------------------------------------------
+$auditRawBody = file_get_contents('php://input');
+file_put_contents(
+    __DIR__ . '/cleanjobs.log',
+    date('Y-m-d H:i:s') .
+    ' | IP=' . ($_SERVER['REMOTE_ADDR'] ?? '-') .
+    ' | METHOD=' . ($_SERVER['REQUEST_METHOD'] ?? '-') .
+    ' | URI=' . ($_SERVER['REQUEST_URI'] ?? '-') .
+    ' | APIKEY=' . ($_SERVER['HTTP_X_API_KEY'] ?? '-') .
+    ' | UA=' . ($_SERVER['HTTP_USER_AGENT'] ?? '-') .
+    ' | BODY=' . $auditRawBody .
+    PHP_EOL,
+    FILE_APPEND | LOCK_EX
+);
+
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405);
     echo json_encode(["error" => "Only DELETE method allowed"]);
@@ -166,9 +184,9 @@ try {
     }
 
     // Parse body - support JSON and form-encoded
-    $rawBody = file_get_contents('php://input');
+    $rawBody = $auditRawBody;
     $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
-    
+
     error_log(
         "CLEANJOBS REQUEST | IP=" .
         ($_SERVER['REMOTE_ADDR'] ?? '-') .
@@ -337,6 +355,19 @@ try {
     if ($brand) $response['brand'] = $brand;
 
     error_log("CLEANJOBS SUCCESS: company=$company cif=$cif brand=$brand jobsDeleted=$jobCount");
+
+    // Log the confirmed outcome too, so the audit file shows what actually happened
+    file_put_contents(
+        __DIR__ . '/cleanjobs.log',
+        date('Y-m-d H:i:s') .
+        ' | RESULT=SUCCESS' .
+        ' | company=' . ($company ?? '-') .
+        ' | cif=' . ($cif ?? '-') .
+        ' | brand=' . ($brand ?? '-') .
+        ' | jobsDeleted=' . $jobCount .
+        PHP_EOL,
+        FILE_APPEND | LOCK_EX
+    );
 
     http_response_code(200);
     echo json_encode($response);
