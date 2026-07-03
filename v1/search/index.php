@@ -125,7 +125,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
-$rows  = min(100, max(1, (int)($_GET['rows'] ?? 12)));
+$rows  = min(1500, max(1, (int)($_GET['rows'] ?? 12)));
 $start = ($page - 1) * $rows;
 
 $params = [];
