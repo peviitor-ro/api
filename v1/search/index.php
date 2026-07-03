@@ -130,6 +130,9 @@ $start = ($page - 1) * $rows;
 
 $params = [];
 foreach ($_GET as $k => $v) {
+    if (is_array($v)) {
+        $v = implode(',', $v);
+    }
     $params[$k] = in_array($k, ['workmode', 'company', 'city']) ? $v : normalize($v);
 }
 
