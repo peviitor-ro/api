@@ -115,7 +115,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
     // implicit: cele mai recente joburi primele
     // dacă clientul trimite sort, îl folosim pe acela
-    $parts[] = 'sort=' . rawurlencode(!empty($params['sort']) ? $params['sort'] : 'vdate desc');
+    $parts[] = 'sort=' . rawurlencode(!empty($params['sort']) ? $params['sort'] : 'date desc');
 
     $parts[] = "start=$start";
     $parts[] = "rows=$rows";
@@ -125,7 +125,7 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
-$rows  = max(1, (int)($_GET['rows'] ?? 12));
+$rows  = min(100, max(1, (int)($_GET['rows'] ?? 12)));
 $start = ($page - 1) * $rows;
 
 $params = [];
