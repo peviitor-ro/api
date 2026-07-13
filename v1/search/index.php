@@ -113,21 +113,9 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
     $parts[] = !empty($q) ? 'q=' . rawurlencode($q) : 'q=*:*';
 
 
-    // Only add boost queries when NOT filtering by company (range queries dont work on text fields)
-    if (empty($params['company'])) {
-        $parts[] = "bq=salary:*^10000";
-        $parts[] = "bq=tags:*^5000";
-        $parts[] = "bq=cif:*^2000";
-        $parts[] = "bq=company:*^500";
-        $parts[] = "bq=title:*^100";
-        $parts[] = "bq=location:*^50";
-    }
-
-    // sort=vdate+desc  =>  sort=vdate desc
-    if (!empty($params['sort'])) {
-        // deja vine normalizat, dar îl folosim direct
-        $parts[] = 'sort=' . rawurlencode($params['sort']);
-    }
+    // implicit: cele mai recente joburi primele
+    // dacă clientul trimite sort, îl folosim pe acela
+    $parts[] = 'sort=' . rawurlencode(!empty($params['sort']) ? $params['sort'] : 'date desc');
 
     $parts[] = "start=$start";
     $parts[] = "rows=$rows";
@@ -137,11 +125,14 @@ function buildSolrQuery(array $params, int $start, int $rows): string {
 
 
 $page  = max(1, (int)($_GET['page'] ?? 1));
-$rows  = max(1, (int)($_GET['rows'] ?? 12));
+$rows  = min(1500, max(1, (int)($_GET['rows'] ?? 12)));
 $start = ($page - 1) * $rows;
 
 $params = [];
 foreach ($_GET as $k => $v) {
+    if (is_array($v)) {
+        $v = implode(',', $v);
+    }
     $params[$k] = in_array($k, ['workmode', 'company', 'city']) ? $v : normalize($v);
 }
 
