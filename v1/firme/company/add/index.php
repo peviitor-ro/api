@@ -41,17 +41,21 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
     return $json;
 }
 
-function judet_fix($in) {
-    $output = $in;
-    $output = str_replace("Bucharest", "București", $output);
-    $output = str_replace("Brasov", "Brașov", $output);
-    $output = str_replace("Timisoara", "Timișoara", $output);
-    $output = str_replace("Pitesti", "Pitești", $output);
-    $output = str_replace("Iasi", "Iași", $output);
-    $output = str_replace("Targu Mures", "Târgu Mureș", $output);
-    $output = str_replace("Cluj Napoca", "Cluj-Napoca", $output);
-    return $output;
+function normalizeToArray($value): array {
+    if (is_array($value)) return $value;
+    if (is_string($value) && trim($value) !== '') return [trim($value)];
+    return [];
 }
+
+function isValidCif(string $cif): bool {
+    return preg_match('/^\d{8}$/', $cif) === 1;
+}
+
+function isValidUrl(string $url): bool {
+    return filter_var($url, FILTER_VALIDATE_URL) !== false;
+}
+
+$ALLOWED_STATUSES = ['activ', 'suspendat', 'inactiv', 'radiat'];
 
 try {
     if (!$PROD_SERVER) {
@@ -60,89 +64,99 @@ try {
 
     $raw_data = file_get_contents("php://input");
     $data = json_decode($raw_data);
-    
-    $id = isset($data->id) ? $data->id : null;
-    $company = isset($data->company) ? htmlspecialchars($data->company) : null;
-    $cod_inmatriculare = isset($data->cod_inmatriculare) ? htmlspecialchars($data->cod_inmatriculare) : null;
-    $euid = isset($data->euid) ? htmlspecialchars($data->euid) : null;
-    $localitate = isset($data->localitate) ? htmlspecialchars($data->localitate) : null;
-    $adresa_completa = isset($data->adresa_completa) ? htmlspecialchars($data->adresa_completa) : null;
-    $judet = isset($data->judet) ? htmlspecialchars($data->judet) : null;
-    $cod_stare = isset($data->cod_stare) ? $data->cod_stare : null;
-    $brands = isset($data->brands) ? htmlspecialchars($data->brands) : null;
-    $scraper = isset($data->scraper) ? htmlspecialchars($data->scraper) : null;
-    $website = isset($data->website) ? htmlspecialchars($data->website) : null;
-    $email = isset($data->email) ? htmlspecialchars($data->email) : null;
-    $phone = isset($data->phone) ? htmlspecialchars($data->phone) : null;
-    $logo = isset($data->logo) ? htmlspecialchars($data->logo) : null;
 
-    if (!$id || !$company || !$cod_inmatriculare || !$euid || !$adresa_completa || !$localitate || !$judet || !$cod_stare) {
+    if (!$data) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid or empty JSON body"]);
+        exit;
+    }
+
+    $id = isset($data->id) ? trim((string)$data->id) : '';
+    $company = isset($data->company) ? htmlspecialchars(trim((string)$data->company), ENT_QUOTES, 'UTF-8') : '';
+    $brand = isset($data->brand) ? htmlspecialchars(trim((string)$data->brand), ENT_QUOTES, 'UTF-8') : null;
+    $group = isset($data->group) ? htmlspecialchars(trim((string)$data->group), ENT_QUOTES, 'UTF-8') : null;
+    $status = isset($data->status) ? trim((string)$data->status) : null;
+    $location = $data->location ?? null;
+    $website = $data->website ?? null;
+    $career = $data->career ?? null;
+    $lastScraped = isset($data->lastScraped) ? trim((string)$data->lastScraped) : null;
+    $scraperFile = isset($data->scraperFile) ? trim((string)$data->scraperFile) : null;
+
+    if ($id === '' || $company === '') {
         http_response_code(400);
         echo json_encode([
-            "error" => "Missing required fields: id, company, cod_inmatriculare, euid, adresa_completa, localitate, judet or cod_stare.",
+            "error" => "Missing required fields: id, company",
             "code" => 400
         ]);
         exit;
     }
 
-    if (!is_int($id) || !is_int($cod_stare)) {
+    if (!isValidCif($id)) {
         http_response_code(400);
         echo json_encode([
-            "error" => "Fields 'id' and 'cod_stare' must be integers.",
+            "error" => "Field 'id' must be an 8-digit CIF/CUI string (e.g. '24415960')",
             "code" => 400
         ]);
         exit;
     }
 
-    if ($email && (!preg_match('/^[a-zA-Z0-9._%+-]{3,}@[a-zA-Z0-9.-]/', $email) || preg_match('/[\s\/,<>+=\-:;?"\'\{\}\[\]\|\\\)\(\*&^%$#!~`]/', $email))) {
+    if ($status !== null && !in_array($status, $ALLOWED_STATUSES, true)) {
         http_response_code(400);
-        echo json_encode(["error" => "Invalid email format", "received" => $email]);
+        echo json_encode([
+            "error" => "Field 'status' must be one of: " . implode(', ', $ALLOWED_STATUSES),
+            "code" => 400
+        ]);
         exit;
     }
 
-    if ($phone) {
-        $phone_cleaned = preg_replace('/[\s\-\(\)]+/', '', $phone);
-        if (!preg_match('/^\+?[0-9]{7,15}$/', $phone_cleaned)) {
+    $locationArr = normalizeToArray($location);
+    $websiteArr = normalizeToArray($website);
+    $careerArr = normalizeToArray($career);
+
+    foreach ($websiteArr as $url) {
+        if (!isValidUrl($url)) {
             http_response_code(400);
-            echo json_encode(["error" => "Invalid phone format", "received" => $phone]);
+            echo json_encode(["error" => "Invalid website URL: $url"]);
+            exit;
+        }
+    }
+    foreach ($careerArr as $url) {
+        if (!isValidUrl($url)) {
+            http_response_code(400);
+            echo json_encode(["error" => "Invalid career URL: $url"]);
             exit;
         }
     }
 
-    if ($website && !filter_var($website, FILTER_VALIDATE_URL)) {
-        http_response_code(400);
-        echo json_encode(["error" => "Invalid website URL format.", "received" => $website]);
-        exit;
-    }
-
     $item = new stdClass();
-    $item->id = trim($id);
-    $item->company = trim($company);
-    $item->cod_inmatriculare = trim($cod_inmatriculare);
-    $item->euid = trim($euid);
-    $item->localitate = trim($localitate);
-    $item->adresa_completa = trim($adresa_completa);
-    $item->judet = judet_fix(trim($judet));
-    $item->brands = trim($brands ?? '');
-    $item->scraper = trim($scraper ?? '');
-    $item->website = trim($website ?? '');
-    $item->email = trim($email ?? '');
-    $item->phone = trim($phone ?? '');
-    $item->logo = trim($logo ?? '');
-    $item->cod_stare = trim($cod_stare);
+    $item->id = $id;
+    $item->company = $company;
+
+    if ($brand !== null && $brand !== '') $item->brand = $brand;
+    if ($group !== null && $group !== '') $item->group = $group;
+    if ($status !== null) $item->status = $status;
+    if (!empty($locationArr)) $item->location = $locationArr;
+    if (!empty($websiteArr)) $item->website = $websiteArr;
+    if (!empty($careerArr)) $item->career = $careerArr;
+    if ($lastScraped !== null && $lastScraped !== '') $item->lastScraped = $lastScraped;
+    if ($scraperFile !== null && $scraperFile !== '') $item->scraperFile = $scraperFile;
 
     $core = 'company';
     $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
     $payload = json_encode([$item]);
 
-    error_log("FIRME COMPANY ADD URL: $url");
+    error_log("COMPANY ADD: CIF=$id company=" . preg_replace('/[\r\n]/', '', $company));
 
     $response = postJson($url, $payload, $SOLR_USER, $SOLR_PASS);
 
-    echo json_encode(["success" => "Data successfully inserted into Solr"]);
+    echo json_encode([
+        "success" => true,
+        "id" => $id,
+        "message" => "Company '$company' ($id) upserted to company core"
+    ]);
 
 } catch (Exception $e) {
-    error_log("FIRME COMPANY ADD FAILED: " . $e->getMessage());
+    error_log("COMPANY ADD FAILED: " . $e->getMessage());
     http_response_code(503);
     echo json_encode([
         'error' => 'Company core unavailable',
