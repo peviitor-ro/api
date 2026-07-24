@@ -825,6 +825,323 @@ curl -X DELETE "https://api.peviitor.ro/v1/cleanjobs/" \
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- COMPANY SEARCH ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row" onclick="toggleEndpoint('company-search')">
+      <span class="method-badge">GET</span>
+      <span class="endpoint-path">/v1/firme/company/</span>
+      <span class="endpoint-desc" data-i18n="companySearchTag">Search companies by CIF or name</span>
+      <span class="toggle-arrow" id="arrow-company-search">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="company-search-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="companySearchDesc">
+          Searches the Solr <code>company</code> core using edismax and returns matching company documents.
+          You can search by exact CIF (8-digit number) or by company name (full-text search).
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="companySearchHow1">Provide either <code>cif</code> (exact match) or <code>name</code> (full-text search) as a query parameter</li>
+          <li data-i18n="companySearchHow2">The endpoint builds an edismax query and sends it to the Solr <code>company</code> core</li>
+          <li data-i18n="companySearchHow3">Returns matching documents with fields: id, company, brand, group, status, location, website, career, lastScraped, scraperFile</li>
+        </ol>
+
+        <div class="section-title" data-i18n="queryParamsTitle">Query parameters</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Param</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchParamCif">8-digit CIF/CUI (exact match). Non-digit characters are stripped.</td></tr>
+            <tr><td>name</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchParamName">Company name for full-text search via edismax</td></tr>
+            <tr><td>rows</td><td><span class="type-tag">number</span></td><td data-i18n="companySearchParamRows">Max results to return (default: 10, max: 50)</td></tr>
+            <tr><td>start</td><td><span class="type-tag">number</span></td><td data-i18n="companySearchParamStart">Offset for pagination (default: 0)</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0 0 1rem;color:#7d6b5a;font-size:0.85rem;" data-i18n="companySearchParamNote">
+          At least one of <code>cif</code> or <code>name</code> is required.
+        </p>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X GET "https://api.peviitor.ro/v1/firme/company/?cif=24415960" \
+  -H "Accept: application/json"
+
+curl -X GET "https://api.peviitor.ro/v1/firme/company/?name=Google&rows=5" \
+  -H "Accept: application/json"</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="companySearchRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>success</td><td><span class="type-tag">boolean</span></td><td data-i18n="companySearchRespSuccess">Always <code>true</code> on success</td></tr>
+            <tr><td>total</td><td><span class="type-tag">number</span></td><td data-i18n="companySearchRespTotal">Total number of matching documents in Solr</td></tr>
+            <tr><td>count</td><td><span class="type-tag">number</span></td><td data-i18n="companySearchRespCount">Number of documents returned in this response</td></tr>
+            <tr><td>data</td><td><span class="type-tag">object[]</span></td><td data-i18n="companySearchRespData">Array of company documents</td></tr>
+            <tr><td>data[].id</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespId">CIF/CUI (8 digits)</td></tr>
+            <tr><td>data[].company</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespCompany">Company legal name</td></tr>
+            <tr><td>data[].brand</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespBrand">Brand name (if set)</td></tr>
+            <tr><td>data[].group</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespGroup">Company group (if set)</td></tr>
+            <tr><td>data[].status</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespStatus"><code>activ</code>, <code>suspendat</code>, <code>inactiv</code>, or <code>radiat</code></td></tr>
+            <tr><td>data[].location</td><td><span class="type-tag">string[]</span></td><td data-i18n="companySearchRespLocation">Array of locations</td></tr>
+            <tr><td>data[].website</td><td><span class="type-tag">string[]</span></td><td data-i18n="companySearchRespWebsite">Array of website URLs</td></tr>
+            <tr><td>data[].career</td><td><span class="type-tag">string[]</span></td><td data-i18n="companySearchRespCareer">Array of career page URLs</td></tr>
+            <tr><td>data[].lastScraped</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespLastScraped">ISO8601 timestamp of last scrape</td></tr>
+            <tr><td>data[].scraperFile</td><td><span class="type-tag">string</span></td><td data-i18n="companySearchRespScraperFile">Scraper file name</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"total"</span>: <span class="json-number">1</span>,
+  <span class="json-key">"count"</span>: <span class="json-number">1</span>,
+  <span class="json-key">"data"</span>: [{
+    <span class="json-key">"id"</span>: <span class="json-string">"24415960"</span>,
+    <span class="json-key">"company"</span>: <span class="json-string">"GOOGLE ROMANIA SRL"</span>,
+    <span class="json-key">"brand"</span>: <span class="json-string">"Google"</span>,
+    <span class="json-key">"status"</span>: <span class="json-string">"activ"</span>,
+    <span class="json-key">"location"</span>: [<span class="json-string">"București"</span>],
+    <span class="json-key">"website"</span>: [<span class="json-string">"https://google.ro"</span>],
+    <span class="json-key">"career"</span>: [<span class="json-string">"https://careers.google.com"</span>]
+  }]
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">400 — <span data-i18n="badRequestTitle">Bad Request</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Missing query parameter: cif or name"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Company search unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="companySearchEndpoint">Company Search</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="authVal">None (public endpoint)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="companySearchParamsVal">Query: <code>cif</code> (string) or <code>name</code> (string), optional <code>rows</code> (int, max 50), <code>start</code> (int)</td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="companySearchStatus200">Companies found and returned successfully</span></li>
+          <li><span class="status-code sc-400">400</span><span data-i18n="companySearchStatus400">Missing required query parameter (cif or name)</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="companySearchStatus405">Only GET method is allowed</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="companySearchStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================= -->
+  <!-- COMPANY ADD ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row" onclick="toggleEndpoint('company-add')">
+      <span class="method-badge" style="background:#1565c0;box-shadow:0 2px 6px rgba(21,101,192,0.3);">PUT</span>
+      <span class="endpoint-path">/v1/firme/company/add/</span>
+      <span class="endpoint-desc" data-i18n="companyAddTag">Add or update a company in the Solr index</span>
+      <span class="toggle-arrow" id="arrow-company-add">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="company-add-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="companyAddDesc">
+          Upserts a company document into the Solr <code>company</code> core. If a document with the same CIF (<code>id</code>) already exists, it is replaced.
+          Designed for scrapers and company integrations to keep the company index up to date.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="companyAddHow1">Validates required fields (<code>id</code> as 8-digit CIF, <code>company</code> name)</li>
+          <li data-i18n="companyAddHow2">Sanitizes string fields with <code>htmlspecialchars</code> to prevent XSS</li>
+          <li data-i18n="companyAddHow3">Normalizes array fields (<code>location</code>, <code>website</code>, <code>career</code>) — accepts string or array</li>
+          <li data-i18n="companyAddHow4">Validates URLs in <code>website</code> and <code>career</code> fields</li>
+          <li data-i18n="companyAddHow5">Sends the document to Solr with <code>commitWithin=1000</code> and <code>overwrite=true</code></li>
+        </ol>
+
+        <div class="section-title" data-i18n="authTitle">Authentication</div>
+        <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="companyAddAuthDesc">
+          This endpoint uses Solr Basic Auth via environment variables <code>SOLR_USER</code> and <code>SOLR_PASS</code> configured in <code>api.env</code>.
+          No client-side authentication is required.
+        </p>
+
+        <div class="section-title" data-i18n="companyAddBodyTitle">Request body (JSON)</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Field</th><th>Type</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>id</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="companyAddFieldId">8-digit CIF/CUI (e.g. <code>"24415960"</code>)</td></tr>
+            <tr><td>company</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="companyAddFieldCompany">Company legal name</td></tr>
+            <tr><td>brand</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="companyAddFieldBrand">Brand / trade name</td></tr>
+            <tr><td>group</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="companyAddFieldGroup">Company group / parent</td></tr>
+            <tr><td>status</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="companyAddFieldStatus">One of: <code>activ</code>, <code>suspendat</code>, <code>inactiv</code>, <code>radiat</code></td></tr>
+            <tr><td>location</td><td><span class="type-tag">string|string[]</span></td><td>No</td><td data-i18n="companyAddFieldLocation">City or array of cities</td></tr>
+            <tr><td>website</td><td><span class="type-tag">string|string[]</span></td><td>No</td><td data-i18n="companyAddFieldWebsite">Website URL(s) — must be valid URLs</td></tr>
+            <tr><td>career</td><td><span class="type-tag">string|string[]</span></td><td>No</td><td data-i18n="companyAddFieldCareer">Career page URL(s) — must be valid URLs</td></tr>
+            <tr><td>lastScraped</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="companyAddFieldLastScraped">ISO8601 timestamp of last scrape</td></tr>
+            <tr><td>scraperFile</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="companyAddFieldScraperFile">Name of the scraper file</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X PUT "https://api.peviitor.ro/v1/firme/company/add/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "24415960",
+    "company": "GOOGLE ROMANIA SRL",
+    "brand": "Google",
+    "status": "activ",
+    "location": ["București"],
+    "website": ["https://google.ro"],
+    "career": ["https://careers.google.com"]
+  }'</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="companyAddRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>success</td><td><span class="type-tag">boolean</span></td><td data-i18n="companyAddRespSuccess">Always <code>true</code> on success</td></tr>
+            <tr><td>id</td><td><span class="type-tag">string</span></td><td data-i18n="companyAddRespId">The CIF of the upserted company</td></tr>
+            <tr><td>message</td><td><span class="type-tag">string</span></td><td data-i18n="companyAddRespMessage">Confirmation message</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"id"</span>: <span class="json-string">"24415960"</span>,
+  <span class="json-key">"message"</span>: <span class="json-string">"Company 'GOOGLE ROMANIA SRL' (24415960) upserted to company core"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">400 — <span data-i18n="badRequestTitle">Bad Request</span></div>
+      <div class="card-body">
+        <p style="margin-bottom:0.75rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="companyAdd400Desc">
+          Returned when the request body is invalid or required fields are missing/invalid.
+        </p>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Missing required fields: id, company"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Field 'id' must be an 8-digit CIF/CUI string (e.g. '24415960')"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Field 'status' must be one of: activ, suspendat, inactiv, radiat"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Invalid website URL: not-a-url"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only PUT method allowed"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Company core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"FETCH FAILED: http://... | Connection timed out"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="companyAddEndpoint">Company Add</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>PUT</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="companyAddAuthVal">Solr Basic Auth (server-side, via <code>api.env</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="companyAddParamsVal">Body: <code>{"id": "...", "company": "...", ...}</code></td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="companyAddStatus200">Company was upserted successfully</span></li>
+          <li><span class="status-code sc-400">400</span><span data-i18n="companyAddStatus400">Invalid body, missing required fields, or validation failed</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="companyAddStatus405">Only PUT method is allowed</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="companyAddStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -945,6 +1262,72 @@ const i18n = {
     cleanjobsStatus503: "Solr core is unavailable or environment not configured",
     unauthTitle: "Unauthorized",
 
+    companySearchTag: "Search companies by CIF or name",
+    companySearchDesc: "Searches the Solr <code>company</code> core using edismax and returns matching company documents. You can search by exact CIF (8-digit number) or by company name (full-text search).",
+    companySearchHow1: "Provide either <code>cif</code> (exact match) or <code>name</code> (full-text search) as a query parameter",
+    companySearchHow2: "The endpoint builds an edismax query and sends it to the Solr <code>company</code> core",
+    companySearchHow3: "Returns matching documents with fields: id, company, brand, group, status, location, website, career, lastScraped, scraperFile",
+    queryParamsTitle: "Query parameters",
+    companySearchParamCif: "8-digit CIF/CUI (exact match). Non-digit characters are stripped.",
+    companySearchParamName: "Company name for full-text search via edismax",
+    companySearchParamRows: "Max results to return (default: 10, max: 50)",
+    companySearchParamStart: "Offset for pagination (default: 0)",
+    companySearchParamNote: "At least one of <code>cif</code> or <code>name</code> is required.",
+    companySearchRespTitle: "Response fields",
+    companySearchRespSuccess: "Always <code>true</code> on success",
+    companySearchRespTotal: "Total number of matching documents in Solr",
+    companySearchRespCount: "Number of documents returned in this response",
+    companySearchRespData: "Array of company documents",
+    companySearchRespId: "CIF/CUI (8 digits)",
+    companySearchRespCompany: "Company legal name",
+    companySearchRespBrand: "Brand name (if set)",
+    companySearchRespGroup: "Company group (if set)",
+    companySearchRespStatus: "<code>activ</code>, <code>suspendat</code>, <code>inactiv</code>, or <code>radiat</code>",
+    companySearchRespLocation: "Array of locations",
+    companySearchRespWebsite: "Array of website URLs",
+    companySearchRespCareer: "Array of career page URLs",
+    companySearchRespLastScraped: "ISO8601 timestamp of last scrape",
+    companySearchRespScraperFile: "Scraper file name",
+    badRequestTitle: "Bad Request",
+    companySearchEndpoint: "Company Search",
+    companySearchParamsVal: "Query: <code>cif</code> (string) or <code>name</code> (string), optional <code>rows</code> (int, max 50), <code>start</code> (int)",
+    companySearchStatus200: "Companies found and returned successfully",
+    companySearchStatus400: "Missing required query parameter (cif or name)",
+    companySearchStatus405: "Only GET method is allowed",
+    companySearchStatus503: "Solr core is unavailable or environment not configured",
+
+    companyAddTag: "Add or update a company in the Solr index",
+    companyAddDesc: "Upserts a company document into the Solr <code>company</code> core. If a document with the same CIF (<code>id</code>) already exists, it is replaced. Designed for scrapers and company integrations to keep the company index up to date.",
+    companyAddHow1: "Validates required fields (<code>id</code> as 8-digit CIF, <code>company</code> name)",
+    companyAddHow2: "Sanitizes string fields with <code>htmlspecialchars</code> to prevent XSS",
+    companyAddHow3: "Normalizes array fields (<code>location</code>, <code>website</code>, <code>career</code>) — accepts string or array",
+    companyAddHow4: "Validates URLs in <code>website</code> and <code>career</code> fields",
+    companyAddHow5: "Sends the document to Solr with <code>commitWithin=1000</code> and <code>overwrite=true</code>",
+    companyAddAuthDesc: "This endpoint uses Solr Basic Auth via environment variables <code>SOLR_USER</code> and <code>SOLR_PASS</code> configured in <code>api.env</code>. No client-side authentication is required.",
+    companyAddBodyTitle: "Request body (JSON)",
+    companyAddFieldId: "8-digit CIF/CUI (e.g. <code>\"24415960\"</code>)",
+    companyAddFieldCompany: "Company legal name",
+    companyAddFieldBrand: "Brand / trade name",
+    companyAddFieldGroup: "Company group / parent",
+    companyAddFieldStatus: "One of: <code>activ</code>, <code>suspendat</code>, <code>inactiv</code>, <code>radiat</code>",
+    companyAddFieldLocation: "City or array of cities",
+    companyAddFieldWebsite: "Website URL(s) — must be valid URLs",
+    companyAddFieldCareer: "Career page URL(s) — must be valid URLs",
+    companyAddFieldLastScraped: "ISO8601 timestamp of last scrape",
+    companyAddFieldScraperFile: "Name of the scraper file",
+    companyAddRespTitle: "Response fields",
+    companyAddRespSuccess: "Always <code>true</code> on success",
+    companyAddRespId: "The CIF of the upserted company",
+    companyAddRespMessage: "Confirmation message",
+    companyAdd400Desc: "Returned when the request body is invalid or required fields are missing/invalid.",
+    companyAddEndpoint: "Company Add",
+    companyAddAuthVal: "Solr Basic Auth (server-side, via <code>api.env</code>)",
+    companyAddParamsVal: "Body: <code>{\"id\": \"...\", \"company\": \"...\", ...}</code>",
+    companyAddStatus200: "Company was upserted successfully",
+    companyAddStatus400: "Invalid body, missing required fields, or validation failed",
+    companyAddStatus405: "Only PUT method is allowed",
+    companyAddStatus503: "Solr core is unavailable or environment not configured",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -1050,6 +1433,72 @@ const i18n = {
     cleanjobsStatus405: "Doar metoda DELETE este permis\u0103",
     cleanjobsStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
     unauthTitle: "Neautorizat",
+
+    companySearchTag: "Caută companii după CIF sau nume",
+    companySearchDesc: "Interoghează core-ul Solr <code>company</code> folosind edismax și returnează documentele companiilor găsite. Poți căuta după CIF exact (număr de 8 cifre) sau după numele companiei (căutare full-text).",
+    companySearchHow1: "Furnizează fie <code>cif</code> (potrivire exactă) fie <code>name</code> (căutare full-text) ca parametru de query",
+    companySearchHow2: "Endpoint-ul construiește o interogare edismax și o trimite la core-ul Solr <code>company</code>",
+    companySearchHow3: "Returnează documentele găsite cu câmpurile: id, company, brand, group, status, location, website, career, lastScraped, scraperFile",
+    queryParamsTitle: "Parametri de query",
+    companySearchParamCif: "CIF/CUI de 8 cifre (potrivire exactă). Caracterele non-cifre sunt eliminate.",
+    companySearchParamName: "Numele companiei pentru căutare full-text prin edismax",
+    companySearchParamRows: "Număr maxim de rezultate (implicit: 10, maxim: 50)",
+    companySearchParamStart: "Offset pentru paginare (implicit: 0)",
+    companySearchParamNote: "Cel puțin unul dintre <code>cif</code> sau <code>name</code> este obligatoriu.",
+    companySearchRespTitle: "Câmpurile răspunsului",
+    companySearchRespSuccess: "Întotdeauna <code>true</code> la succes",
+    companySearchRespTotal: "Numărul total de documente potrivite în Solr",
+    companySearchRespCount: "Numărul de documente returnate în acest răspuns",
+    companySearchRespData: "Array de documente companie",
+    companySearchRespId: "CIF/CUI (8 cifre)",
+    companySearchRespCompany: "Numele legal al companiei",
+    companySearchRespBrand: "Numele brandului (dacă este setat)",
+    companySearchRespGroup: "Grupul companiei (dacă este setat)",
+    companySearchRespStatus: "<code>activ</code>, <code>suspendat</code>, <code>inactiv</code> sau <code>radiat</code>",
+    companySearchRespLocation: "Array de locații",
+    companySearchRespWebsite: "Array de URL-uri website",
+    companySearchRespCareer: "Array de URL-uri pagini carieră",
+    companySearchRespLastScraped: "Timestamp ISO8601 al ultimului scrap",
+    companySearchRespScraperFile: "Numele fișierului scraper",
+    badRequestTitle: "Cerere invalidă",
+    companySearchEndpoint: "Căutare companii",
+    companySearchParamsVal: "Query: <code>cif</code> (string) sau <code>name</code> (string), opțional <code>rows</code> (int, max 50), <code>start</code> (int)",
+    companySearchStatus200: "Companiile au fost găsite și returnate cu succes",
+    companySearchStatus400: "Lipsește parametrul de query obligatoriu (cif sau name)",
+    companySearchStatus405: "Doar metoda GET este permisă",
+    companySearchStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+
+    companyAddTag: "Adaugă sau actualizează o companie în indexul Solr",
+    companyAddDesc: "Inserează sau actualizează un document companie în core-ul Solr <code>company</code>. Dacă există deja un document cu același CIF (<code>id</code>), acesta este înlocuit. Conceput pentru scrapers și integrări de companii pentru a menține indexul de companii actualizat.",
+    companyAddHow1: "Validează câmpurile obligatorii (<code>id</code> ca CIF de 8 cifre, numele <code>company</code>)",
+    companyAddHow2: "Sanitizează câmpurile de text cu <code>htmlspecialchars</code> pentru a preveni XSS",
+    companyAddHow3: "Normalizează câmpurile de tip array (<code>location</code>, <code>website</code>, <code>career</code>) — acceptă string sau array",
+    companyAddHow4: "Validează URL-urile din câmpurile <code>website</code> și <code>career</code>",
+    companyAddHow5: "Trimite documentul la Solr cu <code>commitWithin=1000</code> și <code>overwrite=true</code>",
+    companyAddAuthDesc: "Acest endpoint folosește Solr Basic Auth prin variabilele de mediu <code>SOLR_USER</code> și <code>SOLR_PASS</code> configurate în <code>api.env</code>. Nu este necesară autentificarea client-side.",
+    companyAddBodyTitle: "Corpul requestului (JSON)",
+    companyAddFieldId: "CIF/CUI de 8 cifre (ex. <code>\"24415960\"</code>)",
+    companyAddFieldCompany: "Numele legal al companiei",
+    companyAddFieldBrand: "Numele brandului / comercial",
+    companyAddFieldGroup: "Grupul / compania părinte",
+    companyAddFieldStatus: "Unul dintre: <code>activ</code>, <code>suspendat</code>, <code>inactiv</code>, <code>radiat</code>",
+    companyAddFieldLocation: "Oraș sau array de orașe",
+    companyAddFieldWebsite: "URL(uri) website — trebuie să fie URL-uri valide",
+    companyAddFieldCareer: "URL(uri) pagini carieră — trebuie să fie URL-uri valide",
+    companyAddFieldLastScraped: "Timestamp ISO8601 al ultimului scrap",
+    companyAddFieldScraperFile: "Numele fișierului scraper",
+    companyAddRespTitle: "Câmpurile răspunsului",
+    companyAddRespSuccess: "Întotdeauna <code>true</code> la succes",
+    companyAddRespId: "CIF-ul companiei upsertate",
+    companyAddRespMessage: "Mesaj de confirmare",
+    companyAdd400Desc: "Returnat când corpul requestului este invalid sau câmpurile obligatorii lipsesc/sunt invalide.",
+    companyAddEndpoint: "Adăugare companii",
+    companyAddAuthVal: "Solr Basic Auth (server-side, prin <code>api.env</code>)",
+    companyAddParamsVal: "Body: <code>{\"id\": \"...\", \"company\": \"...\", ...}</code>",
+    companyAddStatus200: "Compania a fost upsertată cu succes",
+    companyAddStatus400: "Body invalid, câmpuri obligatorii lipsă sau validare eșuată",
+    companyAddStatus405: "Doar metoda PUT este permisă",
+    companyAddStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
