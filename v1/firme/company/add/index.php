@@ -72,9 +72,9 @@ try {
     }
 
     $id = isset($data->id) ? trim((string)$data->id) : '';
-    $company = isset($data->company) ? trim((string)$data->company) : '';
-    $brand = isset($data->brand) ? trim((string)$data->brand) : null;
-    $group = isset($data->group) ? trim((string)$data->group) : null;
+    $company = isset($data->company) ? htmlspecialchars(trim((string)$data->company), ENT_QUOTES, 'UTF-8') : '';
+    $brand = isset($data->brand) ? htmlspecialchars(trim((string)$data->brand), ENT_QUOTES, 'UTF-8') : null;
+    $group = isset($data->group) ? htmlspecialchars(trim((string)$data->group), ENT_QUOTES, 'UTF-8') : null;
     $status = isset($data->status) ? trim((string)$data->status) : null;
     $location = $data->location ?? null;
     $website = $data->website ?? null;
@@ -145,7 +145,7 @@ try {
     $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
     $payload = json_encode([$item]);
 
-    error_log("COMPANY ADD: CIF=$id company=$company");
+    error_log("COMPANY ADD: CIF=$id company=" . preg_replace('/[\r\n]/', '', $company));
 
     $response = postJson($url, $payload, $SOLR_USER, $SOLR_PASS);
 
