@@ -2,20 +2,20 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once __DIR__ . '/../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../api.env');
+require_once __DIR__ . '/../../../util/loadEnv.php';
+loadEnv(__DIR__ . '/../../../api.env');
 
 $PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
-    echo json_encode(["error" => "Only POST method allowed"]);
+    echo json_encode(["error" => "Only GET method allowed"]);
     exit;
 }
 
-function postJson(string $url, string $payload, ?string $user = null, ?string $pass = null): array {
+function getJson(string $url, ?string $user = null, ?string $pass = null): array {
     $headers = [];
     if ($user && $pass) {
         $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
@@ -23,9 +23,8 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
     $headers[] = "Content-Type: application/json";
     $context = stream_context_create([
         'http' => [
-            'method'  => 'POST',
+            'method'  => 'GET',
             'header'  => implode("\r\n", $headers),
-            'content' => $payload,
             'timeout' => 10
         ]
     ]);
@@ -46,36 +45,66 @@ try {
         throw new Exception("PROD_SERVER not set");
     }
 
-    if (!isset($_POST['id']) || !isset($_POST['company'])) {
+    $cif = isset($_GET['cif']) ? trim($_GET['cif']) : null;
+    $name = isset($_GET['name']) ? trim($_GET['name']) : null;
+    $rows = isset($_GET['rows']) ? min((int)$_GET['rows'], 50) : 10;
+    $start = isset($_GET['start']) ? max((int)$_GET['start'], 0) : 0;
+
+    if (!$cif && !$name) {
         http_response_code(400);
-        echo json_encode(["error" => "Missing id or company"]);
+        echo json_encode(["error" => "Missing query parameter: cif or name"]);
         exit;
     }
 
-    $id = $_POST['id'];
-    $company = $_POST['company'];
-
     $core = 'company';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $fl = 'id,company,brand,group,status,location,website,career,lastScraped,scraperFile';
 
-    $payload = json_encode([
-        [
-            "id" => $id,
-            "company" => ["set" => $company]
-        ]
+    if ($cif) {
+        $cif = preg_replace('/[^0-9]/', '', $cif);
+        $q = "id:" . urlencode($cif);
+        $defType = 'edismax';
+    } else {
+        $escaped = SolrEscape($name);
+        $q = "$escaped";
+        $defType = 'edismax';
+    }
+
+    $params = http_build_query([
+        'q'       => $q,
+        'defType' => $defType,
+        'fl'      => $fl,
+        'rows'    => $rows,
+        'start'   => $start,
+        'wt'      => 'json'
     ]);
 
-    error_log("FIRME COMPANY URL: $url");
+    $url = "http://$PROD_SERVER/solr/$core/select?$params";
 
-    $response = postJson($url, $payload, $SOLR_USER, $SOLR_PASS);
+    $response = getJson($url, $SOLR_USER, $SOLR_PASS);
 
-    echo json_encode($response);
+    $docs = $response['response']['docs'] ?? [];
+    $total = $response['response']['numFound'] ?? 0;
+
+    echo json_encode([
+        "success" => true,
+        "total"   => $total,
+        "count"   => count($docs),
+        "data"    => $docs
+    ]);
 
 } catch (Exception $e) {
-    error_log("FIRME COMPANY FAILED: " . $e->getMessage());
+    error_log("COMPANY SEARCH FAILED: " . $e->getMessage());
     http_response_code(503);
     echo json_encode([
-        'error' => 'Company core unavailable',
+        'error'   => 'Company search unavailable',
         'details' => $e->getMessage()
     ]);
+}
+
+function SolrEscape(string $query): string {
+    $chars = ['+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'];
+    foreach ($chars as $char) {
+        $query = str_replace($char, '\\' . $char, $query);
+    }
+    return $query;
 }
