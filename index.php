@@ -1142,6 +1142,183 @@ curl -X GET "https://api.peviitor.ro/v1/firme/company/?name=Google&rows=5" \
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- SCRAPER JOBS UPLOAD ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row" onclick="toggleEndpoint('scraper-jobs-upload')">
+      <span class="method-badge" style="background:#e65100;box-shadow:0 2px 6px rgba(230,81,0,0.3);">POST</span>
+      <span class="endpoint-path">/v1/scraper/jobs/upload/</span>
+      <span class="endpoint-desc" data-i18n="scraperUploadTag">Upload jobs from scrapers to Solr</span>
+      <span class="toggle-arrow" id="arrow-scraper-jobs-upload">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="scraper-jobs-upload-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="scraperUploadDesc">
+          Accepts a JSON array of job listings and upserts them directly into the Solr <code>job</code> core.
+          Designed for automated scrapers that need to upload jobs in bulk.
+          Automatically fixes diacritics in city names and lowercases tags.
+          Existing jobs (same <code>url</code>) are overwritten.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="scraperUploadHow1">Receives a JSON array of job objects (or <code>{"jobs": [...]}</code>)</li>
+          <li data-i18n="scraperUploadHow2">Skips entries missing required fields (<code>url</code>, <code>title</code>, <code>company</code>)</li>
+          <li data-i18n="scraperUploadHow3">Normalizes <code>location</code> (fixes diacritics, accepts string or array)</li>
+          <li data-i18n="scraperUploadHow4">Lowercases <code>tags</code> and filters empty values</li>
+          <li data-i18n="scraperUploadHow5">Sends to Solr with <code>commitWithin=1000</code> and <code>overwrite=true</code></li>
+        </ol>
+
+        <div class="section-title" data-i18n="authTitle">Authentication</div>
+        <p style="margin-bottom:1rem;color:#5a4a3a;font-size:0.9rem;" data-i18n="scraperUploadAuthDesc">
+          This endpoint uses Solr Basic Auth via environment variables <code>SOLR_USER</code> and <code>SOLR_PASS</code> configured in <code>api.env</code>.
+          No client-side authentication is required.
+        </p>
+
+        <div class="section-title" data-i18n="scraperUploadBodyTitle">Request body (JSON)</div>
+        <p style="margin-bottom:0.75rem;color:#7d6b5a;font-size:0.85rem;" data-i18n="scraperUploadBodyNote">
+          Accepts either a plain array <code>[{...}, ...]</code> or an object <code>{"jobs": [{...}, ...]}</code>.
+        </p>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Field</th><th>Type</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>url</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="scraperUploadFieldUrl">Full URL to the job detail page (unique key)</td></tr>
+            <tr><td>title</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="scraperUploadFieldTitle">Exact job position title</td></tr>
+            <tr><td>company</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="scraperUploadFieldCompany">Hiring company name</td></tr>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="scraperUploadFieldCif">CIF/CUI of the company</td></tr>
+            <tr><td>location</td><td><span class="type-tag">string|string[]</span></td><td>No</td><td data-i18n="scraperUploadFieldLocation">City or array of cities (diacritics auto-fixed)</td></tr>
+            <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td>No</td><td data-i18n="scraperUploadFieldTags">Skill tags (auto-lowercased)</td></tr>
+            <tr><td>workmode</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="scraperUploadFieldWorkmode"><code>remote</code>, <code>on-site</code>, or <code>hybrid</code></td></tr>
+            <tr><td>date</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="scraperUploadFieldDate">ISO8601 UTC timestamp</td></tr>
+            <tr><td>status</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="scraperUploadFieldStatus"><code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X POST "https://api.peviitor.ro/v1/scraper/jobs/upload/" \
+  -H "Content-Type: application/json" \
+  -d '[
+    {
+      "url": "https://example.com/job/123",
+      "title": "Inginer IT",
+      "company": "COMPANY SRL",
+      "cif": "12345678",
+      "location": ["București", "Cluj-Napoca"],
+      "tags": ["javascript", "react"],
+      "workmode": "remote",
+      "date": "2026-07-24T10:00:00Z",
+      "status": "scraped"
+    }
+  ]'</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="scraperUploadRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>success</td><td><span class="type-tag">string</span></td><td data-i18n="scraperUploadRespSuccess">Confirmation message</td></tr>
+            <tr><td>count</td><td><span class="type-tag">number</span></td><td data-i18n="scraperUploadRespCount">Number of jobs sent to Solr</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-string">"Jobs successfully uploaded to Solr"</span>,
+  <span class="json-key">"count"</span>: <span class="json-number">29</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">400 — <span data-i18n="badRequestTitle">Bad Request</span></div>
+      <div class="card-body">
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Payload must be a non-empty JSON array of jobs"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"No valid jobs found in payload (url, title, company required)"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only POST method is allowed"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">405</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">415 — <span data-i18n="unsupportedMediaTypeTitle">Unsupported Media Type</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Content-Type must be application/json"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">415</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="scraperUploadEndpoint">Scraper Jobs Upload</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>POST</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="scraperUploadAuthVal">Solr Basic Auth (server-side, via <code>api.env</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="scraperUploadParamsVal">Body: <code>[{"url": "...", "title": "...", "company": "...", ...}]</code></td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="scraperUploadStatus200">Jobs were uploaded to Solr successfully</span></li>
+          <li><span class="status-code sc-400">400</span><span data-i18n="scraperUploadStatus400">Empty payload, missing required fields, or invalid JSON</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="scraperUploadStatus405">Only POST method is allowed</span></li>
+          <li><span class="status-code sc-415">415</span><span data-i18n="scraperUploadStatus415">Content-Type is not application/json</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="scraperUploadStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -1328,6 +1505,38 @@ const i18n = {
     companyAddStatus405: "Only PUT method is allowed",
     companyAddStatus503: "Solr core is unavailable or environment not configured",
 
+    scraperUploadTag: "Upload jobs from scrapers to Solr",
+    scraperUploadDesc: "Accepts a JSON array of job listings and upserts them directly into the Solr <code>job</code> core. Designed for automated scrapers that need to upload jobs in bulk. Automatically fixes diacritics in city names and lowercases tags. Existing jobs (same <code>url</code>) are overwritten.",
+    scraperUploadHow1: "Receives a JSON array of job objects (or <code>{\"jobs\": [...]}</code>)",
+    scraperUploadHow2: "Skips entries missing required fields (<code>url</code>, <code>title</code>, <code>company</code>)",
+    scraperUploadHow3: "Normalizes <code>location</code> (fixes diacritics, accepts string or array)",
+    scraperUploadHow4: "Lowercases <code>tags</code> and filters empty values",
+    scraperUploadHow5: "Sends to Solr with <code>commitWithin=1000</code> and <code>overwrite=true</code>",
+    scraperUploadAuthDesc: "This endpoint uses Solr Basic Auth via environment variables <code>SOLR_USER</code> and <code>SOLR_PASS</code> configured in <code>api.env</code>. No client-side authentication is required.",
+    scraperUploadBodyTitle: "Request body (JSON)",
+    scraperUploadBodyNote: "Accepts either a plain array <code>[{...}, ...]</code> or an object <code>{\"jobs\": [{...}, ...]}</code>.",
+    scraperUploadFieldUrl: "Full URL to the job detail page (unique key)",
+    scraperUploadFieldTitle: "Exact job position title",
+    scraperUploadFieldCompany: "Hiring company name",
+    scraperUploadFieldCif: "CIF/CUI of the company",
+    scraperUploadFieldLocation: "City or array of cities (diacritics auto-fixed)",
+    scraperUploadFieldTags: "Skill tags (auto-lowercased)",
+    scraperUploadFieldWorkmode: "<code>remote</code>, <code>on-site</code>, or <code>hybrid</code>",
+    scraperUploadFieldDate: "ISO8601 UTC timestamp",
+    scraperUploadFieldStatus: "<code>scraped</code>, <code>tested</code>, <code>published</code>, or <code>verified</code>",
+    scraperUploadRespTitle: "Response fields",
+    scraperUploadRespSuccess: "Confirmation message",
+    scraperUploadRespCount: "Number of jobs sent to Solr",
+    scraperUploadEndpoint: "Scraper Jobs Upload",
+    scraperUploadAuthVal: "Solr Basic Auth (server-side, via <code>api.env</code>)",
+    scraperUploadParamsVal: "Body: <code>[{\"url\": \"...\", \"title\": \"...\", \"company\": \"...\", ...}]</code>",
+    scraperUploadStatus200: "Jobs were uploaded to Solr successfully",
+    scraperUploadStatus400: "Empty payload, missing required fields, or invalid JSON",
+    scraperUploadStatus405: "Only POST method is allowed",
+    scraperUploadStatus415: "Content-Type is not application/json",
+    scraperUploadStatus503: "Solr core is unavailable or environment not configured",
+    unsupportedMediaTypeTitle: "Unsupported Media Type",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -1499,6 +1708,38 @@ const i18n = {
     companyAddStatus400: "Body invalid, câmpuri obligatorii lipsă sau validare eșuată",
     companyAddStatus405: "Doar metoda PUT este permisă",
     companyAddStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+
+    scraperUploadTag: "Încarcă joburi de la scrapers în Solr",
+    scraperUploadDesc: "Acceptă un array JSON de joburi și le inserează/actualizează direct în core-ul Solr <code>job</code>. Conceput pentru scrapers automate care trebuie să încarce joburi în volum. Corectează automat diacriticele din numele orașelor și transformă tag-urile în lowercase. Joburile existente (același <code>url</code>) sunt suprascrise.",
+    scraperUploadHow1: "Primește un array JSON de obiecte job (sau <code>{\"jobs\": [...]}</code>)",
+    scraperUploadHow2: "Omite intrările fără câmpurile obligatorii (<code>url</code>, <code>title</code>, <code>company</code>)",
+    scraperUploadHow3: "Normalizează <code>location</code> (corectează diacriticele, acceptă string sau array)",
+    scraperUploadHow4: "Transformă <code>tags</code>-urile în lowercase și filtrează valorile goale",
+    scraperUploadHow5: "Trimite la Solr cu <code>commitWithin=1000</code> și <code>overwrite=true</code>",
+    scraperUploadAuthDesc: "Acest endpoint folosește Solr Basic Auth prin variabilele de mediu <code>SOLR_USER</code> și <code>SOLR_PASS</code> configurate în <code>api.env</code>. Nu este necesară autentificarea client-side.",
+    scraperUploadBodyTitle: "Corpul requestului (JSON)",
+    scraperUploadBodyNote: "Acceptă fie un array simplu <code>[{...}, ...]</code>, fie un obiect <code>{\"jobs\": [{...}, ...]}</code>.",
+    scraperUploadFieldUrl: "URL complet către pagina jobului (cheie unică)",
+    scraperUploadFieldTitle: "Titlul exact al poziției",
+    scraperUploadFieldCompany: "Numele companiei angajatoare",
+    scraperUploadFieldCif: "CIF/CUI al companiei",
+    scraperUploadFieldLocation: "Oraș sau array de orașe (diacritice auto-corectate)",
+    scraperUploadFieldTags: "Tag-uri de skills (auto-lowercase)",
+    scraperUploadFieldWorkmode: "<code>remote</code>, <code>on-site</code> sau <code>hybrid</code>",
+    scraperUploadFieldDate: "Timestamp ISO8601 UTC",
+    scraperUploadFieldStatus: "<code>scraped</code>, <code>tested</code>, <code>published</code> sau <code>verified</code>",
+    scraperUploadRespTitle: "Câmpurile răspunsului",
+    scraperUploadRespSuccess: "Mesaj de confirmare",
+    scraperUploadRespCount: "Numărul de joburi trimise la Solr",
+    scraperUploadEndpoint: "Încărcare joburi scrapers",
+    scraperUploadAuthVal: "Solr Basic Auth (server-side, prin <code>api.env</code>)",
+    scraperUploadParamsVal: "Body: <code>[{\"url\": \"...\", \"title\": \"...\", \"company\": \"...\", ...}]</code>",
+    scraperUploadStatus200: "Joburile au fost încărcate cu succes în Solr",
+    scraperUploadStatus400: "Payload gol, câmpuri obligatorii lipsă sau JSON invalid",
+    scraperUploadStatus405: "Doar metoda POST este permisă",
+    scraperUploadStatus415: "Content-Type nu este application/json",
+    scraperUploadStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+    unsupportedMediaTypeTitle: "Tip de media nesuportat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
