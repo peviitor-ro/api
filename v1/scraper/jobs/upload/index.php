@@ -101,17 +101,23 @@ try {
     $raw_data = file_get_contents("php://input");
     $data = json_decode($raw_data, true);
 
-    if (!isset($data['jobs']) || !is_array($data['jobs'])) {
+    $jobs = $data;
+    if (!is_array($jobs) || empty($jobs)) {
         http_response_code(400);
         echo json_encode([
-            "error" => "Missing or invalid 'jobs' array in payload",
+            "error" => "Payload must be a non-empty JSON array of jobs",
             "code" => 400
         ]);
         exit;
     }
 
+    // Support both [{...}] and {"jobs": [{...}]}
+    if (isset($jobs['jobs']) && is_array($jobs['jobs'])) {
+        $jobs = $jobs['jobs'];
+    }
+
     $items = [];
-    foreach ($data['jobs'] as $job) {
+    foreach ($jobs as $job) {
         $url = isset($job['url']) ? htmlspecialchars($job['url']) : null;
         $title = isset($job['title']) ? htmlspecialchars($job['title']) : null;
         $company = isset($job['company']) ? htmlspecialchars($job['company']) : null;
