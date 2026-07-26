@@ -1474,6 +1474,185 @@ curl -X GET "https://api.peviitor.ro/v1/scraper/jobs/?cif=24415960&rows=10&start
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- SCRAPER JOBS DELETE ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row endpoint-row-delete" onclick="toggleEndpoint('scraper-jobs-delete')">
+      <span class="method-badge method-badge-delete">DELETE</span>
+      <span class="endpoint-path">/v1/scraper/jobs/delete/</span>
+      <span class="endpoint-desc" data-i18n="scraperDeleteTag">Delete jobs by CIF or URL</span>
+      <span class="toggle-arrow" id="arrow-scraper-jobs-delete">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="scraper-jobs-delete-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <div class="warning-banner" data-i18n="scraperDeleteWarning">
+          <strong>Warning:</strong> This action permanently deletes matching job records from the Solr database. This cannot be undone.
+        </div>
+
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="scraperDeleteDesc">
+          Deletes jobs from the Solr <code>job</code> core by company CIF (all jobs) or by URL (single job).
+          Designed for internal scraper use — when a company becomes inactive in ANAF or when expired job URLs are cleaned up.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="scraperDeleteHow1">Accepts a JSON body with <code>cif</code> or <code>url</code></li>
+          <li data-i18n="scraperDeleteHow2">Counts matching documents before deletion</li>
+          <li data-i18n="scraperDeleteHow3">Returns 404 if no matching jobs found</li>
+          <li data-i18n="scraperDeleteHow4">Deletes all matching jobs with <code>commit=true</code></li>
+        </ol>
+
+        <div class="section-title" data-i18n="scraperDeleteBodyTitle">Request body (JSON)</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Field</th><th>Type</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td>Conditional</td><td data-i18n="scraperDeleteFieldCif">Delete all jobs for this 8-digit CIF</td></tr>
+            <tr><td>url</td><td><span class="type-tag">string</span></td><td>Conditional</td><td data-i18n="scraperDeleteFieldUrl">Delete a single job by its URL</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0 0 1rem;color:#7d6b5a;font-size:0.85rem;" data-i18n="scraperDeleteBodyNote">
+          Exactly one of <code>cif</code> or <code>url</code> is required. Providing both returns an error.
+        </p>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X DELETE "https://api.peviitor.ro/v1/scraper/jobs/delete/" \
+  -H "Content-Type: application/json" \
+  -d '{"cif": "24415960"}'
+
+curl -X DELETE "https://api.peviitor.ro/v1/scraper/jobs/delete/" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://example.com/job/123"}'</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="scraperDeleteRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>success</td><td><span class="type-tag">boolean</span></td><td data-i18n="scraperDeleteRespSuccess">Always <code>true</code> on success</td></tr>
+            <tr><td>message</td><td><span class="type-tag">string</span></td><td data-i18n="scraperDeleteRespMessage">Confirmation message</td></tr>
+            <tr><td>count</td><td><span class="type-tag">number</span></td><td data-i18n="scraperDeleteRespCount">Number of jobs deleted</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"message"</span>: <span class="json-string">"Jobs deleted successfully"</span>,
+  <span class="json-key">"count"</span>: <span class="json-number">32</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">400 — <span data-i18n="badRequestTitle">Bad Request</span></div>
+      <div class="card-body">
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Request body must be a JSON object, not an array"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"At least one of 'cif' or 'url' is required"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Provide only 'cif' or 'url', not both"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"CIF must be exactly 8 digits"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">404 — <span data-i18n="notFoundTitle">No Jobs Found</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"No jobs found"</span>,
+  <span class="json-key">"message"</span>: <span class="json-string">"No jobs found matching cif:24415960"</span>,
+  <span class="json-key">"count"</span>: <span class="json-number">0</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only DELETE method is allowed"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">405</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">415 — <span data-i18n="unsupportedMediaTypeTitle">Unsupported Media Type</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Content-Type must be application/json"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">415</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="scraperDeleteEndpoint">Scraper Jobs Delete</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>DELETE</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="scraperDeleteAuthVal">Solr Basic Auth (server-side, via <code>api.env</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="scraperDeleteParamsVal">Body: <code>{"cif": "..."}</code> or <code>{"url": "..."}</code></td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="scraperDeleteStatus200">Jobs were deleted successfully</span></li>
+          <li><span class="status-code sc-400">400</span><span data-i18n="scraperDeleteStatus400">Missing required fields, invalid CIF, or invalid JSON</span></li>
+          <li><span class="status-code sc-404">404</span><span data-i18n="scraperDeleteStatus404">No jobs found matching the criteria</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="scraperDeleteStatus405">Only DELETE method is allowed</span></li>
+          <li><span class="status-code sc-415">415</span><span data-i18n="scraperDeleteStatus415">Content-Type is not application/json</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="scraperDeleteStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -1714,6 +1893,31 @@ const i18n = {
     scraperQueryStatus405: "Only GET method is allowed",
     scraperQueryStatus503: "Solr core is unavailable or environment not configured",
 
+    scraperDeleteTag: "Delete jobs by CIF or URL",
+    scraperDeleteWarning: "<strong>Warning:</strong> This action permanently deletes matching job records from the Solr database. This cannot be undone.",
+    scraperDeleteDesc: "Deletes jobs from the Solr <code>job</code> core by company CIF (all jobs) or by URL (single job). Designed for internal scraper use — when a company becomes inactive in ANAF or when expired job URLs are cleaned up.",
+    scraperDeleteHow1: "Accepts a JSON body with <code>cif</code> or <code>url</code>",
+    scraperDeleteHow2: "Counts matching documents before deletion",
+    scraperDeleteHow3: "Returns 404 if no matching jobs found",
+    scraperDeleteHow4: "Deletes all matching jobs with <code>commit=true</code>",
+    scraperDeleteBodyTitle: "Request body (JSON)",
+    scraperDeleteFieldCif: "Delete all jobs for this 8-digit CIF",
+    scraperDeleteFieldUrl: "Delete a single job by its URL",
+    scraperDeleteBodyNote: "Exactly one of <code>cif</code> or <code>url</code> is required. Providing both returns an error.",
+    scraperDeleteRespTitle: "Response fields",
+    scraperDeleteRespSuccess: "Always <code>true</code> on success",
+    scraperDeleteRespMessage: "Confirmation message",
+    scraperDeleteRespCount: "Number of jobs deleted",
+    scraperDeleteEndpoint: "Scraper Jobs Delete",
+    scraperDeleteAuthVal: "Solr Basic Auth (server-side, via <code>api.env</code>)",
+    scraperDeleteParamsVal: "Body: <code>{\"cif\": \"...\"}</code> or <code>{\"url\": \"...\"}</code>",
+    scraperDeleteStatus200: "Jobs were deleted successfully",
+    scraperDeleteStatus400: "Missing required fields, invalid CIF, or invalid JSON",
+    scraperDeleteStatus404: "No jobs found matching the criteria",
+    scraperDeleteStatus405: "Only DELETE method is allowed",
+    scraperDeleteStatus415: "Content-Type is not application/json",
+    scraperDeleteStatus503: "Solr core is unavailable or environment not configured",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -1939,6 +2143,31 @@ const i18n = {
     scraperQueryStatus400: "CIF lipsă sau invalid",
     scraperQueryStatus405: "Doar metoda GET este permisă",
     scraperQueryStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+
+    scraperDeleteTag: "Ștergere joburi după CIF sau URL",
+    scraperDeleteWarning: "<strong>Atenție:</strong> Această acțiune șterge permanent din baza de date Solr joburile care corespund. Operația nu poate fi anulată.",
+    scraperDeleteDesc: "Șterge joburi din core-ul Solr <code>job</code> după CIF (toate joburile) sau URL (un singur job). Destinat uzului intern al scraper-ului — când o companie devine inactivă în ANAF sau când URL-urile expirate sunt curățate.",
+    scraperDeleteHow1: "Acceptă un corp JSON cu <code>cif</code> sau <code>url</code>",
+    scraperDeleteHow2: "Numără documentele înainte de ștergere",
+    scraperDeleteHow3: "Returnează 404 dacă nu găsește joburi",
+    scraperDeleteHow4: "Șterge toate joburile cu <code>commit=true</code>",
+    scraperDeleteBodyTitle: "Corp cerere (JSON)",
+    scraperDeleteFieldCif: "Șterge toate joburile pentru acest CIF de 8 cifre",
+    scraperDeleteFieldUrl: "Șterge un singur job după URL",
+    scraperDeleteBodyNote: "Exact unul dintre <code>cif</code> sau <code>url</code> este obligatoriu. Furnizarea ambelor returnează o eroare.",
+    scraperDeleteRespTitle: "Câmpuri răspuns",
+    scraperDeleteRespSuccess: "Întotdeauna <code>true</code> la succes",
+    scraperDeleteRespMessage: "Mesaj de confirmare",
+    scraperDeleteRespCount: "Numărul de joburi șterse",
+    scraperDeleteEndpoint: "Ștergere Joburi Scraper",
+    scraperDeleteAuthVal: "Solr Basic Auth (server-side, prin <code>api.env</code>)",
+    scraperDeleteParamsVal: "Corp: <code>{\"cif\": \"...\"}</code> sau <code>{\"url\": \"...\"}</code>",
+    scraperDeleteStatus200: "Joburile au fost șterse cu succes",
+    scraperDeleteStatus400: "Câmpuri obligatorii lipsă, CIF invalid sau JSON invalid",
+    scraperDeleteStatus404: "Nu s-au găsit joburi care să corespundă criteriilor",
+    scraperDeleteStatus405: "Doar metoda DELETE este permisă",
+    scraperDeleteStatus415: "Content-Type nu este application/json",
+    scraperDeleteStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
