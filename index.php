@@ -1319,6 +1319,161 @@ curl -X GET "https://api.peviitor.ro/v1/firme/company/?name=Google&rows=5" \
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- SCRAPER JOBS QUERY ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row" onclick="toggleEndpoint('scraper-jobs-query')">
+      <span class="method-badge">GET</span>
+      <span class="endpoint-path">/v1/scraper/jobs/</span>
+      <span class="endpoint-desc" data-i18n="scraperQueryTag">Query jobs by company CIF</span>
+      <span class="toggle-arrow" id="arrow-scraper-jobs-query">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="scraper-jobs-query-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="scraperQueryDesc">
+          Queries the Solr <code>job</code> core for all jobs matching a company CIF.
+          Returns paginated results with standard job fields.
+          Designed for scrapers that need to read existing jobs before re-scraping.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="scraperQueryHow1">Validates the <code>cif</code> parameter (must be exactly 8 digits)</li>
+          <li data-i18n="scraperQueryHow2">Escapes special Solr characters to prevent query injection</li>
+          <li data-i18n="scraperQueryHow3">Queries the Solr <code>job</code> core with pagination support</li>
+          <li data-i18n="scraperQueryHow4">Returns matching documents with standard job fields</li>
+        </ol>
+
+        <div class="section-title" data-i18n="queryParamsTitle">Query parameters</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Param</th><th>Type</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="scraperQueryParamCif">8-digit CIF/CUI (exact match)</td></tr>
+            <tr><td>rows</td><td><span class="type-tag">number</span></td><td>No</td><td data-i18n="scraperQueryParamRows">Max results (default: 100, max: 500)</td></tr>
+            <tr><td>start</td><td><span class="type-tag">number</span></td><td>No</td><td data-i18n="scraperQueryParamStart">Offset for pagination (default: 0)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X GET "https://api.peviitor.ro/v1/scraper/jobs/?cif=24415960" \
+  -H "Accept: application/json"
+
+curl -X GET "https://api.peviitor.ro/v1/scraper/jobs/?cif=24415960&rows=10&start=0" \
+  -H "Accept: application/json"</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="scraperQueryRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>success</td><td><span class="type-tag">boolean</span></td><td data-i18n="scraperQueryRespSuccess">Always <code>true</code> on success</td></tr>
+            <tr><td>total</td><td><span class="type-tag">number</span></td><td data-i18n="scraperQueryRespTotal">Total number of matching jobs in Solr</td></tr>
+            <tr><td>count</td><td><span class="type-tag">number</span></td><td data-i18n="scraperQueryRespCount">Number of jobs returned in this response</td></tr>
+            <tr><td>data</td><td><span class="type-tag">object[]</span></td><td data-i18n="scraperQueryRespData">Array of job documents</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-bool">true</span>,
+  <span class="json-key">"total"</span>: <span class="json-number">32</span>,
+  <span class="json-key">"count"</span>: <span class="json-number">32</span>,
+  <span class="json-key">"data"</span>: [
+    {
+      <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/123"</span>,
+      <span class="json-key">"title"</span>: <span class="json-string">"Senior Developer"</span>,
+      <span class="json-key">"company"</span>: <span class="json-string">"COMPANY SRL"</span>,
+      <span class="json-key">"cif"</span>: <span class="json-string">"24415960"</span>,
+      <span class="json-key">"location"</span>: [<span class="json-string">"București"</span>],
+      <span class="json-key">"tags"</span>: [<span class="json-string">"javascript"</span>],
+      <span class="json-key">"workmode"</span>: <span class="json-string">"remote"</span>,
+      <span class="json-key">"date"</span>: <span class="json-string">"2026-07-26T10:00:00Z"</span>,
+      <span class="json-key">"status"</span>: <span class="json-string">"scraped"</span>
+    }
+  ]
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">400 — <span data-i18n="badRequestTitle">Bad Request</span></div>
+      <div class="card-body">
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Missing required query parameter: cif"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"CIF must be exactly 8 digits"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only GET method is allowed"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">405</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="scraperQueryEndpoint">Scraper Jobs Query</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="scraperQueryAuthVal">Solr Basic Auth (server-side, via <code>api.env</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="scraperQueryParamsVal">Query: <code>cif</code> (string, required), optional <code>rows</code> (int, max 500), <code>start</code> (int)</td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="scraperQueryStatus200">Jobs found and returned successfully</span></li>
+          <li><span class="status-code sc-400">400</span><span data-i18n="scraperQueryStatus400">Missing or invalid CIF parameter</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="scraperQueryStatus405">Only GET method is allowed</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="scraperQueryStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -1537,6 +1692,28 @@ const i18n = {
     scraperUploadStatus503: "Solr core is unavailable or environment not configured",
     unsupportedMediaTypeTitle: "Unsupported Media Type",
 
+    scraperQueryTag: "Query jobs by company CIF",
+    scraperQueryDesc: "Queries the Solr <code>job</code> core for all jobs matching a company CIF. Returns paginated results with standard job fields. Designed for scrapers that need to read existing jobs before re-scraping.",
+    scraperQueryHow1: "Validates the <code>cif</code> parameter (must be exactly 8 digits)",
+    scraperQueryHow2: "Escapes special Solr characters to prevent query injection",
+    scraperQueryHow3: "Queries the Solr <code>job</code> core with pagination support",
+    scraperQueryHow4: "Returns matching documents with standard job fields",
+    scraperQueryParamCif: "8-digit CIF/CUI (exact match)",
+    scraperQueryParamRows: "Max results (default: 100, max: 500)",
+    scraperQueryParamStart: "Offset for pagination (default: 0)",
+    scraperQueryRespTitle: "Response fields",
+    scraperQueryRespSuccess: "Always <code>true</code> on success",
+    scraperQueryRespTotal: "Total number of matching jobs in Solr",
+    scraperQueryRespCount: "Number of jobs returned in this response",
+    scraperQueryRespData: "Array of job documents",
+    scraperQueryEndpoint: "Scraper Jobs Query",
+    scraperQueryAuthVal: "Solr Basic Auth (server-side, via <code>api.env</code>)",
+    scraperQueryParamsVal: "Query: <code>cif</code> (string, required), optional <code>rows</code> (int, max 500), <code>start</code> (int)",
+    scraperQueryStatus200: "Jobs found and returned successfully",
+    scraperQueryStatus400: "Missing or invalid CIF parameter",
+    scraperQueryStatus405: "Only GET method is allowed",
+    scraperQueryStatus503: "Solr core is unavailable or environment not configured",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -1740,6 +1917,28 @@ const i18n = {
     scraperUploadStatus415: "Content-Type nu este application/json",
     scraperUploadStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
     unsupportedMediaTypeTitle: "Tip de media nesuportat",
+
+    scraperQueryTag: "Interoghează joburi după CIF companie",
+    scraperQueryDesc: "Interoghează core-ul Solr <code>job</code> pentru toate joburile care corespund CIF-ului unei companii. Returnează rezultate paginate cu câmpurile standard de job. Conceput pentru scrapers care trebuie să citească joburile existente înainte de re-scraping.",
+    scraperQueryHow1: "Validează parametrul <code>cif</code> (trebuie să aibă exact 8 cifre)",
+    scraperQueryHow2: "Escapează caracterele speciale Solr pentru a preveni injectarea de query",
+    scraperQueryHow3: "Interoghează core-ul Solr <code>job</code> cu suport de paginare",
+    scraperQueryHow4: "Returnează documentele potrivite cu câmpurile standard de job",
+    scraperQueryParamCif: "CIF/CUI de 8 cifre (potrivire exactă)",
+    scraperQueryParamRows: "Număr maxim de rezultate (implicit: 100, maxim: 500)",
+    scraperQueryParamStart: "Offset pentru paginare (implicit: 0)",
+    scraperQueryRespTitle: "Câmpurile răspunsului",
+    scraperQueryRespSuccess: "Întotdeauna <code>true</code> la succes",
+    scraperQueryRespTotal: "Numărul total de joburi potrivite în Solr",
+    scraperQueryRespCount: "Numărul de joburi returnate în acest răspuns",
+    scraperQueryRespData: "Array de documente job",
+    scraperQueryEndpoint: "Interogare joburi scrapers",
+    scraperQueryAuthVal: "Solr Basic Auth (server-side, prin <code>api.env</code>)",
+    scraperQueryParamsVal: "Query: <code>cif</code> (string, obligatoriu), opțional <code>rows</code> (int, max 500), <code>start</code> (int)",
+    scraperQueryStatus200: "Joburile au fost găsite și returnate cu succes",
+    scraperQueryStatus400: "CIF lipsă sau invalid",
+    scraperQueryStatus405: "Doar metoda GET este permisă",
+    scraperQueryStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
