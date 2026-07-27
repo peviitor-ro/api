@@ -12,7 +12,8 @@
  *   WARNING: This action cannot be undone. No recovery possible without backups.
  *
  * DEPENDENCIES:
- *   - Apache Solr server (required, configured via PROD_SERVER in api.env)
+ *   - Apache Solr server (required, configured via SOLR_SERVER in api.env)
+ *   - Protocol (required, configured via PROTOCOL in api.env)
  *   - Solr Basic Authentication (SOLR_USER and SOLR_PASS from api.env)
  *     All Solr requests use: Authorization: Basic base64(SOLR_USER:SOLR_PASS)
  *   - 'job' core in Solr (job records deleted from this core)
@@ -86,9 +87,10 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../api.env');
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 
 // ----------------------------------------------------------------------
 // AUDIT LOG: capture every hit to this endpoint, before any early exits,
@@ -179,8 +181,8 @@ function solrEscape(string $value): string {
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     // Parse body - support JSON and form-encoded
@@ -282,7 +284,7 @@ try {
 
     // Build Solr query
     $core = 'job';
-    $base = "http://$PROD_SERVER/solr/$core";
+    $base = "$PROTOCOL://$SOLR_SERVER/solr/$core";
 
     $queryParts = [];
 
@@ -295,7 +297,7 @@ try {
     }
 
     if ($brand) {
-        $companyCore = "http://$PROD_SERVER/solr/company";
+        $companyCore = "$PROTOCOL://$SOLR_SERVER/solr/company";
         $brandUrl = $companyCore . "/select?q=" . rawurlencode('brand:"' . solrEscape($brand) . '"') . "&wt=json&rows=100&fl=id,company";
 
         $brandResponse = fetchJson($brandUrl, $SOLR_USER, $SOLR_PASS, 4);

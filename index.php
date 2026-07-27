@@ -493,7 +493,7 @@
       <div class="card-body">
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
 }</pre>
       </div>
     </div>
@@ -790,7 +790,7 @@ curl -X DELETE "https://api.peviitor.ro/v1/cleanjobs/" \
       <div class="card-body">
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
 }</pre>
       </div>
     </div>
@@ -939,7 +939,7 @@ curl -X GET "https://api.peviitor.ro/v1/firme/company/?name=Google&rows=5" \
       <div class="card-body">
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Company search unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
 }</pre>
       </div>
     </div>
@@ -1284,7 +1284,7 @@ curl -X GET "https://api.peviitor.ro/v1/firme/company/?name=Google&rows=5" \
       <div class="card-body">
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
 }</pre>
       </div>
     </div>
@@ -1440,7 +1440,7 @@ curl -X GET "https://api.peviitor.ro/v1/scraper/jobs/?cif=24415960&rows=10&start
       <div class="card-body">
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
 }</pre>
       </div>
     </div>
@@ -1617,7 +1617,7 @@ curl -X DELETE "https://api.peviitor.ro/v1/scraper/jobs/delete/" \
       <div class="card-body">
         <pre>{
   <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
-  <span class="json-key">"details"</span>: <span class="json-string">"PROD_SERVER not set"</span>
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
 }</pre>
       </div>
     </div>

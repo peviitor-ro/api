@@ -10,7 +10,8 @@
  *   Useful for "job of the day" widgets, testing, or exploratory browsing.
  * 
  * DEPENDENCIES:
- *   - Apache Solr server (required, configured via PROD_SERVER in api.env)
+ *   - Apache Solr server (required, configured via SOLR_SERVER in api.env)
+ *   - Protocol (required, configured via PROTOCOL in api.env)
  *   - Solr Basic Authentication (SOLR_USER and SOLR_PASS from api.env)
  *     All Solr requests use: Authorization: Basic base64(SOLR_USER:SOLR_PASS)
  * 
@@ -53,14 +54,16 @@ loadEnv(__DIR__ . '/../../api.env');
 
 // ======= REQUIRED api.env VARIABLES =======
 // This script expects the following variables in api.env:
-//   PROD_SERVER=<solr_server_url>    (e.g., localhost:18983)
+//   SOLR_SERVER=<solr_server_url>    (e.g., localhost:18983)
+//   PROTOCOL=<http|https>            (e.g., http)
 //   SOLR_USER=<solr_username>
 //   SOLR_PASS=<solr_password>
 // =======================================
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
@@ -93,12 +96,12 @@ function fetchJson(string $url, ?string $user = null, ?string $pass = null, int 
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     $core = 'job';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "$PROTOCOL://$SOLR_SERVER/solr/$core/select";
 
     $countUrl = $base . '?q=*:*&rows=0';
     error_log("RANDOM COUNT URL: $countUrl");

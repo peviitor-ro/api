@@ -63,7 +63,8 @@ if [ -f "$ROOT_DIR/api.env" ]; then
 fi
 
 cat > "$ROOT_DIR/api.env" << 'TESTENV'
-PROD_SERVER = 127.0.0.1:18983
+SOLR_SERVER = 127.0.0.1:18983
+PROTOCOL = http
 SOLR_USER = 
 SOLR_PASS = 
 CLEANUP_API_KEY = test-key-123456
