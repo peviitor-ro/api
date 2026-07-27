@@ -51,7 +51,7 @@ function validateBody(array $body): array {
 test("rejects empty body", function() {
     $errors = validateBody([]);
     assertTrue(count($errors) > 0);
-    assertTrue(str_contains($errors[0], 'at least one'));
+    assertTrue(str_contains($errors[0], 'At least one'));
 });
 
 test("accepts company only", function() {
