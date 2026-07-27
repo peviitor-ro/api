@@ -4,7 +4,7 @@ set -e
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TESTS_DIR="$ROOT_DIR/tests"
 RESULTS_FILE="$TESTS_DIR/results.json"
-REPORT_FILE="$TESTS_DIR/report/index.html"
+REPORT_FILE="$TESTS_DIR/report.html"
 API_PORT=8080
 MOCK_PORT=18983
 E2E_MODE=${E2E:-0}
