@@ -27,8 +27,8 @@ if (stripos($contentType, 'application/json') === false) {
     exit;
 }
 
-require_once __DIR__ . '/../../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../../api.env');
+require_once __DIR__ . '/../../../../util/loadEnv.php';
+loadEnv(__DIR__ . '/../../../../api.env');
 
 $PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
