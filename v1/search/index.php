@@ -21,7 +21,6 @@ loadEnv(__DIR__ . '/../../api.env');
 // =========================
 // CONFIG
 // =========================
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
 $LOCAL_SERVER = trim(getenv('LOCAL_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');

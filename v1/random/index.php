@@ -10,10 +10,10 @@
  *   Useful for "job of the day" widgets, testing, or exploratory browsing.
  * 
  * DEPENDENCIES:
- *   - Apache Solr server (required, configured via PROD_SERVER in api.env)
+ *   - Apache Solr server (required, configured via SOLR_SERVER in api.env)
+ *   - Protocol (required, configured via PROTOCOL in api.env)
  *   - Solr Basic Authentication (SOLR_USER and SOLR_PASS from api.env)
  *     All Solr requests use: Authorization: Basic base64(SOLR_USER:SOLR_PASS)
- *   - 'job' core in Solr (random job selected from this core)
  * 
  * AUTHENTICATION:
  *   No authentication required. This endpoint is publicly accessible.
@@ -54,7 +54,8 @@ loadEnv(__DIR__ . '/../../api.env');
 
 // ======= REQUIRED api.env VARIABLES =======
 // This script expects the following variables in api.env:
-//   SOLR_SERVER=<solr_server_url>    (e.g., http://localhost:8983 or https://solr.example.com)
+//   SOLR_SERVER=<solr_server_url>    (e.g., localhost:18983)
+//   PROTOCOL=<http|https>            (e.g., http)
 //   SOLR_USER=<solr_username>
 //   SOLR_PASS=<solr_password>
 // =======================================

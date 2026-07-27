@@ -5,7 +5,8 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../../../api.env');
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -58,8 +59,8 @@ function isValidUrl(string $url): bool {
 $ALLOWED_STATUSES = ['activ', 'suspendat', 'inactiv', 'radiat'];
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     $raw_data = file_get_contents("php://input");
@@ -142,7 +143,7 @@ try {
     if ($scraperFile !== null && $scraperFile !== '') $item->scraperFile = $scraperFile;
 
     $core = 'company';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $url = "$PROTOCOL://$SOLR_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
     $payload = json_encode([$item]);
 
     error_log("COMPANY ADD: CIF=$id company=" . preg_replace('/[\r\n]/', '', $company));

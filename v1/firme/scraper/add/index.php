@@ -5,7 +5,8 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../../api.env');
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -42,8 +43,8 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     if (!isset($_POST['id']) || !isset($_POST['scraper'])) {
@@ -56,7 +57,7 @@ try {
     $scraper = $_POST['scraper'];
 
     $core = 'company';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $url = "$PROTOCOL://$SOLR_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
 
     $payload = json_encode([
         [

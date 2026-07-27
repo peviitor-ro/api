@@ -4,7 +4,7 @@ set -e
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TESTS_DIR="$ROOT_DIR/tests"
 RESULTS_FILE="$TESTS_DIR/results.json"
-REPORT_FILE="$TESTS_DIR/report/index.html"
+REPORT_FILE="$TESTS_DIR/report.html"
 API_PORT=8080
 MOCK_PORT=18983
 E2E_MODE=${E2E:-0}
@@ -63,7 +63,8 @@ if [ -f "$ROOT_DIR/api.env" ]; then
 fi
 
 cat > "$ROOT_DIR/api.env" << 'TESTENV'
-PROD_SERVER = 127.0.0.1:18983
+SOLR_SERVER = 127.0.0.1:18983
+PROTOCOL = http
 SOLR_USER = 
 SOLR_PASS = 
 CLEANUP_API_KEY = test-key-123456
