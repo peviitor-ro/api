@@ -5,7 +5,8 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../api.env');
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -40,8 +41,8 @@ function fetchJson(string $url, ?string $user = null, ?string $pass = null, int 
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     if (!isset($_GET['brand']) || $_GET['brand'] === '') {
@@ -53,7 +54,7 @@ try {
     $brand = strtolower(urldecode($_GET['brand']));
 
     $core = 'company';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "$PROTOCOL://$SOLR_SERVER/solr/$core/select";
 
     $url = $base . '?' . http_build_query([
         "indent" => "true",

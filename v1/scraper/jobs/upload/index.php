@@ -30,7 +30,8 @@ if (stripos($contentType, 'application/json') === false) {
 require_once __DIR__ . '/../../../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../../../api.env');
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -94,8 +95,8 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     $raw_data = file_get_contents("php://input");
@@ -168,7 +169,7 @@ try {
     }
 
     $core = 'job';
-    $url = "http://$PROD_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
+    $url = "$PROTOCOL://$SOLR_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
     $payload = json_encode($items);
 
     error_log("SCRAPER UPLOAD URL: $url | COUNT: " . count($items));
