@@ -121,7 +121,7 @@ try {
         'wt'   => 'json'
     ]);
 
-    $countResponse = postJson($selectUrl, null, $SOLR_USER, $SOLR_PASS);
+    $countResponse = postJson($selectUrl, '', $SOLR_USER, $SOLR_PASS);
     $totalCount = $countResponse['response']['numFound'] ?? 0;
 
     if ($totalCount === 0) {
