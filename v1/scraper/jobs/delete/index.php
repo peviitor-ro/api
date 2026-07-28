@@ -1,13 +1,21 @@
 <?php
+// DELETE /v1/scraper/jobs/delete/
+// Deletes job postings from the Solr "job" core.
+// Accepts JSON body with exactly one of:
+//   { "cif": "05415866" }  — deletes all jobs matching this CIF (8 digits)
+//   { "url": "https://..." } — deletes a single job by its exact URL
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: DELETE, OPTIONS");
 header('Content-Type: application/json; charset=utf-8');
 
+// Handle CORS preflight
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
+// Only allow DELETE method
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405);
     echo json_encode([
@@ -17,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     exit;
 }
 
+// Load environment variables (SOLR_SERVER, PROTOCOL, SOLR_USER, SOLR_PASS)
 require_once __DIR__ . '/../../../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../../../api.env');
 
@@ -25,6 +34,7 @@ $PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
+// POST request to Solr with a JSON payload (used for updates/deletes)
 function postJson(string $url, string $payload, ?string $user = null, ?string $pass = null): array {
     $headers = [];
     if ($user && $pass) {
@@ -51,6 +61,33 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
     return $json;
 }
 
+// GET request to Solr (used for counting matching docs before deleting)
+function getJson(string $url, ?string $user = null, ?string $pass = null): array {
+    $headers = [];
+    if ($user && $pass) {
+        $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
+    }
+    $headers[] = "Content-Type: application/json";
+    $context = stream_context_create([
+        'http' => [
+            'method'  => 'GET',
+            'header'  => implode("\r\n", $headers),
+            'timeout' => 10
+        ]
+    ]);
+    $data = @file_get_contents($url, false, $context);
+    if ($data === false) {
+        $err = error_get_last()['message'] ?? 'Unknown error';
+        throw new Exception("FETCH FAILED: $url | $err");
+    }
+    $json = json_decode($data, true);
+    if (!is_array($json)) {
+        throw new Exception("Invalid JSON response");
+    }
+    return $json;
+}
+
+// Build Solr update URL with commit=true so changes are visible immediately
 function buildSolrUpdateUrl(string $server, string $core, string $protocol = 'http'): string {
     $server = rtrim($server, '/');
     if (preg_match('#^https?://#i', $server)) {
@@ -59,11 +96,21 @@ function buildSolrUpdateUrl(string $server, string $core, string $protocol = 'ht
     return "$protocol://$server/solr/$core/update?commit=true&wt=json";
 }
 
+// Escape special Solr query characters to prevent injection
+function solrEscape(string $value): string {
+    $chars = ['+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'];
+    foreach ($chars as $char) {
+        $value = str_replace($char, '\\' . $char, $value);
+    }
+    return $value;
+}
+
 try {
     if (!$SOLR_SERVER) {
         throw new Exception("SOLR_SERVER not set");
     }
 
+    // --- 1. Parse and validate the request body ---
     $requestBody = file_get_contents('php://input');
     $data = json_decode($requestBody, true);
 
@@ -76,6 +123,7 @@ try {
     $hasCif = isset($data['cif']) && is_string($data['cif']);
     $hasUrl = isset($data['url']) && is_string($data['url']);
 
+    // Must have exactly one of cif or url
     if (!$hasCif && !$hasUrl) {
         http_response_code(400);
         echo json_encode(['error' => 'Exactly one of "cif" or "url" is required', 'code' => 400]);
@@ -88,47 +136,44 @@ try {
         exit;
     }
 
+    // --- 2. Build the Solr query ---
     $core = 'job';
-    $solrUrl = buildSolrUpdateUrl($SOLR_SERVER, $core, $PROTOCOL);
 
     if ($hasCif) {
+        // Strip non-digits and enforce exactly 8 digits (zero-padded CIF)
         $cif = preg_replace('/[^0-9]/', '', $data['cif']);
         if (strlen($cif) !== 8) {
             http_response_code(400);
             echo json_encode(['error' => 'CIF must be exactly 8 digits', 'code' => 400]);
             exit;
         }
-
-        $escapedCif = str_replace(['+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'], ['\\+', '\\-', '\\&&', '\\||', '\\!', '\\(', '\\)', '\\{', '\\}', '\\[', '\\]', '\\^', '\\"', '\\~', '\\*', '\\?', '\\:', '\\\\', '\\/'], $cif);
-
+        $escapedCif = solrEscape($cif);
         $query = "cif:$escapedCif";
     } else {
-        $url = htmlspecialchars($data['url'], ENT_QUOTES, 'UTF-8');
-        $escapedUrl = str_replace(['+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'], ['\\+', '\\-', '\\&&', '\\||', '\\!', '\\(', '\\)', '\\{', '\\}', '\\[', '\\]', '\\^', '\\"', '\\~', '\\*', '\\?', '\\:', '\\\\', '\\/'], $url);
-
+        // URL field values are stored as-is; escape for Solr query syntax
+        $escapedUrl = solrEscape($data['url']);
         $query = "url:$escapedUrl";
     }
 
-    $countPayload = json_encode([
-        'query' => $query,
-        'fields' => ['url'],
-        'limit' => 1
-    ]);
-
+    // --- 3. Count matching jobs first (GET to /select with URL params) ---
     $selectUrl = "$PROTOCOL://$SOLR_SERVER/solr/$core/select?" . http_build_query([
         'q'    => $query,
         'rows' => 0,
         'wt'   => 'json'
     ]);
 
-    $countResponse = postJson($selectUrl, '', $SOLR_USER, $SOLR_PASS);
+    $countResponse = getJson($selectUrl, $SOLR_USER, $SOLR_PASS);
     $totalCount = $countResponse['response']['numFound'] ?? 0;
 
+    // Nothing to delete — return 404
     if ($totalCount === 0) {
         http_response_code(404);
         echo json_encode(['error' => 'No matching jobs found', 'code' => 404]);
         exit;
     }
+
+    // --- 4. Delete matching jobs (POST to /update with JSON delete body) ---
+    $solrUrl = buildSolrUpdateUrl($SOLR_SERVER, $core, $PROTOCOL);
 
     $deletePayload = json_encode([
         'delete' => [
@@ -138,6 +183,13 @@ try {
 
     $response = postJson($solrUrl, $deletePayload, $SOLR_USER, $SOLR_PASS);
 
+    // Solr returns { responseHeader: { status: 0 } } on success
+    $solrStatus = $response['responseHeader']['status'] ?? -1;
+    if ($solrStatus !== 0) {
+        throw new Exception("Solr delete returned status: $solrStatus");
+    }
+
+    // --- 5. Return success with count of deleted jobs ---
     echo json_encode([
         'success' => true,
         'message' => "Jobs deleted successfully",
