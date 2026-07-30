@@ -150,9 +150,9 @@ try {
         $escapedCif = solrEscape($cif);
         $query = "cif:$escapedCif";
     } else {
-        // URL field values are stored as-is; escape for Solr query syntax
-        $escapedUrl = solrEscape($data['url']);
-        $query = "url:$escapedUrl";
+        // Use phrase query for URLs to avoid escaping special chars like / and -
+        $escapedUrl = str_replace(['\\', '"'], ['\\\\', '\\"'], $data['url']);
+        $query = 'url:"' . $escapedUrl . '"';
     }
 
     // --- 3. Count matching jobs first (GET to /select with URL params) ---
