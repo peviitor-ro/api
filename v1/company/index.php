@@ -134,19 +134,23 @@ try {
     $base = "$PROTOCOL://$SOLR_SERVER/solr/$core/select";
 
     if (!empty($name)) {
-        $qs = http_build_query([
-            "q" => "company:*" . rawurlencode($name) . "*",
-            "start" => $page * $rows,
-            "rows" => $rows,
-            "indent" => "true"
-        ]);
-    } else {
-        $qs = http_build_query([
-            "q" => "id:" . rawurlencode($cif),
-            "rows" => 1,
-            "indent" => "true"
-        ]);
-    }
+    $escapedName = str_replace(' ', '\\ ', $name); // escape spaces for Solr syntax
+
+    $qs = http_build_query([
+        "q" => "company:*" . $escapedName . "*",
+        "start" => $page * $rows,
+        "rows" => $rows,
+        "indent" => "true"
+    ]);
+} else {
+    $escapedCif = str_replace(' ', '\\ ', $cif);
+
+    $qs = http_build_query([
+        "q" => "id:" . $escapedCif,
+        "rows" => 1,
+        "indent" => "true"
+    ]);
+}
 
     $url = "$base?$qs";
     error_log("COMPANY URL: $url");
