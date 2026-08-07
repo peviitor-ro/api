@@ -5,9 +5,10 @@ header("Content-Type: application/json; charset=UTF-8");
 require_once __DIR__ . '/../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../api.env');
 
-$PROD_SERVER = trim(getenv('PROD_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
@@ -102,8 +103,8 @@ function mapDemoAnafToCompany(array $anafData): array {
     return $company;
 }
 
-function updateCompanyInSolr(string $cif, array $companyData, string $prodServer, ?string $solrUser, ?string $solrPass): void {
-    $url = "http://$prodServer/solr/company/update?commit=true";
+function updateCompanyInSolr(string $cif, array $companyData, string $solrServer, string $protocol, ?string $solrUser, ?string $solrPass): void {
+    $url = "$protocol://$solrServer/solr/company/update?commit=true";
 
     $doc = ['id' => $cif];
     foreach ($companyData as $field => $value) {
@@ -114,8 +115,8 @@ function updateCompanyInSolr(string $cif, array $companyData, string $prodServer
 }
 
 try {
-    if (!$PROD_SERVER) {
-        throw new Exception("PROD_SERVER not set");
+    if (!$SOLR_SERVER) {
+        throw new Exception("SOLR_SERVER not set");
     }
 
     $cif = $_GET['cif'] ?? '';
@@ -130,22 +131,26 @@ try {
     }
 
     $core = 'company';
-    $base = "http://$PROD_SERVER/solr/$core/select";
+    $base = "$PROTOCOL://$SOLR_SERVER/solr/$core/select";
 
     if (!empty($name)) {
-        $qs = http_build_query([
-            "q" => "company:*" . rawurlencode($name) . "*",
-            "start" => $page * $rows,
-            "rows" => $rows,
-            "indent" => "true"
-        ]);
-    } else {
-        $qs = http_build_query([
-            "q" => "id:" . rawurlencode($cif),
-            "rows" => 1,
-            "indent" => "true"
-        ]);
-    }
+    $escapedName = str_replace(' ', '\\ ', $name); // escape spaces for Solr syntax
+
+    $qs = http_build_query([
+        "q" => "company:*" . $escapedName . "*",
+        "start" => $page * $rows,
+        "rows" => $rows,
+        "indent" => "true"
+    ]);
+} else {
+    $escapedCif = str_replace(' ', '\\ ', $cif);
+
+    $qs = http_build_query([
+        "q" => "id:" . $escapedCif,
+        "rows" => 1,
+        "indent" => "true"
+    ]);
+}
 
     $url = "$base?$qs";
     error_log("COMPANY URL: $url");
@@ -178,7 +183,7 @@ try {
         try {
             $anafData = fetchFromDemoAnaf($cif);
             $companyData = mapDemoAnafToCompany($anafData);
-            updateCompanyInSolr($cif, $companyData, $PROD_SERVER, $SOLR_USER, $SOLR_PASS);
+            updateCompanyInSolr($cif, $companyData, $SOLR_SERVER, $PROTOCOL, $SOLR_USER, $SOLR_PASS);
 
             $doc = ['id' => $cif] + $companyData;
             error_log("COMPANY UPDATED from DemoANAF: $cif");
