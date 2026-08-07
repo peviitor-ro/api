@@ -2,8 +2,8 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once __DIR__ . '/../../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../../api.env');
+require_once __DIR__ . '/../../../../util/loadEnv.php';
+loadEnv(__DIR__ . '/../../../../api.env');
 
 $SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
 $PROTOCOL = trim(getenv('PROTOCOL') ?: '');
