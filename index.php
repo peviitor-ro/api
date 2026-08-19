@@ -1653,6 +1653,134 @@ curl -X DELETE "https://api.peviitor.ro/v1/scraper/jobs/delete/" \
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- VALIDATE ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row" onclick="toggleEndpoint('validate')">
+      <span class="method-badge">GET</span>
+      <span class="endpoint-path">/v1/validate/</span>
+      <span class="endpoint-desc" data-i18n="validateTag">Validate a batch of jobs</span>
+      <span class="toggle-arrow" id="arrow-validate">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="validate-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="validateDesc">
+          Fetches the oldest jobs that have NOT been validated today from the Solr <code>job</code> core
+          and stamps each one with the current UTC timestamp (<code>vdate</code>).
+          Only documents that carry both <code>url</code> and <code>title</code> are processed.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="validateHow1">Queries Solr for the total number of unvalidated jobs (excluding those validated today)</li>
+          <li data-i18n="validateHow2">Fetches up to <code>index</code> jobs that were not yet validated today</li>
+          <li data-i18n="validateHow3">For each valid job (has both <code>url</code> and <code>title</code>), stamps it with the current UTC timestamp</li>
+          <li data-i18n="validateHow4">Commits the updates back to Solr</li>
+          <li data-i18n="validateHow5">Returns the list of validated job URLs</li>
+        </ol>
+
+        <div class="section-title" data-i18n="queryParamsTitle">Query parameters</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Param</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>index</td><td><span class="type-tag">number</span></td><td data-i18n="validateParamIndex">Number of jobs to validate per request (optional, default: 10)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X GET "https://api.peviitor.ro/v1/validate/" \
+  -H "Accept: application/json"
+
+curl -X GET "https://api.peviitor.ro/v1/validate/?index=50" \
+  -H "Accept: application/json"</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="validateRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>numFound</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespNumFound">Number of jobs not yet validated today</td></tr>
+            <tr><td>count</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespCount">Number of jobs validated in this batch</td></tr>
+            <tr><td>jobs</td><td><span class="type-tag">object[]</span></td><td data-i18n="validateRespJobs">Array of validated job objects</td></tr>
+            <tr><td>jobs[].url</td><td><span class="type-tag">string</span></td><td data-i18n="validateRespJobsUrl">Full URL to the job detail page</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"numFound"</span>: <span class="json-number">1243</span>,
+  <span class="json-key">"count"</span>: <span class="json-number">10</span>,
+  <span class="json-key">"jobs"</span>: [
+    { <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/123"</span> },
+    { <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/456"</span> }
+  ]
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only GET method allowed"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"SOLR_SERVER not set"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="validateEndpoint">Validate</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>GET</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="validateAuthVal">Solr Basic Auth (server-side, via <code>api.env</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="validateParamsVal">Query: <code>index</code> (int, optional, default 10)</td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="validateStatus200">Jobs were validated successfully</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="validateStatus405">Only GET method is allowed</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="validateStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -1898,6 +2026,26 @@ const i18n = {
     scraperDeleteStatus415: "Content-Type is not application/json",
     scraperDeleteStatus503: "Solr core is unavailable or environment not configured",
 
+    validateTag: "Validate a batch of jobs",
+    validateDesc: "Fetches the oldest jobs that have NOT been validated today from the Solr <code>job</code> core and stamps each one with the current UTC timestamp (<code>vdate</code>). Only documents that carry both <code>url</code> and <code>title</code> are processed.",
+    validateHow1: "Queries Solr for the total number of unvalidated jobs (excluding those validated today)",
+    validateHow2: "Fetches up to <code>index</code> jobs that were not yet validated today",
+    validateHow3: "For each valid job (has both <code>url</code> and <code>title</code>), stamps it with the current UTC timestamp",
+    validateHow4: "Commits the updates back to Solr",
+    validateHow5: "Returns the list of validated job URLs",
+    validateParamIndex: "Number of jobs to validate per request (optional, default: 10)",
+    validateRespTitle: "Response fields",
+    validateRespNumFound: "Number of jobs not yet validated today",
+    validateRespCount: "Number of jobs validated in this batch",
+    validateRespJobs: "Array of validated job objects",
+    validateRespJobsUrl: "Full URL to the job detail page",
+    validateEndpoint: "Validate",
+    validateAuthVal: "Solr Basic Auth (server-side, via <code>api.env</code>)",
+    validateParamsVal: "Query: <code>index</code> (int, optional, default 10)",
+    validateStatus200: "Jobs were validated successfully",
+    validateStatus405: "Only GET method is allowed",
+    validateStatus503: "Solr core is unavailable or environment not configured",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -2128,6 +2276,26 @@ const i18n = {
     scraperDeleteStatus405: "Doar metoda DELETE este permisă",
     scraperDeleteStatus415: "Content-Type nu este application/json",
     scraperDeleteStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+
+    validateTag: "Validează un lot de joburi",
+    validateDesc: "Preia cele mai vechi joburi care NU au fost validate astăzi din core-ul Solr <code>job</code> și le marchează cu timestampul UTC curent (<code>vdate</code>). Doar documentele care conțin atât <code>url</code> cât și <code>title</code> sunt procesate.",
+    validateHow1: "Interoghează Solr pentru numărul total de joburi nevalidate (excluzând cele validate astăzi)",
+    validateHow2: "Preia până la <code>index</code> joburi care nu au fost încă validate astăzi",
+    validateHow3: "Pentru fiecare job valid (are atât <code>url</code> cât și <code>title</code>), îl marchează cu timestampul UTC curent",
+    validateHow4: "Transmite update-urile înapoi la Solr",
+    validateHow5: "Returnează lista URL-urilor joburilor validate",
+    validateParamIndex: "Numărul de joburi de validat per request (opțional, implicit: 10)",
+    validateRespTitle: "Câmpurile răspunsului",
+    validateRespNumFound: "Numărul de joburi nevalidate astăzi",
+    validateRespCount: "Numărul de joburi validate în acest lot",
+    validateRespJobs: "Array de obiecte job validate",
+    validateRespJobsUrl: "URL complet către pagina jobului",
+    validateEndpoint: "Validare",
+    validateAuthVal: "Solr Basic Auth (server-side, prin <code>api.env</code>)",
+    validateParamsVal: "Query: <code>index</code> (int, opțional, implicit 10)",
+    validateStatus200: "Joburile au fost validate cu succes",
+    validateStatus405: "Doar metoda GET este permisă",
+    validateStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
