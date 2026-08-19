@@ -1,7 +1,13 @@
 <?php
-    
+
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 require_once __DIR__ . '/../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../api.env');
@@ -156,8 +162,9 @@ try {
     }
 
     echo json_encode([
-        "numFound" => $numFound,
-        "count"    => count($jobs),
+        "remaining" => $numFound-count($jobs),
+        "index" => $index,
+        "found"    => count($jobs),
         "jobs"     => $result
     ], JSON_UNESCAPED_UNICODE);
 

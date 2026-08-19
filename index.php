@@ -1711,8 +1711,9 @@ curl -X GET "https://api.peviitor.ro/v1/validate/?index=50" \
         <table class="prop-table">
           <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
           <tbody>
-            <tr><td>numFound</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespNumFound">Number of jobs not yet validated today</td></tr>
-            <tr><td>count</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespCount">Number of jobs validated in this batch</td></tr>
+            <tr><td>remaining</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespRemaining">Number of jobs not yet validated today</td></tr>
+            <tr><td>index</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespIndex">The index value used for this batch</td></tr>
+            <tr><td>found</td><td><span class="type-tag">number</span></td><td data-i18n="validateRespFound">Number of jobs validated in this batch</td></tr>
             <tr><td>jobs</td><td><span class="type-tag">object[]</span></td><td data-i18n="validateRespJobs">Array of validated job objects</td></tr>
             <tr><td>jobs[].url</td><td><span class="type-tag">string</span></td><td data-i18n="validateRespJobsUrl">Full URL to the job detail page</td></tr>
           </tbody>
@@ -1724,8 +1725,9 @@ curl -X GET "https://api.peviitor.ro/v1/validate/?index=50" \
       <div class="card-header" data-i18n="successTitle">200 — Success</div>
       <div class="card-body">
         <pre>{
-  <span class="json-key">"numFound"</span>: <span class="json-number">1243</span>,
-  <span class="json-key">"count"</span>: <span class="json-number">10</span>,
+  <span class="json-key">"remaining"</span>: <span class="json-number">1233</span>,
+  <span class="json-key">"index"</span>: <span class="json-number">10</span>,
+  <span class="json-key">"found"</span>: <span class="json-number">10</span>,
   <span class="json-key">"jobs"</span>: [
     { <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/123"</span> },
     { <span class="json-key">"url"</span>: <span class="json-string">"https://example.com/job/456"</span> }
@@ -2035,8 +2037,9 @@ const i18n = {
     validateHow5: "Returns the list of validated job URLs",
     validateParamIndex: "Number of jobs to validate per request (optional, default: 10)",
     validateRespTitle: "Response fields",
-    validateRespNumFound: "Number of jobs not yet validated today",
-    validateRespCount: "Number of jobs validated in this batch",
+    validateRespRemaining: "Number of jobs not yet validated today",
+    validateRespIndex: "The index value used for this batch",
+    validateRespFound: "Number of jobs validated in this batch",
     validateRespJobs: "Array of validated job objects",
     validateRespJobsUrl: "Full URL to the job detail page",
     validateEndpoint: "Validate",
@@ -2286,8 +2289,9 @@ const i18n = {
     validateHow5: "Returnează lista URL-urilor joburilor validate",
     validateParamIndex: "Numărul de joburi de validat per request (opțional, implicit: 10)",
     validateRespTitle: "Câmpurile răspunsului",
-    validateRespNumFound: "Numărul de joburi nevalidate astăzi",
-    validateRespCount: "Numărul de joburi validate în acest lot",
+    validateRespRemaining: "Numărul de joburi nevalidate astăzi",
+    validateRespIndex: "Valoarea index folosită pentru acest lot",
+    validateRespFound: "Numărul de joburi validate în acest lot",
     validateRespJobs: "Array de obiecte job validate",
     validateRespJobsUrl: "URL complet către pagina jobului",
     validateEndpoint: "Validare",
