@@ -7,6 +7,9 @@
   },
   "servers": [
     {
+      "url": "http://localhost:8081/api/v1"
+    },
+    {
       "url": "https://test.peviitor.ro/api/v1"
     }
   ],
@@ -2851,6 +2854,110 @@
           },
           "500": {
             "description": "Solr request failed or server misconfiguration"
+          }
+        }
+      }
+    },
+    "/validate/": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Validate a batch of jobs",
+        "description": "Fetches the oldest jobs that have NOT been validated today from the Solr job core and stamps each one with the current UTC timestamp (vdate). Only documents that carry both url and title are processed.",
+        "operationId": "validateJobs",
+        "parameters": [
+          {
+            "name": "index",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of jobs to validate per request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Jobs validated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "remaining": {
+                      "type": "integer",
+                      "description": "Number of jobs not yet validated today"
+                    },
+                    "index": {
+                      "type": "integer",
+                      "description": "The index value used for this batch"
+                    },
+                    "found": {
+                      "type": "integer",
+                      "description": "Number of jobs validated in this batch"
+                    },
+                    "jobs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string",
+                            "description": "Full URL to the job detail page"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "remaining": 1233,
+                  "index": 10,
+                  "found": 10,
+                  "jobs": [
+                    { "url": "https://example.com/job/123" },
+                    { "url": "https://example.com/job/456" }
+                  ]
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET method is allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Only GET method allowed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable. SOLR server is down or request failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Job core unavailable"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
