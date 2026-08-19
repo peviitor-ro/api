@@ -967,62 +967,84 @@
     "/update/": {
       "put": {
         "tags": [
-          "Jobs"
+          "General"
         ],
-        "summary": "Update jobs",
-        "description": "Update jobs using Solr",
+        "summary": "Update a job document",
+        "description": "Partially updates a job document in the Solr 'job' core. The 'url' field identifies the document; all other fields are optional and use atomic updates so only provided fields are touched.",
+        "operationId": "updateJob",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["url"],
                 "properties": {
-                  "job_link": {
+                  "url": {
                     "type": "string",
-                    "description": "Job link",
-                    "example": "https://example.com/job/software-engineer"
+                    "description": "Full URL to the job detail page (unique key)",
+                    "example": "https://example.com/job/123"
                   },
-                  "job_title": {
+                  "title": {
                     "type": "string",
-                    "description": "Job title",
-                    "example": "Software Engineer"
+                    "description": "Job title (max 200 chars, no HTML)",
+                    "example": "Senior PHP Developer"
                   },
                   "company": {
                     "type": "string",
-                    "description": "Company name",
-                    "example": "Tech Corp"
+                    "description": "Hiring company name (stored uppercase)",
+                    "example": "GOOGLE ROMANIA SRL"
                   },
-                  "country": {
+                  "cif": {
                     "type": "string",
-                    "description": "Country",
-                    "example": "România"
+                    "description": "CIF/CUI of the company",
+                    "example": "24415960"
                   },
-                  "city": {
-                    "type": "string",
-                    "description": "City",
-                    "example": "București"
+                  "location": {
+                    "oneOf": [
+                      { "type": "string" },
+                      { "type": "array", "items": { "type": "string" } }
+                    ],
+                    "description": "City or array of cities (diacritics accepted, auto-corrected)",
+                    "example": ["București", "Cluj-Napoca"]
                   },
-                  "county": {
-                    "type": "string",
-                    "description": "County",
-                    "example": "Ilfov"
+                  "tags": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Skill tags (lowercase, max 20)",
+                    "example": ["php", "laravel", "solr"]
                   },
-                  "remote": {
+                  "workmode": {
                     "type": "string",
-                    "description": "Remote",
-                    "example": "on-site"
+                    "enum": ["remote", "on-site", "hybrid"],
+                    "description": "Work mode"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["scraped", "tested", "published", "verified"],
+                    "description": "Job status"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "ISO8601 UTC timestamp of indexing",
+                    "example": "2026-08-19T10:00:00.000Z"
+                  },
+                  "vdate": {
+                    "type": "string",
+                    "description": "ISO8601 UTC timestamp of validation",
+                    "example": "2026-08-19T10:00:00.000Z"
+                  },
+                  "expirationdate": {
+                    "type": "string",
+                    "description": "ISO8601 UTC expiration timestamp",
+                    "example": "2026-09-19T10:00:00.000Z"
+                  },
+                  "salary": {
+                    "type": "string",
+                    "description": "Salary interval with currency",
+                    "example": "5000-8000 RON"
                   }
-                },
-                "required": [
-                  "job_link",
-                  "job_title",
-                  "company",
-                  "country",
-                  "city",
-                  "county",
-                  "remote"
-                ]
+                }
               }
             }
           }
@@ -1045,50 +1067,56 @@
             }
           },
           "400": {
-            "description": "Bad Request. Invalid input parameter.",
+            "description": "Invalid request (bad JSON, missing/invalid fields)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Missing required fields: job_link, job_title, company, country, city, county, remote"
-                    }
+                    "error": { "type": "string" },
+                    "code": { "type": "integer", "example": 400 }
                   }
                 }
               }
             }
           },
-          "500": {
-            "description": "Internal Server Error. Something went wrong on the server side.",
+          "405": {
+            "description": "Only PUT method is allowed",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Failed to insert data into Solr"
-                    }
+                    "error": { "type": "string", "example": "Only PUT method is allowed" },
+                    "code": { "type": "integer", "example": 405 }
+                  }
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Content-Type is not application/json",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string", "example": "Content-Type must be application/json" },
+                    "code": { "type": "integer", "example": 415 }
                   }
                 }
               }
             }
           },
           "503": {
-            "description": "Service unavailable. SOLR server is down or request failed.",
+            "description": "Service unavailable. Solr server is down or environment not configured.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
-                    }
+                    "error": { "type": "string", "example": "Job core unavailable" },
+                    "details": { "type": "string" }
                   }
                 }
               }

@@ -35,16 +35,49 @@ $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 $PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 
-function city_fix($in) {
-    $output = $in;
-    $output = str_replace("Bucharest", "București", $output);
-    $output = str_replace("Brasov", "Brașov", $output);
-    $output = str_replace("Timisoara", "Timișoara", $output);
-    $output = str_replace("Pitesti", "Pitești", $output);
-    $output = str_replace("Iasi", "Iași", $output);
-    $output = str_replace("Targu Mures", "Târgu Mureș", $output);
-    $output = str_replace("Cluj Napoca", "Cluj-Napoca", $output);
-    return $output;
+const ALLOWED_WORKMODES = ['remote', 'on-site', 'hybrid'];
+const ALLOWED_STATUSES = ['scraped', 'tested', 'published', 'verified'];
+
+function location_fix(string $in): string {
+    $map = [
+        "Bucharest" => "București",
+        "Brasov" => "Brașov",
+        "Timisoara" => "Timișoara",
+        "Pitesti" => "Pitești",
+        "Iasi" => "Iași",
+        "Targu Mures" => "Târgu Mureș",
+        "Cluj Napoca" => "Cluj-Napoca",
+    ];
+    return str_replace(array_keys($map), array_values($map), $in);
+}
+
+// reject strings that look like they're trying to inject HTML/markup
+function reject_if_html(?string $val, string $field): void {
+    if ($val !== null && strip_tags($val) !== $val) {
+        http_response_code(400);
+        echo json_encode(["error" => "Field '$field' must not contain HTML/markup", "code" => 400]);
+        exit;
+    }
+}
+
+function clean_string(mixed $val): ?string {
+    if (!is_string($val)) return null;
+    $val = trim($val);
+    return $val === '' ? null : $val;
+}
+
+// normalizes a value that should be a string[] — accepts array or single string
+function clean_string_array(mixed $val): array {
+    if ($val === null) return [];
+    if (is_string($val)) $val = [$val];
+    if (!is_array($val)) return [];
+    $out = [];
+    foreach ($val as $v) {
+        if (!is_string($v)) continue;
+        $v = trim($v);
+        if ($v !== '') $out[] = $v;
+    }
+    return $out;
 }
 
 function postJson(string $url, string $payload, ?string $user = null, ?string $pass = null): array {
@@ -81,40 +114,110 @@ try {
     $raw_data = file_get_contents("php://input");
     $data = json_decode($raw_data);
 
-    $job_link = isset($data->job_link) ? htmlspecialchars($data->job_link) : null;
-    $job_title = isset($data->job_title) ? htmlspecialchars($data->job_title) : null;
-    $company = isset($data->company) ? htmlspecialchars($data->company) : null;
-    $country = isset($data->country) ? htmlspecialchars($data->country) : null;
-    $city = isset($data->city) ? htmlspecialchars($data->city) : null;
-    $county = isset($data->county) ? htmlspecialchars($data->county) : null;
-    $remote = isset($data->remote) ? htmlspecialchars($data->remote) : null;
+    if (json_last_error() !== JSON_ERROR_NONE || !is_object($data)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Invalid JSON body", "code" => 400]);
+        exit;
+    }
 
-    if (!$job_link || !$job_title || !$company) {
+    // ---- url ----
+    $url = clean_string($data->url ?? null);
+    if (!$url || !filter_var($url, FILTER_VALIDATE_URL) || !preg_match('#^https?://#i', $url)) {
+        http_response_code(400);
+        echo json_encode(["error" => "Missing or invalid required field: url", "code" => 400]);
+        exit;
+    }
+
+    // ---- title (optional on partial update; validated only if present) ----
+    $title = clean_string($data->title ?? null);
+    if ($title !== null) {
+        if (mb_strlen($title) > 200) {
+            http_response_code(400);
+            echo json_encode(["error" => "title exceeds 200 characters", "code" => 400]);
+            exit;
+        }
+        reject_if_html($title, 'title');
+    }
+
+    // ---- company (uppercase per schema) ----
+    $company = clean_string($data->company ?? null);
+    reject_if_html($company, 'company');
+    if ($company !== null) $company = mb_strtoupper($company);
+
+    // ---- cif ----
+    $cif = clean_string($data->cif ?? null);
+    reject_if_html($cif, 'cif');
+
+    // ---- location (string[], diacritics accepted) — only touched if key present ----
+    $location = null;
+    if (property_exists($data, 'location')) {
+        $location = array_map('location_fix', clean_string_array($data->location));
+    }
+
+    // ---- tags (string[], lowercase, no diacritics, max 20) — only touched if key present ----
+    $tags = null;
+    if (property_exists($data, 'tags')) {
+        $tags = clean_string_array($data->tags);
+        $tags = array_map(fn($t) => mb_strtolower($t), $tags);
+        $tags = array_slice($tags, 0, 20);
+    }
+
+    // ---- workmode (enum) ----
+    $workmode = clean_string($data->workmode ?? null);
+    if ($workmode !== null && !in_array($workmode, ALLOWED_WORKMODES, true)) {
         http_response_code(400);
         echo json_encode([
-            "error" => "Missing required fields: job_link, job_title, company",
+            "error" => "workmode must be one of: " . implode(', ', ALLOWED_WORKMODES),
             "code" => 400
         ]);
         exit;
     }
 
+    // ---- status (enum) — optional on partial update, no forced default ----
+    $status = clean_string($data->status ?? null);
+    if ($status !== null && !in_array($status, ALLOWED_STATUSES, true)) {
+        http_response_code(400);
+        echo json_encode([
+            "error" => "status must be one of: " . implode(', ', ALLOWED_STATUSES),
+            "code" => 400
+        ]);
+        exit;
+    }
+
+    // ---- date fields (pass through as-is; validate basic ISO8601 shape) ----
+    $date = clean_string($data->date ?? null);
+    $vdate = clean_string($data->vdate ?? null);
+    $expirationdate = clean_string($data->expirationdate ?? null);
+
+    // ---- salary (string, not array) ----
+    $salary = clean_string($data->salary ?? null);
+    reject_if_html($salary, 'salary');
+
+    // atomic update: url identifies the doc, every other field is wrapped in
+    // {"set": ...} so only fields present in this request get touched — anything
+    // omitted keeps its existing value in Solr instead of being wiped.
     $item = new stdClass();
-    $item->job_link = trim($job_link);
-    $item->id = md5($item->job_link)."";
-    $item->job_title = trim($job_title);
-    $item->company = trim($company);
-    $item->country = $country ? str_ireplace("Romania", "România", trim($country)) : null;
-    $item->city = $city ? city_fix(trim($city)) : null;
-    $item->county = $county ? trim($county) : null;
-    $item->remote = $remote ? trim($remote) : null;
+    $item->url = $url;
+    if ($title !== null) $item->title = ["set" => $title];
+    if ($company !== null) $item->company = ["set" => $company];
+    if ($cif !== null) $item->cif = ["set" => $cif];
+    if ($location !== null) $item->location = ["set" => $location];
+    if ($tags !== null) $item->tags = ["set" => $tags];
+    if ($workmode !== null) $item->workmode = ["set" => $workmode];
+    if ($date !== null) $item->date = ["set" => $date];
+    if ($status !== null) $item->status = ["set" => $status];
+    if ($vdate !== null) $item->vdate = ["set" => $vdate];
+    if ($expirationdate !== null) $item->expirationdate = ["set" => $expirationdate];
+    if ($salary !== null) $item->salary = ["set" => $salary];
 
     $core = 'job';
-    $url = "$PROTOCOL://$SOLR_SERVER/solr/$core/update?commitWithin=1000&overwrite=true&wt=json";
-    $payload = json_encode([$item]);
+    $updateUrl = "$PROTOCOL://$SOLR_SERVER/solr/$core/update?commitWithin=1000&wt=json";
+    $payload = json_encode([$item], JSON_UNESCAPED_UNICODE);
 
-    error_log("UPDATE URL: $url");
+    error_log("UPDATE URL: $updateUrl");
+    error_log("UPDATE PAYLOAD: $payload");
 
-    $response = postJson($url, $payload, $SOLR_USER, $SOLR_PASS);
+    $response = postJson($updateUrl, $payload, $SOLR_USER, $SOLR_PASS);
 
     echo json_encode(["success" => "Data successfully inserted into Solr"]);
 
