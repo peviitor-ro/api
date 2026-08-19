@@ -1783,6 +1783,176 @@ curl -X GET "https://api.peviitor.ro/v1/validate/?index=50" \
 
   </div>
 
+  <!-- ============================================= -->
+  <!-- UPDATE ENDPOINT -->
+  <!-- ============================================= -->
+
+  <div class="card">
+    <div class="endpoint-row" onclick="toggleEndpoint('update')">
+      <span class="method-badge" style="background:#1565c0;box-shadow:0 2px 6px rgba(21,101,192,0.3);">PUT</span>
+      <span class="endpoint-path">/v1/update/</span>
+      <span class="endpoint-desc" data-i18n="updateTag">Update a job document</span>
+      <span class="toggle-arrow" id="arrow-update">&#9654;</span>
+    </div>
+  </div>
+
+  <div id="update-content" class="endpoint-content" style="display:none">
+
+    <div class="card">
+      <div class="card-body">
+        <p style="margin-bottom:1rem;color:#5a4a3a;" data-i18n="updateDesc">
+          Partially updates a job document in the Solr <code>job</code> core.
+          The <code>url</code> field identifies the document; all other fields are optional and use atomic updates
+          so only provided fields are touched &mdash; anything omitted keeps its existing value.
+        </p>
+
+        <div class="section-title" data-i18n="howItWorksTitle">How it works</div>
+        <ol style="margin:0 0 1.5rem 1.2rem;color:#5a4a3a;font-size:0.9rem;">
+          <li data-i18n="updateHow1">Validates the required <code>url</code> field (must be a valid HTTP/HTTPS URL)</li>
+          <li data-i18n="updateHow2">Sanitizes string fields and rejects HTML/markup in <code>title</code>, <code>company</code>, <code>cif</code>, <code>salary</code></li>
+          <li data-i18n="updateHow3">Normalizes <code>location</code> (string or array, auto-corrects diacritics) and <code>tags</code> (lowercase, max 20)</li>
+          <li data-i18n="updateHow4">Validates enum fields: <code>workmode</code> (<code>remote</code>, <code>on-site</code>, <code>hybrid</code>) and <code>status</code> (<code>scraped</code>, <code>tested</code>, <code>published</code>, <code>verified</code>)</li>
+          <li data-i18n="updateHow5">Sends atomic update to Solr with <code>commitWithin=1000</code></li>
+        </ol>
+
+        <div class="section-title" data-i18n="companyAddBodyTitle">Request body (JSON)</div>
+        <table class="prop-table" style="margin-bottom:1.5rem;">
+          <thead><tr><th>Field</th><th>Type</th><th>Required</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>url</td><td><span class="type-tag">string</span></td><td>Yes</td><td data-i18n="updateFieldUrl">Full URL to the job detail page (unique key)</td></tr>
+            <tr><td>title</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldTitle">Job title (max 200 chars, no HTML)</td></tr>
+            <tr><td>company</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldCompany">Hiring company name (stored uppercase)</td></tr>
+            <tr><td>cif</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldCif">CIF/CUI of the company</td></tr>
+            <tr><td>location</td><td><span class="type-tag">string|string[]</span></td><td>No</td><td data-i18n="updateFieldLocation">City or array of cities (diacritics accepted, auto-corrected)</td></tr>
+            <tr><td>tags</td><td><span class="type-tag">string[]</span></td><td>No</td><td data-i18n="updateFieldTags">Skill tags (lowercase, max 20)</td></tr>
+            <tr><td>workmode</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldWorkmode">One of: <code>remote</code>, <code>on-site</code>, <code>hybrid</code></td></tr>
+            <tr><td>status</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldStatus">One of: <code>scraped</code>, <code>tested</code>, <code>published</code>, <code>verified</code></td></tr>
+            <tr><td>date</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldDate">ISO8601 UTC timestamp of indexing</td></tr>
+            <tr><td>vdate</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldVdate">ISO8601 UTC timestamp of validation</td></tr>
+            <tr><td>expirationdate</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldExpirationdate">ISO8601 UTC expiration timestamp</td></tr>
+            <tr><td>salary</td><td><span class="type-tag">string</span></td><td>No</td><td data-i18n="updateFieldSalary">Salary interval with currency (no HTML)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title" data-i18n="tryItTitle">Try it</div>
+        <div class="curl-box">
+          <div class="curl-label">curl</div>
+          <pre>curl -X PUT "https://api.peviitor.ro/v1/update/" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com/job/123",
+    "title": "Senior PHP Developer",
+    "company": "GOOGLE ROMANIA SRL",
+    "workmode": "hybrid",
+    "status": "verified"
+  }'</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="validateRespTitle">Response fields</div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th>Field</th><th>Type</th><th data-i18n="description">Description</th></tr></thead>
+          <tbody>
+            <tr><td>success</td><td><span class="type-tag">string</span></td><td data-i18n="updateRespSuccess">Confirmation message</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="successTitle">200 — Success</div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"success"</span>: <span class="json-string">"Data successfully inserted into Solr"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">400 — <span data-i18n="badRequestTitle">Bad Request</span></div>
+      <div class="card-body">
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Missing or invalid required field: url"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"Field 'title' must not contain HTML/markup"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre style="margin-bottom:0.75rem">{
+  <span class="json-key">"error"</span>: <span class="json-string">"workmode must be one of: remote, on-site, hybrid"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Invalid JSON body"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">400</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">405 — <span data-i18n="methodNotAllowedTitle">Method Not Allowed</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Only PUT method is allowed"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">405</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">415 — <span data-i18n="unsupportedMediaTypeTitle">Unsupported Media Type</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Content-Type must be application/json"</span>,
+  <span class="json-key">"code"</span>: <span class="json-number">415</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">503 — <span data-i18n="unavailTitle">Service Unavailable</span></div>
+      <div class="card-body">
+        <pre>{
+  <span class="json-key">"error"</span>: <span class="json-string">"Job core unavailable"</span>,
+  <span class="json-key">"details"</span>: <span class="json-string">"FETCH FAILED: http://... | Connection timed out"</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span data-i18n="requirementsTitle">Requirements</span> &mdash; <span data-i18n="updateEndpoint">Update</span></div>
+      <div class="card-body">
+        <table class="prop-table">
+          <thead><tr><th style="width:100px" data-i18n="item">Item</th><th data-i18n="details">Details</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="method">Method</td><td><code>PUT</code> only</td></tr>
+            <tr><td data-i18n="auth">Auth</td><td data-i18n="companyAddAuthVal">Solr Basic Auth (server-side, via <code>api.env</code>)</td></tr>
+            <tr><td data-i18n="params">Params</td><td data-i18n="updateParamsVal">Body: <code>{"url": "...", ...}</code></td></tr>
+            <tr><td data-i18n="contentType">Content-Type</td><td><code>application/json</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" data-i18n="statusCodesTitle">Status codes</div>
+      <div class="card-body">
+        <ul class="status-list">
+          <li><span class="status-code sc-200">200</span><span data-i18n="updateStatus200">Job was updated successfully</span></li>
+          <li><span class="status-code sc-400">400</span><span data-i18n="updateStatus400">Invalid body, missing/invalid fields, or HTML detected</span></li>
+          <li><span class="status-code sc-405">405</span><span data-i18n="updateStatus405">Only PUT method is allowed</span></li>
+          <li><span class="status-code sc-415">415</span><span data-i18n="updateStatus415">Content-Type is not application/json</span></li>
+          <li><span class="status-code sc-503">503</span><span data-i18n="updateStatus503">Solr core is unavailable or environment not configured</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
   <h2 data-i18n="statusTitle">Stare curentă a API-ului</h2>
   <p class="section-desc" data-i18n="statusDesc">Lucrăm la:</p>
   <ul class="future-list">
@@ -2049,6 +2219,35 @@ const i18n = {
     validateStatus405: "Only GET method is allowed",
     validateStatus503: "Solr core is unavailable or environment not configured",
 
+    updateTag: "Update a job document",
+    updateDesc: "Partially updates a job document in the Solr <code>job</code> core. The <code>url</code> field identifies the document; all other fields are optional and use atomic updates so only provided fields are touched \u2014 anything omitted keeps its existing value.",
+    updateHow1: "Validates the required <code>url</code> field (must be a valid HTTP/HTTPS URL)",
+    updateHow2: "Sanitizes string fields and rejects HTML/markup in <code>title</code>, <code>company</code>, <code>cif</code>, <code>salary</code>",
+    updateHow3: "Normalizes <code>location</code> (string or array, auto-corrects diacritics) and <code>tags</code> (lowercase, max 20)",
+    updateHow4: "Validates enum fields: <code>workmode</code> (<code>remote</code>, <code>on-site</code>, <code>hybrid</code>) and <code>status</code> (<code>scraped</code>, <code>tested</code>, <code>published</code>, <code>verified</code>)",
+    updateHow5: "Sends atomic update to Solr with <code>commitWithin=1000</code>",
+    updateFieldUrl: "Full URL to the job detail page (unique key)",
+    updateFieldTitle: "Job title (max 200 chars, no HTML)",
+    updateFieldCompany: "Hiring company name (stored uppercase)",
+    updateFieldCif: "CIF/CUI of the company",
+    updateFieldLocation: "City or array of cities (diacritics accepted, auto-corrected)",
+    updateFieldTags: "Skill tags (lowercase, max 20)",
+    updateFieldWorkmode: "One of: <code>remote</code>, <code>on-site</code>, <code>hybrid</code>",
+    updateFieldStatus: "One of: <code>scraped</code>, <code>tested</code>, <code>published</code>, <code>verified</code>",
+    updateFieldDate: "ISO8601 UTC timestamp of indexing",
+    updateFieldVdate: "ISO8601 UTC timestamp of validation",
+    updateFieldExpirationdate: "ISO8601 UTC expiration timestamp",
+    updateFieldSalary: "Salary interval with currency (no HTML)",
+    updateRespSuccess: "Confirmation message",
+    updateEndpoint: "Update",
+    updateParamsVal: "Body: <code>{\"url\": \"...\", ...}</code>",
+    updateStatus200: "Job was updated successfully",
+    updateStatus400: "Invalid body, missing/invalid fields, or HTML detected",
+    updateStatus405: "Only PUT method is allowed",
+    updateStatus415: "Content-Type is not application/json",
+    updateStatus503: "Solr core is unavailable or environment not configured",
+    unsupportedMediaTypeTitle: "Unsupported Media Type",
+
     contextParagraph: "This page exposes public endpoints of the peviitor.ro API, a job discovery platform. We are in the process of reviewing and expanding the API, and the documentation will gradually improve.",
     availableEndpointsTitle: "Currently available endpoints",
     availableEndpointsDesc: "The endpoints below are available right now and can be used for testing and exploration. The API is being standardized, and we will gradually publish new endpoints along with more detailed documentation.",
@@ -2300,6 +2499,35 @@ const i18n = {
     validateStatus200: "Joburile au fost validate cu succes",
     validateStatus405: "Doar metoda GET este permisă",
     validateStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+
+    updateTag: "Actualizează un document job",
+    updateDesc: "Actualizează parțial un document job în core-ul Solr <code>job</code>. Câmpul <code>url</code> identifică documentul; toate celelalte câmpuri sunt opționale și folosesc actualizări atomice, astfel încât doar câmpurile furnizate sunt modificate \u2014 restul își păstrează valoarea existentă.",
+    updateHow1: "Validează câmpul obligatoriu <code>url</code> (trebuie să fie un URL HTTP/HTTPS valid)",
+    updateHow2: "Sanitizează câmpurile string și respinge HTML/markup în <code>title</code>, <code>company</code>, <code>cif</code>, <code>salary</code>",
+    updateHow3: "Normalizează <code>location</code> (string sau array, corectează automat diacriticele) și <code>tags</code> (lowercase, max 20)",
+    updateHow4: "Validează câmpurile enum: <code>workmode</code> (<code>remote</code>, <code>on-site</code>, <code>hybrid</code>) și <code>status</code> (<code>scraped</code>, <code>tested</code>, <code>published</code>, <code>verified</code>)",
+    updateHow5: "Trimite actualizare atomică în Solr cu <code>commitWithin=1000</code>",
+    updateFieldUrl: "URL complet către pagina jobului (cheie unică)",
+    updateFieldTitle: "Titlul jobului (max 200 caractere, fără HTML)",
+    updateFieldCompany: "Numele companiei angajatoare (stocat uppercase)",
+    updateFieldCif: "CIF/CUI-ul companiei",
+    updateFieldLocation: "Oraș sau array de orașe (diacritice acceptate, corectate automat)",
+    updateFieldTags: "Tag-uri de skill (lowercase, max 20)",
+    updateFieldWorkmode: "Unul dintre: <code>remote</code>, <code>on-site</code>, <code>hybrid</code>",
+    updateFieldStatus: "Unul dintre: <code>scraped</code>, <code>tested</code>, <code>published</code>, <code>verified</code>",
+    updateFieldDate: "Timestamp ISO8601 UTC al indexării",
+    updateFieldVdate: "Timestamp ISO8601 UTC al validării",
+    updateFieldExpirationdate: "Timestamp ISO8601 UTC al expirării",
+    updateFieldSalary: "Interval salariu cu monedă (fără HTML)",
+    updateRespSuccess: "Mesaj de confirmare",
+    updateEndpoint: "Actualizare",
+    updateParamsVal: "Body: <code>{\"url\": \"...\", ...}</code>",
+    updateStatus200: "Jobul a fost actualizat cu succes",
+    updateStatus400: "Body invalid, câmpuri lipsă/invalid sau HTML detectat",
+    updateStatus405: "Doar metoda PUT este permisă",
+    updateStatus415: "Content-Type nu este application/json",
+    updateStatus503: "Core-ul Solr este indisponibil sau mediul nu este configurat",
+    unsupportedMediaTypeTitle: "Tip de media neacceptat",
 
     contextParagraph: "Această pagină expune endpoint-uri publice ale API-ului peviitor.ro, o platformă de descoperire a joburilor. Suntem în proces de revizuire și extindere a API-ului, iar documentația se va îmbunătăți treptat.",
     availableEndpointsTitle: "Endpoint-uri disponibile în prezent",
