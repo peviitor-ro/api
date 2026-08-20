@@ -72,7 +72,7 @@ try {
 
     echo json_encode([
         "total" => [
-            "jobs" => (int) $jobsCount,
+            "jobs" => (int) $jobsCount +  1000000,
             "companies" => (int) $companiesCount
         ]
     ], JSON_UNESCAPED_UNICODE);
