@@ -48,7 +48,7 @@ function postJson(string $url, string $payload, string $id, string $logo, ?strin
     }
 
     return [
-        "message" => "Logo $logo deleted from id $id",
+        "message" => "Logo url << $logo >> deleted from id << $id >>",
         "solr_response" => $json
     ];
 }
