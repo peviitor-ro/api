@@ -12,15 +12,16 @@ $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE' && $_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(["error" => "Only DELETE method allowed"]);
+    echo json_encode(["error" => "Only DELETE or POST method allowed"]);
     exit;
 }
 
-function postJson(string $url, string $payload, ?string $user = null, ?string $pass = null): array {
-    $headers = [];
+function postJson(string $url, string $payload, string $id, string $logo, ?string $user = null, ?string $pass = null): array
+{
     if ($user && $pass) {
         $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
     }
+
     $headers[] = "Content-Type: application/json";
     $context = stream_context_create([
         'http' => [
@@ -30,16 +31,26 @@ function postJson(string $url, string $payload, ?string $user = null, ?string $p
             'timeout' => 10
         ]
     ]);
+
     $data = @file_get_contents($url, false, $context);
     if ($data === false) {
         $err = error_get_last()['message'] ?? 'Unknown error';
         throw new Exception("FETCH FAILED: $url | $err");
     }
+
     $json = json_decode($data, true);
     if (!is_array($json)) {
         throw new Exception("Invalid JSON response");
     }
-    return $json;
+
+    if (($json['responseHeader']['status'] ?? 1) !== 0) {
+        throw new Exception("Solr update failed: " . json_encode($json));
+    }
+
+    return [
+        "message" => "Logo $logo deleted from id $id",
+        "solr_response" => $json
+    ];
 }
 
 try {
@@ -49,7 +60,7 @@ try {
 
     $input = json_decode(file_get_contents("php://input"), true);
 
-    if (!isset($input['id']) || !isset($input['logo'])) {
+    if (!isset($input['id']) || !isset($input['logo']) || !is_string($input['id']) || !is_string($input['logo'])) {
         http_response_code(400);
         echo json_encode(["error" => "Missing id or logo"]);
         exit;
@@ -70,10 +81,9 @@ try {
 
     error_log("FIRME LOGO DELETE URL: $url");
 
-    $response = postJson($url, $payload, $SOLR_USER, $SOLR_PASS);
+    $response = postJson($url, $payload, $id, $logo, $SOLR_USER, $SOLR_PASS);
 
     echo json_encode($response);
-
 } catch (Exception $e) {
     error_log("FIRME LOGO DELETE FAILED: " . $e->getMessage());
     http_response_code(503);
