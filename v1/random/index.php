@@ -55,7 +55,7 @@ loadEnv(__DIR__ . '/../../api.env');
 // ======= REQUIRED api.env VARIABLES =======
 // This script expects the following variables in api.env:
 //   SOLR_SERVER=<solr_server_url>    (e.g., localhost:18983)
-//   PROTOCOL=<http|https>            (e.g., http)
+//   PROTOCOL=<http|https>           
 //   SOLR_USER=<solr_username>
 //   SOLR_PASS=<solr_password>
 // =======================================
