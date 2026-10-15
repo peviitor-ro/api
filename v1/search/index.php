@@ -44,6 +44,13 @@ function normalize(string $v): string {
     return $v;
 }
 
+function splitLocation($location): array {
+    $text = implode(',', (array) $location);
+    $cities = explode(',', $text);
+    $cities = array_map('trim', $cities);
+    return array_values(array_filter($cities));
+}
+
 function fetchJson(string $url, ?string $user = null, ?string $pass = null, int $timeout = 5): array {
     $headers = [];
     if ($user && $pass) {
@@ -159,7 +166,7 @@ try {
             'title' => $doc['title'] ?? null,            
             'company' => $doc['company'] ?? null,
             'city' => $doc['location'] ?? [],
-            'location' => $doc['location'] ?? [],
+            'location' => splitLocation($doc['location'] ?? []),
             'county' => $doc['location'] ?? [],
             'remote' => $doc['workmode'] ?? '',
             'workmode' => $doc['workmode'] ?? '',
