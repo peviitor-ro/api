@@ -44,13 +44,6 @@ try {
     if (!$SOLR_SERVER) {
         throw new Exception("SOLR_SERVER not set");
     }
-    
-    $count = $_GET['count'] ?? 'false';
-    if ($count !== 'true' && $count !== 'false') {
-        http_response_code(400);
-        echo json_encode(["error" => "Missing or wrong required field: count"]);
-        exit;
-    }
 
     $page = max(1, (int)($_GET['page'] ?? 1));
     $rows = max(1, (int)($_GET['rows'] ?? 100));
@@ -64,7 +57,6 @@ try {
         "rows" => $rows,
         "start" => $start,
         "fl" => "id,company",
-        "sort" => "company asc",
         "indent" => "true"
     ]);
 
@@ -78,16 +70,10 @@ try {
 
     $companies = [];
     foreach ($docs as $doc) {
-        if ($count === 'true') {
-            $companies[] = [
-                'name' => $doc['company'] ?? null,
-                'id' => $doc['id'] ?? null
+        $companies[] = [
+            'name' => $doc['company'] ?? null,
+            'id' => $doc['id'] ?? null
             ];
-        } else {
-            $companies[] = [
-                'name' => $doc['company'] ?? null
-            ];
-        }
     }
 
     echo json_encode([
