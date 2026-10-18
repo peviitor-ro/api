@@ -8,6 +8,9 @@
   "servers": [
     {
       "url": "https://test.peviitor.ro/v1"
+    },
+    {
+      "url": "http://localhost:8081/api/v1"
     }
   ],
   "paths": {
