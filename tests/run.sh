@@ -70,6 +70,7 @@ SOLR_PASS =
 CLEANUP_API_KEY = test-key-123456
 CLEANUP_SECRET = test-secret-789012
 NODE_ENV = test
+PANEL_LINK_STUB = 1
 TESTENV
 
 cleanup() {
@@ -83,7 +84,8 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-# Start mock Solr server
+# Start mock Solr server (with a fresh store for the 'apikeys' core)
+rm -f "$(php -r 'echo sys_get_temp_dir();')/pv-mock-store.json" "$(php -r 'echo sys_get_temp_dir();')/pv-mock-last-delete.txt"
 php -S "127.0.0.1:$MOCK_PORT" "$TESTS_DIR/integration/mock-handler.php" > /dev/null 2>&1 &
 MOCK_PID=$!
 
