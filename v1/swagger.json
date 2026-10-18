@@ -299,17 +299,6 @@
           "General"
         ],
         "summary": "Get list of companies",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "count",
-            "schema": {
-              "type": "boolean"
-            },
-            "description": "Whether to count the number of jobs for each company",
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully received the list of companies",
