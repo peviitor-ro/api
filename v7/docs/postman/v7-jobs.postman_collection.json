@@ -1,0 +1,1003 @@
+{
+  "info": {
+    "_postman_id": "8c3b91fa-bf16-5658-a5e9-8cb5ffd6fe7b",
+    "name": "peviitor v7 — joburi prin API key (teste)",
+    "description": "Testează `/v7/jobs/`: o firmă publică, modifică și șterge propriile joburi cu cheia ei API.\n\n**Pregătire**\n1. Importă și environment-ul `v7-local.postman_environment.json` și selectează-l.\n2. Generează o cheie din panou (`{{baseUrl}}/v7/panel/`) și pune-o în variabila `apiKey` a environment-ului.\n   Colecția o trimite ca header `X-Api-Key` (tab-ul Authorization al colecției).\n3. Rulează folderele în ordine (Collection Runner): requesturile își transmit url-urile joburilor prin variabile de colecție.\n\nJoburile create au url-uri `https://firma-test.ro/cariere/postman-...` și sunt șterse în folderul 5.\nFolderul 6 nu creează nimic: are url-uri exemplu pe care le poți înlocui cu joburi existente.\nDocumentație: `v7/readme.md`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Api-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "1. Autentificare",
+      "item": [
+        {
+          "name": "Fără X-Api-Key → 401",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "Orice request fără headerul X-Api-Key este refuzat.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"error: Missing X-Api-Key header\", () => pm.expect(pm.response.json().error).to.eql(\"Missing X-Api-Key header\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cheie cu format greșit → 401",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Api-Key",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "cheie-gresita",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cheie necunoscută / revocată → 401",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "Format valid, dar cheia nu există (sau a fost revocată din panou).",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Api-Key",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "pv_live_000000000000000000000000000000000000000000000000",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Citire",
+      "item": [
+        {
+          "name": "Listează joburile firmei",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "Doar joburile publicate de firma cheii prin v7 (nu cele din scraping)."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"are cif, company, count, jobs\", () => {",
+                  "    pm.expect(body).to.have.keys(\"cif\", \"company\", \"count\", \"jobs\");",
+                  "    pm.expect(body.jobs).to.be.an(\"array\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Adăugare (POST)",
+      "item": [
+        {
+          "name": "Adaugă un job",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "company, cif, date, status=\"activ\" și source=\"company\" sunt setate de API din cheie.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"{{jobUrl}}\",\n  \"title\": \"Java Developer (Postman)\",\n  \"location\": [\n    \"Cluj-Napoca\"\n  ],\n  \"workmode\": \"hybrid\",\n  \"tags\": [\n    \"java\",\n    \"spring\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// url unic la fiecare rulare, refolosit de requesturile următoare",
+                  "pm.collectionVariables.set(\"jobUrl\", \"https://firma-test.ro/cariere/postman-\" + Date.now());"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"1 job salvat\", () => pm.expect(pm.response.json().count).to.eql(1));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Același url din nou → 409 already_posted_use_put",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"{{jobUrl}}\",\n  \"title\": \"Java Developer (Postman)\",\n  \"location\": \"Cluj-Napoca\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"reason already_posted_use_put\", () => pm.expect(pm.response.json().conflicts[0].reason).to.eql(\"already_posted_use_put\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Adaugă 2 joburi într-un singur request (batch)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "Body: un job, o listă de joburi sau {\"jobs\": [...]}; maxim 100. Totul sau nimic.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobs\": [\n    {\n      \"url\": \"{{batchUrl1}}\",\n      \"title\": \"Tester QA (Postman)\",\n      \"location\": \"Iași\",\n      \"workmode\": \"remote\"\n    },\n    {\n      \"url\": \"{{batchUrl2}}\",\n      \"title\": \"DevOps Engineer (Postman)\",\n      \"location\": [\n        \"București\",\n        \"Remote\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const t = Date.now();",
+                  "pm.collectionVariables.set(\"batchUrl1\", \"https://firma-test.ro/cariere/postman-batch-1-\" + t);",
+                  "pm.collectionVariables.set(\"batchUrl2\", \"https://firma-test.ro/cariere/postman-batch-2-\" + t);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"2 joburi salvate\", () => pm.expect(pm.response.json().count).to.eql(2));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Joburi invalide → 400 (nu se salvează nimic)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"url\": \"ftp://nu-e-http.ro\",\n    \"location\": \"Iasi\"\n  },\n  {\n    \"url\": \"https://firma-test.ro/x\",\n    \"title\": \"Dev\",\n    \"location\": \"Iasi\",\n    \"workmode\": \"acasa\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"2 joburi invalide raportate\", () => pm.expect(pm.response.json().invalid).to.have.lengthOf(2));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Modificare (PUT)",
+      "item": [
+        {
+          "name": "Listează din nou (jobul nou apare)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// joburile se salvează cu commitWithin=1000: așteaptă să apară în căutare",
+                  "setTimeout(() => {}, 1500);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "const urls = pm.response.json().jobs.map(j => j.url);",
+                  "pm.test(\"jobul adăugat e în listă\", () => pm.expect(urls).to.include(pm.collectionVariables.get(\"jobUrl\")));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Modifică titlul și locația",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "Se trimit doar câmpurile de schimbat; url identifică jobul și nu se poate schimba.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"{{jobUrl}}\",\n  \"title\": \"Senior Java Developer (Postman)\",\n  \"location\": [\n    \"Cluj-Napoca\",\n    \"Remote\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));",
+                  "const job = pm.response.json().job;",
+                  "pm.test(\"titlu modificat\", () => pm.expect(job.title).to.eql(\"Senior Java Developer (Postman)\"));",
+                  "pm.test(\"workmode păstrat\", () => pm.expect(job.workmode).to.eql(\"hybrid\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Job inexistent → 404",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://firma-test.ro/cariere/nu-exista\",\n  \"title\": \"X\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 404\", () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Fără url → 400",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Fără url\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Ștergere (DELETE)",
+      "item": [
+        {
+          "name": "Șterge jobul adăugat în folderul 3 (url în query)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/?url={{jobUrl}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "url",
+                  "value": "{{jobUrl}}"
+                }
+              ]
+            },
+            "description": "DELETE șterge un singur job, identificat prin url. Url-ul poate fi în query sau în body."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Șterge același job din nou → 404",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/?url={{jobUrl}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "url",
+                  "value": "{{jobUrl}}"
+                }
+              ]
+            },
+            "description": "Verifică faptul că jobul chiar a fost șters."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 404\", () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Șterge primul job adăugat în batch (url în body)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"{{batchUrl1}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Șterge al doilea job adăugat în batch (url în query)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/?url={{batchUrl2}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "url",
+                  "value": "{{batchUrl2}}"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6. Joburi care nu sunt ale firmei → 403",
+      "description": "O cheie poate modifica sau șterge doar joburile postate de firma ei prin v7.\n\nUrl-urile din body sunt exemple fixe: pune url-ul unui job existent al altei firme, respectiv\nal unui job din scraping al firmei tale, ca să primești 403. Dacă url-ul nu există în Solr-ul\nîn care rulezi, răspunsul e 404. Colecția nu creează și nu modifică nimic aici.",
+      "item": [
+        {
+          "name": "Modifică jobul altei firme (https://alta-firma.ro/cariere/job-existent) → 403",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://alta-firma.ro/cariere/job-existent\",\n  \"title\": \"Încercare\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"refuzat: 403 (sau 404 dacă url-ul din body nu există în acest Solr)\", () => pm.expect(pm.response.code).to.be.oneOf([403, 404]));",
+                  "pm.test(\"nu reușește niciodată\", () => pm.expect(pm.response.code).to.not.be.oneOf([200, 201]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Șterge jobul altei firme (https://alta-firma.ro/cariere/job-existent) → 403",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://alta-firma.ro/cariere/job-existent\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"refuzat: 403 (sau 404 dacă url-ul din body nu există în acest Solr)\", () => pm.expect(pm.response.code).to.be.oneOf([403, 404]));",
+                  "pm.test(\"nu reușește niciodată\", () => pm.expect(pm.response.code).to.not.be.oneOf([200, 201]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Modifică un job din scraping al firmei (https://firma-ta.ro/cariere/job-din-scraping) → 403",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://firma-ta.ro/cariere/job-din-scraping\",\n  \"title\": \"Încercare\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"refuzat: 403 (sau 404 dacă url-ul din body nu există în acest Solr)\", () => pm.expect(pm.response.code).to.be.oneOf([403, 404]));",
+                  "pm.test(\"nu reușește niciodată\", () => pm.expect(pm.response.code).to.not.be.oneOf([200, 201]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Șterge un job din scraping al firmei (https://firma-ta.ro/cariere/job-din-scraping) → 403",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://firma-ta.ro/cariere/job-din-scraping\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"refuzat: 403 (sau 404 dacă url-ul din body nu există în acest Solr)\", () => pm.expect(pm.response.code).to.be.oneOf([403, 404]));",
+                  "pm.test(\"nu reușește niciodată\", () => pm.expect(pm.response.code).to.not.be.oneOf([200, 201]));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7. Altele",
+      "item": [
+        {
+          "name": "Metodă nepermisă (PATCH) → 405",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v7/jobs/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "v7",
+                "jobs",
+                ""
+              ]
+            },
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"status 405\", () => pm.response.to.have.status(405));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "jobUrl",
+      "value": ""
+    },
+    {
+      "key": "batchUrl1",
+      "value": ""
+    },
+    {
+      "key": "batchUrl2",
+      "value": ""
+    }
+  ]
+}

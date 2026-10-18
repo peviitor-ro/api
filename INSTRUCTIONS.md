@@ -18,6 +18,7 @@ api/
 ├── v4/          # Download-focused version
 ├── v5/          # Simplified jobs API
 ├── v6/          # Companies (firme) API - query/search focused
+├── v7/          # Company-managed jobs with API keys
 ├── util/        # Shared utilities (solr, auth, loadEnv)
 ├── testing/     # Performance testing (JMeter reports)
 ├── devops/      # DevOps scripts (Solr)
@@ -73,6 +74,13 @@ Simplified jobs API:
 Companies (firme) API with query capabilities:
 - `/firme/company/`, `/firme/brand/`, `/firme/email/`, `/firme/phone/`
 - `/firme/logo/`, `/firme/website/`, `/firme/scraper/`, `/firme/qsearch/`, `/firme/search/`
+
+### v7
+Companies publish and manage their own jobs with an API key (`X-Api-Key`), see `v7/readme.md`:
+- `/jobs/` - GET (own jobs), POST (add), PUT (update), DELETE
+- `/panel/` - companies log in with an authorized email and generate/revoke their own keys
+- Keys are bound to one CIF; admins use `devops/apikeys/manage.php`
+- Code shared by v7 lives in `v7/lib/` (not web-reachable), specs in `v7/docs/specs/`
 
 ## Running Locally
 
