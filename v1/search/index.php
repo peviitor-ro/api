@@ -48,6 +48,11 @@ function splitLocation($location): array {
     $text = implode(',', (array) $location);
     $cities = explode(',', $text);
     $cities = array_map('trim', $cities);
+    
+    if (!in_array('Romania', $cities, true)) {
+        array_push($cities, 'Romania');
+    }
+
     return array_values(array_filter($cities));
 }
 
