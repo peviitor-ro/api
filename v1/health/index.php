@@ -6,6 +6,8 @@ require_once __DIR__ . '/../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../api.env');
 
 $LOCAL_SERVER = trim(getenv('LOCAL_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -27,7 +29,7 @@ try {
     }
 
     $solrStart = microtime(true);
-    $url = "http://$LOCAL_SERVER/solr/job/select?q=*:*&rows=0";
+    $url = ($PROTOCOL ?: 'https') . '://' . ($SOLR_SERVER ?: $LOCAL_SERVER) . "/solr/job/select?q=*:*&rows=0";
     
     $context = stream_context_create([
         'http' => [
