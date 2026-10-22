@@ -22,6 +22,8 @@ loadEnv(__DIR__ . '/../../api.env');
 // CONFIG
 // =========================
 $LOCAL_SERVER = trim(getenv('LOCAL_SERVER') ?: '');
+$SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
+$PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
@@ -153,7 +155,7 @@ try {
     }
 
     $core = 'job';
-    $base = "http://$LOCAL_SERVER/solr/$core/select";
+    $base = ($PROTOCOL ?: 'https') . '://' . ($SOLR_SERVER ?: $LOCAL_SERVER) . "/solr/$core/select";
     $url  = $base . '?' . buildSolrQuery($params, $start, $rows);
 
     $solr = fetchJson($url, $SOLR_USER, $SOLR_PASS, 4);
