@@ -19,36 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 require_once __DIR__ . '/../../../util/loadEnv.php';
 loadEnv(__DIR__ . '/../../../api.env');
+require_once __DIR__ . '/../../../util/http.php';
+
 
 $SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
 $PROTOCOL = trim(getenv('PROTOCOL') ?: '');
 $SOLR_USER = trim(getenv('SOLR_USER') ?: '');
 $SOLR_PASS = trim(getenv('SOLR_PASS') ?: '');
 
-function getJson(string $url, ?string $user = null, ?string $pass = null): array {
-    $headers = [];
-    if ($user && $pass) {
-        $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
-    }
-    $headers[] = "Content-Type: application/json";
-    $context = stream_context_create([
-        'http' => [
-            'method'  => 'GET',
-            'header'  => implode("\r\n", $headers),
-            'timeout' => 10
-        ]
-    ]);
-    $data = @file_get_contents($url, false, $context);
-    if ($data === false) {
-        $err = error_get_last()['message'] ?? 'Unknown error';
-        throw new Exception("FETCH FAILED: $url | $err");
-    }
-    $json = json_decode($data, true);
-    if (!is_array($json)) {
-        throw new Exception("Invalid JSON response");
-    }
-    return $json;
-}
+
 
 function SolrEscape(string $query): string {
     $chars = ['+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\', '/'];
@@ -100,7 +79,7 @@ try {
 
     $url = "$PROTOCOL://$SOLR_SERVER/solr/$core/select?$params";
 
-    $response = getJson($url, $SOLR_USER, $SOLR_PASS);
+    $response = fetchJson($url, $SOLR_USER, $SOLR_PASS);
 
     $docs = $response['response']['docs'] ?? [];
     $total = $response['response']['numFound'] ?? 0;

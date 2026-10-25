@@ -3,6 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 require_once __DIR__ . '/../../../util/loadEnv.php';
+require_once __DIR__ . '/../../../util/http.php';
 loadEnv(__DIR__ . '/../../../api.env');
 
 $SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
@@ -14,31 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
     echo json_encode(["error" => "Only GET method allowed"]);
     exit;
-}
-
-function getJson(string $url, ?string $user = null, ?string $pass = null): array {
-    $headers = [];
-    if ($user && $pass) {
-        $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
-    }
-    $headers[] = "Content-Type: application/json";
-    $context = stream_context_create([
-        'http' => [
-            'method'  => 'GET',
-            'header'  => implode("\r\n", $headers),
-            'timeout' => 10
-        ]
-    ]);
-    $data = @file_get_contents($url, false, $context);
-    if ($data === false) {
-        $err = error_get_last()['message'] ?? 'Unknown error';
-        throw new Exception("FETCH FAILED: $url | $err");
-    }
-    $json = json_decode($data, true);
-    if (!is_array($json)) {
-        throw new Exception("Invalid JSON response");
-    }
-    return $json;
 }
 
 try {
@@ -81,7 +57,7 @@ try {
 
     $url = "$PROTOCOL://$SOLR_SERVER/solr/$core/select?$params";
 
-    $response = getJson($url, $SOLR_USER, $SOLR_PASS);
+    $response = fetchJson($url, $SOLR_USER, $SOLR_PASS);
 
     $docs = $response['response']['docs'] ?? [];
     $total = $response['response']['numFound'] ?? 0;
