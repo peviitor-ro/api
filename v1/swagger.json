@@ -7,12 +7,24 @@
   },
   "servers": [
     {
-      "url": "https://test.peviitor.ro/v1"
+      "url": "http://localhost:8081/api/v1",
+      "description": "Local development"
     },
     {
-      "url": "http://localhost:8081/api/v1"
+      "url": "https://test.peviitor.ro/v1",
+      "description": "Remote test environment"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "CleanjobsApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key",
+        "description": "For cleanjobs, enter MD5(company + cif) when both are supplied; otherwise MD5(company), or MD5(brand) for brand requests. Use the same values as the request body. Update the key when these identifiers change."
+      }
+    }
+  },
   "paths": {
     "/random/": {
       "get": {
@@ -211,22 +223,119 @@
         "tags": [
           "General"
         ],
-        "summary": "Delete jobs by company name",
-        "description": "Deletes all job postings for a specified company.",
+        "summary": "Delete jobs by company, CIF, or brand",
+        "description": "Permanently deletes matching jobs. Supply at least one identifier; supplied identifiers are combined using AND. For local testing, select http://localhost:8081/api/v1 in Servers. Click Authorize and enter X-Api-Key as the lowercase MD5 of company + cif (concatenated without a separator), company alone, or brand alone, matching the request body.",
+        "security": [
+          {
+            "CleanjobsApiKey": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
-            "application/x-www-form-urlencoded": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "required": [
-                  "company"
+                  "confirmation"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "company"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "cif"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "brand"
+                    ]
+                  }
                 ],
                 "properties": {
                   "company": {
                     "type": "string",
-                    "description": "The name of the company whose jobs should be deleted.",
-                    "example": "Example Company"
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Company name. Combined with other supplied identifiers using AND."
+                  },
+                  "cif": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 20,
+                    "description": "Company CIF/CUI."
+                  },
+                  "brand": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Optional brand filter. Omit unless you intend to restrict by brand."
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "enum": [
+                      "CLEAN_COMPANY_JOBS"
+                    ]
+                  }
+                }
+              },
+              "example": {
+                "company": "NUME SRL",
+                "cif": "12345678",
+                "confirmation": "CLEAN_COMPANY_JOBS"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "confirmation"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "company"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "cif"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "brand"
+                    ]
+                  }
+                ],
+                "properties": {
+                  "company": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Company name. Combined with other supplied identifiers using AND."
+                  },
+                  "cif": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 20,
+                    "description": "Company CIF/CUI."
+                  },
+                  "brand": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Optional brand filter. Omit unless you intend to restrict by brand."
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "enum": [
+                      "CLEAN_COMPANY_JOBS"
+                    ]
                   }
                 }
               }
@@ -235,22 +344,32 @@
         },
         "responses": {
           "200": {
-            "description": "Successful deletion",
+            "description": "Matching jobs deleted successfully.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "message",
+                    "jobCount"
+                  ],
                   "properties": {
-                    "responseHeader": {
-                      "type": "object",
-                      "properties": {
-                        "status": {
-                          "type": "integer"
-                        },
-                        "QTime": {
-                          "type": "integer"
-                        }
-                      }
+                    "message": {
+                      "type": "string",
+                      "example": "Jobs deleted successfully"
+                    },
+                    "jobCount": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "cif": {
+                      "type": "string"
+                    },
+                    "brand": {
+                      "type": "string"
                     }
                   }
                 }
@@ -258,7 +377,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Invalid body, identifiers, or confirmation.",
             "content": {
               "application/json": {
                 "schema": {
@@ -266,9 +385,51 @@
                   "properties": {
                     "error": {
                       "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing or invalid X-Api-Key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No matching jobs or no companies found for the brand.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only DELETE is allowed; OPTIONS is accepted for browser preflight.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
                     }
                   }
                 }
@@ -276,7 +437,7 @@
             }
           },
           "503": {
-            "description": "Service unavailable. SOLR server is down or request failed.",
+            "description": "Solr is unavailable or misconfigured.",
             "content": {
               "application/json": {
                 "schema": {
@@ -284,9 +445,6 @@
                   "properties": {
                     "error": {
                       "type": "string"
-                    },
-                    "code": {
-                      "type": "integer"
                     }
                   }
                 }
