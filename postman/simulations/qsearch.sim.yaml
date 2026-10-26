@@ -1,0 +1,6 @@
+simulation: qsearch
+routing: path
+mocks:
+  - name: cuiscan
+    routeKey: cuiscan
+    path: postman/mocks/cuiscan

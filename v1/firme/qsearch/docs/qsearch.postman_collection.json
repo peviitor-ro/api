@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "Company qsearch — isolated sandbox",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Run php tests/integration/TestCompanyQsearch.php --serve and copy its printed address into baseUrl. Assertions expect synthetic sandbox fixtures. GET imports data; use the isolated sandbox."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:REPLACE_WITH_SANDBOX_PORT",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Search and import zira",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v1/firme/qsearch/?q=zira"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "const body = pm.response.json();",
+              "pm.test('One new company, one existing company, duplicate removed', () => { pm.expect(body.import.imported).to.eql(1); pm.expect(body.import.existing).to.eql(1); pm.expect(body.import.received).to.eql(3); pm.expect(body.docs).to.have.lengthOf(2); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repeat zira safely",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v1/firme/qsearch/?q=zira"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+              "pm.test('No duplicate imports', () => { const body = pm.response.json(); pm.expect(body.import.imported).to.eql(0); pm.expect(body.import.existing).to.eql(2); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "No results (sandbox)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v1/firme/qsearch/?q=empty"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Empty successful result', () => { pm.response.to.have.status(200); const body = pm.response.json(); pm.expect(body.docs).to.eql([]); pm.expect(body.pagination.total).to.eql(0); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid input",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v1/firme/qsearch/?q=a"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 400 JSON error', () => { pm.response.to.have.status(400); pm.expect(pm.response.json().error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "External failure (sandbox)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v1/firme/qsearch/?q=failure"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 502 JSON error', () => { pm.response.to.have.status(502); pm.expect(pm.response.json().error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rate limit (sandbox)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/v1/firme/qsearch/?q=ratelimit"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 503 JSON error', () => { pm.response.to.have.status(503); pm.expect(pm.response.json().error).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
