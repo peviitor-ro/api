@@ -97,19 +97,20 @@ empty and the total is zero. Source and database pagination are separate.
 
 ## Safe testing and Postman
 
-From the repository root, with PHP 8.1+ and Postman CLI 1.70+ available:
+From the repository root, with PHP 8.1+ available (no Postman CLI required):
 
 ```sh
 php tests/unit/TestCompanyQsearch.php
-php tests/integration/TestCompanyQsearch.php --postman
+php tests/integration/TestCompanyQsearch.php
 ```
 
 The second command starts the actual endpoint in a temporary directory with a
-temporary `api.env`, a local Solr stand-in, and a Postman CUIscan simulation.
-It exercises real HTTP requests, checks failures and runs the saved collection.
+temporary `api.env` and local PHP HTTP mocks for Solr and CUIscan.
+It exercises real HTTP requests and checks the success and failure scenarios.
 It never reads production credentials or sends a request to a production service.
 Logs and the fixture store remain in the printed temporary directory for diagnosis.
-Servers are stopped when the runner exits. No Postman cloud publishing is needed.
+Servers are stopped when the runner exits. The existing GitHub Actions PHP setup
+can run these tests without installing Postman CLI or Node.js.
 
 For manual Postman requests:
 

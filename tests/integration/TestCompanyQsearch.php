@@ -27,10 +27,11 @@ function qsearchStart(array $command, string $log, string $cwd, ?array $env = nu
 }
 try {
     $apiPort = qsearchPort(); $mockPort = qsearchPort(); $solrPort = qsearchPort();
-    file_put_contents($temp . '/api.env', "SOLR_SERVER=127.0.0.1:$solrPort\nPROTOCOL=http\nCUISCAN_API_URL=http://127.0.0.1:$mockPort/cuiscan/api.php\n");
-    $env = getenv(); $env['QSEARCH_MOCK_STORE'] = $temp . '/store.json';
-    $postman = PHP_OS_FAMILY === 'Windows' ? 'postman.exe' : 'postman';
-    $processes[] = qsearchStart([$postman, 'simulation', 'run', 'postman/simulations/qsearch.sim.yaml', '--port', (string)$mockPort, '--no-history', '--output', 'ndjson'], $temp . '/simulation.log', $root);
+    file_put_contents($temp . '/api.env', "SOLR_SERVER=127.0.0.1:$solrPort\nPROTOCOL=http\nCUISCAN_API_URL=http://127.0.0.1:$mockPort/api.php\n");
+    $env = getenv();
+    $env['QSEARCH_MOCK_STORE'] = $temp . '/store.json';
+    $env['QSEARCH_MOCK_LOG'] = $temp . '/cuiscan-requests.ndjson';
+    $processes[] = qsearchStart([PHP_BINARY, '-S', "127.0.0.1:$mockPort", $root . '/tests/qsearch/cuiscan-router.php'], $temp . '/cuiscan.log', $root, $env);
     $processes[] = qsearchStart([PHP_BINARY, '-S', "127.0.0.1:$solrPort", $root . '/tests/qsearch/solr-router.php'], $temp . '/solr.log', $root, $env);
     $processes[] = qsearchStart([PHP_BINARY, '-S', "127.0.0.1:$apiPort", '-t', $temp], $temp . '/api.log', $root);
     foreach ([$mockPort, $solrPort, $apiPort] as $port) {
@@ -129,21 +130,10 @@ try {
         assertEqual(200, $status); assertEqual(0, $body['import']['imported']);
         assertEqual(50, $body['import']['existing']); assertEqual(10, count($body['docs']));
     });
-    test('simulation log confirms real HTTP requests reached CUIscan mock', function () use ($temp) {
-        $log = file_get_contents($temp . '/simulation.log');
+    test('request log confirms real HTTP requests reached PHP CUIscan mock', function () use ($temp) {
+        $log = file_get_contents($temp . '/cuiscan-requests.ndjson');
         assertTrue(str_contains($log, 'request')); assertTrue(str_contains($log, 'zira'));
     });
-    if (in_array('--postman', $argv, true)) {
-        test('saved Postman collection passes against isolated API', function () use ($postman, $root, $apiPort, $reset) {
-            $reset();
-            $proc = proc_open([$postman, 'collection', 'run', 'v1/firme/qsearch/docs/qsearch.postman_collection.json',
-                '--env-var', "baseUrl=http://127.0.0.1:$apiPort"], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $root);
-            fclose($pipes[0]);
-            $output = stream_get_contents($pipes[1]); fclose($pipes[1]);
-            $errors = stream_get_contents($pipes[2]); fclose($pipes[2]);
-            assertEqual(0, proc_close($proc), $output . $errors);
-        });
-    }
 } catch (Throwable $e) {
     test('local test infrastructure', function () use ($e) { throw $e; });
 } finally {
