@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 require_once __DIR__ . '/../../../util/loadEnv.php';
-loadEnv(__DIR__ . '/../../../api.env');
 require_once __DIR__ . '/../../../util/http.php';
+loadEnv(__DIR__ . '/../../../api.env');
 
 
 $SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
