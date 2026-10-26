@@ -85,6 +85,8 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 require_once __DIR__ . '/../../util/loadEnv.php';
+require_once __DIR__ . '/../../util/http.php';
+
 loadEnv(__DIR__ . '/../../api.env');
 
 $SOLR_SERVER = trim(getenv('SOLR_SERVER') ?: '');
