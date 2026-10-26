@@ -82,7 +82,15 @@
  */
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, X-Api-Key");
 header("Content-Type: application/json; charset=UTF-8");
+
+// Browser preflights do not need application configuration or authentication.
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
 
 require_once __DIR__ . '/../../util/loadEnv.php';
 require_once __DIR__ . '/../../util/http.php';
@@ -118,29 +126,29 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     exit;
 }
 
-function fetchJson(string $url, ?string $user = null, ?string $pass = null, int $timeout = 5): array {
-    $headers = [];
-    if ($user && $pass) {
-        $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
-    }
-    $context = stream_context_create([
-        'http' => [
-            'method'  => 'GET',
-            'header'  => implode("\r\n", $headers),
-            'timeout' => $timeout
-        ]
-    ]);
-    $data = @file_get_contents($url, false, $context);
-    if ($data === false) {
-        $err = error_get_last()['message'] ?? 'Unknown error';
-        throw new Exception("FETCH FAILED: $url | $err");
-    }
-    $json = json_decode($data, true);
-    if (!is_array($json)) {
-        throw new Exception("Invalid JSON response");
-    }
-    return $json;
-}
+// function fetchJson(string $url, ?string $user = null, ?string $pass = null, int $timeout = 5): array {
+//     $headers = [];
+//     if ($user && $pass) {
+//         $headers[] = "Authorization: Basic " . base64_encode("$user:$pass");
+//     }
+//     $context = stream_context_create([
+//         'http' => [
+//             'method'  => 'GET',
+//             'header'  => implode("\r\n", $headers),
+//             'timeout' => $timeout
+//         ]
+//     ]);
+//     $data = @file_get_contents($url, false, $context);
+//     if ($data === false) {
+//         $err = error_get_last()['message'] ?? 'Unknown error';
+//         throw new Exception("FETCH FAILED: $url | $err");
+//     }
+//     $json = json_decode($data, true);
+//     if (!is_array($json)) {
+//         throw new Exception("Invalid JSON response");
+//     }
+//     return $json;
+// }
 
 function postJson(string $url, string $payload, ?string $user = null, ?string $pass = null): array {
     $headers = [];
