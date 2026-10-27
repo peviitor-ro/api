@@ -2769,6 +2769,59 @@
         }
       }
     },
+    "/firme/website/get/": {
+      "get": {
+        "tags": [
+          "Companies' websites"
+        ],
+        "summary": "Get all companies with a valid website",
+        "description": "Retrieves all matching documents from the company Solr core using cursor pagination. A company must have at least one non-empty website value accepted by PHP FILTER_VALIDATE_URL, matching company/add validation. Returns every available stored company field, preserving multi-valued fields. No query parameters are required. Returns an empty array when no companies match; incomplete Solr results are treated as an error.",
+        "operationId": "getCompaniesWithWebsite",
+        "responses": {
+          "200": {
+            "description": "All companies with at least one valid website",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                      "id": { "type": "string" },
+                      "company": { "type": "array", "items": { "type": "string" } },
+                      "website": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                },
+                "example": [{ "id": "12345678", "company": ["Example SRL"], "website": ["https://example.com"], "location": ["Bucharest"] }]
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET is supported",
+            "headers": {
+              "Allow": { "schema": { "type": "string", "enum": ["GET"] } }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": { "error": { "type": "string" } } },
+                "example": { "error": "Only GET method allowed" }
+              }
+            }
+          },
+          "503": {
+            "description": "Solr connection, configuration, or response failure",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": { "error": { "type": "string" } } },
+                "example": { "error": "Company core unavailable" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/firme/website/add/": {
       "post": {
         "tags": [
