@@ -1,4 +1,4 @@
-name: PEviitor PHP and Solr
+name: Test Environment (PHP + Solr)
 
 on:
   workflow_dispatch:
