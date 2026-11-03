@@ -14,6 +14,741 @@
     }
   ],
   "paths": {
+    "/firme/qsearch/": {
+      "get": {
+        "tags": [
+          "Firme"
+        ],
+        "summary": "Search and import companies from CUIscan",
+        "operationId": "searchAndImportCompanies",
+        "description": "Searches the documented CUIscan API and imports missing companies into the existing Solr company core before returning local name matches. This GET writes data. Existing records are preserved by CIF/CUI, including concurrent creates. CUIscan documents 30 results but live searches can return more. All returned valid matches are imported. No pagination is documented; exhaustive imports are not guaranteed. At 30 or more rows, import.possibly_truncated is true and warnings explains the uncertainty. source_limit is the documented warning threshold, not an enforced cap. page and rows paginate the local database response only. No API key is required. Use the isolated sandbox described in firme/qsearch/docs/README.md to test without changing real data.",
+        "security": [],
+        "servers": [
+          {
+            "url": ".",
+            "description": "Same server and v1 base path as the loaded Swagger document; use a local sandbox or staging for testing."
+          }
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Trimmed company-name substring, 2–100 UTF-8 characters. Control characters are rejected.",
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100
+            },
+            "example": "test"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Local database page. Zero is treated as 1.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9999999,
+              "default": 1
+            }
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "description": "Local page size. Zero is treated as 1; values above 100 are capped at 100. Does not limit imports.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9999999,
+              "default": 10
+            },
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import completed and local matches returned. With no local or source matches, docs is empty. Sandbox example uses synthetic company data.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "no-store"
+                  ]
+                },
+                "description": "Import requests must not be cached."
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "pagination",
+                    "docs",
+                    "import"
+                  ],
+                  "properties": {
+                    "pagination": {
+                      "type": "object",
+                      "required": [
+                        "page",
+                        "rows",
+                        "total",
+                        "total_pages"
+                      ],
+                      "properties": {
+                        "page": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "rows": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 100
+                        },
+                        "total": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of matching local companies."
+                        },
+                        "total_pages": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of local result pages."
+                        }
+                      }
+                    },
+                    "docs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "company"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Company CIF/CUI, used as the Solr unique ID."
+                          },
+                          "company": {
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          },
+                          "location": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "additionalProperties": true
+                      }
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      }
+                    },
+                    "warnings": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "pagination": {
+                    "page": 1,
+                    "rows": 10,
+                    "total": 2,
+                    "total_pages": 1
+                  },
+                  "docs": [
+                    {
+                      "id": "88000002",
+                      "company": "ZIRA CUSTOM NAME",
+                      "brand": "KEEP ME"
+                    },
+                    {
+                      "id": "88000001",
+                      "company": "ZIRA TEST SRL",
+                      "location": [
+                        "Cluj-Napoca, Cluj"
+                      ]
+                    }
+                  ],
+                  "import": {
+                    "source": "cuiscan.ro",
+                    "received": 3,
+                    "matched": 2,
+                    "imported": 1,
+                    "existing": 1,
+                    "source_limit": 30,
+                    "source_pagination_supported": false,
+                    "possibly_truncated": false
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing q, or invalid pagination. No external calls or writes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      },
+                      "nullable": true,
+                      "description": "Completed acknowledged import work when available; absent or null for failures before importing. A write timeout may leave an unacknowledged record that is safely detected on retry."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "q must contain between 2 and 100 characters"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Only GET is supported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      },
+                      "nullable": true,
+                      "description": "Completed acknowledged import work when available; absent or null for failures before importing. A write timeout may leave an unacknowledged record that is safely detected on retry."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Only GET method is allowed"
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "GET"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected internal failure; details logged server-side.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      },
+                      "nullable": true,
+                      "description": "Completed acknowledged import work when available; absent or null for failures before importing. A write timeout may leave an unacknowledged record that is safely detected on retry."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Company search failed"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "CUIscan connection failure, HTTP error, invalid JSON or invalid company data. No companies from this response are imported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      },
+                      "nullable": true,
+                      "description": "Completed acknowledged import work when available; absent or null for failures before importing. A write timeout may leave an unacknowledged record that is safely detected on retry."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "CUIscan search unavailable"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Local/provider rate limit, limiter/configuration failure, or Solr unavailable. Earlier imports may have succeeded; retries safely skip existing IDs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      },
+                      "nullable": true,
+                      "description": "Completed acknowledged import work when available; absent or null for failures before importing. A write timeout may leave an unacknowledged record that is safely detected on retry."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Company storage unavailable; earlier imports may have succeeded"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "CUIscan connection/read timeout. No companies from this request are imported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "import": {
+                      "type": "object",
+                      "required": [
+                        "source",
+                        "received",
+                        "matched",
+                        "imported",
+                        "existing",
+                        "source_limit",
+                        "source_pagination_supported",
+                        "possibly_truncated"
+                      ],
+                      "properties": {
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "cuiscan.ro"
+                          ]
+                        },
+                        "received": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Number of provider rows before deduplication."
+                        },
+                        "matched": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Unique companies whose names contain q."
+                        },
+                        "imported": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Acknowledged new company creates."
+                        },
+                        "existing": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "description": "Already stored companies or concurrent create conflicts."
+                        },
+                        "source_limit": {
+                          "type": "integer",
+                          "enum": [
+                            30
+                          ]
+                        },
+                        "source_pagination_supported": {
+                          "type": "boolean",
+                          "enum": [
+                            false
+                          ]
+                        },
+                        "possibly_truncated": {
+                          "type": "boolean",
+                          "description": "True when the provider returned 30 or more rows; more matches may exist."
+                        }
+                      },
+                      "nullable": true,
+                      "description": "Completed acknowledged import work when available; absent or null for failures before importing. A write timeout may leave an unacknowledged record that is safely detected on retry."
+                    }
+                  }
+                },
+                "example": {
+                  "error": "CUIscan request timed out"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/random/": {
       "get": {
         "tags": [
