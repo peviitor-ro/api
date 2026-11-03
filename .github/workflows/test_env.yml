@@ -2,6 +2,14 @@ name: PEviitor PHP and Solr
 
 on:
   workflow_dispatch:
+    inputs:
+      fixture:
+        description: Job fixture to index
+        type: choice
+        default: job-30k.json.gz
+        options:
+          - job-30k.json.gz
+          - job-50k.json.gz
 
 permissions:
   contents: read
@@ -88,15 +96,15 @@ jobs:
       - name: Load jobs from the migration fixture
         env:
           LOCAL_SOLR_URL: http://127.0.0.1:8983/solr
-          FIXTURE: tests/test-data/performance/job-30k.json.gz
+          FIXTURE: tests/test-data/performance/${{ inputs.fixture }}
         run: |
           set -euo pipefail
 
-          # The fixture is a 30,000-document subset of the production job
-          # core, committed so this workflow does not depend on PROD Solr
-          # (or its credentials) at all. The full snapshot is kept next to
-          # it; refresh both with local_environment/Linux/backup_zimbor.sh
-          # in the PEviitor fork.
+          # The fixtures are 30,000- and 50,000-document subsets of the
+          # production job core, committed so this workflow does not depend
+          # on PROD Solr (or its credentials) at all. The full snapshot is
+          # kept next to them; refresh them with
+          # local_environment/Linux/backup_zimbor.sh in the PEviitor fork.
           gunzip -c "$FIXTURE" > /tmp/job.json
           expected=$(python3 -c '
           import json
