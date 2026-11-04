@@ -1,0 +1,229 @@
+name: Test Environment (PHP + Solr)
+
+on:
+  workflow_dispatch:
+    inputs:
+      fixture:
+        description: Job fixture to index
+        type: choice
+        default: job-30k.json.gz
+        options:
+          - job-30k.json.gz
+          - job-50k.json.gz
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y php-cli php-curl php-mbstring
+          php -v
+
+      - name: Check PHP syntax
+        run: |
+          php -l util/solr.php
+          php -l util/loadEnv.php
+
+      - name: Start Apache Solr
+        run: |
+          docker run -d \
+            --name solr \
+            -p 127.0.0.1:8983:8983 \
+            solr:9
+
+          for attempt in $(seq 1 60); do
+            if curl -fsS \
+              http://127.0.0.1:8983/solr/admin/info/system \
+              > /dev/null; then
+              echo "Solr is ready"
+              break
+            fi
+
+            if [ "$attempt" -eq 60 ]; then
+              echo "Solr failed to start in time"
+              docker logs solr
+              exit 1
+            fi
+
+            sleep 2
+          done
+
+          # The job core is created from the schema captured from the source
+          # core, so the uniqueKey (url) and field types match production.
+          # The company core only has to exist for /v1/total/.
+          docker exec solr mkdir -p /var/solr/configsets
+          docker exec solr cp -r \
+            /opt/solr/server/solr/configsets/_default \
+            /var/solr/configsets/peviitor
+          docker cp tests/test-data/performance/job.schema.xml \
+            solr:/var/solr/configsets/peviitor/conf/managed-schema.xml
+          docker exec -u 0 solr \
+            chown -R solr:solr /var/solr/configsets/peviitor
+
+          docker exec solr bin/solr create \
+            -c job -d /var/solr/configsets/peviitor
+          docker exec solr bin/solr create -c company
+
+          for core in job company; do
+            for attempt in $(seq 1 30); do
+              if curl -fsS \
+                "http://127.0.0.1:8983/solr/$core/select?q=*:*&rows=0" \
+                > /dev/null; then
+                echo "Core '$core' is ready"
+                break
+              fi
+
+              if [ "$attempt" -eq 30 ]; then
+                echo "Core '$core' did not become ready"
+                docker logs solr
+                exit 1
+              fi
+
+              sleep 1
+            done
+          done
+
+      - name: Load jobs from the migration fixture
+        env:
+          LOCAL_SOLR_URL: http://127.0.0.1:8983/solr
+          FIXTURE: tests/test-data/performance/${{ inputs.fixture }}
+        run: |
+          set -euo pipefail
+
+          # The fixtures are 30,000- and 50,000-document subsets of the
+          # production job core, committed so this workflow does not depend
+          # on PROD Solr (or its credentials) at all. The full snapshot is
+          # kept next to them; refresh them with
+          # local_environment/Linux/backup_zimbor.sh in the PEviitor fork.
+          gunzip -c "$FIXTURE" > /tmp/job.json
+          expected=$(python3 -c '
+          import json
+
+          with open("/tmp/job.json") as handle:
+              print(len(json.load(handle)))
+          ')
+          echo "Fixture contains $expected jobs"
+
+          curl -fsS -X POST -H 'Content-Type: application/json' \
+            --data-binary @/tmp/job.json \
+            "$LOCAL_SOLR_URL/job/update?commit=true" > /dev/null
+
+          local_total=$(curl -fsS "$LOCAL_SOLR_URL/job/select?q=*:*&rows=0&wt=json" \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin)["response"]["numFound"])')
+          echo "Local job core now contains $local_total documents"
+
+          if [ "$local_total" -ne "$expected" ]; then
+            echo "ERROR: indexed $local_total of $expected jobs"
+            exit 1
+          fi
+
+      - name: Configure connection
+        run: |
+          # The API loads api.env from the repository root.
+          cat > api.env <<'EOF'
+          SOLR_SERVER=localhost:8983
+          LOCAL_SERVER=localhost:8983
+          PROTOCOL=http
+          SOLR_USER=
+          SOLR_PASS=
+          EOF
+
+      - name: Start PHP
+        run: |
+          php -S 127.0.0.1:8000 -t . \
+            > /tmp/php.log 2>&1 &
+          echo $! > /tmp/php.pid
+
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8000/ > /dev/null; then
+              echo "PHP is ready"
+              break
+            fi
+
+            if [ "$attempt" -eq 30 ]; then
+              echo "PHP failed to start"
+              cat /tmp/php.log
+              exit 1
+            fi
+
+            sleep 1
+          done
+
+      - name: Test services
+        run: |
+          set -euo pipefail
+
+          for core in job company; do
+            curl -fsS \
+              "http://127.0.0.1:8983/solr/$core/select?q=*:*&rows=0" \
+              > /dev/null
+            echo "Solr core '$core' responds"
+          done
+
+          jobs=$(curl -fsS "http://127.0.0.1:8983/solr/job/select?q=*:*&rows=0&wt=json" \
+            | python3 -c 'import json, sys; print(json.load(sys.stdin)["response"]["numFound"])')
+          echo "Local job core contains $jobs documents"
+
+          if [ "$jobs" -lt 1 ]; then
+            echo "Local job core is empty; the fixture did not populate it"
+            exit 1
+          fi
+
+          curl -fsS http://127.0.0.1:8000/ > /dev/null
+          echo "Documentation page responds"
+
+          health=$(curl -fsSL http://127.0.0.1:8000/v1/health/)
+          echo "v1/health: $health"
+
+          if ! echo "$health" | grep -q '"status":"pass"'; then
+            echo "Health check failed"
+            exit 1
+          fi
+
+          # GET /v1/total/ reads both the job and company cores.
+          total=$(curl -fsSL http://127.0.0.1:8000/v1/total/)
+          echo "v1/total: $total"
+
+          jobs_total=$(printf '%s' "$total" | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)
+          print(data["total"]["jobs"])
+          ')
+          echo "v1/total reports $jobs_total jobs"
+
+          if [ "$jobs_total" -lt 1 ]; then
+            echo "v1/total reported no jobs"
+            exit 1
+          fi
+
+          # GET /v1/random/ only returns 200 when at least one job exists.
+          random=$(curl -fsSL http://127.0.0.1:8000/v1/random/)
+          echo "v1/random: $random"
+
+          printf '%s' "$random" | python3 -c '
+          import json, sys
+          job = json.load(sys.stdin)
+          if not isinstance(job, dict) or "title" not in job:
+              raise SystemExit("v1/random did not return a job")
+          '
+
+          echo "All basic tests passed!"
+
+      - name: Show logs on failure
+        if: failure()
+        run: |
+          echo "--- PHP log ---"
+          cat /tmp/php.log 2>/dev/null || true
+
+          echo "--- Solr log ---"
+          docker logs solr 2>/dev/null || true
