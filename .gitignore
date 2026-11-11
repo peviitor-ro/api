@@ -1,3 +1,4 @@
 api.env
 tests/results.json
 v1/cleanjobs/cleanjobs.log
+./vendor/
