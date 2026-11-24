@@ -56,7 +56,7 @@ function normalizeToArray($value): array {
 }
 
 function isValidCif(string $cif): bool {
-    return preg_match('/^\d{2,10}$/', $cif) === 1;
+    return preg_match('/^\d{2,13}$/', $cif) === 1;
 }
 
 function isValidUrl(string $url): bool {
@@ -102,7 +102,7 @@ try {
     if (!isValidCif($id)) {
         http_response_code(400);
         echo json_encode([
-            "error" => "Field 'id' must be a valid CIF/CUI string (2-10 digits, e.g. '24415960')",
+            "error" => "Field 'id' must be a valid CIF/CUI string (2-13 digits, e.g. '24415960')",
             "code" => 400
         ]);
         exit;
