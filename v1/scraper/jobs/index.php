@@ -56,10 +56,10 @@ try {
     }
 
     $cif = preg_replace('/[^0-9]/', '', $cif);
-    if (strlen($cif) !== 8) {
+    if (strlen($cif) < 3 || strlen($cif) > 13) {
         http_response_code(400);
         echo json_encode([
-            "error" => "CIF must be exactly 8 digits",
+            "error" => "CIF must have 2-13 digits",
             "code" => 400
         ]);
         exit;
@@ -83,6 +83,16 @@ try {
 
     $docs = $response['response']['docs'] ?? [];
     $total = $response['response']['numFound'] ?? 0;
+
+    if (!$docs)
+    {
+        http_response_code(404);
+        echo json_encode([
+            "error" => "No jobs for CIF $cif",
+            "code" => 404
+        ]);
+        exit;
+    }
 
     echo json_encode([
         "success" => true,
